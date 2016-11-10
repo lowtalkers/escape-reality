@@ -1,0 +1,24 @@
+{
+  "name": "escape-reality",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amadk/escape-reality.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amadk/escape-reality/issues"
+  },
+  "homepage": "https://github.com/amadk/escape-reality#readme",
+  "dependencies": {
+    "aframe": "^0.3.2",
+    "express": "^4.14.0",
+    "sequelize": "^3.25.0"
+  }
+}
