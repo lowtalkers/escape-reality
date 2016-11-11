@@ -9,11 +9,25 @@ import ReactDOM from 'react-dom';
 import Camera from './components/Camera';
 import Text from './components/Text';
 import Sky from './components/Sky';
+import Plane from './components/Plane';
+
+// let show = false;
 
 class VRScene extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {color: 'red'};
+    this.state = {
+      color: 'red',
+      show: 'false',
+      url: "https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg"
+        + "?X-Amz-Date=20161111T193716Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature="
+        + "bc7045c89df0afb64f17bc1aa75dabda86391f9e52c6e7c2d7e43e1263e2582f&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161111/"
+        + "us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token="
+        + "FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0"
+        + "%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdg"
+        + "XVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331Ifbwn"
+        + "ONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D"
+    };
   }
 
   changeColor() {
@@ -23,9 +37,23 @@ class VRScene extends React.Component {
     });
   }
 
+  componentWillMount() {
+    console.log('Loading... Current state is:', this.state.show);
+  }
+
+  componentDidMount() {
+    this.setState({show: 'true'});
+  }
+
+  showGenericPane() {
+    return (
+      <a-plane color="#CCC" height="20" width="20" ></a-plane>
+      )
+  }
+
   render () {
     return (
-      <Scene>
+      <Scene >
         <Camera>
           <a-cursor
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
@@ -33,10 +61,48 @@ class VRScene extends React.Component {
           </a-cursor>
         </Camera>
 
-        <Sky src="url(https://rawgit.com/aframevr/assets/gh-pages/360-image-gallery-boilerplate/img/sechelt.jpg)"/>
+        <a-assets>
+          <img id="city-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg" />
+          <img id="cubes-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg" />
+          <img id="sechelt-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg" />
+        </a-assets>
+
+
+          <Entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+            <Entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></Entity>
+            <Entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></Entity>
+            <Entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></Entity>
+          </Entity>
+
+          <Entity geometry="primitive: plane; width: 2; height: 2"
+              material={{src: 'url(https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg)', opacity: 0.25}}
+              position="-2 0.5 -8"
+              rotation="-20 0 0">
+          </Entity>
+
+          <Entity geometry="primitive: plane; width: 2; height: 2"
+              material={{color: 'yellow', opacity: 0.25}}
+              position="-2.5 -3 -5"
+              rotation="-20 0 0">
+          </Entity>
+
+          <Entity geometry="primitive: plane; width: 2; height: 2"
+              material={{color: 'blue', opacity: 0.25}}
+              position="2.5 -1 -4"
+              rotation="-20 0 0">
+          </Entity>
+
+          <Entity geometry="primitive: plane; width: 2; height: 2"
+              material={{color: 'green', opacity: 0.25}}
+              position="3.5 -1 -2"
+              rotation="-20 0 0">
+          </Entity>
+
+        <a-sky id="image-360" radius="10" src="https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg?X-Amz-Date=20161111T200811Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=33b4e53000612e9679f3c896579880161c167396713de8367f1e9e2b7302eeea&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161111/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdgXVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331IfbwnONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D"></a-sky>
+
 
         <Text
-          text='Hello World!'
+          text='San Francisco!'
           color='#DADADA'
           position='-1.75 1 -3'/>
 
@@ -62,3 +128,5 @@ class VRScene extends React.Component {
 }
 
 ReactDOM.render(<VRScene/>, document.querySelector('.scene-container'));
+// <Sky src="url(http://i.imgur.com/u9dAMpj.jpg)"/>
+

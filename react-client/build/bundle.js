@@ -85,6 +85,10 @@
 
 	var _Sky2 = _interopRequireDefault(_Sky);
 
+	var _Plane = __webpack_require__(482);
+
+	var _Plane2 = _interopRequireDefault(_Plane);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92,6 +96,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// let show = false;
 
 	var VRScene = function (_React$Component) {
 	  _inherits(VRScene, _React$Component);
@@ -101,7 +107,11 @@
 
 	    var _this = _possibleConstructorReturn(this, (VRScene.__proto__ || Object.getPrototypeOf(VRScene)).call(this, props));
 
-	    _this.state = { color: 'red' };
+	    _this.state = {
+	      color: 'red',
+	      show: 'false',
+	      url: "https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg" + "?X-Amz-Date=20161111T193716Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=" + "bc7045c89df0afb64f17bc1aa75dabda86391f9e52c6e7c2d7e43e1263e2582f&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161111/" + "us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=" + "FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0" + "%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdg" + "XVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331Ifbwn" + "ONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D"
+	    };
 	    return _this;
 	  }
 
@@ -112,6 +122,21 @@
 	      this.setState({
 	        color: colors[Math.floor(Math.random() * colors.length)]
 	      });
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      console.log('Loading... Current state is:', this.state.show);
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.setState({ show: 'true' });
+	    }
+	  }, {
+	    key: 'showGenericPane',
+	    value: function showGenericPane() {
+	      return _react2.default.createElement('a-plane', { color: '#CCC', height: '20', width: '20' });
 	    }
 	  }, {
 	    key: 'render',
@@ -126,9 +151,39 @@
 	            animation__click: 'property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150'
 	          })
 	        ),
-	        _react2.default.createElement(_Sky2.default, { src: 'url(https://rawgit.com/aframevr/assets/gh-pages/360-image-gallery-boilerplate/img/sechelt.jpg)' }),
+	        _react2.default.createElement(
+	          'a-assets',
+	          null,
+	          _react2.default.createElement('img', { id: 'city-thumb', crossOrigin: 'anonymous', src: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg' }),
+	          _react2.default.createElement('img', { id: 'cubes-thumb', crossOrigin: 'anonymous', src: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg' }),
+	          _react2.default.createElement('img', { id: 'sechelt-thumb', crossOrigin: 'anonymous', src: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg' })
+	        ),
+	        _react2.default.createElement(
+	          _aframeReact.Entity,
+	          { id: 'links', layout: 'type: line; margin: 1.5', position: '0 -1 -4' },
+	          _react2.default.createElement(_aframeReact.Entity, { template: 'src: #link', 'data-src': '#cubes', 'data-thumb': '#cubes-thumb' }),
+	          _react2.default.createElement(_aframeReact.Entity, { template: 'src: #link', 'data-src': '#city', 'data-thumb': '#city-thumb' }),
+	          _react2.default.createElement(_aframeReact.Entity, { template: 'src: #link', 'data-src': '#sechelt', 'data-thumb': '#sechelt-thumb' })
+	        ),
+	        _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: plane; width: 2; height: 2',
+	          material: { src: 'url(https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg)', opacity: 0.25 },
+	          position: '-2 0.5 -8',
+	          rotation: '-20 0 0' }),
+	        _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: plane; width: 2; height: 2',
+	          material: { color: 'yellow', opacity: 0.25 },
+	          position: '-2.5 -3 -5',
+	          rotation: '-20 0 0' }),
+	        _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: plane; width: 2; height: 2',
+	          material: { color: 'blue', opacity: 0.25 },
+	          position: '2.5 -1 -4',
+	          rotation: '-20 0 0' }),
+	        _react2.default.createElement(_aframeReact.Entity, { geometry: 'primitive: plane; width: 2; height: 2',
+	          material: { color: 'green', opacity: 0.25 },
+	          position: '3.5 -1 -2',
+	          rotation: '-20 0 0' }),
+	        _react2.default.createElement('a-sky', { id: 'image-360', radius: '10', src: 'https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg?X-Amz-Date=20161111T200811Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=33b4e53000612e9679f3c896579880161c167396713de8367f1e9e2b7302eeea&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161111/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdgXVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331IfbwnONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D' }),
 	        _react2.default.createElement(_Text2.default, {
-	          text: 'Hello World!',
+	          text: 'San Francisco!',
 	          color: '#DADADA',
 	          position: '-1.75 1 -3' }),
 	        _react2.default.createElement(_aframeReact.Entity, { light: { type: 'ambient', color: '#888' } }),
@@ -156,6 +211,7 @@
 	}(_react2.default.Component);
 
 	_reactDom2.default.render(_react2.default.createElement(VRScene, null), document.querySelector('.scene-container'));
+	// <Sky src="url(http://i.imgur.com/u9dAMpj.jpg)"/>
 
 /***/ },
 /* 2 */
@@ -98818,6 +98874,31 @@
 	    geometry: { primitive: 'sphere', radius: 100 },
 	    material: { shader: 'flat', src: props.src },
 	    scale: '1 1 -1' });
+	};
+
+/***/ },
+/* 482 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _aframeReact = __webpack_require__(306);
+
+	var _react = __webpack_require__(307);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (props) {
+	  return _react2.default.createElement(_aframeReact.Entity, {
+	    geometry: 'primitive: plane; width: 2; height: 2',
+	    position: '0 1 -3',
+	    rotation: '-10 0 0' });
 	};
 
 /***/ }
