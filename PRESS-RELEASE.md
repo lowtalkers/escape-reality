@@ -1,4 +1,4 @@
-# Project Name #
+# Escape #
 
 <!--
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -17,28 +17,28 @@ Once the project moves into development, the press release can be used as a touc
  -->
 
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Escape the stress from everyday life and explore the world around you virtually.
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > This VR app is for any VR-enthusiast looking to explore the world around them without leaving where they are.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > Our virtual reality app will allow you to escape your current environment and explore the world around you. Immerse yourself into a beach, a jungle, or a city and explore all they have to offer. Discover new places and new experiences.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > This app solves the problem of the limitations we have as humans when it comes to exploring something (anything). We have a physical limitation as humans. With Escape, you can explore a beach, a jungle, or a city, all from the same spot.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > VR, bro.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "Escape will forever change how you explore the world around you" - Some Biased Spokesperson
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Go to escape.vr and sign in/ sign up. If you have a VR headset, put it on and start Escaping! If you don't have one, you can still use Escape.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "I never thought I'd be able to explore the world from the comfort of my couch" - Some Person
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > WHAT ARE YOU WAITING FOR! Escape now ---> escape.vr
