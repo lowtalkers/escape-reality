@@ -27,8 +27,8 @@ class VRScene extends React.Component {
       //   + "%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdg"
       //   + "XVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331Ifbwn"
       //   + "ONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D",
-      url: 'https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg?X-Amz-Date=20161112T004423Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=288043f3892a7ecbcf4846289d4c14f922fddcf7ac709d709fd4e9edf48410d3&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161112/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdgXVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331IfbwnONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D',
-      backupUrl: 'https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg?X-Amz-Date=20161112T004423Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=288043f3892a7ecbcf4846289d4c14f922fddcf7ac709d709fd4e9edf48410d3&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161112/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdgXVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331IfbwnONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D',
+      url: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
+      backupUrl: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
       urlIndex: false,
       planeColor: ['red', 'blue', 'green', 'black'],
       colorIndex: 0
