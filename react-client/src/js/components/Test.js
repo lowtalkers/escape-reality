@@ -5,25 +5,22 @@ import 'babel-polyfill';
 import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link, withRouter } from 'react-router';
 
-import Camera from './components/Camera';
-import Text from './components/Text';
-import Sky from './components/Sky';
-import Plane from './components/Plane';
+import Camera from './Camera';
+import Text from './Text';
+import Sky from './Sky';
+import Plane from './Plane';
 
 // let show = false;
 
-class VRScene extends React.Component {
+class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       color: 'red',
       show: 'false',
-      url: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
-      backupUrl: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
-      urlIndex: false,
-      planeColor: ['red', 'blue', 'green', 'black'],
-      colorIndex: 0
+      url: "https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg"
     };
   }
 
@@ -48,25 +45,7 @@ class VRScene extends React.Component {
       )
   }
 
-  changePlaneColor() {
-    console.log('Changing planeColor... colorIndex:', this.state.colorIndex, 'upcoming:', this.state.colorIndex + 1);
-    if (this.state.colorIndex === 3) {
-      this.setState({colorIndex: 0})
-    } else {
-      this.setState({colorIndex: this.state.colorIndex + 1})
-    }
-  }
-
-  changeUrl() {
-    if (this.state.urlIndex) {
-      this.setState({url: this.state.backupUrl, urlIndex: !this.state.urlIndex});
-    } else {
-      this.setState({url: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg', urlIndex: !this.state.urlIndex});
-    }
-  }
-
   render () {
-    let self = this;
     return (
       <Scene >
         <Camera>
@@ -96,15 +75,13 @@ class VRScene extends React.Component {
           </Entity>
 
           <Entity geometry="primitive: plane; width: 2; height: 2"
-              onClick={() => self.changeUrl()}
               material={{color: 'yellow', opacity: 0.25}}
-              position="-2.5 -3 -5"
+              position="-5.5 -3 -5"
               rotation="-20 0 0">
           </Entity>
 
           <Entity geometry="primitive: plane; width: 2; height: 2"
-              onClick={() => self.changePlaneColor()}        
-              material={{color: self.state.planeColor[self.state.colorIndex], opacity: 0.25}}
+              material={{color: 'blue', opacity: 0.25}}
               position="2.5 -1 -4"
               rotation="-20 0 0">
           </Entity>
@@ -115,11 +92,11 @@ class VRScene extends React.Component {
               rotation="-20 0 0">
           </Entity>
 
-        <a-sky id="image-360" radius="10" src={self.state.url}></a-sky>
+        <a-sky id="image-360" radius="10" src="https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg "></a-sky>
 
 
         <Text
-          text='San Francisco!'
+          text='Lobby!'
           color='#DADADA'
           position='-1.75 1 -3'/>
 
@@ -144,6 +121,9 @@ class VRScene extends React.Component {
   }
 }
 
-ReactDOM.render(<VRScene/>, document.querySelector('.scene-container'));
+// ReactDOM.render(<VRScene/>, document.querySelector('.scene-container'));
+
+export default withRouter(Test, { withRef: true });
+
 // <Sky src="url(http://i.imgur.com/u9dAMpj.jpg)"/>
 

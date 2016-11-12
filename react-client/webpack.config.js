@@ -5,7 +5,7 @@ require('babel-polyfill');
 var IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 var ENTRY_POINTS = [
-  './src/js/app'
+  './src/js/index.jsx'
 ];
 
 var JS_LOADERS = [
@@ -44,6 +44,15 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loaders: JS_LOADERS,
         test: /\.js$/,
+      },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel',
+        exclude: /node_modules/,
+        query: {
+          cacheDirectory: true,
+          presets: ['react', 'es2015']
+        }
       },
       {
         test: /\.css$/,
