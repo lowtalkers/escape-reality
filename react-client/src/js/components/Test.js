@@ -20,7 +20,11 @@ class Test extends React.Component {
     this.state = {
       color: 'red',
       show: 'false',
-      url: "https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg"
+      url: 'https://s3.amazonaws.com/vrpics/white-background.jpg',
+      backupUrl: 'https://s3.amazonaws.com/vrpics/white-background.jpg',
+      urlIndex: false,
+      planeColor: ['red', 'blue', 'green', 'black'],
+      colorIndex: 0
     };
   }
 
@@ -45,7 +49,26 @@ class Test extends React.Component {
       )
   }
 
+  changePlaneColor() {
+    console.log('Changing planeColor... colorIndex:', this.state.colorIndex, 'upcoming:', this.state.colorIndex + 1);
+    if (this.state.colorIndex === 3) {
+      this.setState({colorIndex: 0})
+    } else {
+      this.setState({colorIndex: this.state.colorIndex + 1})
+    }
+  }
+
+  changeUrl() {
+    if (this.state.urlIndex) {
+      this.setState({url: this.state.backupUrl, urlIndex: !this.state.urlIndex});
+    } else {
+      this.props.router.push('/city');
+      // this.setState({url: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg', urlIndex: !this.state.urlIndex});
+    }
+  }
+
   render () {
+    let self = this;
     return (
       <Scene >
         <Camera>
@@ -75,13 +98,15 @@ class Test extends React.Component {
           </Entity>
 
           <Entity geometry="primitive: plane; width: 2; height: 2"
+              onClick={() => self.changeUrl()}
               material={{color: 'yellow', opacity: 0.25}}
               position="-5.5 -3 -5"
               rotation="-20 0 0">
           </Entity>
 
           <Entity geometry="primitive: plane; width: 2; height: 2"
-              material={{color: 'blue', opacity: 0.25}}
+              onClick={() => self.changePlaneColor()}
+              material={{color: self.state.planeColor[self.state.colorIndex], opacity: 0.25}}
               position="2.5 -1 -4"
               rotation="-20 0 0">
           </Entity>
@@ -92,11 +117,10 @@ class Test extends React.Component {
               rotation="-20 0 0">
           </Entity>
 
-        <a-sky id="image-360" radius="10" src="https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg "></a-sky>
-
+        <a-sky id="image-360" radius="10" src={self.state.url}></a-sky>
 
         <Text
-          text='Lobby!'
+          text='Lobby'
           color='#DADADA'
           position='-1.75 1 -3'/>
 
@@ -121,9 +145,7 @@ class Test extends React.Component {
   }
 }
 
-// ReactDOM.render(<VRScene/>, document.querySelector('.scene-container'));
 
 export default withRouter(Test, { withRef: true });
 
-// <Sky src="url(http://i.imgur.com/u9dAMpj.jpg)"/>
 

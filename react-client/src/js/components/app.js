@@ -13,6 +13,7 @@ import Sky from './Sky';
 import Plane from './Plane';
 
 // let show = false;
+//test
 
 class VRScene extends React.Component {
   constructor(props) {
