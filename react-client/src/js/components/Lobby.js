@@ -20,8 +20,8 @@ class Lobby extends React.Component {
     this.state = {
       color: 'red',
       show: 'false',
-      url: 'https://s3.amazonaws.com/vrpics/white-background.jpg',
-      backupUrl: 'https://s3.amazonaws.com/vrpics/white-background.jpg',
+      url: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
+      backupUrl: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
       urlIndex: false,
       planeColor: ['red', 'blue', 'green', 'black'],
       colorIndex: 0
