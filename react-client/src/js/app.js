@@ -19,6 +19,17 @@ class VRScene extends React.Component {
     this.state = {
       color: 'red',
       show: 'false',
+<<<<<<< 9b6e113a9de6adb177b7719fb4a71624887d4acb
+=======
+      // url: "https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg"
+      //   + "?X-Amz-Date=20161111T193716Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature="
+      //   + "bc7045c89df0afb64f17bc1aa75dabda86391f9e52c6e7c2d7e43e1263e2582f&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161111/"
+      //   + "us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token="
+      //   + "FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0"
+      //   + "%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdg"
+      //   + "XVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331Ifbwn"
+      //   + "ONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D",
+>>>>>>> Fix S3 permissions error
       url: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
       backupUrl: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
       urlIndex: false,
