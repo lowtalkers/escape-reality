@@ -14,14 +14,14 @@ import Plane from './Plane';
 
 // let show = false;
 
-class VRScene extends React.Component {
+class Lobby extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       color: 'red',
       show: 'false',
-      url: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
-      backupUrl: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
+      url: 'https://s3.amazonaws.com/vrpics/white-background.jpg',
+      backupUrl: 'https://s3.amazonaws.com/vrpics/white-background.jpg',
       urlIndex: false,
       planeColor: ['red', 'blue', 'green', 'black'],
       colorIndex: 0
@@ -62,7 +62,8 @@ class VRScene extends React.Component {
     if (this.state.urlIndex) {
       this.setState({url: this.state.backupUrl, urlIndex: !this.state.urlIndex});
     } else {
-      this.setState({url: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg', urlIndex: !this.state.urlIndex});
+      this.props.router.push('/city');
+      // this.setState({url: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg', urlIndex: !this.state.urlIndex});
     }
   }
 
@@ -119,7 +120,7 @@ class VRScene extends React.Component {
         <a-sky id="image-360" radius="10" src={self.state.url}></a-sky>
 
         <Text
-          text='San Francisco!'
+          text='Lobby'
           color='#DADADA'
           position='-1.75 1 -3'/>
 
@@ -144,6 +145,7 @@ class VRScene extends React.Component {
   }
 }
 
-ReactDOM.render(<VRScene/>, document.querySelector('.scene-container'));
-// <Sky src="url(http://i.imgur.com/u9dAMpj.jpg)"/>
+
+export default withRouter(Lobby, { withRef: true });
+
 
