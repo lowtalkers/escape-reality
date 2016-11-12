@@ -20,8 +20,8 @@
     "webpack": "^1.13.3"
   },
   "scripts": {
-    "build": "webpack",
-    "serve": "webpack-dev-server --content-base src --progress --watch --history-api-fallback --inline --hot"
+    "start": "node server/server.js",
+    "webpack": "webpack -d --progress --colors --watch"
   },
   "repository": {
     "type": "git",
