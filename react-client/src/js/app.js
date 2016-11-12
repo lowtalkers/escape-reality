@@ -19,14 +19,19 @@ class VRScene extends React.Component {
     this.state = {
       color: 'red',
       show: 'false',
-      url: "https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg"
-        + "?X-Amz-Date=20161111T193716Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature="
-        + "bc7045c89df0afb64f17bc1aa75dabda86391f9e52c6e7c2d7e43e1263e2582f&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161111/"
-        + "us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token="
-        + "FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0"
-        + "%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdg"
-        + "XVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331Ifbwn"
-        + "ONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D"
+      // url: "https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg"
+      //   + "?X-Amz-Date=20161111T193716Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature="
+      //   + "bc7045c89df0afb64f17bc1aa75dabda86391f9e52c6e7c2d7e43e1263e2582f&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161111/"
+      //   + "us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token="
+      //   + "FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0"
+      //   + "%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdg"
+      //   + "XVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331Ifbwn"
+      //   + "ONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D",
+      url: 'https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg?X-Amz-Date=20161112T004423Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=288043f3892a7ecbcf4846289d4c14f922fddcf7ac709d709fd4e9edf48410d3&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161112/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdgXVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331IfbwnONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D',
+      backupUrl: 'https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg?X-Amz-Date=20161112T004423Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=288043f3892a7ecbcf4846289d4c14f922fddcf7ac709d709fd4e9edf48410d3&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161112/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdgXVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331IfbwnONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D',
+      urlIndex: false,
+      planeColor: ['red', 'blue', 'green', 'black'],
+      colorIndex: 0
     };
   }
 
@@ -51,7 +56,25 @@ class VRScene extends React.Component {
       )
   }
 
+  changePlaneColor() {
+    console.log('Changing planeColor... colorIndex:', this.state.colorIndex, 'upcoming:', this.state.colorIndex + 1);
+    if (this.state.colorIndex === 3) {
+      this.setState({colorIndex: 0})
+    } else {
+      this.setState({colorIndex: this.state.colorIndex + 1})
+    }
+  }
+
+  changeUrl() {
+    if (this.state.urlIndex) {
+      this.setState({url: this.state.backupUrl, urlIndex: !this.state.urlIndex});
+    } else {
+      this.setState({url: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg', urlIndex: !this.state.urlIndex});
+    }
+  }
+
   render () {
+    let self = this;
     return (
       <Scene >
         <Camera>
@@ -81,13 +104,15 @@ class VRScene extends React.Component {
           </Entity>
 
           <Entity geometry="primitive: plane; width: 2; height: 2"
+              onClick={() => self.changeUrl()}
               material={{color: 'yellow', opacity: 0.25}}
               position="-2.5 -3 -5"
               rotation="-20 0 0">
           </Entity>
 
           <Entity geometry="primitive: plane; width: 2; height: 2"
-              material={{color: 'blue', opacity: 0.25}}
+              onClick={() => self.changePlaneColor()}        
+              material={{color: self.state.planeColor[self.state.colorIndex], opacity: 0.25}}
               position="2.5 -1 -4"
               rotation="-20 0 0">
           </Entity>
@@ -98,7 +123,7 @@ class VRScene extends React.Component {
               rotation="-20 0 0">
           </Entity>
 
-        <a-sky id="image-360" radius="10" src="https://s3.amazonaws.com/lowtalkerscarlos/union-square-franco_4500.jpg?X-Amz-Date=20161111T200811Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=33b4e53000612e9679f3c896579880161c167396713de8367f1e9e2b7302eeea&X-Amz-Credential=ASIAJJAH2B7Y47MPCE7A/20161111/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEHsaDJQ2DbKoS/H0g7TdeSL6AZjLDvIjlNbsGE3UC%2BOObt/8XKXbataHltzx6%2Bz5X4Rmknssibb4r0%2BLzLoxPhgUoc1TtJeXwvh6lJC2tqTN03sXnHSbIEyCLNN4GQCVxCE2KhZUUhm5TnF6dvu2FxlvcTDwwNrVNeJx2k6kA8oNqcpZ81YBdgXVtQGJDAKZE7vPvGNudPOuRx%2BNH/BwV3lslmMJ0E1DQbbTmYMyYZjrt5ogIdqAwLlDIskg0qlQ/CraPPpn1B55Xvqe9MS331IfbwnONPZuyMpQq7LcbI/kGYzWM0Gpdsd5MQ0odR85j%2BMI4QbvahYus6uLG%2B834ZbZTWv3WH1IciZKKoIorfqXwQU%3D"></a-sky>
+        <a-sky id="image-360" radius="10" src={self.state.url}></a-sky>
 
 
         <Text
