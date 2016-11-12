@@ -112,7 +112,7 @@ class VRScene extends React.Component {
           </Entity>
 
           <Entity geometry="primitive: plane; width: 2; height: 2"
-              material={{color: 'green', opacity: 0.25}}
+              material={{color: 'red', opacity: 0.25}}
               position="3.5 -1 -2"
               rotation="-20 0 0">
           </Entity>
