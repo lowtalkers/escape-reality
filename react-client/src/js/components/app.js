@@ -21,8 +21,8 @@ class VRScene extends React.Component {
     this.state = {
       color: 'red',
       show: 'false',
-      url: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
-      backupUrl: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
+      url: 'https://s3.amazonaws.com/vrpics/union-square-franco_1500.jpg',
+      backupUrl: 'https://s3.amazonaws.com/vrpics/union-square-franco_1500.jpg',
       urlIndex: false,
       planeColor: ['red', 'blue', 'green', 'black'],
       colorIndex: 0
@@ -97,11 +97,12 @@ class VRScene extends React.Component {
               rotation="-20 0 0">
           </Entity>
 
-          <Entity geometry="primitive: plane; width: 2; height: 2"
+          <Entity geometry="primitive: plane; width: 3; height: 3"
               onClick={() => self.changeUrl()}
               material={{color: 'yellow', opacity: 0.25}}
-              position="-5.5 -3 -5"
-              rotation="-20 0 0">
+              position="-10.54 2.38 1.17"
+              rotation="0 80 0"
+              visible="true">
           </Entity>
 
           <Entity geometry="primitive: plane; width: 2; height: 2"
@@ -117,12 +118,18 @@ class VRScene extends React.Component {
               rotation="-20 0 0">
           </Entity>
 
-        <a-sky id="image-360" radius="10" src={self.state.url}></a-sky>
+        <a-sky id="image-360" radius="30" src={self.state.url}></a-sky>
 
         <Text
           text='San Francisco!'
           color='#DADADA'
           position='-1.75 1 -3'/>
+
+        <Text
+          text="Macy's"
+          color='#DADADA'
+          position="-10.54 2.22 2.22"
+          rotation="0 80 0"/>
 
         <Entity light={{type: 'ambient', color: '#888'}}/>
         <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
