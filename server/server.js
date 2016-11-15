@@ -3,6 +3,8 @@ var app = express();
 var path = require('path');
 
 app.use('/', express.static(__dirname + '/../react-client'))
+app.use('/city', express.static(__dirname + '/../react-client'))
+
 
 
 app.listen(3000, function() {
