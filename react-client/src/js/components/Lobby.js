@@ -7,13 +7,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link, withRouter } from 'react-router';
 
-import Camera from './Camera';
-import Text from './Text';
-import Sky from './Sky';
-import Plane from './Plane';
-
-// let show = false;
-
 class Lobby extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +19,13 @@ class Lobby extends React.Component {
       planeColor: ['red', 'blue', 'green', 'black'],
       colorIndex: 0
     };
+     AFRAME.registerComponent('auto-enter-vr', {
+      init: function () {
+        this.el.sceneEl.enterVR();
+      }
+    });
   }
+
 
   changeColor() {
     const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
@@ -49,102 +48,37 @@ class Lobby extends React.Component {
       )
   }
 
-  changePlaneColor() {
-    console.log('Changing planeColor... colorIndex:', this.state.colorIndex, 'upcoming:', this.state.colorIndex + 1);
-    if (this.state.colorIndex === 3) {
-      this.setState({colorIndex: 0})
-    } else {
-      this.setState({colorIndex: this.state.colorIndex + 1})
-    }
-  }
-
   changeUrl() {
     if (this.state.urlIndex) {
       this.setState({url: this.state.backupUrl, urlIndex: !this.state.urlIndex});
     } else {
       this.props.router.push('/city');
-      // this.setState({url: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg', urlIndex: !this.state.urlIndex});
+      this.setState({url: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg', urlIndex: !this.state.urlIndex});
     }
   }
 
   render () {
     let self = this;
-    // AFRAME.registerComponent('auto-enter-vr', {
-    //   init: function () {
-    //     this.el.sceneEl.enterVR();
-    //   }
-    // });
     return (
       <Scene auto-enter-vr>
-        <Camera>
-          <a-cursor
-            animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
->
-          </a-cursor>
-        </Camera>
 
-        <a-assets>
-          <img id="city-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg" />
-          <img id="cubes-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg" />
-          <img id="sechelt-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg" />
-        </a-assets>
-
-
-          <Entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
-            <Entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></Entity>
-            <Entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></Entity>
-            <Entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></Entity>
-          </Entity>
-
-          <Entity geometry="primitive: plane; width: 2; height: 2"
-              material={{src: 'url(https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg)', opacity: 0.25}}
-              position="-2 0.5 -8"
-              rotation="-20 0 0">
-          </Entity>
-
-          <Entity geometry="primitive: plane; width: 2; height: 2"
-              onClick={() => self.changeUrl()}
-              material={{color: 'yellow', opacity: 0.25}}
-              position="-5.5 -3 -5"
-              rotation="-20 0 0">
-          </Entity>
-
-          <Entity geometry="primitive: plane; width: 2; height: 2"
-              onClick={() => self.changePlaneColor()}
-              material={{color: self.state.planeColor[self.state.colorIndex], opacity: 0.25}}
-              position="2.5 -1 -4"
-              rotation="-20 0 0">
-          </Entity>
-
-          <Entity geometry="primitive: plane; width: 2; height: 2"
-              material={{color: 'green', opacity: 0.25}}
-              position="3.5 -1 -2"
-              rotation="-20 0 0">
-          </Entity>
-
-        <a-sky id="image-360" radius="10" src={self.state.url}></a-sky>
-
-        <Text
-          text='Lobby'
-          color='#DADADA'
-          position='-1.75 1 -3'/>
-
-        <Entity light={{type: 'ambient', color: '#888'}}/>
-        <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
-        <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
-
-        <Entity
-          animation__rot={{property: 'rotation', dur: 2000, loop: true, to: '360 360 360'}}
-          animation__sca={{property: 'scale', dir: 'alternate', dur: 100, loop: true, to: '1.1 1.1 1.1'}}
-          geometry='primitive: box'
-          material={{color: this.state.color, opacity: 0.6}}
-          position='0 -0.5 -3'
-          onClick={this.changeColor.bind(this)}>
-          <Entity
-            animation__scale={{property: 'scale', dir: 'alternate', dur: 100, loop: true, to: '2 2 2'}}
-            geometry='primitive: box; depth: 0.2; height: 0.2; width: 0.2'
-            material={{color: '#24CAFF'}}/>
+        <Entity camera look-controls wasd-controls>
+          <Entity position="0 0 -3" scale="0.2 0.2 0.2" geometry="primitive: ring; radiusOuter: 0.20; radiusInner: 0.13;" material="color: #ADD8E6; shader: flat" cursor="maxDistance: 50; fuse: true"/>
         </Entity>
+
+        <Entity rotation="0 80 0" position="0 0 -2" material={{src: 'url(https://s3.amazonaws.com/vrpics/paris.png)', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => self.changeUrl()}/>
+
+        <Entity rotation="0 130 0" position="0 0 -2" material={{src: 'url(https://s3.amazonaws.com/vrpics/sf+(1).png)', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => self.changeUrl()}/>
+
+        <Entity rotation="0 180 0" position="0 0 -2" material={{src: 'url(https://s3.amazonaws.com/vrpics/toronto.png)', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => self.changeUrl()}/>
+
+        <Entity rotation="0 230 0" position="0 0 -2" material={{src: 'url(https://s3.amazonaws.com/vrpics/seattle.png)', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => self.changeUrl()}/>
+
+
+      <Entity light={{type: 'ambient', color: '#fff'}}/>
+      <Entity light={{type: 'directional', intensity: 0.2}} position='-1 2 1'/>
+      <a-sky color='#C0D1CE' opacity="0.5"></a-sky>
+
       </Scene>
     );
   }

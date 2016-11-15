@@ -1,6 +1,7 @@
 .DS_Store
 react-client/build/bundle.js
 react-client/build/bundle.js.map
+react-client/build/
 
 # Logs
 logs

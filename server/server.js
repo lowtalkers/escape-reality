@@ -4,8 +4,24 @@ const app = express();
 const path = require('path');
 const port = 3000;
 
-app.use('/', express.static(__dirname + '/../react-client'))
-app.use('/city', express.static(__dirname + '/../react-client'))
+app.use('/', express.static(__dirname + '/../react-client'));
+app.use('/city', express.static(__dirname + '/../react-client'));
+
+/** WIKIPEDIA API QUERY (start) **/
+
+// var sampleSearch = "Macy's";
+
+// request('http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=' + sampleSearch + '&format=json&exintro=1', (err, res, body) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     var query = (JSON.parse(body)).query.pages;
+//     var text = query[(Object.keys(query)[0])].extract;
+//     console.log(text);
+//   }
+// });
+
+/** WIKIPEDIA API QUERY (end) **/
 
 app.listen(port, () => {
   console.log(`🌐  listening on port ${port} for app ${metadata.name} 🌐`);
