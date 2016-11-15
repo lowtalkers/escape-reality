@@ -20,8 +20,8 @@ class Lobby extends React.Component {
     this.state = {
       color: 'red',
       show: 'false',
-      url: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
-      backupUrl: 'https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg',
+      url: 'https://s3.amazonaws.com/vrpics/test5.jpeg',
+      backupUrl: 'https://s3.amazonaws.com/vrpics/test5.jpeg',
       urlIndex: false,
       planeColor: ['red', 'blue', 'green', 'black'],
       colorIndex: 0
@@ -69,8 +69,13 @@ class Lobby extends React.Component {
 
   render () {
     let self = this;
+    // AFRAME.registerComponent('auto-enter-vr', {
+    //   init: function () {
+    //     this.el.sceneEl.enterVR();
+    //   }
+    // });
     return (
-      <Scene >
+      <Scene auto-enter-vr>
         <Camera>
           <a-cursor
             animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
