@@ -7,6 +7,7 @@ import App from './components/App.js';
 import Lobby from './components/Lobby.js';
 import SF from './components/SF.js'
 import Louvre from './components/Louvre.js';
+import Berlin from './components/Berlin.js';
 
 
 ReactDOM.render((
@@ -15,6 +16,7 @@ ReactDOM.render((
       <Route path="lobby" component={Lobby} />
       <Route path="sf" component={SF} />
       <Route path="louvre" component={Louvre} />
-    </Route>  
+      <Route path="berlin" component={Berlin} />
+    </Route>
   </Router>
 ), document.querySelector('.scene-container'));
