@@ -67,11 +67,11 @@ export default props => (
           header='Louvre Pyramid of Paris'
           text='The Louvre Pyramid (Pyramide du Louvre) is a large glass and metal pyramid designed by Chinese-American architect I.M. Pei, surrounded by three smaller pyramids, in the main courtyard (Cour Napoléon) of the Louvre Palace (Palais du Louvre) in Paris. The large pyramid serves as the main entrance to the Louvre Museum. Completed in 1989, it has become a landmark of the city of Paris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate diam ut bibendum consequat, sep ipsum solore.'
           imageSrc='https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/1024px-Louvre_Pyramid.jpg'
+
         />
 
+
         <a-text color="white" text="Testing A Frame Tag" position="0 0 -3"/>
-          
-        <Entity bmfont-text={{width: '500', color: 'yellow', text: 'HOLAAAA'}} position='-5 0 -3' rotation='0 0 0'/>
 
         <a-sky id="image-360" radius="10" src='#louvre'></a-sky>
 
