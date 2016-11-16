@@ -14,6 +14,7 @@ ReactDOM.render((
     <Route path="/" component={App} >
       <Route path="lobby" component={Lobby} />
       <Route path="sf" component={SF} />
+      <Route path="louvre" component={Louvre} />
     </Route>  
   </Router>
 ), document.querySelector('.scene-container'));
