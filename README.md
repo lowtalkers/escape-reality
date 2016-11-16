@@ -1,12 +1,12 @@
 # Escape
 
-> Escape from the stress of everyday life and explore San Francisco from the comfort of your chair
+> Escape from the stress of everyday life and explore the world around you
 
 ## Team
 
   - __Product Owner__: Carlos Portillo
-  - __Scrum Master__: Amad Khan
-  - __Development Team Members__: Tony Le, Franco Abaroa
+  - __Scrum Masters__: Amad Khan, Franco Abaroa
+  - __Development Team__: Tony Le
 
 ## Table of Contents
 
