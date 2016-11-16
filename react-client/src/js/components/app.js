@@ -10,10 +10,14 @@ import { Link, withRouter } from 'react-router';
 import Camera from './Camera';
 import Text from './Text';
 import Sky from './Sky';
-import Plane from './Plane';
+import TextPlane from './Plane';
 
+// var AFRAME = require("aframe-core");
+// var draw = require("aframe-draw-component").component;
+// var textwrap = require("aframe-textwrap-component").component;
+// AFRAME.registerComponent("draw", draw);
+// AFRAME.registerComponent("textwrap", textwrap);
 // let show = false;
-//test
 
 class VRScene extends React.Component {
   constructor(props) {
@@ -113,11 +117,7 @@ class VRScene extends React.Component {
               rotation="-20 0 0">
           </Entity>
 
-          <Entity geometry="primitive: plane; width: 2; height: 2"
-              material={{color: 'red', opacity: 0.25}}
-              position="3.5 -1 -2"
-              rotation="-20 0 0">
-          </Entity>
+          <TextPlane />
 
         <a-sky id="image-360" radius="30" src={self.state.url}></a-sky>
 
