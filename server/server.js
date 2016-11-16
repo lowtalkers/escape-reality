@@ -7,11 +7,11 @@ const port = 3000;
 /** WIKIPEDIA API QUERY (start) **/
 
 // var sampleSearch = "Macy's";
-var routes = ['/', '/sf', '/lobby', '/louvre'];
+var routes = ['/', '/sf', '/lobby', '/louvre', '/berlin'];
 
 routes.forEach(function(route) {
   app.use(route, express.static(__dirname + '/../react-client'))
-})
+});
 
 // request('http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=' + sampleSearch + '&format=json&exintro=1', (err, res, body) => {
 //   if (err) {
