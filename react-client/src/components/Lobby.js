@@ -26,7 +26,7 @@ export default props => (
 
         <Entity rotation="0 180 0" position="0 0 -2" material={{src: '#toronto', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0"/>
 
-        <Entity rotation="0 230 0" position="0 0 -2" material={{src: '#seattle', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0"/>
+        <Entity rotation="0 230 0" position="0 0 -2" material={{src: '#seattle', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => props.router.push('/berlin/')}/>
 
 
       <Entity light={{type: 'ambient', color: '#fff'}}/>
