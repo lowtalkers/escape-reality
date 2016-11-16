@@ -20,77 +20,8 @@ import TextPlane from './TextPlane';
 // AFRAME.registerComponent("textwrap", textwrap);
 // let show = false;
 
-class Lobby extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      color: 'red',
-      show: 'false',
-      url: 'https://c2.staticflickr.com/6/5688/21597873406_8f4021b4b4_k.jpg',
-      // url: 'https://s3.amazonaws.com/vrpics/white-background.jpg',
-      backupUrl: 'https://s3.amazonaws.com/vrpics/white-background.jpg',
-      urlIndex: false,
-      planeColor: ['green', 'blue', 'black', 'red'],
-      colorIndex: 0
-    };
-  }
-
-  changeColor() {
-    const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
-    this.setState({
-      color: colors[Math.floor(Math.random() * colors.length)]
-    });
-  }
-
-  componentWillMount() {
-    console.log('Loading... Current state is:', this.state.show);
-  }
-
-  componentDidMount() {
-    this.setState({show: 'true'});
-  }
-
-  showGenericPane() {
-    return (
-      <a-plane color="#CCC" height="20" width="20" ></a-plane>
-      )
-  }
-
-  changePlaneColor() {
-    console.log('Changing planeColor... colorIndex:', this.state.colorIndex, 'upcoming:', this.state.colorIndex + 1);
-    if (this.state.colorIndex === 3) {
-      this.setState({colorIndex: 0})
-    } else {
-      this.setState({colorIndex: this.state.colorIndex + 1})
-    }
-  }
-
-  changeUrl() {
-    if (this.state.urlIndex) {
-      this.setState({url: this.state.backupUrl, urlIndex: !this.state.urlIndex});
-    } else {
-      this.props.router.push('/city');
-      // this.setState({url: 'https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg', urlIndex: !this.state.urlIndex});
-    }
-  }
-
-  render () {
-    let self = this;
-    return (
-      <Scene >
-        <Camera>
-          <a-cursor
-            animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
->
-          </a-cursor>
-        </Camera>
-
-        <a-assets>
-          <img id="city-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg" />
-          <img id="cubes-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg" />
-          <img id="sechelt-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg" />
-        </a-assets>
-
+export default props => (
+      <Entity >
 
         <Entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
           <Entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></Entity>
@@ -120,8 +51,8 @@ class Lobby extends React.Component {
 
         <Entity geometry="primitive: plane; width: 2; height: 2"
             draw="text: Hello"
-            onClick={() => self.changePlaneColor()}
-            material={{color: self.state.planeColor[self.state.colorIndex], opacity: 0.25}}
+            onClick={() => props.changePlaneColor()}
+            material={{color: props.planeColor[props.colorIndex], opacity: 0.25}}
             position="2.32 3.77 8.53"
             rotation="20.63 -170.74 -6.88">
         </Entity>
@@ -135,20 +66,16 @@ class Lobby extends React.Component {
           
         <Entity bmfont-text={{width: '500', color: 'yellow', text: 'HOLAAAA'}} position='-5 0 -3' rotation='0 0 0'/>
 
-        <a-sky id="image-360" radius="10" src={self.state.url}></a-sky>
+        <a-sky id="image-360" radius="10" src='#louvre'></a-sky>
 
         <Entity light={{type: 'ambient', color: '#888'}}/>
         <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
         <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
 
-      </Scene>
-    );
-  }
-}
+      </Entity>
+);
 
 
-
-export default withRouter(Lobby, { withRef: true });
 
 // <TextPlane 
   // x='0'

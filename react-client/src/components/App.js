@@ -13,6 +13,7 @@ import Sky from './Sky';
 import Plane from './Plane';
 import Lobby from './Lobby';
 import SF from './SF';
+import Louvre from './Louvre';
 import TextPlane from './Plane';
 
 
@@ -101,6 +102,19 @@ class App extends React.Component {
 
           />
         )
+     } else if (this.props.router.location.pathname === '/louvre/') {
+        view = (
+          <Louvre
+          changePlaneColor={this.changePlaneColor.bind(this)}
+          planeColor={self.state.planeColor}
+          colorIndex={self.state.colorIndex}
+          url={self.state.url}
+          color={self.state.color}
+          changeColor={this.changeColor.bind(this)}
+          changeCity={this.changeCity.bind(this)}
+          router={this.props.router}
+          />
+        )
      }
 
     return (
@@ -118,6 +132,13 @@ class App extends React.Component {
           <img id="sechelt-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg" />
           <img id="lobby" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/test3.jpg" />
           <img id="sf" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/union-square-franco_1500.jpg" />
+          <img id="louvre" crossOrigin="anonymous" src="https://c2.staticflickr.com/6/5688/21597873406_8f4021b4b4_k.jpg" />
+
+          <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/paris.png" />
+          <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/sf+(1).png" />
+          <img id="toronto" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/toronto.png" />
+          <img id="seattle" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/seattle.png" />
+          
         </a-assets>
         {view}
       </Scene>
