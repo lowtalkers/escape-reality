@@ -88,7 +88,7 @@ export default props => {
     return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
   }
 
-  return <Entity>
+  return <Entity onClick={() => console.log('Textplane clicked!')}>
 
     {/* Assume that props.position === "0 1 -3" */}
 
@@ -113,6 +113,7 @@ export default props => {
         material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
         position={adjustIconCoordinates(props.position, '6', '2')}
         rotation={props.rotation}
+        onClick={() => console.log('Collapse icon clicked!')}
     >
     </Entity>
 
@@ -132,6 +133,7 @@ export default props => {
 
   </Entity>
 };
+
 
 // <Entity 
   // geometry='primitive: plane; width: 3; height: 3'
