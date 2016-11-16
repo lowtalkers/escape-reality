@@ -14,7 +14,7 @@ import Plane from './Plane';
 import Lobby from './Lobby';
 import SF from './SF';
 import Louvre from './Louvre';
-import Berlin from './Berlin';
+import Berlin from './Berlin.js';
 import TextPlane from './Plane';
 
 
@@ -118,7 +118,7 @@ class App extends React.Component {
         )
      } else if (this.props.router.location.pathname === '/berlin/') {
         view = (
-          <Louvre
+          <Berlin
           changePlaneColor={this.changePlaneColor.bind(this)}
           planeColor={self.state.planeColor}
           colorIndex={self.state.colorIndex}
@@ -147,6 +147,7 @@ class App extends React.Component {
           <img id="lobby" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/test3.jpg" />
           <img id="sf" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/union-square-franco_1500.jpg" />
           <img id="louvre" crossOrigin="anonymous" src="https://c2.staticflickr.com/6/5688/21597873406_8f4021b4b4_k.jpg" />
+          <img id="berlin" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/germany.jpg" />
 
           <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/paris.png" />
           <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/sf+(1).png" />
