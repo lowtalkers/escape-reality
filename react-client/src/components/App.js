@@ -14,7 +14,8 @@ import Plane from './Plane';
 import Lobby from './Lobby';
 import SF from './SF';
 import Louvre from './Louvre';
-import Berlin from './Berlin.js';
+import Berlin from './Berlin';
+import Milan from './Milan';
 import TextPlane from './Plane';
 
 
@@ -129,14 +130,26 @@ class App extends React.Component {
           router={this.props.router}
           />
         )
+     } else if (this.props.router.location.pathname === '/milan/') {
+        view = (
+          <Milan
+          changePlaneColor={this.changePlaneColor.bind(this)}
+          planeColor={self.state.planeColor}
+          colorIndex={self.state.colorIndex}
+          url={self.state.url}
+          color={self.state.color}
+          changeColor={this.changeColor.bind(this)}
+          changeCity={this.changeCity.bind(this)}
+          router={this.props.router}
+          />
+        )
      }
 
     return (
       <Scene >
         <Camera>
           <a-cursor
-            animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
->
+            animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150" geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64" material="color: #f72222; shader: flat" raycaster="" cursor="">
           </a-cursor>
         </Camera>
 
@@ -148,11 +161,13 @@ class App extends React.Component {
           <img id="sf" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/union-square-franco_1500.jpg" />
           <img id="louvre" crossOrigin="anonymous" src="https://c2.staticflickr.com/6/5688/21597873406_8f4021b4b4_k.jpg" />
           <img id="berlin" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/germany.jpg" />
+          <img id="milan" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan360.jpg" />
 
           <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/paris.png" />
           <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/sf+(1).png" />
-          <img id="toronto" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/toronto.png" />
+          <img id="berlin2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/berlin2.png" />
           <img id="seattle" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/seattle.png" />
+          <img id="milan2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan.png" />
 
         </a-assets>
         {view}

@@ -6,8 +6,9 @@ const port = 3000;
 
 /** WIKIPEDIA API QUERY (start) **/
 
+// var sampleSearch = "Macy's";
+var routes = ['/', '/sf', '/lobby', '/louvre', '/berlin', '/milan/'];
 
-var routes = ['/', '/sf', '/lobby', '/louvre', '/berlin'];
 
 routes.forEach(function(route) {
   app.use(route, express.static(__dirname + '/../react-client'))
