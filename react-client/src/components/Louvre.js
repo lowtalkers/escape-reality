@@ -13,6 +13,7 @@ import Camera from './Camera';
 import Text from './Text';
 import Sky from './Sky';
 import TextPlane from './TextPlane';
+import Bookmark from './Bookmark';
 
 // var draw = require("aframe-draw-component").component;
 // var textWrap = require('aframe-textwrap-component').component;
@@ -37,6 +38,8 @@ export default props => (
             rotation="8.02 135.22 -1.15">
         </Entity>
 
+
+
         <Entity geometry="primitive: plane; width: 2; height: 2"
             onClick={() => console.log('The Louvre Museum in Paris, France')}
             material={{color: 'yellow', opacity: 0.35}}
@@ -60,18 +63,22 @@ export default props => (
         </Entity>
 
         <TextPlane
-          //should maintain a 2:1 width to height ratio for optimal ratios
+
+          //should maintain a 2:1 width to height ratio for optimal output
           height= '3'
           width= '6'
-          position="0 1 -3"
-          rotation='0 0 0'
 
-          header='Louvre Pyramid of Paris'
-          text='The Louvre Pyramid (Pyramide du Louvre) is a large glass and metal pyramid designed by Chinese-American architect I.M. Pei, surrounded by three smaller pyramids, in the main courtyard (Cour Napoléon) of the Louvre Palace (Palais du Louvre) in Paris. The large pyramid serves as the main entrance to the Louvre Museum. Completed in 1989, it has become a landmark of the city of Paris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate diam ut bibendum consequat, sep ipsum solore.'
+          position="0 0.5 -3"
+          rotation='0 0 0'
+          scale='0 0 0'
+
+          header='Louvre Pyramid'
+          headerAdjust='-1.5' // lower moves it to the left, higher to the right
+          text='The Louvre Pyramid (Pyramide du Louvre) is a large glass and metal pyramid designed by Chinese-American architect I.M. Pei, surrounded by three smaller pyramids, in the main courtyard (Cour Napoléon) of the Louvre Palace (Palais du Louvre) in Paris. The large pyramid serves as the main entrance to the Louvre Museum. Completed in 1989, it has become a landmark of the city of Paris.'
+          textAdjust='-1' //lower moves this down, higher moves this up
           imageSrc='https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/1024px-Louvre_Pyramid.jpg'
 
         />
-
 
         <a-text color="white" text="Testing A Frame Tag" position="0 0 -3"/>
 
