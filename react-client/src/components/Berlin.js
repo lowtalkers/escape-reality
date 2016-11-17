@@ -46,5 +46,5 @@ export default props => (
   <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
 
   </Entity>
-)
+);
 
