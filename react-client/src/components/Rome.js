@@ -7,7 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link, withRouter } from 'react-router';
 
-import Camera from './Camera';
+// import Camera from './Camera';
 import Text from './Text';
 import Sky from './Sky';
 import Plane from './Plane';
@@ -20,7 +20,6 @@ import Plane from './Plane';
 */
 
 export default props => (
-
   <Entity>
 
       <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" rotation="0 20 0"position="1.68 0 0" onClick={() => props.router.replace('/lobby')}></a-image>
