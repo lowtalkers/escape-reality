@@ -16,6 +16,7 @@ import SF from './SF';
 import Louvre from './Louvre';
 import Berlin from './Berlin';
 import Milan from './Milan';
+import Rome from './Rome';
 import TextPlane from './Plane';
 
 
@@ -143,6 +144,19 @@ class App extends React.Component {
           router={this.props.router}
           />
         )
+     } else if (this.props.router.location.pathname === '/rome/') {
+        view = (
+          <Rome
+          changePlaneColor={this.changePlaneColor.bind(this)}
+          planeColor={self.state.planeColor}
+          colorIndex={self.state.colorIndex}
+          url={self.state.url}
+          color={self.state.color}
+          changeColor={this.changeColor.bind(this)}
+          changeCity={this.changeCity.bind(this)}
+          router={this.props.router}
+          />
+        )
      }
 
     return (
@@ -163,12 +177,15 @@ class App extends React.Component {
           <img id="berlin" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/germany.jpg" />
           <img id="milan" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan360.jpg" />
           <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
+          <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
+          {/* <img id="milan" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_2000.jpg" /> */}
 
           <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/paris.png" />
           <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/sf+(1).png" />
           <img id="berlin2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/berlin2.png" />
           <img id="seattle" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/seattle.png" />
           <img id="milan2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan.png" />
+          <img id="rome2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/colorome.png" />
 
         </a-assets>
         {view}
