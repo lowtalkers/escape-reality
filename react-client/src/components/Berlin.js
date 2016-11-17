@@ -17,37 +17,21 @@ export default props => (
 
   <Entity>
 
-    <Entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
-      <Entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></Entity>
-      <Entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></Entity>
-      <Entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></Entity>
+    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 0" onClick={() => props.router.push('/')}></a-image>
+
+    <Entity id="circle" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="-14.62 8.51 -19.69" rotation="0 50 0" visible="true">
     </Entity>
 
-    <Entity geometry="primitive: plane; width: 2; height: 2"
-        material={{src: 'url(https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg)', opacity: 0.25}}
-        position="-2 0.5 -8"
-        rotation="-20 0 0">
+    <Entity id="circle2" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="-14.62 11.81 -4.9" rotation="20 80 0" visible="true">
     </Entity>
 
-      <Entity geometry="primitive: plane; width: 3; height: 3"
-          onClick={() => props.router.replace('/')}
-          material={{color: 'yellow', opacity: 0.25}}
-          position="-10.54 2.38 1.17"
-          rotation="0 80 0"
-          visible="true">
-      </Entity>
-
-    <Entity geometry="primitive: plane; width: 2; height: 2"
-        onClick={() => props.changePlaneColor()}
-        material={{color: props.planeColor[props.colorIndex], opacity: 0.25}}
-        position="2.5 -1 -4"
-        rotation="-20 0 0">
+    <Entity id="circle3" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="-10.51 8.51 25.6" rotation="-20 150 0" visible="true">
     </Entity>
 
-    <Entity geometry="primitive: plane; width: 2; height: 2"
-        material={{color: 'red', opacity: 0.25}}
-        position="3.5 -1 -2"
-        rotation="-20 0 0">
+    <Entity id="circle4" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="20.05 3.7 -1.31" rotation="160 100 0" visible="true">
+    </Entity>
+
+    <Entity id="circle5" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="-10.85 7.36 5.89" rotation="20 100 0" visible="true">
     </Entity>
 
   <a-sky id="image-360" radius="30" src='#berlin'></a-sky>
@@ -57,28 +41,10 @@ export default props => (
     color='#DADADA'
     position='-1.75 1 -3'/>
 
-  <Text
-    text="Macy's"
-    color='#DADADA'
-    position="-10.54 2.22 2.22"
-    rotation="0 80 0"/>
-
   <Entity light={{type: 'ambient', color: '#888'}}/>
   <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
   <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
 
-  <Entity
-    animation__rot={{property: 'rotation', dur: 2000, loop: true, to: '360 360 360'}}
-    animation__sca={{property: 'scale', dir: 'alternate', dur: 100, loop: true, to: '1.1 1.1 1.1'}}
-    geometry='primitive: box'
-    material={{color: props.color, opacity: 0.6}}
-    position='0 -0.5 -3'
-    onClick={props.changeColor}>
-    <Entity
-      animation__scale={{property: 'scale', dir: 'alternate', dur: 100, loop: true, to: '2 2 2'}}
-      geometry='primitive: box; depth: 0.2; height: 0.2; width: 0.2'
-      material={{color: '#24CAFF'}}/>
-  </Entity>
   </Entity>
 )
 
