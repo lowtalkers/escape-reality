@@ -7,7 +7,7 @@ const port = 3000;
 /** WIKIPEDIA API QUERY (start) **/
 
 // var sampleSearch = "Macy's";
-var routes = ['/', '/sf', '/lobby', '/louvre', '/berlin', '/milan/'];
+var routes = ['/', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome'];
 
 
 routes.forEach(function(route) {
