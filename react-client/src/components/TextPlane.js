@@ -2,6 +2,9 @@ import {Entity} from 'aframe-react';
 import React from 'react';
 import 'aframe-bmfont-text-component';
 
+const Height = 3;
+const Width = 6;
+
 export default props => {
   const extraProps = AFRAME.utils.extend({}, props);
   delete extraProps.color;
@@ -13,9 +16,9 @@ export default props => {
     let yCoordinate = coordinates[1];
     let zCoordinate = coordinates[2];
     if (zCoordinate < 0) {
-      zCoordinate = '0.1';
+      zCoordinate = (zCoordinate + 0.1).toString();
     } else {
-      zCoordinate = '-0.1';
+      zCoordinate = (zCoordinate - 0.1).toString();
     }
     xCoordinate = (xCoordinate).toString();
     //temporary
@@ -23,11 +26,11 @@ export default props => {
     return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
   }
 
-
   let adjustEntityCoordinates = (position) => {
     let coordinates = position.split(" ").map((element) => Number(element));
     let xCoordinate = coordinates[0];
-    return (`${xCoordinate} 0.5 -3`)
+    let yCoordinate = coordinates[1];
+    return (`${xCoordinate} ${yCoordinate} -3`)
   }
 
   let adjustEntityRotation = (rotation) => {
@@ -53,26 +56,29 @@ export default props => {
     return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
   }
 
-  return <Entity>
 
-      <Entity position={adjustEntityCoordinates(props.position)} rotation={adjustEntityRotation(props.rotation)} onClick={() => console.log('Textplane clicked!')}>
+
+//  return <Entity id="TextPlane" position={adjustEntityCoordinates(props.position)} rotation={adjustEntityRotation(props.rotation)}>
+  return <Entity id="TextPlane" position={adjustCoordinates(props.position)} rotation={props.rotation}>
+
+      <Entity onClick={() => console.log('Textplane clicked!')}>
 
         {/* Assume that props.position === "0 1 -3" */}
 
 
         {/* Background Plane */}
         <Entity 
-          geometry={`primitive: plane; width: ${props.width}; height: ${props.height}`}
+          geometry={`primitive: plane; width: ${Width}; height: ${Height}`}
           // position='0 0 0'
           rotation='0 0 0'
           material={{color: 'black'}}
         />
 
         {/* Main Image */}
-        <Entity geometry={`primitive: plane; width: ${(props.width/8)*3}; height: ${(props.height/3)*2}`}
+        <Entity geometry={`primitive: plane; width: ${(Width/8)*3}; height: ${(Height/3)*2}`}
             material={{side: 'double', src: 'url(' + props.imageSrc + ')', opacity: 1}}
-            // position={adjustImageCoordinates(props.position, props.width, (props.height/3)*2)}
-            position={`${(props.width/-4)} ${(props.height/-10)} 0.1`}
+            // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
+            position={`${(Width/-4)} ${(Height/-10)} 0.1`}
             rotation='0 0 0'
         >
         </Entity>
@@ -90,7 +96,7 @@ export default props => {
 
         {/* Header Text */}
         <Entity bmfont-text={{align: 'left', width: '750', color: 'yellow', text: props.header}} 
-          // position={adjustHeaderTextCoordinates(props.position, props.width, props.height)}
+          // position={adjustHeaderTextCoordinates(props.position, Width, Height)}
           position={`${props.headerAdjust} 1 0.1`}
           rotation='0 0 0'
           scale='1.85 1.85 0'
@@ -98,7 +104,7 @@ export default props => {
 
         {/* Main Body Text */}
         <Entity bmfont-text={{align: 'left', width: '750', color: 'white', text: props.text}} // Max character length = 500
-          // position={adjustMainTextCoordinates(props.position, props.width, props.height)}
+          // position={adjustMainTextCoordinates(props.position, Width, Height)}
           position={`-0.1 ${props.textAdjust} 0.1`}
           rotation='0 0 0'
           scale='0.8 0.8 0'
@@ -108,10 +114,10 @@ export default props => {
 
       <Entity 
             onClick={() => console.log('Bookmark clicked!')}
-            geometry={`primitive: plane; width: ${props.width/18}; height: ${props.height/9}`}
+            geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
-            position={adjustIconCoordinates(props.position, props.width, props.height)}
-            rotation={adjustEntityRotation(props.rotation)}
+            position={`2.65 1.2 0.1`}
+            rotation='0 0 0'
             onClick={() => console.log('Collapse icon clicked!')}
             scale='1 1 0'
           >
@@ -119,6 +125,25 @@ export default props => {
 
     </Entity>
 };
+
+  // position = '0 0.5 -3'
+
+  // let adjustIconCoordinates = (position, width, height) => { 
+  //   let coordinates = position.split(" ").map((element) => Number(element));
+  //   let xCoordinate = coordinates[0];
+  //   let yCoordinate = coordinates[1];
+  //   let zCoordinate = coordinates[2];
+  //   if (zCoordinate < 0) {
+  //     zCoordinate = (zCoordinate + 0.1).toString();
+  //   } else {
+  //     zCoordinate = (zCoordinate - 0.1).toString();
+  //   }
+  //   xCoordinate = (0 + (6/2.5)).toString(); //bigger modifier moves left
+  //   //temporary
+  //   console.log('adjustIconCoordinates height:', height)
+  //   yCoordinate = (0.5 + (3/2.75)).toString(); //bigger modifier moves down
+  //   return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
+  // }
 
 // let adjustMainTextCoordinates = (position, width, height) => { 
 //   let coordinates = position.split(" ").map((element) => Number(element));
