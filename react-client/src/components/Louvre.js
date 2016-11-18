@@ -54,7 +54,7 @@ export default props => (
             rotation="8.02 135.22 -1.15"
         >
         </Entity>
-        
+
         <TextPlane id="pyramidTextPlane"
           position="-4.34 2.22 6.83"
           rotation="8.02 135.22 -1.15"
@@ -110,19 +110,18 @@ export default props => (
         >
         </Entity>
 
+        <TextPlane id="testTextPlane"
+          position="0 0.5 -3"
+          rotation='0 0 0'
+          scale='0 0 0'
 
-        <Entity id="richelieuWingTag" 
-            geometry="primitive: plane; width: 2; height: 2"
-            draw="text: Hello"
-            onClick={() => props.changePlaneColor()}
-            material={{color: props.planeColor[props.colorIndex], opacity: 0.25}}
-            position="2.32 3.77 8.53"
-            rotation="20.63 -170.74 -6.88"
-            look-at="[camera]"
-            // lookAt={[camera]}
-        >
+          header='Louvre Pyramid'
+          headerAdjust='-1.5' // lower moves it to the left, higher to the right
+          text={`The Louvre or the Louvre Museum (French: Musée du Louvre, pronounced: [myze dy luvʁ]) (French   ) is the world's largest museum and a historic monument in Paris, France. A central landmark of the city, it is located on the Right Bank of the Seine in the city's 1st arrondissement (district or ward). Nearly 35,000 objects from prehistory to the 21st century are exhibited over an area of 72,735 square metres (782,910 square feet). Lorem ipsur dolor.`}
+          textAdjust='0' //lower moves this down, higher moves this up
+          imageSrc='https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/1024px-Louvre_Pyramid.jpg'
+        />
 
-        </Entity>
 
 
 

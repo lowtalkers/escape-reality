@@ -75,10 +75,10 @@ export default props => {
         />
 
         {/* Main Image */}
-        <Entity geometry={`primitive: plane; width: ${(Width/8)*3}; height: ${(Height/3)*2}`}
+        <Entity geometry={`primitive: plane; width: ${(Width/9)*3}; height: ${(Height/3)*2}`}
             material={{side: 'double', src: 'url(' + props.imageSrc + ')', opacity: 1}}
             // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
-            position={`${(Width/-4)} ${(Height/-10)} 0.1`}
+            position={`${(Width/-3.65)} ${(Height/-10)} 0.1`}
             rotation='0 0 0'
         >
         </Entity>
@@ -103,9 +103,9 @@ export default props => {
         />
 
         {/* Main Body Text */}
-        <Entity bmfont-text={{align: 'left', width: '750', color: 'white', text: props.text}} // Max character length = 500
+        <Entity bmfont-text={{align: 'left', width: '775', color: 'white', text: props.text}} // Max character length = 500
           // position={adjustMainTextCoordinates(props.position, Width, Height)}
-          position={`-0.1 ${props.textAdjust} 0.1`}
+          position={`-0.35 ${props.textAdjust - 1.1} 0.1`}
           rotation='0 0 0'
           scale='0.8 0.8 0'
         />
@@ -120,7 +120,7 @@ export default props => {
             rotation='0 0 0'
             onClick={() => console.log('Collapse icon clicked!')}
             scale='1 1 0'
-          >
+      >
       </Entity>
 
     </Entity>
