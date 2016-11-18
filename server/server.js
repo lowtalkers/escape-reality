@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const port = 3000;
-const userController = require('../db/controllers/users.js')
+const userController = require('../db/controllers/users.js');
 const utils = require('./lib/utilities.js');
 
 var bcrypt = require('bcrypt-nodejs');
@@ -20,15 +20,14 @@ app.use(session({
   saveUninitialized: true
 }));
 
-
 routes.forEach(function(route) {
   app.get(route, userController.checkAuth, function(req, res) {
     if (route === '/') {
-      res.redirect('/lobby')
+      res.redirect('/lobby');
     } else {
-      res.sendFile(path.join(__dirname, '/../react-client/index.html'))      
+      res.sendFile(path.join(__dirname, '/../react-client/index.html'));
     }
-  })
+  });
 });
 
 
@@ -38,36 +37,35 @@ app.post('/signin', function(req, res) {
   var password = req.body.password;
   var response = {};
   userController.findOne({where: {email: email}}, function(user) {
-
-  if (!user) {
-    response.auth = false;
-    res.send(response)
-  } else {
+    if (!user) {
+      response.auth = false;
+      res.send(response);
+    } else {
       userController.comparePassword(user, password, function(match) {
         if (match) {
           response.auth = true;
           userController.createSession(req, res, user, response);
         } else {
           response.auth = false;
-          res.send(response)
+          res.send(response);
         }
       });
     }
-  })
-})
+  });
+});
 
 app.post('/signup', function(req, res) {
 
   var email = req.body.email;
   var password = req.body.password;
-  console.log(req.body)
+  console.log(req.body);
   userController.findOne({where: {email: email}}, function(user) {
 
     if (!user) {
       bcrypt.hash(password, null, null, function(err, hash) {
         req.body.password = hash;
         userController.create(req.body, function(user) {
-          userController.createSession(req, res, user, {auth:true});
+          userController.createSession(req, res, user, {auth: true});
         });
       });
 
@@ -89,7 +87,7 @@ app.post('/signup', function(req, res) {
 //
 //   https://en.wikipedia.org/wiki/Macy's
 //   https://en.wikipedia.org/wiki/Normandy_landings
-
+//   https://en.wikipedia.org/wiki/Sant%27Agnese_in_Agone
 
 app.get('/getWiki', function(req, res) {
   utils.fetchWiki(req, res);
