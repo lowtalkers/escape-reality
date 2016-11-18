@@ -102,7 +102,6 @@ class App extends React.Component {
           changeColor={this.changeColor.bind(this)}
           changeCity={this.changeCity.bind(this)}
           router={this.props.router}
-
           />
         )
      } else if (this.props.router.location.pathname === '/louvre/') {
