@@ -79,23 +79,10 @@ app.post('/signup', function(req, res) {
   });
 });
 
-<<<<<<< c1357bc79ac6012c5176d070e1e4ba3b7c7d0a3b
-var sampleSearch = "Normandy_landings";
-=======
-// When sign in page loads, session is checked
-
-
-// app.get('/signup', userController.checkAuth, function(req, res) {
-//   res.sendFile(path.join(__dirname, '/../react-client/index.html'))
-// });
-
-// app.get('/signin', userController.checkAuth, function(req, res) {
-//   res.sendFile(path.join(__dirname, '/../react-client/index.html'))
-// });
 /* auth routes end ---------------------------------------------------------- */
->>>>>>> Setup authentication
 
 
+// var sampleSearch = "Normandy_landings";
 // request('http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles=' + sampleSearch + '&format=json&exintro=1', (err, res, body) => {
 //   if (err) {
 //     console.log(err);
