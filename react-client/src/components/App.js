@@ -17,7 +17,7 @@ import Louvre from './Louvre';
 import Berlin from './Berlin';
 import Milan from './Milan';
 import Rome from './Rome';
-import TextPlane from './Plane';
+import TextPlane from './TextPlane';
 
 
 // let show = false;

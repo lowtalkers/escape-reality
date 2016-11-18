@@ -16,9 +16,9 @@ export default props => {
     let yCoordinate = coordinates[1];
     let zCoordinate = coordinates[2];
     if (zCoordinate < 0) {
-      zCoordinate = (zCoordinate + 0.1).toString();
+      zCoordinate = (zCoordinate + 1.5).toString();
     } else {
-      zCoordinate = (zCoordinate - 0.1).toString();
+      zCoordinate = (zCoordinate - 1.5).toString();
     }
     xCoordinate = (xCoordinate).toString();
     //temporary
@@ -94,17 +94,6 @@ export default props => {
         >
         </Entity>
 
-        {/* Collapse Icon */}
-        {/*}
-        <Entity geometry="primitive: plane; width: 0.33; height: 0.33"
-            material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
-            position={adjustIconCoordinates(props.position, '6', '2')}
-            rotation={props.rotation}
-            onClick={() => console.log('Collapse icon clicked!')}
-        >
-        </Entity>
-        */}
-
         {/* Header Text */}
         <Entity bmfont-text={{align: 'left', width: '750', color: 'yellow', text: props.header}} 
           // position={adjustHeaderTextCoordinates(props.position, Width, Height)}
@@ -123,13 +112,14 @@ export default props => {
 
       </Entity>
 
+      {/*Collapse Icon*/}
       <Entity 
             onClick={() => console.log('Bookmark clicked!')}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
             position={`2.65 1.2 0.1`}
             rotation='0 0 0'
-            onClick={() => console.log('Collapse icon clicked!')}
+            onClick={() => props.hidePlane()}
             scale='1 1 0'
       >
       </Entity>
