@@ -56,6 +56,17 @@ export default props => {
     return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
   }
 
+  //make sure main text doesn't overflow beyond component parameters
+ let reduceMainTextSize = (text) => {
+   if (text.length >= 500) {
+     text = text.slice(0, text.length -1);
+     let finalPeriod = text.lastIndexOf('. ')
+     return (text.slice(0, finalPeriod) + '.').replace(/\s+/g, ' ').trim()
+   } else {
+     return text.replace(/\s+/g, ' ').trim();
+   }
+ }
+
 
 
 //  return <Entity id="TextPlane" position={adjustEntityCoordinates(props.position)} rotation={adjustEntityRotation(props.rotation)}>
@@ -103,7 +114,7 @@ export default props => {
         />
 
         {/* Main Body Text */}
-        <Entity bmfont-text={{align: 'left', width: '775', color: 'white', text: props.text}} // Max character length = 500
+        <Entity bmfont-text={{align: 'left', width: '775', color: 'white', text: reduceMainTextSize(props.text)}} // Max character length = 500
           // position={adjustMainTextCoordinates(props.position, Width, Height)}
           position={`-0.35 ${props.textAdjust - 1.1} 0.1`}
           rotation='0 0 0'
