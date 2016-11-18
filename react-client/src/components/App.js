@@ -99,7 +99,7 @@ class App extends React.Component {
       success: (data) => {
         console.log('Success!!!!!', data);
         if (data.auth) {
-          this.props.router.replace('/lobby');          
+          this.props.router.replace('/lobby');
         } else if (data === 'User exists!') {
           console.log('User exists!')
         }
@@ -118,7 +118,7 @@ class App extends React.Component {
     if(this.props.router.location.pathname.indexOf('/signup') >= 0) {
       console.log(this.props.router.location.pathname.indexOf('/signup'))
       return (
-        <SignUp 
+        <SignUp
         onEmailChange={this.onEmailChange.bind(this)}
         onPasswordChange={this.onPasswordChange.bind(this)}
         submitFn={this.submitFn.bind(this)}
@@ -126,7 +126,7 @@ class App extends React.Component {
       )
     } else if (this.props.router.location.pathname.indexOf('/signin') >= 0) {
         return (
-          <SignIn 
+          <SignIn
           onEmailChange={this.onEmailChange.bind(this)}
           onPasswordChange={this.onPasswordChange.bind(this)}
           submitFn={this.submitFn.bind(this)}
@@ -232,7 +232,7 @@ class App extends React.Component {
             </a-assets>
             {vrView}
           </Scene>
-        )            
+        )
     }
   }
 }
