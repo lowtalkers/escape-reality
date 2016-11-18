@@ -26,7 +26,7 @@ export default props => {
     yCoordinate = yCoordinate.toString();
     return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
   }
-
+//
   let adjustEntityCoordinates = (position) => {
     let coordinates = position.split(" ").map((element) => Number(element));
     let xCoordinate = coordinates[0];
