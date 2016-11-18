@@ -23,7 +23,7 @@ export default props => (
 
   <Entity>
 
-      <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" rotation="0 20 0"position="1.68 0 0" onClick={() => props.router.push('/')}></a-image>
+      <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" rotation="0 20 0"position="1.68 0 0" onClick={() => props.router.replace('/lobby')}></a-image>
 
       <Entity
           id='sant-agnese-church-tag'

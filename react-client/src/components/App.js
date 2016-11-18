@@ -140,10 +140,8 @@ class App extends React.Component {
             changePlaneColor={this.changePlaneColor.bind(this)}
             planeColor={self.state.planeColor}
             colorIndex={self.state.colorIndex}
-            url={self.state.url}
             color={self.state.color}
             changeColor={this.changeColor.bind(this)}
-            changeCity={this.changeCity.bind(this)}
             router={this.props.router}
             />
           )
@@ -153,10 +151,8 @@ class App extends React.Component {
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
               colorIndex={self.state.colorIndex}
-              url={self.state.url}
               color={self.state.color}
               changeColor={this.changeColor.bind(this)}
-              changeCity={this.changeCity.bind(this)}
               router={this.props.router}
 
               />
@@ -167,10 +163,8 @@ class App extends React.Component {
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
               colorIndex={self.state.colorIndex}
-              url={self.state.url}
               color={self.state.color}
               changeColor={this.changeColor.bind(this)}
-              changeCity={this.changeCity.bind(this)}
               router={this.props.router}
               />
             )
@@ -180,36 +174,30 @@ class App extends React.Component {
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
               colorIndex={self.state.colorIndex}
-              url={self.state.url}
               color={self.state.color}
               changeColor={this.changeColor.bind(this)}
-              changeCity={this.changeCity.bind(this)}
               router={this.props.router}
               />
             )
-        } else if (this.props.router.location.pathname === '/milan/') {
-            view = (
+        } else if (this.props.router.location.pathname.indexOf('/milan') >= 0) {
+            vrView = (
               <Milan
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
               colorIndex={self.state.colorIndex}
-              url={self.state.url}
               color={self.state.color}
               changeColor={this.changeColor.bind(this)}
-              changeCity={this.changeCity.bind(this)}
               router={this.props.router}
               />
             )
-        } else if (this.props.router.location.pathname === '/rome/') {
-            view = (
+        } else if (this.props.router.location.pathname.indexOf('/rome') >= 0) {
+            vrView = (
               <Rome
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
               colorIndex={self.state.colorIndex}
-              url={self.state.url}
               color={self.state.color}
               changeColor={this.changeColor.bind(this)}
-              changeCity={this.changeCity.bind(this)}
               router={this.props.router}
               />
             )
@@ -218,7 +206,7 @@ class App extends React.Component {
           <Scene >
             <Camera>
               <a-cursor
-                animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150">
+            animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150" geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64" material="color: #f72222; shader: flat" raycaster="" cursor="">
               </a-cursor>
             </Camera>
 
@@ -227,14 +215,19 @@ class App extends React.Component {
               <img id="cubes-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg" />
               <img id="sechelt-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg" />
               <img id="lobby" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/test3.jpg" />
-              <img id="sf" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/union-square-franco_1500.jpg" />
+              <img id="sf" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg" />
               <img id="louvre" crossOrigin="anonymous" src="https://c2.staticflickr.com/6/5688/21597873406_8f4021b4b4_k.jpg" />
               <img id="berlin" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/germany.jpg" />
+              <img id="milan" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan360.jpg" />
+              <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
+              <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
 
               <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/paris.png" />
               <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/sf+(1).png" />
-              <img id="toronto" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/toronto.png" />
+              <img id="berlin2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/berlin2.png" />
               <img id="seattle" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/seattle.png" />
+              <img id="milan2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan.png" />
+              <img id="rome2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/colorome.png" />
 
             </a-assets>
             {vrView}
