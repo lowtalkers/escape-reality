@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser');
 const request = require('request');
 const Entities = require('html-entities').AllHtmlEntities;
+const bookmarkController = require('../../db/controllers/bookmarks.js');
+
 
 const entities = new Entities(); // decode strings like '&amp;'
 
@@ -32,7 +34,9 @@ module.exports.fetchWiki = function(req, res) {
       output = entities.decode(output);
       console.log('🍊  Sending scrubbed text to client:', output.slice(0, 55) + '...');
 
-      res.status(200).send(JSON.stringify(output));
+      bookmarkController.create({title: req.query.exactWikiTitle, paragraph: output}, function(bookmark) {
+        res.status(200).send(JSON.stringify(bookmark));        
+      });
     }
   });
 };

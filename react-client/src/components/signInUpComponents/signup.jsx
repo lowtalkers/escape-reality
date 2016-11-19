@@ -12,6 +12,6 @@ export default props => (
     <input type="password" id="password" name="password" onChange={event => props.onPasswordChange(event)} />
     <input type="button" id="signup" value="Signup" onClick={props.submitFn} />
     Already have an account?
-    <Link to="/signin/"> Sign in here</Link>
+    <Link to="/signin"> Sign in here</Link>
   </div>
 );

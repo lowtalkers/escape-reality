@@ -5,6 +5,7 @@ const app = express();
 const path = require('path');
 const port = 3000;
 const userController = require('../db/controllers/users.js');
+const bookmarkController = require('../db/controllers/bookmarks.js');
 const utils = require('./lib/utilities.js');
 
 var bcrypt = require('bcrypt-nodejs');
@@ -90,8 +91,21 @@ app.post('/signup', function(req, res) {
 //   https://en.wikipedia.org/wiki/Sant%27Agnese_in_Agone
 
 app.get('/getWiki', function(req, res) {
-  utils.fetchWiki(req, res);
+  bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, function(bookmark) {
+    if(!bookmark) {
+      utils.fetchWiki(req, res);          
+    } else {
+      res.send(bookmark.get('paragraph'));
+    }
+  })
 });
+
+app.get('/bookmarks', function(req, res) {
+  userController.findOne({where: {email: req.session.email}}, function(user) {
+    console.log(user.getBookmarks())
+    res.send(user.getBookmarks());
+  })
+})
 
 
 app.use(express.static(path.join(__dirname, '../react-client')));
