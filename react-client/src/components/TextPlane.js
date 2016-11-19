@@ -68,10 +68,43 @@ export default props => {
    }
  }
 
+  let greenAngleCalc = (position) => {
+    console.log('Position in greenAngleCalc:', position, 'type of position:', typeof position)
+    position = cardCoordCalc(position);
+    let coordinates = position.split(" ").map((element) => Number(element));
+    let x = coordinates[0];
+    let z = coordinates[2];
+    if (z <= 0 && x <= 0){
+      return `0 ${90 - Math.abs(Math.atan(z/x) * (180/Math.PI))} 0`
+    } 
+    if (z >= 0 && x >= 0) {
+      return `0 ${-90 - Math.abs(Math.atan(z/x) * (180/Math.PI))} 0`
+    } 
+    if (z >= 0 && x <= 0){
+      return `0 ${90 + Math.abs(Math.atan(z/x) * (180/Math.PI))} 0`
+    }
+    if (z <= 0 && x >= 0) {
+      return `0 ${Math.abs(Math.atan(z/x) * (180/Math.PI)) - 90} 0`
+    }
+  }
+
+  let cardCoordCalc = (position) => {  //y=tx, x=tz
+    let coordinates = position.split(" ").map((element) => Number(element));
+    let tx = coordinates[0];
+    let tz = coordinates[2];
+    let s = Math.abs(tx/ tz); // s = slope
+    let z = 3 / (Math.sqrt(Math.pow(s, 2) + 1));
+    let x = s*z;
+    x = Math.sign(tx) * x;
+    z = Math.sign(tz) * z
+    // let gAngle = greenAngleCalc(`${x} 0.5 ${z}`);
+    // return {'x': x, 'z': z, 'gAngle': gAngle};
+    return `${x.toString()} 0.5 ${z.toString()}`
+  }
 
 
 //  return <Entity id="TextPlane" position={adjustEntityCoordinates(props.position)} rotation={adjustEntityRotation(props.rotation)}>
-  return <Entity id="TextPlane" position={adjustCoordinates(props.position)} rotation={props.rotation}>
+  return <Entity id="TextPlane" position={cardCoordCalc(props.position)} rotation={greenAngleCalc(props.position)}>
 
       <Entity>
 
@@ -137,91 +170,3 @@ export default props => {
 
     </Entity>
 };
-
-  // position = '0 0.5 -3'
-
-  // let adjustIconCoordinates = (position, width, height) => {
-  //   let coordinates = position.split(" ").map((element) => Number(element));
-  //   let xCoordinate = coordinates[0];
-  //   let yCoordinate = coordinates[1];
-  //   let zCoordinate = coordinates[2];
-  //   if (zCoordinate < 0) {
-  //     zCoordinate = (zCoordinate + 0.1).toString();
-  //   } else {
-  //     zCoordinate = (zCoordinate - 0.1).toString();
-  //   }
-  //   xCoordinate = (0 + (6/2.5)).toString(); //bigger modifier moves left
-  //   //temporary
-  //   console.log('adjustIconCoordinates height:', height)
-  //   yCoordinate = (0.5 + (3/2.75)).toString(); //bigger modifier moves down
-  //   return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
-  // }
-
-// let adjustMainTextCoordinates = (position, width, height) => {
-//   let coordinates = position.split(" ").map((element) => Number(element));
-//   let xCoordinate = coordinates[0];
-//   let yCoordinate = coordinates[1];
-//   let zCoordinate = coordinates[2];
-//   if (zCoordinate < 0) {
-//     zCoordinate = '0.1';
-//   } else {
-//     zCoordinate = '-0.1';
-//   }
-//   xCoordinate = (xCoordinate - 0.1 ).toString();
-//   //temporary
-//   yCoordinate = (yCoordinate - (height/1.75)).toString();
-//   return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
-// }
-
-// let adjustHeaderTextCoordinates = (position, width, height) => {
-//   let coordinates = position.split(" ").map((element) => Number(element));
-//   let xCoordinate = coordinates[0];
-//   let yCoordinate = coordinates[1];
-//   let zCoordinate = coordinates[2];
-//   if (zCoordinate < 0) {
-//     zCoordinate = '0.1';
-//   } else {
-//     zCoordinate = '-0.1';
-//   }
-//   xCoordinate = (xCoordinate - (width/3)).toString();
-//   //temporary
-//   yCoordinate = (yCoordinate + ((height/6))).toString();
-//   return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
-// }
-
-// let adjustImageCoordinates = (position, width, height) => {
-//   let coordinates = position.split(" ").map((element) => Number(element));
-//   let xCoordinate = coordinates[0];
-//   let yCoordinate = coordinates[1];
-//   let zCoordinate = coordinates[2];
-//   if (zCoordinate < 0) {
-//     zCoordinate = '0.1';
-//   } else {
-//     zCoordinate = '-0.1';
-//   }
-//   xCoordinate = (xCoordinate - (width / 4) ).toString();
-//   //temporary
-//   yCoordinate = (yCoordinate - (height / 3)).toString();
-//   return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
-// }
-
-// <Entity
-  // geometry='primitive: plane; width: 3; height: 3'
-  // position='0 0 -3'
-  // rotation='0 0 0'
-  // material={{color: 'black'}}
-// />
-
-// <Entity
- // bmfont-text={{width: 3, color: 'white', text: 'TESTING B&W'}} position='0 0 -2' rotation='0 0 0'
- // {...extraProps}/>
-
-// <Entity
- // bmfont-text={{width: props.textWidth, color: props.textColor, text: props.text}} position={props.textPosition} rotation={props.textRotation}
- // {...extraProps}/>
-
-
-// <Entity
-//   geometry={`primitive: plane; width: ${props.planeWidth}; height: ${props.planeHeight}; color: ${props.planeColor}`}
-//   position={props.planePosition}
-//   rotation={props.planeRotation} />
