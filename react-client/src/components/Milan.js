@@ -38,11 +38,12 @@ class Milan extends React.Component {
     });
   }
 
+
   render () {
     const self = this;
     return (
       <Entity>
-          <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 2" onClick={() => self.props.router.replace('/lobby')}></a-image>
+          <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
           <Entity
               id='milan-cathedral-tag'
