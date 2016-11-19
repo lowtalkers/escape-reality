@@ -63,8 +63,8 @@ class Milan extends React.Component {
               id="cathedralTextPlane"
               hidePlane={() => self.setState({showCathedral: false})}
 
-              position="-2. 1.96 -2.7"
-              rotation="0 49.6 0"
+              position="-14.62 5.5 -2.76"
+              rotation="20 80 0"
 
               scale='0 0 0'
               header='Milan Cathedral'
@@ -93,8 +93,8 @@ class Milan extends React.Component {
             id="GalleriaVittorioEmanueleIITextPlane"
             hidePlane={() => self.setState({showGalleria: false})}
 
-            position="-2. 1.96 -2.7"
-            rotation="0 49.6 0"
+            position="-11.8 6.77 25.6"
+            rotation="20 150 0"
 
             scale='0 0 0'
             header='Galleria Vittorio'
@@ -123,8 +123,8 @@ class Milan extends React.Component {
             id="RoyalPalaceTextPlane"
             hidePlane={() => self.setState({showPalace: false})}
 
-            position="-2. 1.96 -2.7"
-            rotation="0 49.6 0"
+            position="-24.47 2.68 -16.46"
+            rotation="0 50 0"
 
             scale='0 0 0'
             header='Royal Palace'
