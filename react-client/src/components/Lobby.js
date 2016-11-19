@@ -15,17 +15,7 @@ import Plane from './Plane';
 export default props => (
   <Entity>
 
-
-
-        <Entity>
-        <Text
-          text='San Francisco!'
-          color='#000000'
-          rotation='0 30 0'
-          position='0 0 -2"'/>
-
-          <Entity rotation="0 30 0" position="0 0 -2" material={{src: '#milan2', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => props.router.replace('/milan')}/>
-        </Entity>
+        <Entity rotation="0 30 0" position="0 0 -2" material={{src: '#milan2', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => props.router.replace('/milan')}/>
 
         <Entity rotation="0 80 0" position="0 0 -2" material={{src: '#paris', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => props.router.replace('/louvre')}/>
 
