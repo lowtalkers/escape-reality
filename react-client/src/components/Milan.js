@@ -46,6 +46,7 @@ class Milan extends React.Component {
       <Entity>
           <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
+<<<<<<< 4641073f661faf3751afa72fbe5e7c396b0b7009
           <RingTag
               id='milan-cathedral-tag'
               clickFunction={() => {
@@ -57,6 +58,15 @@ class Milan extends React.Component {
               rotation="20 80 0"
               visible="true">
           </RingTag>
+=======
+          <RingTag id="milan-cathedral-tag"
+            clickFunction={() => {
+              self.setState({showMoorFountain: true});
+            }}
+              position="-14.62 5.5 -2.76"
+              rotation="20 80 0"
+          />
+>>>>>>> Replace textplane components with ring tags in remaining interactive cities
 
           {self.state.showCathedral ?
             <TextPlane
@@ -87,6 +97,7 @@ class Milan extends React.Component {
             position="-11.8 6.77 25.6"
             rotation="-20 150 0">
         </RingTag>
+
 
         {self.state.showGalleria ?
           <TextPlane

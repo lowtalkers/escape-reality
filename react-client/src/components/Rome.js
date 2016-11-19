@@ -48,8 +48,8 @@ class Rome extends React.Component {
             clickFunction={() => {
               self.setState({showChurch: true});
             }}
-              position="-22.55 7.98 -14.11"
-              rotation="0 80 0"
+            position="-22.55 7.98 -14.11"
+            rotation="0 80 0"
           />
 
           {self.state.showChurch ? 
@@ -102,8 +102,8 @@ class Rome extends React.Component {
           clickFunction={() => {
                 self.setState({showMoorFountain: true});
               }}
-            position="0.53 2.76 20.73"
-            rotation="0 -180 0"
+          position="0.53 2.76 20.73"
+          rotation="0 -180 0"
         />
 
         {self.state.showMoorFountain ? 
