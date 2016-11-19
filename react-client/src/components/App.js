@@ -44,6 +44,35 @@ class App extends React.Component {
     });
   }
 
+  getParagraph(allTitles, setStateParagraph) {
+    const result = {};
+    const fetch = (title, idx, getNextParagraph) => {
+      $.get({
+        url: '/getWiki?exactWikiTitle=' + title,
+        success: (data) => {
+          console.log('Success fetch wiki paragraph', data);
+          result[allTitles[idx]] = data;
+          getNextParagraph();
+        },
+        error: (error) => {
+          console.error('error in fetch paragraph', error);
+          $('.error').show();
+        },
+      });
+    };
+
+    const recurse = (titleIndex) => {
+      if (titleIndex === allTitles.length) {
+        setStateParagraph(result);
+        return result;
+      }
+      fetch(allTitles[titleIndex], titleIndex, () => {
+        recurse(titleIndex + 1);
+      });
+    };
+    recurse(0);
+  }
+
   componentWillMount() {
   }
 
@@ -160,6 +189,7 @@ class App extends React.Component {
         } else if (this.props.router.location.pathname.indexOf('/louvre') >= 0) {
             vrView = (
               <Louvre
+              getParagraph={this.getParagraph.bind(this)}
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
               colorIndex={self.state.colorIndex}
@@ -193,6 +223,7 @@ class App extends React.Component {
         } else if (this.props.router.location.pathname.indexOf('/rome') >= 0) {
             vrView = (
               <Rome
+              getParagraph={this.getParagraph.bind(this)}
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
               colorIndex={self.state.colorIndex}
