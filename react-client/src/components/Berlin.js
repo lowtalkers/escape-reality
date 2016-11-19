@@ -14,7 +14,6 @@ import TextPlane from './TextPlane';
 import Plane from './Plane';
 import RingTag from './RingTag';
 
-
 /*  Wikipedia links
     Potsdamer Platz | https://en.wikipedia.org/wiki/Potsdamer_Platz
     Potsdamer Platz Station | https://en.wikipedia.org/wiki/Berlin_Potsdamer_Platz_station
@@ -148,5 +147,71 @@ class Berlin extends React.Component {
   }
 }
 
+
+
+
+export default props => {
+
+  return (
+
+    <Entity>
+
+      <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby') ;}}></a-image>
+
+      <RingTag id="circle"
+        clickFunction={() => {
+          self.setState({showMoorFountain: true});
+        }}
+        position="-14.62 8.51 -19.69" 
+        rotation="0 50 0"
+      />
+
+      <RingTag id="circle2"
+        clickFunction={() => {
+          self.setState({showMoorFountain: true});
+        }}
+        position="-14.62 11.81 -4.9" 
+        rotation="20 80 0"
+      />
+
+      <RingTag id="circle3"
+        clickFunction={() => {
+          self.setState({showMoorFountain: true});
+        }}
+        position="-10.51 8.51 25.6" 
+        rotation="-20 150 0"
+      />
+
+      <RingTag id="circle4"
+        clickFunction={() => {
+          self.setState({showMoorFountain: true});
+        }}
+        position="20.05 3.7 -1.31" 
+        rotation="160 100 0"
+      />
+      
+      <RingTag id="circle5"
+        clickFunction={() => {
+          self.setState({showMoorFountain: true});
+        }}
+        position="-10.85 7.36 5.89" 
+        rotation="20 100 0"
+      />
+
+    <a-sky id="image-360" radius="30" src='#berlin'></a-sky>
+
+    <Text
+      text='Berlin!'
+      color='#DADADA'
+      position='-1.75 1 -3'/>
+
+    <Entity light={{type: 'ambient', color: '#888'}}/>
+    <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
+    <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
+
+    </Entity>
+  );
+};
+>>>>>>> Replace textplane components with ring tags in remaining interactive cities
 
 export default withRouter(Berlin, {withRef: true});
