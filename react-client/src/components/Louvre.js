@@ -39,7 +39,15 @@ class Louvre extends React.Component {
     this.state = {
       showPyramid: false,
       showLeftWingPlane: false,
-    }
+      allTitles: ['Louvre_Pyramid', 'Louvre']
+    };
+  }
+
+  componentWillMount () {
+    this.props.getParagraph(this.state.allTitles, allParagraphs => { 
+      this.setState( {allParagraphs: allParagraphs} );
+      console.log('🍊  this.state allParagraphs', this.state.allParagraphs);
+    });
   }
 
   render () {
@@ -66,7 +74,7 @@ class Louvre extends React.Component {
         >
         </Entity>
 
-        {self.state.showPyramid? 
+        {self.state.showPyramid ? 
           
             <TextPlane 
               id="pyramidTextPlane"
@@ -78,7 +86,7 @@ class Louvre extends React.Component {
               scale='0 0 0'
               header='Louvre Pyramid'
               headerAdjust='-1.5' // lower moves it to the left, higher to the right
-              text={`The Louvre or the Louvre Museum (French: Musée du Louvre, pronounced: [myze dy luvʁ]) (French   ) is the world's largest museum and a historic monument in Paris, France. A central landmark of the city, it is located on the Right Bank of the Seine in the city's 1st arrondissement (district or ward). Nearly 35,000 objects from prehistory to the 21st century are exhibited over an area of 72,735 square metres (782,910 square feet). The Louvre is the world's second most visited museum after the Palace Museum in China, receiving more than 9.26 million visitors in 2014.`}
+              text={this.state.allParagraphs['Louvre_Pyramid']}
               textAdjust='0' //lower moves this down, higher moves this up
               imageSrc='https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/1024px-Louvre_Pyramid.jpg'
             />
@@ -114,7 +122,7 @@ class Louvre extends React.Component {
         >
         </Entity>
 
-        {self.state.showLeftWingPlane?
+        {self.state.showLeftWingPlane ?
 
           <TextPlane 
             id="leftWingTagPlane"
@@ -126,7 +134,7 @@ class Louvre extends React.Component {
             scale='0 0 0'
             header='Louvre Museum'
             headerAdjust='-1.5' // lower moves it to the left, higher to the right
-            text= {`The Louvre or the Louvre Museum (French: Musée du Louvre, pronounced: [myze dy luvʁ]) (French   ) is the world's largest museum and a historic monument in Paris, France. A central landmark of the city, it is located on the Right Bank of the Seine in the city's 1st arrondissement (district or ward). Nearly 35,000 objects from prehistory to the 21st century are exhibited over an area of 72,735 square metres (782,910 square feet). The Louvre is the world's second most visited museum after the Palace Museum in China, receiving more than 9.26 million visitors in 2014.`}
+            text= {this.state.allParagraphs['Louvre']}
             textAdjust='0' //lower moves this down, higher moves this up
             imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
           />
