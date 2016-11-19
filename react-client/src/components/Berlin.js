@@ -42,7 +42,7 @@ class Berlin extends React.Component {
     const self = this;
     return (
       <Entity>
-          <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="3.81 0 2" rotation="0 -92.24620501606255 0" onClick={() => self.props.router.replace('/lobby')}></a-image>
+          <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -4" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
           <RingTag
               id='potsdamer-platz-tag'
