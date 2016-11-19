@@ -55,7 +55,7 @@ class Louvre extends React.Component {
     return (
       <Entity >
 
-       <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 0" onClick={() => props.router.replace('/lobby')}></a-image>
+       <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 2" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
         <Entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
           <Entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></Entity>
