@@ -73,7 +73,7 @@ export default props => {
 //  return <Entity id="TextPlane" position={adjustEntityCoordinates(props.position)} rotation={adjustEntityRotation(props.rotation)}>
   return <Entity id="TextPlane" position={adjustCoordinates(props.position)} rotation={props.rotation}>
 
-      <Entity onClick={() => console.log('Textplane clicked!')}>
+      <Entity>
 
         {/* Assume that props.position === "0 1 -3" */}
 
@@ -115,7 +115,6 @@ export default props => {
 
       {/*Collapse Icon*/}
       <Entity
-            onClick={() => console.log('Bookmark clicked!')}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
             position={`2.65 1.2 0.1`}
