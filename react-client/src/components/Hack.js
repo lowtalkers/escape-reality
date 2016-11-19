@@ -17,18 +17,15 @@ export default props => (
 
   <Entity>
 
-    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby') ;}}></a-image>
+    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 2" onClick={() => {props.router.replace('/lobby') ;}}></a-image>
 
-    <a-image id="hr-image" src="#hrlogo" geometry="height: 0.5; width: 0.5" position="-1.29 1.04 -0.56" rotation="0 60 0" onClick={() => {props.router.replace('/hr') ;}}></a-image>
-
-    <a-sky id="image-360" radius="30" src='#sf'></a-sky>
+    <a-sky id="image-360" radius="30" src='#hr'></a-sky>
 
     <Text
-      text='San Francisco!'
-      color='#000000'
-      rotation='0 100 0'
-      position='-6 3.85 3.23'/>
-
+      text="Hack Reactin'!"
+      color='#1d3c54'
+      rotation='0 43 0'
+      position='-6 -0.28 1.41'/>
 
   <Entity light={{type: 'ambient', color: '#888'}}/>
   <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>

@@ -19,6 +19,7 @@ import Louvre from './Louvre';
 import Berlin from './Berlin';
 import Milan from './Milan';
 import Rome from './Rome';
+import Hack from './Hack';
 import TextPlane from './TextPlane';
 
 import SignUp from './signInUpComponents/signup.jsx';
@@ -201,6 +202,7 @@ class App extends React.Component {
         } else if (this.props.router.location.pathname.indexOf('/berlin') >= 0) {
             vrView = (
               <Berlin
+              getParagraph={this.getParagraph.bind(this)}
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
               colorIndex={self.state.colorIndex}
@@ -224,6 +226,18 @@ class App extends React.Component {
         } else if (this.props.router.location.pathname.indexOf('/rome') >= 0) {
             vrView = (
               <Rome
+              getParagraph={this.getParagraph.bind(this)}
+              changePlaneColor={this.changePlaneColor.bind(this)}
+              planeColor={self.state.planeColor}
+              colorIndex={self.state.colorIndex}
+              color={self.state.color}
+              changeColor={this.changeColor.bind(this)}
+              router={this.props.router}
+              />
+            )
+        } else if (this.props.router.location.pathname.indexOf('/hr') >= 0) {
+            vrView = (
+              <Hack
               getParagraph={this.getParagraph.bind(this)}
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
@@ -259,6 +273,8 @@ class App extends React.Component {
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
               <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
+              <img id="hr" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/hr.JPG" />
+              <img id="hrlogo" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/HR.png" />
 
               <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/paris.png" />
               <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/sf+(1).png" />
@@ -266,6 +282,8 @@ class App extends React.Component {
               <img id="seattle" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/seattle.png" />
               <img id="milan2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan.png" />
               <img id="rome2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/colorome.png" />
+
+
 
             </a-assets>
             {vrView}

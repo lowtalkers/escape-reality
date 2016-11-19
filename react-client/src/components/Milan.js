@@ -12,6 +12,7 @@ import Text from './Text';
 import Sky from './Sky';
 import TextPlane from './TextPlane';
 import Plane from './Plane';
+import RingTag from './RingTag';
 
 
 /*  Wikipedia links
@@ -45,9 +46,9 @@ class Milan extends React.Component {
       <Entity>
           <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
-          <Entity
+          <RingTag
               id='milan-cathedral-tag'
-              onClick={() => {
+              clickFunction={() => {
                 self.setState({showCathedral: true});
               }}
               geometry="primitive: plane; width: 3; height: 3"
@@ -55,7 +56,7 @@ class Milan extends React.Component {
               position="-14.62 5.5 -2.76"
               rotation="20 80 0"
               visible="true">
-          </Entity>
+          </RingTag>
 
           {self.state.showCathedral ?
             <TextPlane
@@ -76,16 +77,16 @@ class Milan extends React.Component {
             : null
           }
 
-        <Entity
+        <RingTag
             id='galleria-tag'
-              onClick={() => {
-                self.setState({showGalleria: true});
-              }}
+            clickFunction={() => {
+              self.setState({showGalleria: true});
+            }}
             geometry="primitive: plane; width: 2; height: 2"
             material={{color: 'red', opacity: 0.25}}
             position="-11.8 6.77 25.6"
             rotation="-20 150 0">
-        </Entity>
+        </RingTag>
 
         {self.state.showGalleria ?
           <TextPlane
@@ -106,16 +107,16 @@ class Milan extends React.Component {
           : null
         }
 
-        <Entity
+        <RingTag
             id='royal-palace-tag'
-              onClick={() => {
-                self.setState({showPalace: true});
-              }}
+            clickFunction={() => {
+              self.setState({showPalace: true});
+            }}
             geometry="primitive: plane; width: 2; height: 2"
             material={{color: 'red', opacity: 0.25}}
             position="-24.47 2.68 -16.46"
             rotation="0 50 0">
-        </Entity>
+        </RingTag>
 
         {self.state.showPalace ?
           <TextPlane
