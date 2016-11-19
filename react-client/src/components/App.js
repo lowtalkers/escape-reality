@@ -212,6 +212,7 @@ class App extends React.Component {
         } else if (this.props.router.location.pathname.indexOf('/milan') >= 0) {
             vrView = (
               <Milan
+              getParagraph={this.getParagraph.bind(this)}
               changePlaneColor={this.changePlaneColor.bind(this)}
               planeColor={self.state.planeColor}
               colorIndex={self.state.colorIndex}

@@ -10,41 +10,141 @@ import { Link, withRouter } from 'react-router';
 import Camera from './Camera';
 import Text from './Text';
 import Sky from './Sky';
+import TextPlane from './TextPlane';
 import Plane from './Plane';
 
 
-export default props => (
+/*  Wikipedia links
+    Milan Cathedral | https://en.wikipedia.org/wiki/Milan_Cathedral
+    Galleria Vittorio Emanuele II | https://en.wikipedia.org/wiki/Galleria_Vittorio_Emanuele_II
+    Royal Palace of Milan | https://en.wikipedia.org/wiki/Royal_Palace_of_Milan
+*/
 
-  <Entity>
+class Milan extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showCathedral: false,
+      showGalleria: false,
+      showPalace: false,
+      allTitles: ['Milan_Cathedral', 'Galleria_Vittorio_Emanuele_II', 'Royal_Palace_of_Milan']
+    };
+  }
 
-  <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 2" onClick={() => {props.router.replace('/lobby/') ;}}></a-image>
+  componentWillMount () {
+    this.props.getParagraph(this.state.allTitles, allParagraphs => {
+      this.setState( {allParagraphs: allParagraphs} );
+      console.log('🍊  this.state allParagraphs', this.state.allParagraphs);
+    });
+  }
 
-    <Entity id="circle" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="-24.47 2.68 -16.46" rotation="0 50 0" visible="true">
-    </Entity>
+  render () {
+    const self = this;
+    return (
+      <Entity>
+          <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 2" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
-    <Entity id="circle2" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="-14.62 5.5 -2.76" rotation="20 80 0" visible="true">
-    </Entity>
+          <Entity
+              id='milan-cathedral-tag'
+              onClick={() => {
+                self.setState({showCathedral: true});
+              }}
+              geometry="primitive: plane; width: 3; height: 3"
+              material={{color: '#ff0000', opacity: 0.25}}
+              position="-14.62 5.5 -2.76"
+              rotation="20 80 0"
+              visible="true">
+          </Entity>
 
-    <Entity id="circle3" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="-11.8 6.77 25.6" rotation="-20 150 0" visible="true">
-    </Entity>
+          {self.state.showCathedral ?
+            <TextPlane
+              id="cathedralTextPlane"
+              hidePlane={() => self.setState({showCathedral: false})}
 
-    <Entity id="circle4" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="20.05 3.7 11.37" rotation="160 60 0" visible="true">
-    </Entity>
+              position="-2. 1.96 -2.7"
+              rotation="0 49.6 0"
 
-    <Entity id="circle5" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="3.52 3.46 19.33" rotation="180 0 0" visible="true">
-    </Entity>
+              scale='0 0 0'
+              header='Milan Cathedral'
+              wikiName='Milan_Cathedral'
+              headerAdjust='-1.5' // lower moves it to the left, higher to the right
+              text={this.state.allParagraphs['Milan_Cathedral']}
+              textAdjust='0' //lower moves this down, higher moves this up
+              imageSrc='https://upload.wikimedia.org/wikipedia/commons/e/ec/876MilanoDuomo.JPG'
+            />
+            : null
+          }
 
-  <a-sky id="image-360" radius="30" src='#milan'></a-sky>
+        <Entity
+            id='galleria-tag'
+              onClick={() => {
+                self.setState({showGalleria: true});
+              }}
+            geometry="primitive: plane; width: 2; height: 2"
+            material={{color: 'red', opacity: 0.25}}
+            position="-11.8 6.77 25.6"
+            rotation="-20 150 0">
+        </Entity>
 
-  <Text
-    text='Milan!'
-    color='#DADADA'
-    position='-1.75 1 -3'/>
+        {self.state.showGalleria ?
+          <TextPlane
+            id="GalleriaVittorioEmanueleIITextPlane"
+            hidePlane={() => self.setState({showGalleria: false})}
 
-  <Entity light={{type: 'ambient', color: '#888'}}/>
-  <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
-  <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
+            position="-2. 1.96 -2.7"
+            rotation="0 49.6 0"
 
-  </Entity>
-)
+            scale='0 0 0'
+            header='Galleria Vittorio'
+            wikiName='Galleria_Vittorio_Emanuele_II'
+            headerAdjust='-1.5' // lower moves it to the left, higher to the right
+            text={this.state.allParagraphs['Galleria_Vittorio_Emanuele_II']}
+            textAdjust='0' //lower moves this down, higher moves this up
+            imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Galleria_Vittorio_Emanuele_II_%28Milan%29_E1.jpg/1024px-Galleria_Vittorio_Emanuele_II_%28Milan%29_E1.jpg'
+          />
+          : null
+        }
 
+        <Entity
+            id='royal-palace-tag'
+              onClick={() => {
+                self.setState({showPalace: true});
+              }}
+            geometry="primitive: plane; width: 2; height: 2"
+            material={{color: 'red', opacity: 0.25}}
+            position="-24.47 2.68 -16.46"
+            rotation="0 50 0">
+        </Entity>
+
+        {self.state.showPalace ?
+          <TextPlane
+            id="RoyalPalaceTextPlane"
+            hidePlane={() => self.setState({showPalace: false})}
+
+            position="-2. 1.96 -2.7"
+            rotation="0 49.6 0"
+
+            scale='0 0 0'
+            header='Royal Palace'
+            wikiName='Royal_Palace_of_Milan'
+            headerAdjust='-1.5' // lower moves it to the left, higher to the right
+            text={this.state.allParagraphs['Royal_Palace_of_Milan']}
+            textAdjust='0' //lower moves this down, higher moves this up
+            imageSrc='https://upload.wikimedia.org/wikipedia/commons/0/0e/860MilanoPalazzoReale.JPG.jpg'
+          />
+          : null
+        }
+
+        <a-sky id="image-360" radius="30" src='#milan'></a-sky>
+
+        <Entity light={{type: 'ambient', color: '#888'}}/>
+        <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
+        <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
+
+      </Entity>
+    );
+  }
+}
+
+
+export default withRouter(Milan, {withRef: true});
