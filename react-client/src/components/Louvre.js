@@ -14,6 +14,7 @@ import Text from './Text';
 import Sky from './Sky';
 import TextPlane from './TextPlane';
 import Bookmark from './Bookmark';
+import RingTag from './RingTag';
 
 // var draw = require("aframe-draw-component").component;
 // var textWrap = require('aframe-textwrap-component').component;
@@ -40,14 +41,16 @@ class Louvre extends React.Component {
       showPyramidCard: false,
       showLeftWingCard: false,
       showMuseumCard: false,
-      showCourtyardCard: false
+      showCourtyardCard: false,
+      allTitles: ['Louvre', 'Louvre_Pyramid']
     }
+  }
 
   componentWillMount () {
     this.props.getParagraph(this.state.allTitles, allParagraphs => {
       this.setState( {allParagraphs: allParagraphs} );
       console.log('🍊 this.state allParagraphs', this.state.allParagraphs);
-    }
+    })
   }
 
   render () {
@@ -63,64 +66,65 @@ class Louvre extends React.Component {
           <Entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></Entity>
         </Entity>
 
-        <Entity id="pyramidTag"
-            onClick={() => {
-              self.setState({showPyramidCard: true});
-            }}
-            geometry="primitive: plane; width: 2; height: 2"
-            material={{src: 'url(https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg)', opacity: 0.85}}
-            position="-4.34 2.22 6.83"
-            rotation="8.02 135.22 -1.15"
-        >
-        </Entity>
-
-        {self.state.showPyramidCard? 
-          
-            <TextPlane 
-              id="pyramidTextPlane"
-              hidePlane={() => self.setState({showPyramidCard: false})}
-
-              position="-4.34 2.22 6.83"
-              rotation="8.02 135.22 -1.15"
-
-              scale='0 0 0'
-              header='Louvre Pyramid'
-              headerAdjust='-1.5' // lower moves it to the left, higher to the right
-              text={this.state.allParagraphs['Louvre_Pyramid']}
-              textAdjust='0' //lower moves this down, higher moves this up
-              imageSrc='https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/1024px-Louvre_Pyramid.jpg'
-            />
-
-            :
-
-            null
-        }
+{/*
+        <a-ring
+          radius-inner='3'
+          radius-outer='3'
+          color="white"
+          position='0 0 -3'
+          rotation='0 0 0'
+        ></a-ring>
+*/}
 
 {/*
-        <TextPlane id="pyramidTextPlane"
-        //replace two below lines with corresponding tag properties
-          position="-4.34 2.22 6.83"
-          rotation="8.02 135.22 -1.15"
-
-          scale='0 0 0'
-          header='Louvre Pyramid'
-          headerAdjust='-1.5' // lower moves it to the left, higher to the right
-          text='The Louvre Pyramid (Pyramide du Louvre) is a large glass and metal pyramid designed by Chinese-American architect I.M. Pei, surrounded by three smaller pyramids, in the main courtyard (Cour Napoléon) of the Louvre Palace (Palais du Louvre) in Paris. The large pyramid serves as the main entrance to the Louvre Museum. Completed in 1989, it has become a landmark of the city of Paris.'
-          textAdjust='-1' //lower moves this down, higher moves this up
-          imageSrc='https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/1024px-Louvre_Pyramid.jpg'
+        <RingTag 
+          position='0 0 -3'
+          rotation='0 0 0'
+          color='white'
         />
 */}
 
-        <Entity id="richelieuWingTag" 
-          geometry="primitive: plane; width: 2; height: 2"
-          onClick={() => {
+{/*Pyramid*/}
+
+      <RingTag id="pyramidTag"
+        clickFunction={() => {
+          self.setState({showPyramidCard: true});
+        }}
+        position="-4.34 2.22 6.83"
+        rotation="8.02 135.22 -1.15"
+      />
+
+      {self.state.showPyramidCard? 
+        
+          <TextPlane 
+            id="pyramidTextPlane"
+            hidePlane={() => self.setState({showPyramidCard: false})}
+
+            position="-4.34 2.22 6.83"
+            rotation="8.02 135.22 -1.15"
+
+            scale='0 0 0'
+            header='Louvre Pyramid'
+            headerAdjust='-1.5' // lower moves it to the left, higher to the right
+            text={this.state.allParagraphs['Louvre_Pyramid']}
+            textAdjust='0' //lower moves this down, higher moves this up
+            imageSrc='https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/1024px-Louvre_Pyramid.jpg'
+          />
+
+          :
+
+          null
+      }
+
+{/*Richelieu Wing*/}
+
+        <RingTag id="richelieuWingTag" 
+          clickFunction={() => {
             self.setState({showLeftWingCard: true});
           }}
-          material={{color: 'yellow', opacity: 0.35}}
           position="-8.02 2.97 -3.8"
           rotation="-2.86 53.86 2.86"
-        >
-        </Entity>
+        />
 
         {self.state.showLeftWingCard?
 
@@ -132,9 +136,9 @@ class Louvre extends React.Component {
             rotation="-2.86 53.86 2.86"
 
             scale='0 0 0'
-            header='Louvre Museum'
+            header='Richelieu Wing'
             headerAdjust='-1.5' // lower moves it to the left, higher to the right
-            text= {this.state.allParagraphs['Louvre']}
+            text= "The Richelieu Wing of the Louvre Museum in Paris France is home to many famous French, German and Dutch paintings (third floor) and historical treasures from the Renaissance (second floor). French sculptures are located on the main floor. Although he never actually lived here, the apartments reflect Napoleon III's architectural style, and is home to numerous Cour Marly and Cour Puget sculptures. The Building served previously as The Ministry of Finance."
             textAdjust='0' //lower moves this down, higher moves this up
             imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
           />
@@ -144,14 +148,13 @@ class Louvre extends React.Component {
           null
         }
 
-        <Entity id='courtyardTag'
-            geometry="primitive: plane; width: 5; height: 5"
-            onClick={() => self.setState({showCourtyardCard: true})}
-            material={{color: 'yellow', opacity: 0.35}}
-            position="6.4 -4 0.11"
-            rotation="-89.46 -89.95 85"
-        >
-        </Entity>
+{/*Napoleon Courtyard*/}
+
+        <RingTag id="courtyardTag" 
+          clickFunction={() => self.setState({showCourtyardCard: true})}
+          position="6.4 -4 0.11"
+          rotation="-89.46 -89.95 85"
+        />
 
         {self.state.showCourtyardCard?
 
@@ -163,9 +166,9 @@ class Louvre extends React.Component {
             rotation="-2.86 53.86 2.86"
             
             scale='0 0 0'
-            header='Louvre Museum'
+            header='Napoleon Courtyard'
             headerAdjust='-1.5' // lower moves it to the left, higher to the right
-            text= {`The Louvre or the Louvre Museum (French: Musée du Louvre, pronounced: [myze dy luvʁ]) (French   ) is the world's largest museum and a historic monument in Paris, France. A central landmark of the city, it is located on the Right Bank of the Seine in the city's 1st arrondissement (district or ward). Nearly 35,000 objects from prehistory to the 21st century are exhibited over an area of 72,735 square metres (782,910 square feet). The Louvre is the world's second most visited museum after the Palace Museum in China, receiving more than 9.26 million visitors in 2014.`}
+            text= {`'Cour Napolon', or Napoleon's Courtyard, is named after Napoleon III, under whose rule the Louvre Palace underwent several structural changes to its design. The nephew and heir of Napoleon I, he was the first President of France to be elected by a direct popular vote. He was blocked by the Constitution and Parliament from running for a second term, so he organized a coup d'état in 1851 and then took the throne as Napoleon III on 2 December 1852.`}
             textAdjust='0' //lower moves this down, higher moves this up
             imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
           />
@@ -175,17 +178,13 @@ class Louvre extends React.Component {
           null
         }
 
-        <Entity id="museumTag" 
-            geometry="primitive: plane; width: 2; height: 2"
-            draw="text: Hello"
-            onClick={() => self.setState({showMuseumCard: true})}
-            material={{color: this.props.planeColor[this.props.colorIndex], opacity: 0.25}}
-            position="7 3 -5.42"
-            rotation="18.91 -52.14 0"
-            look-at="[camera]"
-            // lookAt={[camera]}
-        >
-        </Entity>
+{/*Louvre Museum*/}
+
+        <RingTag id="museumTag" 
+          clickFunction={() => self.setState({showMuseumCard: true})}
+          position="7 3 -5.42"
+          rotation="18.91 -52.14 0"
+        />
 
         {self.state.showMuseumCard?
 
@@ -199,7 +198,8 @@ class Louvre extends React.Component {
             scale='0 0 0'
             header='Louvre Museum'
             headerAdjust='-1.5' // lower moves it to the left, higher to the right
-            text= {`The Louvre or the Louvre Museum (French: Musée du Louvre, pronounced: [myze dy luvʁ]) (French   ) is the world's largest museum and a historic monument in Paris, France. A central landmark of the city, it is located on the Right Bank of the Seine in the city's 1st arrondissement (district or ward). Nearly 35,000 objects from prehistory to the 21st century are exhibited over an area of 72,735 square metres (782,910 square feet). The Louvre is the world's second most visited museum after the Palace Museum in China, receiving more than 9.26 million visitors in 2014.`}
+            text= {this.state.allParagraphs['Louvre']}
+            // text= {`The Louvre or the Louvre Museum (French: Musée du Louvre, pronounced: [myze dy luvʁ]) (French   ) is the world's largest museum and a historic monument in Paris, France. A central landmark of the city, it is located on the Right Bank of the Seine in the city's 1st arrondissement (district or ward). Nearly 35,000 objects from prehistory to the 21st century are exhibited over an area of 72,735 square metres (782,910 square feet). The Louvre is the world's second most visited museum after the Palace Museum in China, receiving more than 9.26 million visitors in 2014.`}
             textAdjust='0' //lower moves this down, higher moves this up
             imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Vista_exterior_del_Museo_del_Louvre.JPG/1280px-Vista_exterior_del_Museo_del_Louvre.JPG'
           />
