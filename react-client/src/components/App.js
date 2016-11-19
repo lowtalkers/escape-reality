@@ -253,9 +253,9 @@ class App extends React.Component {
             <Camera>
               <a-cursor
                 fuse="true" fuseTimeout="800"
-                animation__fuse="property: scale; startEvents: stateadded; from: 4 4 4; to: 1 1 1; dur: 1400"
+                animation__fuse="property: scale; easing: easeOutExpo; startEvents: stateadded; from: 7 7 7; to: 1 1 1; dur: 2000"
                 geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64"
-                material="color: red; shader: flat"
+                material="color: #61ffff; shader: flat"
               >
               </a-cursor>
             </Camera>
@@ -272,7 +272,7 @@ class App extends React.Component {
               <img id="milan" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan360.jpg" />
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
-              <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
+              <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_2000.jpg" />
               <img id="hr" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/hr.JPG" />
               <img id="hrlogo" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/HR.png" />
 
