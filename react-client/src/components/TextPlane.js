@@ -1,6 +1,7 @@
 import {Entity} from 'aframe-react';
 import React from 'react';
 import 'aframe-bmfont-text-component';
+import Bookmark from './Bookmark';
 
 const Height = 3;
 const Width = 6;
@@ -10,7 +11,7 @@ export default props => {
   delete extraProps.color;
   delete extraProps.text;
 
-  let adjustCoordinates = (position, width) => { 
+  let adjustCoordinates = (position, width) => {
     let coordinates = position.split(" ").map((element) => Number(element));
     let xCoordinate = coordinates[0];
     let yCoordinate = coordinates[1];
@@ -39,7 +40,7 @@ export default props => {
     return (`0 ${xRotation} 0`)
   }
 
-  let adjustIconCoordinates = (position, width, height) => { 
+  let adjustIconCoordinates = (position, width, height) => {
     let coordinates = position.split(" ").map((element) => Number(element));
     let xCoordinate = coordinates[0];
     let yCoordinate = coordinates[1];
@@ -78,7 +79,7 @@ export default props => {
 
 
         {/* Background Plane */}
-        <Entity 
+        <Entity
           geometry={`primitive: plane; width: ${Width}; height: ${Height}`}
           // position='0 0 0'
           rotation='0 0 0'
@@ -95,7 +96,7 @@ export default props => {
         </Entity>
 
         {/* Header Text */}
-        <Entity bmfont-text={{align: 'left', width: '750', color: 'yellow', text: props.header}} 
+        <Entity bmfont-text={{align: 'left', width: '750', color: 'yellow', text: props.header}}
           // position={adjustHeaderTextCoordinates(props.position, Width, Height)}
           position={`${props.headerAdjust} 1 0.1`}
           rotation='0 0 0'
@@ -113,7 +114,7 @@ export default props => {
       </Entity>
 
       {/*Collapse Icon*/}
-      <Entity 
+      <Entity
             onClick={() => console.log('Bookmark clicked!')}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
@@ -124,12 +125,23 @@ export default props => {
       >
       </Entity>
 
+      <Entity
+            onClick={() => console.log('Bookmark clicked!')}
+            geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
+            material={{side: 'double', src: '#bookmark', opacity: 0.99}}
+            position={`-2.65 1.2 0.1`}
+            rotation='0 0 0'
+            scale='1 1 0'
+      >
+      </Entity>
+
+
     </Entity>
 };
 
   // position = '0 0.5 -3'
 
-  // let adjustIconCoordinates = (position, width, height) => { 
+  // let adjustIconCoordinates = (position, width, height) => {
   //   let coordinates = position.split(" ").map((element) => Number(element));
   //   let xCoordinate = coordinates[0];
   //   let yCoordinate = coordinates[1];
@@ -146,7 +158,7 @@ export default props => {
   //   return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
   // }
 
-// let adjustMainTextCoordinates = (position, width, height) => { 
+// let adjustMainTextCoordinates = (position, width, height) => {
 //   let coordinates = position.split(" ").map((element) => Number(element));
 //   let xCoordinate = coordinates[0];
 //   let yCoordinate = coordinates[1];
@@ -162,7 +174,7 @@ export default props => {
 //   return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
 // }
 
-// let adjustHeaderTextCoordinates = (position, width, height) => { 
+// let adjustHeaderTextCoordinates = (position, width, height) => {
 //   let coordinates = position.split(" ").map((element) => Number(element));
 //   let xCoordinate = coordinates[0];
 //   let yCoordinate = coordinates[1];
@@ -178,7 +190,7 @@ export default props => {
 //   return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
 // }
 
-// let adjustImageCoordinates = (position, width, height) => { 
+// let adjustImageCoordinates = (position, width, height) => {
 //   let coordinates = position.split(" ").map((element) => Number(element));
 //   let xCoordinate = coordinates[0];
 //   let yCoordinate = coordinates[1];
@@ -194,7 +206,7 @@ export default props => {
 //   return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
 // }
 
-// <Entity 
+// <Entity
   // geometry='primitive: plane; width: 3; height: 3'
   // position='0 0 -3'
   // rotation='0 0 0'
@@ -210,7 +222,7 @@ export default props => {
  // {...extraProps}/>
 
 
-// <Entity 
+// <Entity
 //   geometry={`primitive: plane; width: ${props.planeWidth}; height: ${props.planeHeight}; color: ${props.planeColor}`}
 //   position={props.planePosition}
 //   rotation={props.planeRotation} />
