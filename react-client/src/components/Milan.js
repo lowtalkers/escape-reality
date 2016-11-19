@@ -46,27 +46,13 @@ class Milan extends React.Component {
       <Entity>
           <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
-<<<<<<< 4641073f661faf3751afa72fbe5e7c396b0b7009
-          <RingTag
-              id='milan-cathedral-tag'
-              clickFunction={() => {
-                self.setState({showCathedral: true});
-              }}
-              geometry="primitive: plane; width: 3; height: 3"
-              material={{color: '#ff0000', opacity: 0.25}}
-              position="-14.62 5.5 -2.76"
-              rotation="20 80 0"
-              visible="true">
-          </RingTag>
-=======
           <RingTag id="milan-cathedral-tag"
             clickFunction={() => {
-              self.setState({showMoorFountain: true});
+              self.setState({showCathedral: true});
             }}
               position="-14.62 5.5 -2.76"
               rotation="20 80 0"
           />
->>>>>>> Replace textplane components with ring tags in remaining interactive cities
 
           {self.state.showCathedral ?
             <TextPlane
@@ -87,13 +73,11 @@ class Milan extends React.Component {
             : null
           }
 
-        <RingTag
-            id='galleria-tag'
-            clickFunction={() => {
-              self.setState({showGalleria: true});
-            }}
-            geometry="primitive: plane; width: 2; height: 2"
-            material={{color: 'red', opacity: 0.25}}
+
+        <RingTag id="galleria-tag"
+          clickFunction={() => {
+            self.setState({showGalleria: true});
+          }}
             position="-11.8 6.77 25.6"
             rotation="-20 150 0">
         </RingTag>
@@ -105,7 +89,7 @@ class Milan extends React.Component {
             hidePlane={() => self.setState({showGalleria: false})}
 
             position="-11.8 6.77 25.6"
-            rotation="20 150 0"
+            rotation="-20 150 0"
 
             scale='0 0 0'
             header='Galleria Vittorio'
@@ -118,13 +102,11 @@ class Milan extends React.Component {
           : null
         }
 
-        <RingTag
-            id='royal-palace-tag'
-            clickFunction={() => {
-              self.setState({showPalace: true});
-            }}
-            geometry="primitive: plane; width: 2; height: 2"
-            material={{color: 'red', opacity: 0.25}}
+
+        <RingTag id="royal-palace-tag"
+          clickFunction={() => {
+            self.setState({showPalace: true});
+          }}
             position="-24.47 2.68 -16.46"
             rotation="0 50 0">
         </RingTag>
