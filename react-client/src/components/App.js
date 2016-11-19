@@ -238,9 +238,14 @@ class App extends React.Component {
           <Scene >
             <Camera>
               <a-cursor
-            animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150" geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64" material="color: #f72222; shader: flat" raycaster="" cursor="">
+                fuse="true" fuseTimeout="800"
+                animation__fuse="property: scale; startEvents: stateadded; from: 4 4 4; to: 1 1 1; dur: 1400"
+                geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64"
+                material="color: red; shader: flat"
+              >
               </a-cursor>
             </Camera>
+
 
             <a-assets>
               <img id="city-thumb" crossOrigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg" />
