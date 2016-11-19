@@ -172,7 +172,7 @@ let addBookmark = (title) => {
       </Entity>
 
       <Entity
-            onClick={() => addBookmark(props.wikiTitle)}
+            onClick={() => addBookmark(props.wikiName)}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: '#bookmark', opacity: 0.99}}
             position={`-2.65 1.2 0.1`}

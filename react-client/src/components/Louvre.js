@@ -105,7 +105,7 @@ class Louvre extends React.Component {
 
             scale='0 0 0'
             header='Louvre Pyramid'
-            wikiTitle='Louvre_Pyramid'
+            wikiName='Louvre_Pyramid'
             headerAdjust='-1.5' // lower moves it to the left, higher to the right
             text={this.state.allParagraphs['Louvre_Pyramid']}
             textAdjust='0' //lower moves this down, higher moves this up
