@@ -43,7 +43,7 @@ class Rome extends React.Component {
     const self = this;
     return (
       <Entity>
-          <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" rotation="0 80 0" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
+          <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
           <RingTag id='sant-agnese-church-tag'
             clickFunction={() => {
@@ -58,7 +58,7 @@ class Rome extends React.Component {
               id="churchTextPlane"
               hidePlane={() => self.setState({showChurch: false})}
 
-              position="-2. 1.96 -2.7"
+              position="-22.55 7.98 -14.11"
               rotation="0 49.6 0"
               
               scale='0 0 0'
@@ -85,7 +85,7 @@ class Rome extends React.Component {
             id="Fountain4RiversTextPlane"
             hidePlane={() => self.setState({show4RiversFountain: false})}
 
-            position="-2. 1.96 -2.7"
+            position="-2.74 4.84 -22.5"
             rotation="0 49.6 0"
             
             scale='0 0 0'
@@ -112,7 +112,7 @@ class Rome extends React.Component {
             id="MoorFountainTextPlane"
             hidePlane={() => self.setState({showMoorFountain: false})}
 
-            position="-2. 1.96 -2.7"
+            position="0.53 2.76 20.73"
             rotation="0 49.6 0"
             
             scale='0 0 0'
