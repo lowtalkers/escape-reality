@@ -12,6 +12,9 @@ module.exports = function(sequelize, Sequelize) {
     },
     paragraph: {
       type: Sequelize.TEXT
+    },
+    image: {
+      type: Sequelize.TEXT
     }
   });
 
