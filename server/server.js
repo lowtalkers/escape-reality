@@ -92,20 +92,31 @@ app.post('/signup', function(req, res) {
 
 app.get('/getWiki', function(req, res) {
   bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, function(bookmark) {
+    console.log('*********', !!bookmark)
     if(!bookmark) {
-      utils.fetchWiki(req, res);          
+      utils.fetchWiki(req, res);
     } else {
       res.send(bookmark.get('paragraph'));
     }
   })
 });
 
+app.get('/addBookmark', function(req, res) {
+  userController.findOne({where: {email: req.session.email}}, function(user) {
+    bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, function(bookmark) {
+      user.addBookmark(bookmark);
+      console.log('bookmark added')
+      res.send('Added!');
+    });
+  });
+})
+
 app.get('/bookmarks', function(req, res) {
   userController.findOne({where: {email: req.session.email}}, function(user) {
-    console.log(user.getBookmarks())
+    console.log(user.getBookmarks());
     res.send(user.getBookmarks());
-  })
-})
+  });
+});
 
 
 app.use(express.static(path.join(__dirname, '../react-client')));

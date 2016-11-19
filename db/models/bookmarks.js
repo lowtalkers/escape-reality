@@ -1,6 +1,6 @@
 module.exports = function(sequelize, Sequelize) {
 
-  var User = sequelize.define('users', {
+  var User = sequelize.define('bookmarks', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,

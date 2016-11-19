@@ -2,6 +2,7 @@ import {Entity} from 'aframe-react';
 import React from 'react';
 import 'aframe-bmfont-text-component';
 import Bookmark from './Bookmark';
+import $ from 'jquery';
 
 const Height = 3;
 const Width = 6;
@@ -102,6 +103,19 @@ export default props => {
     return `${x.toString()} 0.5 ${z.toString()}`
   }
 
+let addBookmark = (title) => {
+  $.get({
+    url: '/addBookmark?exactWikiTitle=' + title,
+    success: (data) => {
+      console.log(data);
+    },
+    error: (error) => {
+      console.error('error in fetch paragraph', error);
+      $('.error').show();
+    }
+  });
+};
+
 
 //  return <Entity id="TextPlane" position={adjustEntityCoordinates(props.position)} rotation={adjustEntityRotation(props.rotation)}>
   return <Entity id="TextPlane" position={cardCoordCalc(props.position)} rotation={greenAngleCalc(props.position)}>
@@ -148,17 +162,17 @@ export default props => {
 
       {/*Collapse Icon*/}
       <Entity
+            onClick={() => props.hidePlane()}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
             position={`2.65 1.2 0.1`}
             rotation='0 0 0'
-            onClick={() => props.hidePlane()}
             scale='1 1 0'
       >
       </Entity>
 
       <Entity
-            onClick={() => console.log('Bookmark clicked!')}
+            onClick={() => addBookmark(props.wikiTitle)}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: '#bookmark', opacity: 0.99}}
             position={`-2.65 1.2 0.1`}

@@ -13,6 +13,5 @@ export default props => (
     <input type="button" id="signin" value="Signin" onClick={props.submitFn} />
     Don't have an account?
     <Link to="/signup"> Sign up here</Link>
-    <h2 className="error"> Invalid user or password! </h2>
   </div>
 );

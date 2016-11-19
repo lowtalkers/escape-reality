@@ -19,8 +19,8 @@ var findAll = function(callback) {
 };
 
 var findOne = function(query, callback) {
-  Bookmark.findAll(query).done(function(bookmarks) {
-      callback(bookmarks);
+  Bookmark.findOne(query).done(function(bookmark) {
+      callback(bookmark);
   });
 };
 

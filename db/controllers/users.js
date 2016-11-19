@@ -28,8 +28,8 @@ var findAll = function(callback) {
 };
 
 var findOne = function(query, callback) {
-  User.findAll(query).done(function(users) {
-      callback(users[0]);
+  User.findOne(query).done(function(user) {
+      callback(user);
   });
 };
 
@@ -52,7 +52,6 @@ exports.createSession = function(req, res, newUser, response) {
   return req.session.regenerate(function() {
     req.session.email = newUser.email;
     req.session.password = newUser.password;
-    // res.redirect('/lobby');
     res.send(response);
   });
 };
