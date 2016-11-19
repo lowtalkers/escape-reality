@@ -11,7 +11,7 @@ const utils = require('./lib/utilities.js');
 var bcrypt = require('bcrypt-nodejs');
 var session = require('express-session');
 
-var routes = ['/', '/signup', '/signin', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome'];
+var routes = ['/', '/signup', '/signin', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome', '/hr'];
 
 app.use(bodyParser.json());
 
