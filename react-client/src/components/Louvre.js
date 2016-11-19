@@ -22,7 +22,7 @@ import Bookmark from './Bookmark';
 // let show = false;
 
 /*
-not sure how these 'dumb' components will handle the equivalent of 
+not sure how these 'dumb' components will handle the equivalent of
 state changes once imported into our smart component?
 i.e onClick -> this.setState({louvrePyramid: true}) in order to
 determine whether to render Louvre Pyramid etc. obv we can do it
@@ -44,7 +44,7 @@ class Louvre extends React.Component {
   }
 
   componentWillMount () {
-    this.props.getParagraph(this.state.allTitles, allParagraphs => { 
+    this.props.getParagraph(this.state.allTitles, allParagraphs => {
       this.setState( {allParagraphs: allParagraphs} );
       console.log('🍊  this.state allParagraphs', this.state.allParagraphs);
     });
@@ -54,7 +54,7 @@ class Louvre extends React.Component {
     let self = this;
     return (
       <Entity >
-      
+
        <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 0" onClick={() => props.router.replace('/lobby')}></a-image>
 
         <Entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
@@ -63,7 +63,7 @@ class Louvre extends React.Component {
           <Entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></Entity>
         </Entity>
 
-        <Entity id="pyramidTag" 
+        <Entity id="pyramidTag"
             onClick={() => {
               self.setState({showPyramid: true});
             }}
@@ -74,15 +74,15 @@ class Louvre extends React.Component {
         >
         </Entity>
 
-        {self.state.showPyramid ? 
-          
-            <TextPlane 
+        {self.state.showPyramid ?
+
+            <TextPlane
               id="pyramidTextPlane"
               hidePlane={() => self.setState({showPyramid: false})}
 
               position="-4.34 2.22 6.83"
               rotation="8.02 135.22 -1.15"
-              
+
               scale='0 0 0'
               header='Louvre Pyramid'
               headerAdjust='-1.5' // lower moves it to the left, higher to the right
@@ -111,7 +111,7 @@ class Louvre extends React.Component {
         />
 */}
 
-        <Entity id="leftWingTag" 
+        <Entity id="leftWingTag"
           geometry="primitive: plane; width: 2; height: 2"
           onClick={() => {
             self.setState({showLeftWingPlane: true});
@@ -124,13 +124,13 @@ class Louvre extends React.Component {
 
         {self.state.showLeftWingPlane ?
 
-          <TextPlane 
+          <TextPlane
             id="leftWingTagPlane"
             hidePlane={() => self.setState({showLeftWingPlane: false})}
 
             position="-8.02 2.97 -3.8"
             rotation="-2.86 53.86 2.86"
-            
+
             scale='0 0 0'
             header='Louvre Museum'
             headerAdjust='-1.5' // lower moves it to the left, higher to the right
@@ -144,7 +144,7 @@ class Louvre extends React.Component {
           null
         }
 
-        <Entity id='courtyardTag' 
+        <Entity id='courtyardTag'
             geometry="primitive: plane; width: 5; height: 5"
             onClick={() => console.log('The Napoleonic Courtyard in Paris, France')}
             material={{color: 'yellow', opacity: 0.35}}
@@ -152,7 +152,7 @@ class Louvre extends React.Component {
             rotation="-89.46 -89.95 85">
         </Entity>
 
-        <Entity id="richelieuWingTag" 
+        <Entity id="richelieuWingTag"
             geometry="primitive: plane; width: 2; height: 2"
             draw="text: Hello"
             onClick={() => this.props.changePlaneColor()}
