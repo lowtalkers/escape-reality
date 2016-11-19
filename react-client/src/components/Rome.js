@@ -12,6 +12,7 @@ import Text from './Text';
 import Sky from './Sky';
 import TextPlane from './TextPlane';
 import Plane from './Plane';
+import RingTag from './RingTag';
 
 
 /*  Wikipedia links
@@ -44,17 +45,15 @@ class Rome extends React.Component {
       <Entity>
           <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" rotation="0 80 0" position="1.68 0 0" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
-          <Entity
-              id='sant-agnese-church-tag'
-              onClick={() => {
-                self.setState({showChurch: true});
-              }}
-              geometry="primitive: plane; width: 3; height: 3"
-              material={{color: '#ff0000', opacity: 0.25}}
+
+
+          <RingTag id='sant-agnese-church-tag'
+            clickFunction={() => {
+              self.setState({showChurch: true});
+            }}
               position="-22.55 7.98 -14.11"
               rotation="0 80 0"
-              visible="true">
-          </Entity>
+          />
 
           {self.state.showChurch ? 
             <TextPlane 
@@ -75,16 +74,13 @@ class Rome extends React.Component {
             : null
           }
 
-        <Entity
-            id='fountain-of-4-rivers-tag'
-              onClick={() => {
-                self.setState({show4RiversFountain: true});
-              }}
-            geometry="primitive: plane; width: 2; height: 2"
-            material={{color: 'red', opacity: 0.25}}
-            position="-2.74 4.84 -22.5"
-            rotation="0 0 0">
-        </Entity>
+        <RingTag id='fountain-of-4-rivers-tag'
+          clickFunction={() => {
+              self.setState({show4RiversFountain: true});
+            }} 
+          position="-2.74 4.84 -22.5"
+          rotation="0 0 0"
+        />
 
         {self.state.show4RiversFountain ? 
           <TextPlane 
@@ -105,16 +101,13 @@ class Rome extends React.Component {
           : null
         }
 
-        <Entity
-            id='moor-fountain-tag'
-              onClick={() => {
+        <RingTag id='moor-fountain-tag'
+          clickFunction={() => {
                 self.setState({showMoorFountain: true});
               }}
-            geometry="primitive: plane; width: 2; height: 2"
-            material={{color: 'red', opacity: 0.25}}
             position="0.53 2.76 20.73"
-            rotation="0 -180 0">
-        </Entity>
+            rotation="0 -180 0"
+        />
 
         {self.state.showMoorFountain ? 
           <TextPlane 
