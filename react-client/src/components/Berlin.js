@@ -20,7 +20,7 @@ export default props => {
 
     <Entity>
 
-      <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby/') ;}}></a-image>
+      <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby') ;}}></a-image>
 
       <Entity id="circle" geometry="primitive:circle;radius:1" material="color:red;opacity:0.75" position="-14.62 8.51 -19.69" rotation="0 50 0" visible="true">
       </Entity>
