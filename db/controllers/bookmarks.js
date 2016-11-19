@@ -4,7 +4,7 @@ var create = function(props, callback) {
   Bookmark.build(props)
   .save()
   .then(function(bookmark) {
-    callback(user);
+    callback(bookmark);
   }).catch(function(err) {
     console.log(err);
   });
@@ -20,7 +20,7 @@ var findAll = function(callback) {
 
 var findOne = function(query, callback) {
   Bookmark.findAll(query).done(function(bookmarks) {
-      callback(bookmarks[0]);
+      callback(bookmarks);
   });
 };
 
