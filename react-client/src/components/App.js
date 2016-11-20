@@ -52,7 +52,7 @@ class App extends React.Component {
         url: '/getWiki?exactWikiTitle=' + title,
         success: (data) => {
           console.log('Success fetch wiki paragraph', data);
-          result[allTitles[idx]] = JSON.parse(data);
+          result[allTitles[idx]] = data;
           getNextParagraph();
         },
         error: (error) => {

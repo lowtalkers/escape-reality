@@ -65,7 +65,7 @@ class Rome extends React.Component {
               wikiName='Sant%27Agnese_in_Agone'
               headerAdjust='-1.5' // lower moves it to the left, higher to the right
               text={this.state.allParagraphs['Sant%27Agnese_in_Agone']}
-              textAdjust='0' //lower moves this down, higher moves this up
+              textAdjust='-0.25' //lower moves this down, higher moves this up
               imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sant%27Agnese_in_Agone_%28Piazza_Navona%29_September_2015-1.jpg/1024px-Sant%27Agnese_in_Agone_%28Piazza_Navona%29_September_2015-1.jpg'
             />
             : null
