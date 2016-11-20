@@ -76,6 +76,12 @@ app.post('/signup', function(req, res) {
   });
 });
 
+app.get('/signout', function(req, res) {
+  req.session.destroy(function() {
+    res.send('session destroyed');
+  });
+});
+
 /* auth routes end ---------------------------------------------------------- */
 
 
