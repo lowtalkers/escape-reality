@@ -35,8 +35,7 @@ module.exports.fetchWiki = function(req, res) {
       console.log('🍊  Sending scrubbed text to client:', output.slice(0, 55) + '...');
 
       bookmarkController.create({title: req.query.exactWikiTitle, paragraph: output}, function(bookmark) {
-        bookmark.get('paragraph').then((paragraph) => res.status(200).send(paragraph));
-        // res.status(200).send(JSON.stringify(bookmark.paragraph));        
+          res.status(200).send(bookmark.get('paragraph'));
       });
     }
   });
