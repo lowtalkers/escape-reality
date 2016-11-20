@@ -47,7 +47,7 @@ View the project roadmap [here](https://github.com/lowtalkers/escape-reality/iss
 
 ### High-Level Architecture
 <p align="center">
-  <img src="/diagrams/architecture.png?raw=true"/>
+  <img src="/diagrams/architecture1.png?raw=true"/>
 </p>
 
 ### Database Schema
