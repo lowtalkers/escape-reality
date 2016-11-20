@@ -24,8 +24,8 @@
 
 ## Requirements
 
-- Node 0.10.x
-- PostgreSQL 9.1.x
+- Node
+- MariaDB
 - etc
 - etc
 
@@ -36,15 +36,35 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
+sudo npm install -g
 npm install
-bower install
 ```
-
 ### Roadmap
 
 View the project roadmap [here](https://github.com/lowtalkers/escape-reality/issues)
 
+## Architecture
+
+### High-Level Architecture
+<p align="center">
+  <img src="/diagrams/architecture.png?raw=true"/>
+</p>
+
+### Database Schema
+Database in MariaDB, using Sequelize ORM
+<p align="center">
+  <img src="/diagrams/schema.png?raw=true"/>
+</p>
+
+## API
+##### Public End Points
+<p align="center">
+  <img src="/diagrams/routes.png?raw=true"/>
+</p>
+
+## Deployment
+
+This has been deployed onto DigitalOcean.
 
 ## Contributing
 
