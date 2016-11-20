@@ -123,15 +123,15 @@ let addBookmark = (title) => {
 };
 
 
-//  return <Entity id="TextPlane" position={adjustEntityCoordinates(props.position)} rotation={adjustEntityRotation(props.rotation)}>
-  return <Entity id="TextPlane" position={cardCoordCalc(props.position)} rotation={greenAngleCalc(props.position)} 
-    animation__rot={{property: 'rotation', dir: 'normal', dur: 500, loop: false, from: '0 0 0', to: greenAngleCalc(props.position)}}
-    animation__scale={{property: 'scale', dir: 'normal', dur: 500, loop: false, from: '.1 .1 .1', to: '1 1 1'}}
-    easing='easeInOutQuad'
-  >
+  return (
+      <Entity 
+        id="TextPlane" position={cardCoordCalc(props.position)} rotation={greenAngleCalc(props.position)} 
+        animation__rot={{property: 'rotation', dir: 'normal', dur: 500, loop: false, from: '0 0 0', to: greenAngleCalc(props.position)}}
+        animation__scale={{property: 'scale', dir: 'normal', dur: 500, loop: false, from: '.1 .1 .1', to: '1 1 1'}}
+        easing='easeInOutQuad'
+      >
 
       <Entity>
-
         {/* Assume that props.position === "0 1 -3" */}
 
 
@@ -193,4 +193,5 @@ let addBookmark = (title) => {
 
 
     </Entity>
+  );
 };
