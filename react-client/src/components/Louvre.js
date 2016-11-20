@@ -195,6 +195,7 @@ class Louvre extends React.Component {
             position="7 3 -5.42"
             rotation="18.91 -52.14 0"
             
+            wikiName='Louvre'
             scale='0 0 0'
             header='Louvre Museum'
             headerAdjust='-1.5' // lower moves it to the left, higher to the right
