@@ -15,8 +15,11 @@ import Milan from './components/Milan.js';
 import Rome from './components/Rome.js';
 import Hack from './components/Hack.js';
 
-import SignIn from './components/signInUpComponents/signin.jsx'
-import SignUp from './components/signInUpComponents/signup.jsx'
+import SignIn from './components/signInUpComponents/signin.jsx';
+import SignUp from './components/signInUpComponents/signup.jsx';
+
+import Dashboard from './components/Dashboard.js';
+import Bookmarks from './components/Bookmarks.js'
 
 
 ReactDOM.render((
@@ -24,6 +27,8 @@ ReactDOM.render((
     <Route path="/" component={App} >
       <Route path="signup" component={SignUp} />
       <Route path="signin" component={SignIn} />
+      <Route path="dashboard" component={Dashboard} />
+      <Route path="bookmarks" component={Bookmarks} />
       <Route path="lobby" component={Lobby} />
       <Route path="sf" component={SF} />
       <Route path="louvre" component={Louvre} />

@@ -13,7 +13,6 @@ import Camera from './Camera';
 import Text from './Text';
 import Sky from './Sky';
 import TextPlane from './TextPlane';
-import Bookmark from './Bookmark';
 import RingTag from './RingTag';
 
 // var draw = require("aframe-draw-component").component;
