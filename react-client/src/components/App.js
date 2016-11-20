@@ -276,12 +276,12 @@ class App extends React.Component {
               <img id="hr" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/hr.JPG" />
               <img id="hrlogo" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/HR.png" />
 
-              <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/paris.png" />
-              <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/sf+(1).png" />
-              <img id="berlin2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/berlin2.png" />
+              <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Paris.jpg" />
+              <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/SanFrancisco.jpg" />
+              <img id="berlin2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Berlin.jpg" />
               <img id="seattle" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/seattle.png" />
-              <img id="milan2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan.png" />
-              <img id="rome2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/colorome.png" />
+              <img id="milan2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Milan.jpg" />
+              <img id="rome2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Rome.jpg" />
 
 
 
