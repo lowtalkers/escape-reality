@@ -210,6 +210,8 @@ class App extends React.Component {
              
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
+              <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
+              <img id="hr" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/hr.JPG" />
               <img id="hrlogo" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/HR.png" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/exit.png" />
 
