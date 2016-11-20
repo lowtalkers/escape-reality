@@ -11,7 +11,7 @@ const utils = require('./lib/utilities.js');
 var bcrypt = require('bcrypt-nodejs');
 var session = require('express-session');
 
-var routes = ['/', '/signup', '/signin', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome', '/hr'];
+var routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome', '/hr'];
 
 app.use(bodyParser.json());
 
@@ -24,7 +24,7 @@ app.use(session({
 routes.forEach(function(route) {
   app.get(route, userController.checkAuth, function(req, res) {
     if (route === '/') {
-      res.redirect('/lobby');
+      res.redirect('/dashboard');
     } else {
       res.sendFile(path.join(__dirname, '/../react-client/index.html'));
     }
@@ -92,7 +92,6 @@ app.post('/signup', function(req, res) {
 
 app.get('/getWiki', function(req, res) {
   bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, function(bookmark) {
-    console.log('*********', !!bookmark)
     if(!bookmark) {
       utils.fetchWiki(req, res);
     } else {
@@ -112,10 +111,11 @@ app.get('/addBookmark', function(req, res) {
   });
 })
 
-app.get('/bookmarks', function(req, res) {
+app.get('/allBookmarks', function(req, res) {
   userController.findOne({where: {email: req.session.email}}, function(user) {
-    console.log(user.getBookmarks());
-    res.send(user.getBookmarks());
+    user.getBookmarks().then(function(bookmarks) {
+      res.send(bookmarks)
+    })
   });
 });
 
