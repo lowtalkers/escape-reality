@@ -95,8 +95,7 @@ app.get('/getWiki', function(req, res) {
     if(!bookmark) {
       utils.fetchWiki(req, res);
     } else {
-      // bookmark.get('paragraph').then((paragraph) => res.status(200).send(paragraph));
-      res.send(bookmark.get('paragraph'));
+      res.status(200).send(bookmark.get('paragraph'));
     }
   })
 });
