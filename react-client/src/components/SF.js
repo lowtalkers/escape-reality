@@ -19,7 +19,7 @@ export default props => (
 
     <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby') ;}}></a-image>
 
-    <a-image id="hr-image" src="#hrlogo" geometry="height: 0.5; width: 0.5" position="-1.29 1.04 -0.56" rotation="0 60 0" onClick={() => {props.router.replace('/hr') ;}}></a-image>
+    <a-image id="hr-image" src="#hrlogo" geometry="height: 0.5; width: 0.5" position="-1.92 0.41 -1.34" rotation="18.334649444186343 58.44169510334397 -10.886198107485642" onClick={() => {props.router.replace('/hr') ;}}></a-image>
 
     <a-sky id="image-360" radius="30" src='#sf'></a-sky>
 

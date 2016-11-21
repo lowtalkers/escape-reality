@@ -24,7 +24,7 @@ export default props => (
     <Text
       text="Hack Reactin'!"
       color='#1d3c54'
-      rotation='0 43 0'
+      rotation='0 50 0'
       position='-6 -0.28 1.41'/>
 
   <Entity light={{type: 'ambient', color: '#888'}}/>
