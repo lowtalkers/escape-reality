@@ -20,6 +20,7 @@ var findAll = function(callback) {
 
 var findOne = function(query, callback) {
   Bookmark.findOne(query).done(function(bookmark) {
+    console.log(bookmark, 'BOOOKMARK');
       callback(bookmark);
   });
 };
