@@ -31,7 +31,7 @@ export default props => (
       <Entity light={{type: 'ambient', color: '#fff'}}/>
       <Entity light={{type: 'directional', intensity: 0.2}} position='-1 2 1'/>
 
-      <a-sky color='#FFF' opacity="0.5"></a-sky>
+      <a-sky src='#lobby1' rotation='0 -90 0'></a-sky>
   </Entity>
 );
 
