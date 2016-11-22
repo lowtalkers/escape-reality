@@ -85,25 +85,25 @@ app.get('/signout', function(req, res) {
 /* auth routes end ---------------------------------------------------------- */
 
 
-//-----------------------------------------------------------------
-//------------------ GET WIKIPEDIA EXTRACT ------------------------
-//-----------------------------------------------------------------
-//
-// Client needs to send a query string with the key "exactWikiTitle" that has
-// the exact Wikipedia article title, like the final part of these URLs:
-//
-//   https://en.wikipedia.org/wiki/Macy's
-//   https://en.wikipedia.org/wiki/Normandy_landings
-//   https://en.wikipedia.org/wiki/Sant%27Agnese_in_Agone
-
+/**
+ * GET WIKIPEDIA EXTRACT
+ *
+ * String 'exactWikiExtract' must match the last fragment of Wikipedia URLs:
+ * https://en.wikipedia.org/wiki/Macy's
+ * https://en.wikipedia.org/wiki/Sant%27Agnese_in_Agone
+ *
+ * @param  {GET query string}  {exactWikiTitle: string}  
+ * @return {string} res        Scrubbed first paragraph of Wikipedia article
+ */
 app.get('/getWiki', function(req, res) {
-  bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, function(bookmark) {
-    if(!bookmark) {
-      utils.fetchWiki(req, res);
-    } else {
-      res.status(200).send(bookmark.get('paragraph'));
-    }
-  })
+  bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, 
+    function(bookmark) {
+      if (!bookmark) {
+        utils.fetchWiki(req, res);
+      } else {
+        res.status(200).send(bookmark.get('paragraph'));
+      }
+    });
 });
 
 app.get('/addBookmark', function(req, res) {
