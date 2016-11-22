@@ -1,9 +1,10 @@
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const metadata = require('../package.json');
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = 3000;
+const port = process.env.NODE_PORT;
 const userController = require('../db/controllers/users.js');
 const bookmarkController = require('../db/controllers/bookmarks.js');
 const utils = require('./lib/utilities.js');
@@ -86,14 +87,14 @@ app.get('/signout', function(req, res) {
 
 
 /**
- * GET WIKIPEDIA EXTRACT
+ * GET SCRUBBED WIKIPEDIA PARAGRAPH
  *
  * String 'exactWikiExtract' must match the last fragment of Wikipedia URLs:
  * https://en.wikipedia.org/wiki/Macy's
  * https://en.wikipedia.org/wiki/Sant%27Agnese_in_Agone
  *
  * @param  {GET query string}  {exactWikiTitle: string}  
- * @return {string} res        Scrubbed first paragraph of Wikipedia article
+ * @return {string}            Scrubbed first paragraph of Wikipedia article
  */
 app.get('/getWiki', function(req, res) {
   bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, 
