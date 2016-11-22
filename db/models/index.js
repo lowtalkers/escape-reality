@@ -1,14 +1,18 @@
 // This file makes all join table relationships
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('escape', 'escape', 'escapeacft', {
+const database = process.env.DB_DATABASE;
+const dbHost = process.env.DB_HOST;
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASS;
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize(database, dbUser, dbPassword, {
   dialect: 'mariadb',
-  host: 'localhost'
+  host: dbHost
 });
 
 // Any vairable that starts with a capital letter is a model
-var User = require('./users.js')(sequelize, Sequelize);
-var Bookmark = require('./bookmarks.js')(sequelize, Sequelize);
-var BookmarkUsers = require('./bookmarkUsers')(sequelize, Sequelize);
+const User = require('./users.js')(sequelize, Sequelize);
+const Bookmark = require('./bookmarks.js')(sequelize, Sequelize);
+const BookmarkUsers = require('./bookmarkUsers')(sequelize, Sequelize);
 
 // BookmarkUsers join table:
 User.belongsToMany(Bookmark, {
@@ -24,6 +28,7 @@ Bookmark.belongsToMany(User, {
 //Create missing tables, if any
 // sequelize.sync({force: true});
 sequelize.sync();
+
 
 exports.User = User;
 exports.Bookmark = Bookmark;
