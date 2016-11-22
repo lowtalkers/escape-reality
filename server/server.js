@@ -1,43 +1,43 @@
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const metadata = require('../package.json');
+const compression = require('compression');
 const express = require('express');
 const app = express();
 const path = require('path');
 const port = process.env.NODE_PORT;
+const secret = process.env.SESSION_SECRET;
 const userController = require('../db/controllers/users.js');
 const bookmarkController = require('../db/controllers/bookmarks.js');
 const utils = require('./lib/utilities.js');
-
-var bcrypt = require('bcrypt-nodejs');
-var session = require('express-session');
-
-var routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome', '/hr'];
+const bcrypt = require('bcrypt-nodejs');
+const session = require('express-session');
+const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome', '/hr'];
 
 app.use(bodyParser.json());
+app.use(compression()); // compress all responses
 
 app.use(session({
-  secret: 'shhh, it\'s a secret',
+  secret: secret,
   resave: false,
   saveUninitialized: true
 }));
 
-routes.forEach(function(route) {
-  app.get(route, userController.checkAuth, function(req, res) {
+for (const route of routes) {
+  app.get(route, userController.checkAuth, (req, res) => {
     if (route === '/') {
       res.redirect('/dashboard');
     } else {
       res.sendFile(path.join(__dirname, '/../react-client/index.html'));
     }
   });
-});
-
+}
 
 /* auth routes -------------------------------------------------------------- */
 app.post('/signin', function(req, res) {
-  var email = req.body.email;
-  var password = req.body.password;
-  var response = {};
+  const email = req.body.email;
+  const password = req.body.password;
+  const response = {};
   userController.findOne({where: {email: email}}, function(user) {
     if (!user) {
       response.auth = false;
@@ -58,8 +58,8 @@ app.post('/signin', function(req, res) {
 
 app.post('/signup', function(req, res) {
 
-  var email = req.body.email;
-  var password = req.body.password;
+  const email = req.body.email;
+  const password = req.body.password;
   console.log(req.body);
   userController.findOne({where: {email: email}}, function(user) {
 
@@ -87,7 +87,7 @@ app.get('/signout', function(req, res) {
 
 
 /**
- * GET SCRUBBED WIKIPEDIA PARAGRAPH
+ * Get Scrubbed Wikipedia Paragraph
  *
  * String 'exactWikiExtract' must match the last fragment of Wikipedia URLs:
  * https://en.wikipedia.org/wiki/Macy's
@@ -111,17 +111,17 @@ app.get('/addBookmark', function(req, res) {
   userController.findOne({where: {email: req.session.email}}, function(user) {
     bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, function(bookmark) {
       user.addBookmark(bookmark);
-      console.log('bookmark added')
+      console.log('bookmark added');
       res.send('Added!');
     });
   });
-})
+});
 
 app.get('/allBookmarks', function(req, res) {
   userController.findOne({where: {email: req.session.email}}, function(user) {
     user.getBookmarks().then(function(bookmarks) {
-      res.send(bookmarks)
-    })
+      res.send(bookmarks);
+    });
   });
 });
 
