@@ -34,7 +34,8 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "webpack": "webpack -d --progress --colors --watch"
+    "webpack": "webpack -d --progress --colors --watch",
+    "webpack-production": "webpack --progress --config ./webpack.config.production.js"
   },
   "repository": {
     "type": "git",
