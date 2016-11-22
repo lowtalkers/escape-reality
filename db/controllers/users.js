@@ -29,7 +29,7 @@ var findAll = function(callback) {
 
 var findOne = function(query, callback) {
   User.findOne(query).done(function(user) {
-      callback(user);
+    callback(user);
   });
 };
 
@@ -40,10 +40,10 @@ var isLoggedIn = function(req) {
 exports.checkAuth = function(req, res, next) {
 
   if (!isLoggedIn(req) && !(req.url.indexOf('/signin') >= 0) && !(req.url.indexOf('/signup') >= 0)) {
-    console.log('inside if')
+    console.log('Redirecting to /signin');
     res.redirect('/signin');
   } else {
-    console.log('inside else')
+    console.log('Executing next() after checkAuth()');
     next();
   }
 };
