@@ -21,7 +21,7 @@ Bookmark.belongsToMany(User, {
   foreignKey: 'bookmark_id'
 });
 
-
+//Create missing tables, if any
 // sequelize.sync({force: true});
 sequelize.sync();
 
