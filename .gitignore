@@ -3,6 +3,9 @@ react-client/build/bundle.js
 react-client/build/bundle.js.map
 react-client/build/
 
+# env file that stores API keys
+.env
+
 # Logs
 logs
 *.log
@@ -44,5 +47,3 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
-
-.DS_Store
