@@ -88,7 +88,7 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({email: email, password: password}),
       success: (data) => {
-        console.log('Success!!!!!', data);
+        console.log('Success!!!!!', data, data.auth);
         if (data.auth) {
           this.props.router.replace('/dashboard');
         } else if (data === 'User exists!') {
@@ -126,9 +126,9 @@ class App extends React.Component {
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
         return (
           <Dashboard
-          
+
           />
-        )    
+        )
 
     } else if (this.props.router.location.pathname.indexOf('/bookmarks') >= 0) {
         return (
@@ -207,7 +207,8 @@ class App extends React.Component {
               <img id="milan" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan360.jpg" />
               <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
               <img id="hr" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/hr.JPG" />
-             
+              <img id="lobby1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
+
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
               <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
