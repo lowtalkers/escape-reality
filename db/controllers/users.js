@@ -1,45 +1,49 @@
-var bcrypt = require('bcrypt-nodejs');
-var Promise = require('bluebird');
-var User = require('../models/index.js').User;
+const bcrypt = require('bcrypt-nodejs');
+const Promise = require('bluebird');
+const User = require('../models/index.js').User;
 
-
-var comparePassword = function(user, attemptedPassword, callback) {
-  bcrypt.compare(attemptedPassword, user.get('password'), function(err, isMatch) {
+const comparePassword = (user, attemptedPassword, callback) => {
+  bcrypt.compare(attemptedPassword, user.get('password'), (err, isMatch) => {
     callback(isMatch);
   });
 };
 
-var create = function(props, callback) {
+const create = (props, callback) => {
   User.build(props)
   .save()
-  .then(function(user) {
+  .then(user => {
     callback(user);
-  }).catch(function(err) {
+  })
+  .catch(err => {
     console.log(err);
   });
 };
 
-var findAll = function(callback) {
-  User.findAll().then(function(users) {
+const findAll = callback => {
+  User.findAll()
+  .then(users => {
     callback(users);
-  }).catch(function(err) {
+  })
+  .catch(err => {
     console.log(err);
   });
 };
 
-var findOne = function(query, callback) {
-  User.findOne(query).done(function(user) {
+const findOne = (query, callback) => {
+  User.findOne(query)
+  .done(user => {
     callback(user);
   });
 };
 
-var isLoggedIn = function(req) {
-  return req.session ? !!req.session.email : false;
+const isLoggedIn = req => {
+  req.session ? !!req.session.email : false;
 };
 
-exports.checkAuth = function(req, res, next) {
-
-  if (!isLoggedIn(req) && !(req.url.indexOf('/signin') >= 0) && !(req.url.indexOf('/signup') >= 0)) {
+exports.checkAuth = (req, res, next) => {
+  if (!isLoggedIn(req) && 
+      !(req.url.indexOf('/signin') >= 0) && 
+      !(req.url.indexOf('/signup') >= 0)) {
     console.log('Redirecting to /signin');
     res.redirect('/signin');
   } else {
@@ -48,13 +52,14 @@ exports.checkAuth = function(req, res, next) {
   }
 };
 
-exports.createSession = function(req, res, newUser, response) {
-  return req.session.regenerate(function() {
+exports.createSession = (req, res, newUser, response) => {
+  req.session.regenerate(() => {
     req.session.email = newUser.email;
     req.session.password = newUser.password;
     res.send(response);
   });
 };
+
 
 exports.comparePassword = comparePassword;
 exports.create = create;
