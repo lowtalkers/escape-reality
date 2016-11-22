@@ -191,7 +191,7 @@ class App extends React.Component {
           <Scene >
             <Camera>
               <a-cursor
-                fuse="true" fuseTimeout="800"
+                fuse="false" fuseTimeout="800"
                 animation__fuse="property: scale; easing: easeOutExpo; startEvents: stateadded; from: 7 7 7; to: 1 1 1; dur: 2000"
                 geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64"
                 material="color: #61ffff; shader: flat"
