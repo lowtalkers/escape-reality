@@ -26,7 +26,7 @@ import SignUp from './signInUpComponents/signup.jsx';
 import SignIn from './signInUpComponents/signin.jsx';
 
 import Dashboard from './Dashboard.js';
-import Bookmarks from './Bookmarks.js'
+import Bookmarks from './Bookmarks.js';
 
 
 class App extends React.Component {
@@ -81,7 +81,7 @@ class App extends React.Component {
     /** Grab email and password values from fields */
     const email = this.state.email;
     const password = this.state.password;
-    console.log(email)
+    console.log(email);
     /** Submit email and password for verification */
     $.post({
       url: this.props.router.location.pathname,
@@ -92,7 +92,7 @@ class App extends React.Component {
         if (data.auth) {
           this.props.router.replace('/dashboard');
         } else if (data === 'User exists!') {
-          console.log('User exists!')
+          console.log('User exists!');
         }
       },
       error: (error) => {
@@ -106,93 +106,104 @@ class App extends React.Component {
     let self = this;
     var vrView;
 
-    if(this.props.router.location.pathname.indexOf('/signup') >= 0) {
-      console.log(this.props.router.location.pathname.indexOf('/signup'))
+    if (this.props.router.location.pathname.indexOf('/signup') >= 0) {
+      console.log(this.props.router.location.pathname.indexOf('/signup'));
       return (
         <SignUp
         onEmailChange={this.onEmailChange.bind(this)}
         onPasswordChange={this.onPasswordChange.bind(this)}
         submitFn={this.submitFn.bind(this)}
         />
-      )
+      );
     } else if (this.props.router.location.pathname.indexOf('/signin') >= 0) {
-        return (
+      return (
           <SignIn
           onEmailChange={this.onEmailChange.bind(this)}
           onPasswordChange={this.onPasswordChange.bind(this)}
           submitFn={this.submitFn.bind(this)}
           />
-        )
+        );
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
-        return (
+      return (
           <Dashboard
 
           />
-        )
+        );
 
     } else if (this.props.router.location.pathname.indexOf('/bookmarks') >= 0) {
-        return (
+      return (
           <Bookmarks
             bookmarks={self.state.bookmarks}
           />
-        )
+        );
 
     } else {
-        if(this.props.router.location.pathname.indexOf('/lobby') >= 0) {
-          vrView = (
+      if (this.props.router.location.pathname.indexOf('/lobby') >= 0) {
+        vrView = (
             <Lobby
             router={this.props.router}
             />
-          )
-        } else if (this.props.router.location.pathname.indexOf('/sf') >= 0) {
-            vrView = (
+          );
+      } else if (this.props.router.location.pathname.indexOf('/sf') >= 0) {
+        vrView = (
               <SF
               router={this.props.router}
 
               />
-            )
-        } else if (this.props.router.location.pathname.indexOf('/louvre') >= 0) {
-            vrView = (
+            );
+      } else if (this.props.router.location.pathname.indexOf('/louvre') >= 0) {
+        vrView = (
               <Louvre
               getParagraph={this.getParagraph.bind(this)}
               router={this.props.router}
               />
-            )
-        } else if (this.props.router.location.pathname.indexOf('/berlin') >= 0) {
-            vrView = (
+            );
+      } else if (this.props.router.location.pathname.indexOf('/berlin') >= 0) {
+        vrView = (
               <Berlin
               getParagraph={this.getParagraph.bind(this)}
               router={this.props.router}
               />
-            )
-        } else if (this.props.router.location.pathname.indexOf('/milan') >= 0) {
-            vrView = (
+            );
+      } else if (this.props.router.location.pathname.indexOf('/milan') >= 0) {
+        vrView = (
               <Milan
               getParagraph={this.getParagraph.bind(this)}
               router={this.props.router}
               />
-            )
-        } else if (this.props.router.location.pathname.indexOf('/rome') >= 0) {
-            vrView = (
+            );
+      } else if (this.props.router.location.pathname.indexOf('/rome') >= 0) {
+        vrView = (
               <Rome
               getParagraph={this.getParagraph.bind(this)}
               router={this.props.router}
               />
-            )
-        } else if (this.props.router.location.pathname.indexOf('/hr') >= 0) {
-            vrView = (
+            );
+      } else if (this.props.router.location.pathname.indexOf('/hr') >= 0) {
+        vrView = (
               <Hack
               getParagraph={this.getParagraph.bind(this)}
               router={this.props.router}
               />
-            )
-        }
-        return (
+            );
+      }
+        /*
+          For development, we turn off fusing cursor (too slow) to allow clicking
+          For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
+
+              <a-cursor
+                fuse="true" fuseTimeout="800"
+                animation__fuse="property: scale; easing: easeOutExpo; startEvents: stateadded; from: 7 7 7; to: 1 1 1; dur: 2000"
+                geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64"
+                material="color: #61ffff; shader: flat"
+              >
+              </a-cursor>
+         */
+      return (
           <Scene >
             <Camera>
               <a-cursor
-                fuse="false" fuseTimeout="800"
-                animation__fuse="property: scale; easing: easeOutExpo; startEvents: stateadded; from: 7 7 7; to: 1 1 1; dur: 2000"
+                animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
                 geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64"
                 material="color: #61ffff; shader: flat"
               >
@@ -227,7 +238,7 @@ class App extends React.Component {
             </a-assets>
             {vrView}
           </Scene>
-        )
+        );
     }
   }
 }
