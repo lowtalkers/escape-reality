@@ -83,10 +83,10 @@ export default props => {
     let z = coordinates[2];
     if (z <= 0 && x <= 0){
       return `0 ${90 - Math.abs(Math.atan(z/x) * (180/Math.PI))} 0`
-    } 
+    }
     if (z >= 0 && x >= 0) {
       return `0 ${-90 - Math.abs(Math.atan(z/x) * (180/Math.PI))} 0`
-    } 
+    }
     if (z >= 0 && x <= 0){
       return `0 ${90 + Math.abs(Math.atan(z/x) * (180/Math.PI))} 0`
     }
@@ -124,8 +124,8 @@ let addBookmark = (title) => {
 
 
   return (
-      <Entity 
-        id="TextPlane" position={cardCoordCalc(props.position)} rotation={greenAngleCalc(props.position)} 
+      <Entity
+        id="TextPlane" position={cardCoordCalc(props.position)} rotation={greenAngleCalc(props.position)}
         animation__rot={{property: 'rotation', dir: 'normal', dur: 500, loop: false, from: '0 0 0', to: greenAngleCalc(props.position)}}
         animation__scale={{property: 'scale', dir: 'normal', dur: 500, loop: false, from: '.1 .1 .1', to: '1 1 1'}}
         easing='easeInOutQuad'
@@ -181,6 +181,7 @@ let addBookmark = (title) => {
       >
       </Entity>
 
+      {/*Bookmark Button*/}
       <Entity
             onClick={() => addBookmark(props.wikiName)}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
