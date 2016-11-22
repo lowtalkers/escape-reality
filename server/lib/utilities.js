@@ -15,7 +15,9 @@ module.exports.fetchWiki = function(req, res) {
   request(url, (err, requestResponse, body) => {
     if (err) {
       console.log('Error in Wikipedia fetch', err);
-    } else {
+    } 
+    
+    if (!err) {
       const query = (JSON.parse(body)).query.pages;
       
       if (query['-1']) {
@@ -34,9 +36,10 @@ module.exports.fetchWiki = function(req, res) {
       output = entities.decode(output);
       console.log('🍊  Sending scrubbed text to client:', output.slice(0, 55) + '...');
 
-      bookmarkController.create({title: req.query.exactWikiTitle, paragraph: output}, function(bookmark) {
+      bookmarkController.create({title: req.query.exactWikiTitle, paragraph: output}, 
+        function(bookmark) {
           res.status(200).send(bookmark.get('paragraph'));
-      });
+        });
     }
   });
 };
