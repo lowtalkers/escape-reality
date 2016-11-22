@@ -15,7 +15,7 @@ const session = require('express-session');
 const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome', '/hr'];
 
 app.use(bodyParser.json());
-app.use(compression()); // compress all responses
+app.use(compression()); // gzip compress all responses
 
 app.use(session({
   secret: secret,
@@ -34,16 +34,16 @@ for (const route of routes) {
 }
 
 /* auth routes -------------------------------------------------------------- */
-app.post('/signin', function(req, res) {
+app.post('/signin', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const response = {};
-  userController.findOne({where: {email: email}}, function(user) {
+  userController.findOne({where: {email: email}}, user => {
     if (!user) {
       response.auth = false;
       res.send(response);
     } else {
-      userController.comparePassword(user, password, function(match) {
+      userController.comparePassword(user, password, match => {
         if (match) {
           response.auth = true;
           userController.createSession(req, res, user, response);
@@ -61,12 +61,11 @@ app.post('/signup', function(req, res) {
   const email = req.body.email;
   const password = req.body.password;
   console.log(req.body);
-  userController.findOne({where: {email: email}}, function(user) {
-
+  userController.findOne({where: {email: email}}, user => {
     if (!user) {
-      bcrypt.hash(password, null, null, function(err, hash) {
+      bcrypt.hash(password, null, null, (err, hash) => {
         req.body.password = hash;
-        userController.create(req.body, function(user) {
+        userController.create(req.body, user => {
           userController.createSession(req, res, user, {auth: true});
         });
       });
@@ -77,8 +76,8 @@ app.post('/signup', function(req, res) {
   });
 });
 
-app.get('/signout', function(req, res) {
-  req.session.destroy(function() {
+app.get('/signout', (req, res) => {
+  req.session.destroy(() => {
     res.send('session destroyed');
   });
 });
@@ -96,9 +95,9 @@ app.get('/signout', function(req, res) {
  * @param  {GET query string}  {exactWikiTitle: string}  
  * @return {string}            Scrubbed first paragraph of Wikipedia article
  */
-app.get('/getWiki', function(req, res) {
+app.get('/getWiki', (req, res) => {
   bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, 
-    function(bookmark) {
+    bookmark => {
       if (!bookmark) {
         utils.fetchWiki(req, res);
       } else {
@@ -107,26 +106,31 @@ app.get('/getWiki', function(req, res) {
     });
 });
 
-app.get('/addBookmark', function(req, res) {
-  userController.findOne({where: {email: req.session.email}}, function(user) {
-    bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, function(bookmark) {
-      user.addBookmark(bookmark);
-      console.log('bookmark added');
-      res.send('Added!');
-    });
+app.get('/addBookmark', (req, res) => {
+  userController.findOne({where: {email: req.session.email}}, user => {
+    bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, 
+      bookmark => {
+        user.addBookmark(bookmark);
+        console.log('bookmark added');
+        res.send('Added!');
+      });
   });
 });
 
 app.get('/allBookmarks', function(req, res) {
-  userController.findOne({where: {email: req.session.email}}, function(user) {
-    user.getBookmarks().then(function(bookmarks) {
+  userController.findOne({where: {email: req.session.email}}, user => {
+    user.getBookmarks().then(bookmarks => {
       res.send(bookmarks);
     });
   });
 });
 
-
 app.use(express.static(path.join(__dirname, '../react-client')));
+
+// wildcard route
+app.get('*', function(req, res) {
+  res.status(404).send('Not Found');
+});
 
 app.listen(port, () => {
   console.log(`🌎  Listening on port ${port} for app ${metadata.name} 🌏`);
