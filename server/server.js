@@ -6,6 +6,8 @@ const express = require('express');
 const path = require('path');
 const port = process.env.NODE_PORT;
 const secret = process.env.SESSION_SECRET;
+const AWSaccessKey = process.env.ACCESSKEYID;
+const AWSsecretKey = process.env.SECRETACCESSKEY;
 const redis = require('redis');
 const userController = require('../db/controllers/users.js');
 const bookmarkController = require('../db/controllers/bookmarks.js');
@@ -38,7 +40,10 @@ for (const route of routes) {
 
 /** AWS CONFIG **/
 const AWS = require('aws-sdk');
-AWS.config.loadFromPath('../config.json');
+AWS.config.update({
+    accessKeyId: AWSaccessKey,
+    secretAccessKey: AWSsecretKey
+});
 const s3Bucket = new AWS.S3( { params: {Bucket: 'vrpics'} } );
 
 /** AWS UPLOAD **/
