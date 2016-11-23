@@ -43,44 +43,72 @@ export default props => {
   );
 */}
 
+if (props.ternary) {
 
-return (
+  return ( 
 
-  <Entity ref="RingTag123">
-    <RingTag id="pyramidTag" 
-      clickFunction={() => {
-        self.setState({showPyramidCard: true});
-      }}
-      position={props.position}
-      rotation="8.02 135.22 -1.15"
-    >
-      <Entity></Entity>
-    </RingTag>
+  <Entity>
+
+
+
+    <Entity ref="RingTag123">
+      <RingTag id="pyramidTag" 
+        clickFunction={() => props.clickFunction()}
+        position={props.position}
+        rotation="8.02 135.22 -1.15"
+      >
+        <Entity></Entity>
+      </RingTag>
+    </Entity>
+
+        
+          <TextPlane 
+            planeClick={() => console.log('Current ref object id is:', self.refs)}
+            id="pyramidTextPlane"
+            hidePlane={props.hidePlane}
+
+            position="-4.34 2.22 6.83"
+            rotation="8.02 135.22 -1.15"
+
+            scale={props.scale}
+            header={props.header}
+            wikiName={props.wikiName}
+            headerAdjust={props.headerAdjust} // lower moves it to the left, higher to the right
+            text={() => props.text()}
+            textAdjust={props.textAdjust} //lower moves this down, higher moves this up
+            imageSrc={props.imageSrc}
+          />
+
   </Entity>
 
-    {props.ternary ? 
-      
-        <TextPlane 
-          planeClick={() => console.log('Current ref object id is:', self.refs)}
-          id="pyramidTextPlane"
-          hidePlane={props.hidePlane}
-
-          position="-4.34 2.22 6.83"
-          rotation="8.02 135.22 -1.15"
-
-          scale={props.scale}
-          header={props.header}
-          wikiName={props.wikiName}
-          headerAdjust={props.headerAdjust} // lower moves it to the left, higher to the right
-          text={props.text}
-          textAdjust={props.textAdjust} //lower moves this down, higher moves this up
-          imageSrc={props.imageSrc}
-        />
-
-        :
-
-        null
-    }
-
   )
+
+  } else {
+
+    return ( 
+    <Entity>
+
+      <Entity ref="RingTag123">
+        <RingTag id="pyramidTag" 
+          clickFunction={() => props.clickFunction()}
+          position={props.position}
+          rotation="8.02 135.22 -1.15"
+        >
+          <Entity></Entity>
+        </RingTag>
+      </Entity>
+  </Entity>
+
+    )
+  }
+
+{/*
+return (
+  <Entity geometry='primitive: box; height: 2; width: 2'
+    position='0 2 -2'
+    rotation='0 0 0'
+  >
+  </Entity>
+  )
+*/}
 };

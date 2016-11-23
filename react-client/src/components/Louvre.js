@@ -14,6 +14,7 @@ import Text from './Text';
 import Sky from './Sky';
 import TextPlane from './TextPlane';
 import RingTag from './RingTag';
+import UnifiedComponent from './UnifiedComponent';
 
 // var draw = require("aframe-draw-component").component;
 // var textWrap = require('aframe-textwrap-component').component;
@@ -112,7 +113,8 @@ class Louvre extends React.Component {
     header='Louvre Pyramid'
     wikiName='Louvre_Pyramid'
     headerAdjust='-1.5' // lower moves it to the left, higher to the right
-    text={this.state.allParagraphs['Louvre_Pyramid']}
+    text={() => self.state.allParagraphs['Louvre_Pyramid']}
+    // text="Testing 456"
     textAdjust='0' //lower moves this down, higher moves this up
     imageSrc='https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/1024px-Louvre_Pyramid.jpg'
     ternary={self.state.showPyramidCard}
