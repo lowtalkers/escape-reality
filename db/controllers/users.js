@@ -37,7 +37,7 @@ const findOne = (query, callback) => {
 };
 
 const isLoggedIn = req => {
-  req.session ? !!req.session.email : false;
+  return req.session ? !!req.session.email : false;
 };
 
 exports.checkAuth = (req, res, next) => {
@@ -53,7 +53,7 @@ exports.checkAuth = (req, res, next) => {
 };
 
 exports.createSession = (req, res, newUser, response) => {
-  req.session.regenerate(() => {
+  return req.session.regenerate(() => {
     req.session.email = newUser.email;
     req.session.password = newUser.password;
     res.send(response);
