@@ -1,13 +1,13 @@
-const bodyParser = require('body-parser');
 const request = require('request');
+const redis = require('redis');
 const Entities = require('html-entities').AllHtmlEntities;
 const bookmarkController = require('../../db/controllers/bookmarks.js');
 
-
+const redisClient = redis.createClient();
 const entities = new Entities(); // decode strings like '&amp;'
 
 module.exports.fetchWiki = function(req, res) {
-  console.log('🍊  Starting Wikipedia API request for ', req.query.exactWikiTitle);
+  console.log('🍊  Starting Wikipedia API request for:', req.query.exactWikiTitle);
   const url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles='
               + req.query.exactWikiTitle 
               + '&format=json&exintro=1';
@@ -16,7 +16,7 @@ module.exports.fetchWiki = function(req, res) {
     if (err) {
       console.log('Error in Wikipedia fetch', err);
     } 
-    
+
     if (!err) {
       const query = (JSON.parse(body)).query.pages;
       
@@ -32,14 +32,21 @@ module.exports.fetchWiki = function(req, res) {
       const result = firstParagraph.replace(regex, '');
       
       const regexApostrophes = /(\')/ig;
-      let output = result.replace(regexApostrophes, '\'');
-      output = entities.decode(output);
-      console.log('🍊  Sending scrubbed text to client:', output.slice(0, 55) + '...');
+      let paragraph = result.replace(regexApostrophes, '\'');
+      paragraph = entities.decode(paragraph);
+      console.log('🍊  Sending scrubbed text to client:', paragraph.slice(0, 55) + '...');
 
-      bookmarkController.create({title: req.query.exactWikiTitle, paragraph: output}, 
-        function(bookmark) {
-          res.status(200).send(bookmark.get('paragraph'));
+      // Save to Redis
+      const wikiFragment = req.query.exactWikiTitle;
+      redisClient.set(wikiFragment, paragraph, redis.print);
+
+      // Save to database
+      bookmarkController.create({title: wikiFragment, paragraph: paragraph}, 
+        bookmark => {
+          console.log('🍊  Saved to database:', wikiFragment);
         });
+
+      res.status(200).send(paragraph);
     }
   });
 };

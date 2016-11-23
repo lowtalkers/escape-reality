@@ -3,25 +3,27 @@ const bodyParser = require('body-parser');
 const metadata = require('../package.json');
 const compression = require('compression');
 const express = require('express');
-const app = express();
 const path = require('path');
 const port = process.env.NODE_PORT;
 const secret = process.env.SESSION_SECRET;
+const redis = require('redis');
 const userController = require('../db/controllers/users.js');
 const bookmarkController = require('../db/controllers/bookmarks.js');
 const utils = require('./lib/utilities.js');
 const bcrypt = require('bcrypt-nodejs');
 const session = require('express-session');
-const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome', '/hr'];
 
+const redisClient = redis.createClient();
+const app = express();
 app.use(bodyParser.json());
 app.use(compression()); // gzip compress all responses
-
 app.use(session({
   secret: secret,
   resave: false,
   saveUninitialized: true
 }));
+
+const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome', '/hr'];
 
 for (const route of routes) {
   app.get(route, userController.checkAuth, (req, res) => {
@@ -96,14 +98,21 @@ app.get('/signout', (req, res) => {
  * @return {string}            Scrubbed first paragraph of Wikipedia article
  */
 app.get('/getWiki', (req, res) => {
-  bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, 
-    bookmark => {
-      if (!bookmark) {
-        utils.fetchWiki(req, res);
-      } else {
-        res.status(200).send(bookmark.get('paragraph'));
-      }
-    });
+  const wikiFragment = req.query.exactWikiTitle;
+  redisClient.get(wikiFragment, function(err, reply) {
+    if (err) {
+      console.log('🍊  Error in fetching from Redis', err);
+      res.status(200).send('Error in fetching from Redis', err);
+    }
+    if (reply) {
+      console.log('🍊  Found in Redis!', wikiFragment);
+      res.status(200).send(reply);
+    } 
+    if (!reply) {
+      console.log('🍊  Not found in Redis:', wikiFragment);
+      utils.fetchWiki(req, res);
+    }
+  });
 });
 
 app.get('/addBookmark', (req, res) => {
