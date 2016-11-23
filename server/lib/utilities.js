@@ -9,17 +9,17 @@ const entities = new Entities(); // decode strings like '&amp;'
 module.exports.fetchWiki = function(req, res) {
   console.log('🍊  Starting Wikipedia API request for:', req.query.exactWikiTitle);
   const url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles='
-              + req.query.exactWikiTitle 
+              + req.query.exactWikiTitle
               + '&format=json&exintro=1';
 
   request(url, (err, requestResponse, body) => {
     if (err) {
       console.log('Error in Wikipedia fetch', err);
-    } 
+    }
 
     if (!err) {
       const query = (JSON.parse(body)).query.pages;
-      
+
       if (query['-1']) {
         console.log('🍊  bad title for Wikipedia API request:', query['-1'].title);
         res.status(404).send('Not Found');
@@ -30,7 +30,7 @@ module.exports.fetchWiki = function(req, res) {
       const regex = /(<([^>]+)>)/ig;
       const firstParagraph = text.slice(0, text.indexOf('\n'));
       const result = firstParagraph.replace(regex, '');
-      
+
       const regexApostrophes = /(\')/ig;
       let paragraph = result.replace(regexApostrophes, '\'');
       paragraph = entities.decode(paragraph);
@@ -41,7 +41,7 @@ module.exports.fetchWiki = function(req, res) {
       redisClient.set(wikiFragment, paragraph, redis.print);
 
       // Save to database
-      bookmarkController.create({title: wikiFragment, paragraph: paragraph}, 
+      bookmarkController.create({title: wikiFragment, paragraph: paragraph},
         bookmark => {
           console.log('🍊  Saved to database:', wikiFragment);
         });
@@ -49,4 +49,18 @@ module.exports.fetchWiki = function(req, res) {
       res.status(200).send(paragraph);
     }
   });
+};
+
+module.exports.decodeBase64Image = function(dataString) {
+  const matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+    response = {};
+
+  if (matches.length !== 3) {
+    return new Error('Invalid input string');
+  }
+
+  response.type = matches[1];
+  response.data = new Buffer(matches[2], 'base64');
+
+  return response;
 };

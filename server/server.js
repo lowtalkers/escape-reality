@@ -15,7 +15,7 @@ const session = require('express-session');
 
 const redisClient = redis.createClient();
 const app = express();
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb'}));
 app.use(compression()); // gzip compress all responses
 app.use(session({
   secret: secret,
@@ -34,6 +34,36 @@ for (const route of routes) {
     }
   });
 }
+
+
+/** AWS CONFIG **/
+const AWS = require('aws-sdk');
+AWS.config.loadFromPath('../config.json');
+const s3Bucket = new AWS.S3( { params: {Bucket: 'vrpics'} } );
+
+/** AWS UPLOAD **/
+app.post('/upload', (req, res) => {
+  const imageBuffer = utils.decodeBase64Image(req.body.filePath);
+  let imgType = req.body.fileName.split('.', 2);
+  imgType = imgType[1];
+
+  const data = {
+    Bucket: 'vrpics',
+    Key: req.body.fileName,
+    Body: imageBuffer.data,
+    ContentType: 'image/' + imgType
+  };
+
+  s3Bucket.putObject(data, (err, data) => {
+    if (err) {
+      console.log('Error uploading data: ', data, err);
+    } else {
+      console.log('succesfully uploaded the image!');
+    }
+  });
+  res.sendStatus(200);
+});
+
 
 /* auth routes -------------------------------------------------------------- */
 app.post('/signin', (req, res) => {
@@ -94,8 +124,8 @@ app.get('/signout', (req, res) => {
  * https://en.wikipedia.org/wiki/Macy's
  * https://en.wikipedia.org/wiki/Sant%27Agnese_in_Agone
  *
- * @param  {GET query string}  {exactWikiTitle: string}  
- * @return {string}            Scrubbed first paragraph of Wikipedia article
+ * @param  {object}    {exactWikiTitle: string}
+ * @return {string}    Scrubbed first paragraph of Wikipedia article
  */
 app.get('/getWiki', (req, res) => {
   const wikiFragment = req.query.exactWikiTitle;
@@ -107,7 +137,7 @@ app.get('/getWiki', (req, res) => {
     if (reply) {
       console.log('🍊  Found in Redis!', wikiFragment);
       res.status(200).send(reply);
-    } 
+    }
     if (!reply) {
       console.log('🍊  Not found in Redis:', wikiFragment);
       utils.fetchWiki(req, res);
@@ -117,7 +147,7 @@ app.get('/getWiki', (req, res) => {
 
 app.get('/addBookmark', (req, res) => {
   userController.findOne({where: {email: req.session.email}}, user => {
-    bookmarkController.findOne({where: {title: req.query.exactWikiTitle}}, 
+    bookmarkController.findOne({where: {title: req.query.exactWikiTitle}},
       bookmark => {
         user.addBookmark(bookmark);
         console.log('bookmark added');
