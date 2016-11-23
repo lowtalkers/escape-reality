@@ -243,12 +243,12 @@ class App extends React.Component {
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/exit.png" />
 
               <img id="lobby" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/test3.jpg" />
-              <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Paris.jpg" />
-              <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/SanFrancisco.jpg" />
-              <img id="berlin2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Berlin.jpg" />
+              <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Paris_384x384.jpg" />
+              <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/SF_384x384.jpg" />
+              <img id="berlin2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Berlin_384x384.jpg" />
               <img id="seattle" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/seattle.png" />
-              <img id="milan2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Milan.jpg" />
-              <img id="rome2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Rome.jpg" />
+              <img id="milan2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Milan_384x384.jpg" />
+              <img id="rome2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Rome_384x384.jpg" />
 
             </a-assets>
             {vrView}
