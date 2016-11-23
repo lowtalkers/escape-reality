@@ -19,4 +19,4 @@ module.exports = function(sequelize, Sequelize) {
   });
 
   return Bookmark;
-}
+};
