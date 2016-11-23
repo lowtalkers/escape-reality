@@ -1,3 +1,7 @@
+/**
+ * @file Manages the app component.
+ */
+
 import AFRAME from 'aframe';
 import 'aframe-animation-component';
 import 'aframe-text-component';
@@ -29,6 +33,11 @@ import Dashboard from './Dashboard.js';
 import Bookmarks from './Bookmarks.js';
 
 
+/**
+ * Creates a new App component.
+ * @class
+ */
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -37,6 +46,11 @@ class App extends React.Component {
       password: ''
     };
   }
+
+   /**This function is used to enforce the board rules and changes the class of currently selected letters for UI.
+    * @param {object} event click event object
+    * @returns {boolean} true or false if rules are followed
+    */
 
   getParagraph(allTitles, setStateParagraph) {
     const result = {};
@@ -77,6 +91,7 @@ class App extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  /** This function when invoked will submit email and password. */
   submitFn() {
     /** Grab email and password values from fields */
     const email = this.state.email;
