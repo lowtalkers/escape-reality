@@ -83,7 +83,44 @@ class Louvre extends React.Component {
         />
 */}
 
+
+{/* Draft UnifiedComponent
+  <UnifiedComponent
+    id="pyramidComponent"
+    tag="Louvre Pyramid"
+    clickFunction={() => {
+      self.setState({showPyramidCard: true});
+    }}
+    position="-4.34 2.22 6.83"
+    rotation="8.02 135.22 -1.15"
+    //Use tag string to find first Wiki Article Name
+    //Use Article Name to populate infocard article data
+    //Use Article Name to pull first image for respective page
+
+    //no ternary required in City View for showing info card; pass along ternary function as prop to Unified Component
+  />
+*/}
+
+  <UnifiedComponent 
+    clickFunction={() => {
+      self.setState({showPyramidCard: true});
+    }}
+    position="-4.34 2.22 6.83"
+    rotation="8.02 135.22 -1.15"
+    hidePlane={() => self.setState({showPyramidCard: false})}
+    scale='0 0 0'
+    header='Louvre Pyramid'
+    wikiName='Louvre_Pyramid'
+    headerAdjust='-1.5' // lower moves it to the left, higher to the right
+    text={this.state.allParagraphs['Louvre_Pyramid']}
+    textAdjust='0' //lower moves this down, higher moves this up
+    imageSrc='https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Louvre_Pyramid.jpg/1024px-Louvre_Pyramid.jpg'
+    ternary={self.state.showPyramidCard}
+  />
+
+
 {/*Pyramid*/}
+{/*
     <Entity ref="RingTag123">
       <RingTag id="pyramidTag" 
         clickFunction={() => {
@@ -119,7 +156,7 @@ class Louvre extends React.Component {
 
           null
       }
-
+*/}
 {/*`https://en.wikipedia.org/w/api.php?action=opensearch&search=${}&limit=1&namespace=0&format=jsonfm`*/}
 
 {/*Richelieu Wing*/}
