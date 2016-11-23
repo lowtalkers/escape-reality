@@ -11,6 +11,7 @@
     "aframe-react": "^3.4.0",
     "aframe-text-component": "^0.3.0",
     "aframe-textwrap-component": "^1.0.1",
+    "aws-sdk": "^2.7.6",
     "babel": "^6.3.13",
     "babel-polyfill": "^6.3.14",
     "bcrypt-nodejs": "0.0.3",
@@ -31,6 +32,7 @@
     "redis": "^2.6.3",
     "request": "^2.78.0",
     "sequelize": "^3.25.0",
+    "vex-js": "^3.0.0",
     "webpack": "^1.13.3"
   },
   "scripts": {
