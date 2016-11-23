@@ -3,8 +3,11 @@ react-client/build/bundle.js
 react-client/build/bundle.js.map
 react-client/build/
 
-# env file that stores API keys
+# environment file that stores API keys
 .env
+
+# Redis database
+dump.rdb
 
 # Logs
 logs
