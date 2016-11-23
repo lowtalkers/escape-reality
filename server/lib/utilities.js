@@ -36,24 +36,33 @@ module.exports.fetchWiki = function(req, res) {
       paragraph = entities.decode(paragraph);
       console.log('🍊  Sending scrubbed text to client:', paragraph.slice(0, 55) + '...');
 
+      // Send response to client first (faster),
+      // save to databases later (slower)
+      res.status(200).send(paragraph);
+
       // Save to Redis
       const wikiFragment = req.query.exactWikiTitle;
       redisClient.set(wikiFragment, paragraph, redis.print);
 
       // Save to database
-      bookmarkController.create({title: wikiFragment, paragraph: paragraph},
-        bookmark => {
-          console.log('🍊  Saved to database:', wikiFragment);
-        });
-
-      res.status(200).send(paragraph);
+      bookmarkController.findOne({where: {title: wikiFragment}}, bookmark => {
+        if (bookmark) {
+          console.log('🍊  bookmark already exists, avoiding save to DB:', wikiFragment); 
+        }
+        if (!bookmark) {
+          bookmarkController.create({title: wikiFragment, paragraph: paragraph},
+            bookmark => {
+              console.log('🍊  Saved to database:', wikiFragment);
+            });
+        }
+      });
     }
   });
 };
 
 module.exports.decodeBase64Image = function(dataString) {
-  const matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
-    response = {};
+  const matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+  const response = {};
 
   if (matches.length !== 3) {
     return new Error('Invalid input string');
