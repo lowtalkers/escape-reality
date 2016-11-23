@@ -4,19 +4,21 @@ const metadata = require('../package.json');
 const compression = require('compression');
 const express = require('express');
 const path = require('path');
+const redis = require('redis');
+const utils = require('./lib/utilities.js');
+const bcrypt = require('bcrypt-nodejs');
+const session = require('express-session');
+const userController = require('../db/controllers/users.js');
+const bookmarkController = require('../db/controllers/bookmarks.js');
+
 const port = process.env.NODE_PORT;
 const secret = process.env.SESSION_SECRET;
 const AWSaccessKey = process.env.ACCESSKEYID;
 const AWSsecretKey = process.env.SECRETACCESSKEY;
-const redis = require('redis');
-const userController = require('../db/controllers/users.js');
-const bookmarkController = require('../db/controllers/bookmarks.js');
-const utils = require('./lib/utilities.js');
-const bcrypt = require('bcrypt-nodejs');
-const session = require('express-session');
 
 const redisClient = redis.createClient();
 const app = express();
+
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(compression()); // gzip compress all responses
 app.use(session({
@@ -41,8 +43,8 @@ for (const route of routes) {
 /** AWS CONFIG **/
 const AWS = require('aws-sdk');
 AWS.config.update({
-    accessKeyId: AWSaccessKey,
-    secretAccessKey: AWSsecretKey
+  accessKeyId: AWSaccessKey,
+  secretAccessKey: AWSsecretKey
 });
 const s3Bucket = new AWS.S3( { params: {Bucket: 'vrpics'} } );
 
