@@ -55,7 +55,7 @@ class Louvre extends React.Component {
   render () {
     let self = this;
     return (
-      <Entity >
+      <Entity id="refstest123" ref="pyramidTag">
 
        <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
@@ -84,18 +84,22 @@ class Louvre extends React.Component {
 */}
 
 {/*Pyramid*/}
-
-      <RingTag id="pyramidTag"
+    <Entity ref="RingTag123">
+      <RingTag id="pyramidTag" 
         clickFunction={() => {
           self.setState({showPyramidCard: true});
         }}
         position="-4.34 2.22 6.83"
         rotation="8.02 135.22 -1.15"
-      />
-      
+      >
+        <Entity></Entity>
+      </RingTag>
+    </Entity>
+
       {self.state.showPyramidCard? 
         
           <TextPlane 
+            planeClick={() => console.log('Current ref object id is:', self.refs)}
             id="pyramidTextPlane"
             hidePlane={() => self.setState({showPyramidCard: false})}
 
@@ -115,6 +119,8 @@ class Louvre extends React.Component {
 
           null
       }
+
+{/*`https://en.wikipedia.org/w/api.php?action=opensearch&search=${}&limit=1&namespace=0&format=jsonfm`*/}
 
 {/*Richelieu Wing*/}
 

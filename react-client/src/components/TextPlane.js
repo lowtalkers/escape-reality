@@ -145,10 +145,11 @@ let addBookmark = (title) => {
 
         {/* Main Image */}
         <Entity geometry={`primitive: plane; width: ${(Width/9)*3}; height: ${(Height/3)*2}`}
-            material={{side: 'double', src: 'url(' + props.imageSrc + ')', opacity: 1}}
-            // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
-            position={`${(Width/-3.65)} ${(Height/-10)} 0.1`}
-            rotation='0 0 0'
+          onClick={() => props.planeClick()}
+          material={{side: 'double', src: 'url(' + props.imageSrc + ')', opacity: 1}}
+          // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
+          position={`${(Width/-3.65)} ${(Height/-10)} 0.1`}
+          rotation='0 0 0'
         >
         </Entity>
 
