@@ -13,6 +13,7 @@ const sequelize = new Sequelize(db, dbUser, dbPassword, {
 const User = require('./users.js')(sequelize, Sequelize);
 const Bookmark = require('./bookmarks.js')(sequelize, Sequelize);
 const BookmarkUsers = require('./bookmarkUsers')(sequelize, Sequelize);
+const Photo = require('./photos.js')(sequelize, Sequelize);
 
 // BookmarkUsers join table:
 User.belongsToMany(Bookmark, {
@@ -25,6 +26,16 @@ Bookmark.belongsToMany(User, {
   foreignKey: 'bookmark_id'
 });
 
+//Photos and Users
+User.hasMany(Photo, {
+  foreignKey: 'user_id'
+});
+
+Photo.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+
 //Create missing tables, if any
 // sequelize.sync({force: true});
 sequelize.sync();
@@ -33,3 +44,4 @@ sequelize.sync();
 exports.User = User;
 exports.Bookmark = Bookmark;
 exports.BookmarkUsers = BookmarkUsers;
+exports.Photo = Photo;
