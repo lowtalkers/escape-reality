@@ -5,6 +5,7 @@ const compression = require('compression');
 const express = require('express');
 const path = require('path');
 const redis = require('redis');
+const sharp = require('sharp');
 
 const utils = require('./lib/utilities.js');
 const bcrypt = require('bcrypt-nodejs');
@@ -53,7 +54,6 @@ const s3Bucket = new AWS.S3( { params: {Bucket: 'vrpics'} } );
 /** AWS UPLOAD **/
 app.post('/upload', (req, res) => {
   const imageBuffer = utils.decodeBase64Image(req.body.filePath);
-  console.log(req.body.fileName);
   let imgType = req.body.fileName.split('.', 2);
   // console.log(req.body.fileName);
   imgType = imgType[1];
@@ -65,10 +65,31 @@ app.post('/upload', (req, res) => {
     ContentType: 'image/' + imgType
   };
 
+  sharp(imageBuffer.data)
+    .resize(400, 400)
+    .toBuffer()
+    .then( data => {
+      imageBuffer.resized = data;
+      console.log(data);
+    })
+    .catch( err => console.log(err));
+
   s3Bucket.putObject(data, (err, data) => {
     if (err) {
       console.log('Error uploading data: ', data, err);
     } else {
+      s3Bucket.putObject({
+        Bucket: 'vrpics',
+        Key: 'resized-' + req.body.fileName,
+        Body: imageBuffer.resized,
+        ContentType: 'image/' + imgType
+      }, (err, data) => {
+        if (err) {
+          console.log('Error uploading data: ', data, err);
+        } else {
+          console.log('succesfully uploaded the resized image!');
+        }
+      });
       console.log('succesfully uploaded the image!');
     }
   });
