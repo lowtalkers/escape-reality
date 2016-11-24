@@ -60,20 +60,17 @@ module.exports.fetchWiki = function(req, res) {
   });
 };
 
-module.exports.fetchArticleWikiName = function(req, res) {
-  console.log('Beginning article wiki name fetch...');]
-  const url = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${req.query.exactWikiTitle}%20Pyramid&limit=1&namespace=0&format=jsonfm`;
-      console.log('Error in Wikipedia fetch', err);
-      return;
-    }
+// module.exports.fetchArticleWikiName = function(req, res) {
+//   console.log('Beginning article wiki name fetch...');
+//   const url = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${req.query.exactWikiTitle}%20Pyramid&limit=1&namespace=0&format=jsonfm`;
+//       console.log('Error in Wikipedia fetch', err);
+//       return;
+  
 
-    let articleWikiName = JSON.parse(body)[0][0];
-    console.log('Fetched articleWikiName:', articleWikiName);
-    res.status(200).send(articleWikiName);
-  })
-
-
-}
+//     let articleWikiName = JSON.parse(body)[0][0];
+//     console.log('Fetched articleWikiName:', articleWikiName);
+//     res.status(200).send(articleWikiName);
+//   })
 
 module.exports.decodeBase64Image = function(dataString) {
   const matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
