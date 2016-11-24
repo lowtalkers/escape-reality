@@ -15,6 +15,7 @@ const Bookmark = require('./bookmarks.js')(sequelize, Sequelize);
 const BookmarkUsers = require('./bookmarkUsers')(sequelize, Sequelize);
 const Photo = require('./photos.js')(sequelize, Sequelize);
 const Comment = require('./comments.js')(sequelize, Sequelize);
+const Like = require('./likes.js')(sequelize, Sequelize);
 
 // BookmarkUsers join table:
 User.belongsToMany(Bookmark, {
@@ -42,7 +43,7 @@ User.belongsToMany(Photo, {
   foreignKey: 'user_id'
 });
 
-Photo.belongstoMany(User, {
+Photo.belongsToMany(User, {
   through: 'comments',
   foreignKey: 'photo_id'
 });
@@ -53,7 +54,7 @@ User.belongsToMany(Photo, {
   foreignKey: 'user_id'
 });
 
-Photo.belongstoMany(User, {
+Photo.belongsToMany(User, {
   through: 'likes',
   foreignKey: 'photo_id'
 });
@@ -68,3 +69,4 @@ exports.Bookmark = Bookmark;
 exports.BookmarkUsers = BookmarkUsers;
 exports.Photo = Photo;
 exports.Comment = Comment;
+exports.Like = Like;
