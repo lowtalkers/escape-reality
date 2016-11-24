@@ -31,6 +31,7 @@ import SignIn from './signInUpComponents/signin.jsx';
 
 import Dashboard from './Dashboard.js';
 import Bookmarks from './Bookmarks.js';
+import Home from './Home.js';
 
 
 /**
@@ -43,7 +44,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      pics: []
     };
   }
 
@@ -91,6 +93,24 @@ class App extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  getAllPhotos() {
+    $.get({
+      url: '/topPics',
+      success: (data) => {
+        console.log(data);
+        this.setState({pics: data})
+      },
+      error: (error) => {
+        console.error('error in get upload', error);
+        $('.error').show();
+      },
+    });
+  }
+
+  componentDidMount () {
+    this.getAllPhotos();
+  }
+
   /** This function when invoked will submit email and password. */
   submitFn() {
     /** Grab email and password values from fields */
@@ -122,7 +142,6 @@ class App extends React.Component {
     var vrView;
 
     if (this.props.router.location.pathname.indexOf('/signup') >= 0) {
-      console.log(this.props.router.location.pathname.indexOf('/signup'));
       return (
         <SignUp
         onEmailChange={this.onEmailChange.bind(this)}
@@ -139,69 +158,28 @@ class App extends React.Component {
           />
         );
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
-      return (
-          <Dashboard
-
-          />
-        );
-
-    } else if (this.props.router.location.pathname.indexOf('/bookmarks') >= 0) {
-      return (
-          <Bookmarks
-            bookmarks={self.state.bookmarks}
-          />
-        );
+      return <Dashboard />
 
     } else {
       if (this.props.router.location.pathname.indexOf('/lobby') >= 0) {
         vrView = (
-            <Lobby
+            <Home
             router={this.props.router}
-            />
+            pics={this.state.pics} />
           );
-      } else if (this.props.router.location.pathname.indexOf('/sf') >= 0) {
+      } else {
         vrView = (
-              <SF
-              router={this.props.router}
+            <Entity>
+              <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
 
-              />
+              <a-sky id="image-360" radius="10" src={'#'+this.props.router.location.pathname}></a-sky>
+
+              <Entity light={{type: 'ambient', color: '#888'}}/>
+              <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
+              <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
+            </Entity>
             );
-      } else if (this.props.router.location.pathname.indexOf('/louvre') >= 0) {
-        vrView = (
-              <Louvre
-              getParagraph={this.getParagraph.bind(this)}
-              router={this.props.router}
-              />
-            );
-      } else if (this.props.router.location.pathname.indexOf('/berlin') >= 0) {
-        vrView = (
-              <Berlin
-              getParagraph={this.getParagraph.bind(this)}
-              router={this.props.router}
-              />
-            );
-      } else if (this.props.router.location.pathname.indexOf('/milan') >= 0) {
-        vrView = (
-              <Milan
-              getParagraph={this.getParagraph.bind(this)}
-              router={this.props.router}
-              />
-            );
-      } else if (this.props.router.location.pathname.indexOf('/rome') >= 0) {
-        vrView = (
-              <Rome
-              getParagraph={this.getParagraph.bind(this)}
-              router={this.props.router}
-              />
-            );
-      } else if (this.props.router.location.pathname.indexOf('/hr') >= 0) {
-        vrView = (
-              <Hack
-              getParagraph={this.getParagraph.bind(this)}
-              router={this.props.router}
-              />
-            );
-      }
+      } 
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
           For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
@@ -214,25 +192,28 @@ class App extends React.Component {
               >
               </a-cursor>
          */
+        const images = this.state.pics.map((pic) => {
+          const picId = pic.imageLink.split('/').reverse()[0];
+          return (
+            <img id={picId}
+            crossOrigin="anonymous" 
+            src={pic.imageLink} />
+          )
+        })
       return (
           <Scene >
             <Camera>
               <a-cursor
                 animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
                 geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64"
-                material="color: #61ffff; shader: flat"
-              >
+                material="color: #61ffff; shader: flat">
               </a-cursor>
             </Camera>
 
 
             <a-assets>
-              <img id="sf" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/union-square-franco_4500.jpg" />
-              <img id="louvre" crossOrigin="anonymous" src="https://c2.staticflickr.com/6/5688/21597873406_8f4021b4b4_k.jpg" />
-              <img id="berlin" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/germany.jpg" />
-              <img id="milan" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/milan360.jpg" />
-              <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
-              <img id="hr" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/hr.JPG" />
+              {images}
+
               <img id="lobby1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
@@ -241,14 +222,6 @@ class App extends React.Component {
               <img id="hr" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/hr.JPG" />
               <img id="hrlogo" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/HR.png" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/exit.png" />
-
-              <img id="lobby" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/test3.jpg" />
-              <img id="paris" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Paris_384x384.jpg" />
-              <img id="sf1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/SF_384x384.jpg" />
-              <img id="berlin2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Berlin_384x384.jpg" />
-              <img id="seattle" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/seattle.png" />
-              <img id="milan2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Milan_384x384.jpg" />
-              <img id="rome2" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Rome_384x384.jpg" />
 
             </a-assets>
             {vrView}

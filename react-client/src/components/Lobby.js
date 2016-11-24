@@ -26,6 +26,9 @@ export default props => (
 
         <Entity rotation="0 30 0" position="0 0 -2" material={{src: '#rome2', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => props.router.replace('/rome')}/>
 
+        <Entity rotation="0 -20 0" position="0 0 -2" material={{src: '#rome2', color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" onClick={() => props.router.replace('/rome')}/>
+
+
         <a-image id="exit-image" src="#exit" geometry="height: 0.3; width: 0.3" position="0 -1 -2" onClick={() => props.router.replace('/dashboard')}></a-image>
 
       <Entity light={{type: 'ambient', color: '#fff'}}/>
