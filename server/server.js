@@ -193,6 +193,10 @@ app.get('/getWiki', (req, res) => {
   });
 });
 
+app.get('/getWikiArticleTitle', (req, res) => {
+  utils.fetchArticleWikiName(req, res);
+})
+
 app.get('/addBookmark', (req, res) => {
   userController.findOne({where: {email: req.session.email}}, user => {
     bookmarkController.findOne({where: {title: req.query.exactWikiTitle}},
