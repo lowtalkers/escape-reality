@@ -5,11 +5,13 @@ const compression = require('compression');
 const express = require('express');
 const path = require('path');
 const redis = require('redis');
+
 const utils = require('./lib/utilities.js');
 const bcrypt = require('bcrypt-nodejs');
 const session = require('express-session');
 const userController = require('../db/controllers/users.js');
 const bookmarkController = require('../db/controllers/bookmarks.js');
+const photoController = require('../db/controllers/photos.js');
 
 const port = process.env.NODE_PORT;
 const secret = process.env.SESSION_SECRET;
@@ -19,7 +21,7 @@ const AWSsecretKey = process.env.SECRETACCESSKEY;
 const redisClient = redis.createClient();
 const app = express();
 
-app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.json({limit: '40mb'}));
 app.use(compression()); // gzip compress all responses
 app.use(session({
   secret: secret,
@@ -51,7 +53,9 @@ const s3Bucket = new AWS.S3( { params: {Bucket: 'vrpics'} } );
 /** AWS UPLOAD **/
 app.post('/upload', (req, res) => {
   const imageBuffer = utils.decodeBase64Image(req.body.filePath);
+  console.log(req.body.fileName);
   let imgType = req.body.fileName.split('.', 2);
+  // console.log(req.body.fileName);
   imgType = imgType[1];
 
   const data = {
@@ -68,7 +72,7 @@ app.post('/upload', (req, res) => {
       console.log('succesfully uploaded the image!');
     }
   });
-  res.sendStatus(200);
+  res.status(200).send(data);
 });
 
 
@@ -163,11 +167,29 @@ app.get('/addBookmark', (req, res) => {
   });
 });
 
-app.get('/allBookmarks', function(req, res) {
+app.get('/allBookmarks', (req, res) => {
   userController.findOne({where: {email: req.session.email}}, user => {
+    console.log(user);
     user.getBookmarks().then(bookmarks => {
       res.send(bookmarks);
     });
+  });
+});
+
+app.post('/addPic', (req, res) => {
+  userController.findOne({where: {email: req.session.email}}, user => {
+   photoController.create(req.body, photo => {
+      photo.setUser(user);
+      console.log(photo);
+      res.send('Added!');
+    })
+  });
+});
+
+app.get('/topPics', (req, res) => {
+  console.log('in top pics!!');
+  photoController.findAll((photos) => {
+    res.send(photos);
   });
 });
 
