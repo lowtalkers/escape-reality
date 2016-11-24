@@ -42,7 +42,8 @@ class Louvre extends React.Component {
       showLeftWingCard: false,
       showMuseumCard: false,
       showCourtyardCard: false,
-      allTitles: ['Louvre', 'Louvre_Pyramid']
+      allTitles: ['Louvre', 'Louvre_Pyramid'], //['Stateue of Zeus', 'Eifel Tower', etc]
+      allTagNames: ['Louvre', 'Louvre Pyarmid']
     }
   }
 

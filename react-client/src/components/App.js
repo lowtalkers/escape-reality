@@ -85,6 +85,12 @@ class App extends React.Component {
     recurse(0);
   }
 
+  // getArticleName() {
+
+
+    
+  // }
+
 
   onEmailChange(event) {
     this.setState({ email: event.target.value });
