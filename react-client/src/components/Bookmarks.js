@@ -11,7 +11,7 @@ class Bookmarks extends React.Component {
     }
   }
 
-  getBookmarks() {
+  getUserBookmarks() {
     let self = this;
     $.get({
       url: '/allBookmarks',
@@ -27,7 +27,7 @@ class Bookmarks extends React.Component {
   }
 
   componentWillMount() {
-    this.getBookmarks();
+    this.getUserBookmarks();
   }
 
   render() {
