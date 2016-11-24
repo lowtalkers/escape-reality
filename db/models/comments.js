@@ -1,18 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define('users', {
+  const Comment = sequelize.define('comments', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true
     },
-    email: {
-      type: Sequelize.STRING
-    },
-    password: {
+    body: {
       type: Sequelize.STRING
     }
   });
 
-  return User;
+  return Comment;
 };

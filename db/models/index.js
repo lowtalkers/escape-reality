@@ -9,11 +9,12 @@ const sequelize = new Sequelize(db, dbUser, dbPassword, {
   host: dbHost
 });
 
-// Any vairable that starts with a capital letter is a model
+// Any variable that starts with a capital letter is a model
 const User = require('./users.js')(sequelize, Sequelize);
 const Bookmark = require('./bookmarks.js')(sequelize, Sequelize);
 const BookmarkUsers = require('./bookmarkUsers')(sequelize, Sequelize);
 const Photo = require('./photos.js')(sequelize, Sequelize);
+const Comment = require('./comments.js')(sequelize, Sequelize);
 
 // BookmarkUsers join table:
 User.belongsToMany(Bookmark, {
@@ -35,6 +36,27 @@ Photo.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
+// Comments
+User.belongsToMany(Photo, {
+  through: 'comments',
+  foreignKey: 'user_id'
+});
+
+Photo.belongstoMany(User, {
+  through: 'comments',
+  foreignKey: 'photo_id'
+});
+
+// Likes
+User.belongsToMany(Photo, {
+  through: 'likes',
+  foreignKey: 'user_id'
+});
+
+Photo.belongstoMany(User, {
+  through: 'likes',
+  foreignKey: 'photo_id'
+});
 
 //Create missing tables, if any
 // sequelize.sync({force: true});
@@ -45,3 +67,4 @@ exports.User = User;
 exports.Bookmark = Bookmark;
 exports.BookmarkUsers = BookmarkUsers;
 exports.Photo = Photo;
+exports.Comment = Comment;
