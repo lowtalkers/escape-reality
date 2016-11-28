@@ -11,7 +11,7 @@ const create = (props, callback) => {
 };
 
 const findAll = callback => {
-  console.log('in find all photo controller');
+  console.log('🍊  Running findAll query in photos controller');
   Photo.findAll({ 
     limit: 30, 
     order: [['createdAt', 'DESC']]
