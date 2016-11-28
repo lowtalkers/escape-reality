@@ -1,30 +1,36 @@
-var Photo = require('../models/index.js').Photo;
+const Photo = require('../models/index.js').Photo;
 
-var create = function(props, callback) {
+const create = (props, callback) => {
   Photo.build(props)
   .save()
-  .then(function(photo) {
+  .then(photo => {
     callback(photo);
-  }).catch(function(err) {
-    console.log(err);
+  }).catch(err => {
+    console.log('🍊  Error in create photo', err);
   });
 };
 
-var findAll = function(callback) {
+const findAll = callback => {
   console.log('in find all photo controller');
-  Photo.findAll({ limit: 30, order: [['createdAt', 'DESC']]}).then(function(photos) {
+  Photo.findAll({ 
+    limit: 30, 
+    order: [['createdAt', 'DESC']]
+  })
+  .then(photos => {
     callback(photos);
-  }).catch(function(err) {
-    console.log(err);
+  }).catch(err => {
+    console.log('🍊  Error in find all photos', err);
   });
 };
 
-var findOne = function(query, callback) {
-  Photo.findOne(query).done(function(photo) {
+const findOne = (query, callback) => {
+  Photo.findOne(query)
+  .done(photo => {
     console.log('🍊  Found one photo in db:', query);
     callback(photo);
   });
 };
+
 
 exports.create = create;
 exports.findAll = findAll;
