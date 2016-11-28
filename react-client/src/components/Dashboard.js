@@ -9,7 +9,6 @@ vex.defaultOptions.className = 'vex-theme-os';
 var fileName;
 var filePath;
 var picDescrip;
-var date = fecha.format(new Date(), 'mediumDate').replace(/\s+/g, '');
 var currentImgs = [];
 
 
@@ -17,7 +16,7 @@ const getAllPhotos = () => {
   $.get({
     url: '/topPics',
     success: (data) => {
-      console.log(data);
+      console.log(data, data.length);
     },
     error: (error) => {
       console.error('error in get upload', error);
@@ -51,7 +50,7 @@ const uploadFile = () => {
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         picDescrip = $("#description").val();
-        fileName = date + this.files[0].name;
+        fileName = this.files[0].name
         console.log(fileName);
         reader.onload = imageIsLoaded;
         reader.readAsDataURL(this.files[0]);

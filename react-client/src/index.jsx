@@ -19,7 +19,8 @@ import SignIn from './components/signInUpComponents/signin.jsx';
 import SignUp from './components/signInUpComponents/signup.jsx';
 
 import Dashboard from './components/Dashboard.js';
-import Bookmarks from './components/Bookmarks.js'
+import Bookmarks from './components/Bookmarks.js';
+import Image from './components/Image.js';
 
 
 ReactDOM.render((
@@ -30,12 +31,7 @@ ReactDOM.render((
       <Route path="dashboard" component={Dashboard} />
       <Route path="bookmarks" component={Bookmarks} />
       <Route path="lobby" component={Lobby} />
-      <Route path="sf" component={SF} />
-      <Route path="louvre" component={Louvre} />
-      <Route path="berlin" component={Berlin} />
-      <Route path="milan" component={Milan} />
-      <Route path="rome" component={Rome} />
-      <Route path="hr" component={Hack} />
+      <Route path="*" component={Image} />
     </Route>
   </Router>
 ), document.querySelector('.scene-container'));

@@ -30,7 +30,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
-const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/sf', '/lobby', '/louvre', '/berlin', '/milan/', '/rome', '/hr'];
+const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/lobby'];
 
 for (const route of routes) {
   app.get(route, userController.checkAuth, (req, res) => {
@@ -54,13 +54,17 @@ const s3Bucket = new AWS.S3( { params: {Bucket: 'vrpics'} } );
 /** AWS UPLOAD **/
 app.post('/upload', (req, res) => {
   const imageBuffer = utils.decodeBase64Image(req.body.filePath);
-  let imgType = req.body.fileName.split('.', 2);
+
+  console.log(req.body.fileName);
+  var date = new Date().getTime()// fecha.format(new Date(), 'mediumDate').replace(/\s+/g, '');
+  let file = req.body.fileName.split('.');
+  let imgType = file[1]
   // console.log(req.body.fileName);
-  imgType = imgType[1];
+  let fileName = file[0] + date;
 
   const data = {
     Bucket: 'vrpics',
-    Key: req.body.fileName,
+    Key: fileName,
     Body: imageBuffer.data,
     ContentType: 'image/' + imgType
   };

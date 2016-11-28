@@ -32,6 +32,7 @@ import SignIn from './signInUpComponents/signin.jsx';
 import Dashboard from './Dashboard.js';
 import Bookmarks from './Bookmarks.js';
 import Home from './Home.js';
+import Image from './Image.js';
 
 
 /**
@@ -140,7 +141,13 @@ class App extends React.Component {
   render () {
     let self = this;
     var vrView;
-
+    const images = this.state.pics.map((pic) => {
+                    return (
+                      <img id={pic.title.split('.')[0]}
+                      crossOrigin="anonymous" 
+                      src={pic.imageLink} />
+                    )
+                  });
     if (this.props.router.location.pathname.indexOf('/signup') >= 0) {
       return (
         <SignUp
@@ -169,15 +176,7 @@ class App extends React.Component {
           );
       } else {
         vrView = (
-            <Entity>
-              <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
-
-              <a-sky id="image-360" radius="10" src={'#'+this.props.router.location.pathname}></a-sky>
-
-              <Entity light={{type: 'ambient', color: '#888'}}/>
-              <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
-              <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
-            </Entity>
+            <Image router={this.props.router} /> 
             );
       } 
         /*
@@ -192,14 +191,7 @@ class App extends React.Component {
               >
               </a-cursor>
          */
-        const images = this.state.pics.map((pic) => {
-          const picId = pic.imageLink.split('/').reverse()[0];
-          return (
-            <img id={picId}
-            crossOrigin="anonymous" 
-            src={pic.imageLink} />
-          )
-        })
+        
       return (
           <Scene >
             <Camera>
@@ -213,14 +205,12 @@ class App extends React.Component {
 
             <a-assets>
               {images}
-
-              <img id="lobby1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
+              <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
               <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
               <img id="hr" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/hr.JPG" />
-              <img id="hrlogo" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/HR.png" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/exit.png" />
 
             </a-assets>
