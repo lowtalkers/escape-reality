@@ -84,7 +84,7 @@ app.post('/upload', (req, res) => {
     } else {
       s3Bucket.putObject({
         Bucket: 'vrpics',
-        Key: 'resized-' + req.body.fileName,
+        Key: 'resized-' + fileName,
         Body: imageBuffer.resized,
         ContentType: 'image/' + imgType
       }, (err, data) => {
