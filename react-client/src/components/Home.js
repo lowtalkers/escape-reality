@@ -25,16 +25,16 @@ export default props => {
     } else if (index > -1 && index <= 9) {
       row = 1.1
     }
+    var imageName = pic.title.split('.')[0]
     return (
       <Entity 
       rotation={rot} 
       position={"0 "+ row +" -2"} 
-      material={{src: ('#'+pic.title.split('.')[0]), color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} 
+      material={{src: ('#'+imageName), color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} 
       geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" 
-      onClick={() => props.router.replace('/' + pic.title.split('.')[0])} />
+      onClick={() => props.router.replace('/' + imageName)} />
     )
   });
-  console.log(pics)
   return (
     <Entity>
 

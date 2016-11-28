@@ -68,7 +68,7 @@ class App extends React.Component {
         error: (error) => {
           console.error('error in fetch paragraph', error);
           $('.error').show();
-        },
+        }
       });
     };
 
@@ -142,10 +142,17 @@ class App extends React.Component {
     let self = this;
     var vrView;
     const images = this.state.pics.map((pic) => {
+      var imageName = pic.title.split('.')[0]
+      var resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + imageName
                     return (
-                      <img id={pic.title.split('.')[0]}
-                      crossOrigin="anonymous"
+                      <div>
+                      <img id={imageName}
+                      crossOrigin="anonymous" 
                       src={pic.imageLink} />
+                      <img id={'resized-' + imageName}
+                      crossOrigin="anonymous" 
+                      src={resizedImageLink} />
+                      </div>
                     )
                   });
     if (this.props.router.location.pathname.indexOf('/signup') >= 0) {
@@ -175,10 +182,8 @@ class App extends React.Component {
             pics={this.state.pics} />
           );
       } else {
-        vrView = (
-            <Image router={this.props.router} />
-            );
-      }
+        vrView = <Image router={this.props.router} /> 
+      } 
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
           For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
@@ -193,7 +198,7 @@ class App extends React.Component {
          */
 
       return (
-          <Scene >
+          <a-scene canvas="height: 100; width: 100">
             <Camera>
               <a-cursor
                 animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
@@ -219,7 +224,7 @@ class App extends React.Component {
 
             </a-assets>
             {vrView}
-          </Scene>
+          </a-scene>
         );
     }
   }
