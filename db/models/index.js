@@ -30,11 +30,11 @@ Bookmark.belongsToMany(User, {
 
 //Photos and Users
 User.hasMany(Photo, {
-  foreignKey: 'user_id'
+  foreignKey: 'poster_id'
 });
 
 Photo.belongsTo(User, {
-  foreignKey: 'user_id'
+  foreignKey: 'poster_id'
 });
 
 // Comments
