@@ -12,7 +12,7 @@ var create = function(props, callback) {
 
 var findAll = function(callback) {
   console.log('in find all photo controller');
-  Photo.findAll({ limit: 10, order: [['createdAt', 'DESC']]}).then(function(photos) {
+  Photo.findAll({ limit: 30, order: [['createdAt', 'DESC']]}).then(function(photos) {
     callback(photos);
   }).catch(function(err) {
     console.log(err);
