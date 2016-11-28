@@ -27,6 +27,7 @@ class Berlin extends React.Component {
       showPlatz: false,
       showStation: false,
       showBahn: false,
+      currentPhrase: '',
       allTitles: ['Potsdamer_Platz', 'Berlin_Potsdamer_Platz_station', 'Deutsche_Bahn']
     };
   }
@@ -43,6 +44,25 @@ class Berlin extends React.Component {
     return (
       <Entity>
           <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -4" onClick={() => self.props.router.replace('/lobby')}></a-image>
+
+          <a-image id="commentStart" src="#commentStart" geometry="height: 0.3; width: 0.3" position="0 1 -3" onClick={()=> {if (annyang) {
+                      var commands = {
+                      'hello': function() { alert('Hello world!'); }
+                    };
+
+                      annyang.addCallback('result', function(phrases) {
+                      console.log(phrases, phrases[0]);
+                      alert(phrases[0]);
+                    });
+
+                      annyang.addCommands(commands);
+                      annyang.start();
+                    }}}></a-image>
+
+          <a-image id="commentStop" src="#commentStop" geometry="height: 0.3; width: 0.3" position="-0.06 0.62 -3" onClick={()=> {annyang.abort();}}></a-image>
+
+          <a-image id="like" src="#like" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => self.props.router.replace('/lobby')}></a-image>
+
 
           <RingTag
               id='potsdamer-platz-tag'
