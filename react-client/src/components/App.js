@@ -219,7 +219,6 @@ class App extends React.Component {
               <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/resized-Nov27,2016like.png" />
 
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
-              <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/exit.png" />
 
             </a-assets>
