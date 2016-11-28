@@ -25,24 +25,6 @@ const getAllPhotos = () => {
   });
 };
 
-const savePhoto = (data) => {
-  var link = 'https://s3.amazonaws.com/' + data.Bucket + '/' + data.Key;
-  console.log(link);
-  $.post({
-    url: '/addPic',
-    data: JSON.stringify({title: data.Key, imageLink: link, description: picDescrip}),
-    contentType: 'application/json',
-    success: (data) => {
-      console.log(data);
-      getAllPhotos();
-    },
-    error: (error) => {
-      console.error('error in get upload', error);
-      $('.error').show();
-    },
-  });
-};
-
 const uploadFile = () => {
 
   $(function () {
@@ -66,13 +48,12 @@ const uploadFile = () => {
       currentImgs.push(fileName);
       $.post({
         url: '/upload',
-        data: JSON.stringify({fileName: fileName, filePath: filePath}),
+        data: JSON.stringify({fileName: fileName, filePath: filePath, description: picDescrip}),
         contentType: 'application/json',
         success: (data) => {
           console.log(data);
           $("#fileUp").val('');
           vex.dialog.alert('Image uploaded!');
-          savePhoto(data);
         },
         error: (error) => {
           console.error('error in get upload', error);

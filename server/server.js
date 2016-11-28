@@ -62,6 +62,7 @@ app.post('/upload', (req, res) => {
   // console.log(req.body.fileName);
   let fileName = file[0] + date;
 
+
   const data = {
     Bucket: 'vrpics',
     Key: fileName,
@@ -69,8 +70,10 @@ app.post('/upload', (req, res) => {
     ContentType: 'image/' + imgType
   };
 
+  let imgLink = 'https://s3.amazonaws.com/' + data.Bucket + '/' + fileName;
+
   sharp(imageBuffer.data)
-    .resize(400, 400)
+    .resize(512, 512)
     .toBuffer()
     .then( data => {
       imageBuffer.resized = data;
@@ -97,6 +100,15 @@ app.post('/upload', (req, res) => {
       console.log('succesfully uploaded the image!');
     }
   });
+
+  userController.findOne({where: {email: req.session.email}}, user => {
+   photoController.create({title: fileName, imageLink: imgLink, description: req.body.description}, photo => {
+      photo.setUser(user);
+      console.log(photo);
+      res.send('Added!');
+    })
+  });
+
   res.status(200).send(data);
 });
 
@@ -198,16 +210,6 @@ app.get('/allBookmarks', (req, res) => {
     user.getBookmarks().then(bookmarks => {
       res.send(bookmarks);
     });
-  });
-});
-
-app.post('/addPic', (req, res) => {
-  userController.findOne({where: {email: req.session.email}}, user => {
-   photoController.create(req.body, photo => {
-      photo.setUser(user);
-      console.log(photo);
-      res.send('Added!');
-    })
   });
 });
 
