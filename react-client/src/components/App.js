@@ -144,7 +144,7 @@ class App extends React.Component {
     const images = this.state.pics.map((pic) => {
                     return (
                       <img id={pic.title.split('.')[0]}
-                      crossOrigin="anonymous" 
+                      crossOrigin="anonymous"
                       src={pic.imageLink} />
                     )
                   });
@@ -176,9 +176,9 @@ class App extends React.Component {
           );
       } else {
         vrView = (
-            <Image router={this.props.router} /> 
+            <Image router={this.props.router} />
             );
-      } 
+      }
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
           For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
@@ -191,7 +191,7 @@ class App extends React.Component {
               >
               </a-cursor>
          */
-        
+
       return (
           <Scene >
             <Camera>
@@ -204,13 +204,17 @@ class App extends React.Component {
 
 
             <a-assets>
+
               {images}
               <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
+              <img id="commentStart" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Nov24%2C2016start.png" />
+              <img id="commentStop" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Nov24%2C2016stop.png" />
+              <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/resized-Nov27,2016like.png" />
+
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
               <img id="rome" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/italy-rome-piazza-navona_4000.jpg" />
-              <img id="hr" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/hr.JPG" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/exit.png" />
 
             </a-assets>
