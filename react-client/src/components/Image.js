@@ -44,7 +44,8 @@ export default props => {
       geometry="height:5;primitive:sphere;radius:7.5;segmentsRadial:48;thetaLength:360;openEnded:true;thetaStart:0" 
       onRaycasterIntersected={(obj) => {commentCoords = obj.detail.intersection.point}}
       onClick={() => {
-        console.log(commentCoords)
+        console.log(commentCoords);
+        props.changeCommentMode();
       }} />
 
     <Entity light={{type: 'ambient', color: '#888'}}/>
