@@ -48,6 +48,7 @@ class App extends React.Component {
       profilePic: '',
       bigPic: '',
       pics: []
+      addCommentMode: false
     };
   }
 
@@ -146,6 +147,10 @@ class App extends React.Component {
     }
   }
 
+  componentDidUpdate () {
+    console.log('After rendering, current comment mode:', this.state.addCommentMode)
+  }
+
   /** This function when invoked will submit email and password. */
   submitFn() {
     /** Grab email and password values from fields */
@@ -211,6 +216,12 @@ class App extends React.Component {
     });
   }
 
+  changeCommentMode () {
+    this.setState({
+      addCommentMode: !this.state.addCommentMode
+    })
+  }
+
   render () {
     let self = this;
     let vrView = '';
@@ -263,8 +274,14 @@ class App extends React.Component {
             changeBigPic={this.changeBigPic.bind(this)} />
           );
       } else {
-        vrView = <Image bigPic={this.state.bigPic} commentSubmitFn={this.commentSubmitFn.bind(this)} likeSubmitFn={this.likeSubmitFn.bind(this)} changeBigPic={this.changeBigPic.bind(this)} router={this.props.router} />
+        vrView = <Image 
+                  bigPic={this.state.bigPic} 
+                  commentSubmitFn={this.commentSubmitFn.bind(this)} 
+                  likeSubmitFn={this.likeSubmitFn.bind(this)} 
+                  changeBigPic={this.changeBigPic.bind(this)} 
+                  router={this.props.router} />
       }
+
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
           For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
