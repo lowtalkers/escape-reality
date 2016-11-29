@@ -56,9 +56,9 @@ app.post('/upload', (req, res) => {
   const imageBuffer = utils.decodeBase64Image(req.body.filePath);
 
   console.log(req.body.fileName);
-  var date = new Date().getTime()// fecha.format(new Date(), 'mediumDate').replace(/\s+/g, '');
+  var date = new Date().getTime(); // fecha.format(new Date(), 'mediumDate').replace(/\s+/g, '');
   let file = req.body.fileName.split('.');
-  let imgType = file[1]
+  let imgType = file[1];
   // console.log(req.body.fileName);
   let imgName = file[0] + date;
 
@@ -105,11 +105,10 @@ app.post('/upload', (req, res) => {
    photoController.create({title: imgName + '.' + imgType, imageLink: imgLink, description: req.body.description}, photo => {
       photo.setUser(user);
       console.log(photo);
-      res.send('Added!');
-    })
+      res.status(200).send(data);
+    });
   });
 
-  res.status(200).send(data);
 });
 
 
@@ -211,9 +210,20 @@ app.get('/addBookmark', (req, res) => {
 app.get('/allBookmarks', (req, res) => {
   userController.findOne({where: {email: req.session.email}}, user => {
     console.log(user);
+    // Sequelize join tables get automatic functions
+    // between models, that's how getBookmarks() is available
+    // even though it's not a function on the User model
     user.getBookmarks().then(bookmarks => {
       res.send(bookmarks);
     });
+  });
+});
+
+app.get('/getUserPic', (req, res) => {
+  userController.findOne({where: {email: req.session.email}}, user => {
+    const pic = user.get('profilePic');
+    console.log('🍊  profile pic is', pic);
+    res.send(pic);
   });
 });
 
