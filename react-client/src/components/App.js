@@ -49,7 +49,7 @@ class App extends React.Component {
       bigPic: '',
       pics: [],
       addCommentMode: false,
-      currentComments: []
+      currentComments: [{x: 0, y: 2, z: -3}]
     };
   }
 
@@ -223,10 +223,10 @@ class App extends React.Component {
     })
   }
 
-  addComment () {
+  addComment (coordinates) {
     this.setState({
       // currentComments: (this.state.currentComments).push('New comment')
-      currentComments: this.state.currentComments.concat(['New comment'])
+      currentComments: this.state.currentComments.concat([coordinates])
     });
     // console.log('currentComments:', this.state.currentComments)
   }
@@ -239,7 +239,7 @@ class App extends React.Component {
           id='mappedPlane'
           geometry='primitive: plane; height: 1; width: 1'
           material={{color: 'black'}}
-          position={`0 ${(idx + 1) * 2} -3`}
+          position={`${comment.x} ${comment.y} ${comment.z}`}
           rotation='0 0 0'
         >
         </Entity>
