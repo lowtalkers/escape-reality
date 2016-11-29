@@ -44,7 +44,7 @@ const uploadFile = () => {
           }),
           contentType: 'application/json',
           success: (data) => {
-            console.log(data);
+            console.log('Found user\'s uploaded photo from DB', data);
             $('#fileUp').val('');
             vex.dialog.alert('Image uploaded!');
           },
