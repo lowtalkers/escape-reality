@@ -2,13 +2,13 @@ const bcrypt = require('bcrypt-nodejs');
 const Promise = require('bluebird');
 const User = require('../models/index.js').User;
 
-const comparePassword = (user, attemptedPassword, callback) => {
+exports.comparePassword = (user, attemptedPassword, callback) => {
   bcrypt.compare(attemptedPassword, user.get('password'), (err, isMatch) => {
     callback(isMatch);
   });
 };
 
-const create = (props, callback) => {
+exports.create = (props, callback) => {
   User.build(props)
   .save()
   .then(user => {
@@ -19,7 +19,7 @@ const create = (props, callback) => {
   });
 };
 
-const findAll = callback => {
+exports.findAll = callback => {
   User.findAll()
   .then(users => {
     callback(users);
@@ -29,25 +29,25 @@ const findAll = callback => {
   });
 };
 
-const findOne = (query, callback) => {
+exports.findOne = (query, callback) => {
   User.findOne(query)
   .done(user => {
     callback(user);
   });
 };
 
-const isLoggedIn = req => {
+exports.isLoggedIn = req => {
   return req.session ? !!req.session.email : false;
 };
 
 exports.checkAuth = (req, res, next) => {
-  if (!isLoggedIn(req) && 
+  if (!exports.isLoggedIn(req) && 
       !(req.url.indexOf('/signin') >= 0) && 
       !(req.url.indexOf('/signup') >= 0)) {
     console.log('Redirecting to /signin');
     res.redirect('/signin');
   } else {
-    console.log('Executing next() after checkAuth()');
+    console.log('Executing next() after checkAuth() passed');
     next();
   }
 };
@@ -59,9 +59,3 @@ exports.createSession = (req, res, newUser, response) => {
     res.send(response);
   });
 };
-
-
-exports.comparePassword = comparePassword;
-exports.create = create;
-exports.findAll = findAll;
-exports.findOne = findOne;
