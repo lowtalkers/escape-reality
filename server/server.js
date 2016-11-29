@@ -13,6 +13,8 @@ const session = require('express-session');
 const userController = require('../db/controllers/users.js');
 const bookmarkController = require('../db/controllers/bookmarks.js');
 const photoController = require('../db/controllers/photos.js');
+const likeController = require('../db/controllers/likes.js');
+const commentController = require('../db/controllers/comments.js');
 
 const port = process.env.NODE_PORT;
 const secret = process.env.SESSION_SECRET;
@@ -108,7 +110,6 @@ app.post('/upload', (req, res) => {
       res.status(200).send(data);
     });
   });
-
 });
 
 
@@ -233,6 +234,31 @@ app.get('/topPics', (req, res) => {
     res.send(photos);
   });
 });
+
+app.post('/like', (req, res) => {
+
+
+  userController.findOne({where: {email: req.session.email}}, user => {
+    likeController.findOne({where: {user_id: user.get('id')}}, like => {
+      like.set('like', true);
+      res.status(200).send(like);
+    })
+  });
+});
+
+app.post('/comment', (req, res) => {
+
+
+  userController.findOne({where: {email: req.session.email}}, user => {
+    commentController.create({title: imgName + '.' + imgType, imageLink: imgLink, description: req.body.description}, comment => {
+      photo.setUser(user);
+      console.log('photo');
+      res.status(200).send(data);
+    })
+  });
+});
+
+
 
 app.use(express.static(path.join(__dirname, '../react-client')));
 
