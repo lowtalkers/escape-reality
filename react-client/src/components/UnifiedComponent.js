@@ -67,14 +67,14 @@ if (props.ternary) {
             id="pyramidTextPlane"
             hidePlane={props.hidePlane}
 
-            position="-4.34 2.22 6.83"
+            position={props.position}
             rotation="8.02 135.22 -1.15"
 
             scale={props.scale}
             header={props.header}
             wikiName={props.wikiName}
             headerAdjust={props.headerAdjust} // lower moves it to the left, higher to the right
-            text={() => props.text()}
+            text={props.text}
             textAdjust={props.textAdjust} //lower moves this down, higher moves this up
             imageSrc={props.imageSrc}
           />

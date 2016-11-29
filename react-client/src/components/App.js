@@ -25,6 +25,7 @@ import Rome from './Rome';
 import Hack from './Hack';
 import TextPlane from './TextPlane';
 import RingTag from './RingTag';
+import UnifiedComponent from './UnifiedComponent';
 
 import SignUp from './signInUpComponents/signup.jsx';
 import SignIn from './signInUpComponents/signin.jsx';
@@ -236,12 +237,22 @@ class App extends React.Component {
     let self = this;
     return (
       self.state.currentComments.map((comment, idx) => (
-        <RingTag
-          // clickFunction={() => console.log('Jellyfish ATTACK!!!')}
-          clickFunction={() => self.setState({showComment: true})}
-          id='mappedTag'
+
+        <UnifiedComponent 
+          clickFunction={() => {
+            self.setState({showComment: true});
+          }}
           position={`${comment.x} ${comment.y} ${comment.z}`}
-          rotation='0 0 0'
+          rotation="0 0 0"
+          hidePlane={() => self.setState({showComment: false})}
+          scale='0 0 0'
+          header='Louvre Pyramid'
+          wikiName='Louvre_Pyramid'
+          headerAdjust='-1.5' // lower moves it to the left, higher to the right
+          text= {`'Cour Napolon', or Napoleon's Courtyard, is named after Napoleon III, under whose rule the Louvre Palace underwent several structural changes to its design. The nephew and heir of Napoleon I, he was the first President of France to be elected by a direct popular vote. He was blocked by the Constitution and Parliament from running for a second term, so he organized a coup d'état in 1851 and then took the throne as Napoleon III on 2 December 1852.`}
+          textAdjust='0' //lower moves this down, higher moves this up
+          imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
+          ternary={self.state.showComment}
         />
       ))
     )
@@ -355,6 +366,7 @@ class App extends React.Component {
             
             {this.renderComments()} 
 
+{/*
             {self.state.showComment?
 
                       <TextPlane 
@@ -376,6 +388,7 @@ class App extends React.Component {
 
                       null
             }
+*/}
 
           </Scene>
         );
