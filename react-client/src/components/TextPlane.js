@@ -60,6 +60,7 @@ export default props => {
   //make sure main text doesn't overflow beyond component parameters
  let reduceMainTextSize = (text) => {
    let output = null;
+   console.log('reduceMainTextSize text:', text)
    if (text.length >= 500) {
      text = text.slice(0, text.length -1);
      let finalPeriod = text.lastIndexOf('. ')
