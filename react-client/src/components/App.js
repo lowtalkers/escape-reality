@@ -117,21 +117,26 @@ class App extends React.Component {
   }
 
   changeProfilePic() {
-   $.get({
-     url: '/getUserPic',
-     success: (picUrl) => {
-       console.log('got userpic from server:', picUrl);
-       if (picUrl) {
-         this.setState({
-          profilePic: picUrl
-         });
-       }
-     },
-     error: (error) => {
-       console.error('error in get userPic', error);
-       $('.error').show();
-     },
-   });
+    $.get({
+      url: '/getUserPic',
+      success: (picUrl) => {
+        if (picUrl) {
+          this.setState({
+            profilePic: picUrl
+          });
+        }
+        if (!picUrl) { // picUrl is null on account creation, so give a default pic
+          this.setState({
+            profilePic: 'https://s3.amazonaws.com/vrpics/default-userpic_256x256.png'
+          });
+        }
+        console.log('Got userpic from server:', this.state.profilePic);
+      },
+      error: (error) => {
+        console.error('Error in get userPic', error);
+        $('.error').show();
+      },
+    }); 
   }
 
   componentDidMount () {
@@ -147,14 +152,14 @@ class App extends React.Component {
     /** Grab email and password values from fields */
     const email = this.state.email;
     const password = this.state.password;
-    console.log(email);
+    console.log('email address is', email);
     /** Submit email and password for verification */
     $.post({
       url: this.props.router.location.pathname,
       contentType: 'application/json',
       data: JSON.stringify({email: email, password: password}),
       success: (data) => {
-        console.log('Success!!!!!', data, data.auth);
+        console.log('Sucessful authentication', data, data.auth);
         if (data.auth) {
           this.props.router.replace('/dashboard');
         } else if (data === 'User exists!') {
