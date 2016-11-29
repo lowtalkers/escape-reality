@@ -32,7 +32,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
-const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/lobby'];
+const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/lobby', 'getUserPic'];
 
 for (const route of routes) {
   app.get(route, userController.checkAuth, (req, res) => {
@@ -104,9 +104,14 @@ app.post('/upload', (req, res) => {
   });
 
   userController.findOne({where: {email: req.session.email}}, user => {
-   photoController.create({title: imgName + '.' + imgType, imageLink: imgLink, description: req.body.description}, photo => {
+    photoController.create({
+      title: imgName + '.' + imgType, 
+      imageLink: imgLink, 
+      description: req.body.description
+    }, 
+    photo => {
       photo.setUser(user);
-      console.log(photo);
+      console.log('Found user\'s uploaded photo in DB', photo);
       res.status(200).send(data);
     });
   });
