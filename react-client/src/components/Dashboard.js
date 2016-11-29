@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 import $ from 'jquery';
-var fecha = require('fecha');
-var vex = require('vex-js');
+
+const fecha = require('fecha');
+const vex = require('vex-js');
+
 vex.registerPlugin(require('vex-dialog'));
 vex.defaultOptions.className = 'vex-theme-os';
 
-var fileName;
-var filePath;
-var picDescrip;
-var currentImgs = [];
-
+let fileName = '';
+let filePath = '';
+let picDescrip = '';
+let currentImgs = [];
 
 const getAllPhotos = () => {
   console.log('calling')
@@ -27,59 +28,63 @@ const getAllPhotos = () => {
 };
 
 const uploadFile = () => {
-
   $(function () {
-    $("#fileUp").change(function () {
+    const imageIsLoaded = e => {
+      $('#myImg').attr('src', e.target.result);
+      filePath = e.target.result;
+
+      if (!currentImgs.includes(fileName)) {
+        currentImgs.push(fileName);
+        $.post({
+          url: '/upload',
+          data: JSON.stringify({
+            fileName: fileName,
+            filePath: filePath,
+            description: picDescrip
+          }),
+          contentType: 'application/json',
+          success: (data) => {
+            console.log(data);
+            $('#fileUp').val('');
+            vex.dialog.alert('Image uploaded!');
+          },
+          error: (error) => {
+            console.error('error in get upload', error);
+            $('.error').show();
+          },
+        });
+      }
+    };
+
+    $('#fileUp').change(function () {
       if (this.files && this.files[0]) {
-        var reader = new FileReader();
-        picDescrip = $("#description").val();
-        fileName = this.files[0].name
+        const reader = new FileReader();
+        picDescrip = $('#description').val();
+        fileName = this.files[0].name;
         console.log(fileName);
         reader.onload = imageIsLoaded;
         reader.readAsDataURL(this.files[0]);
       }
     });
   });
-
-  function imageIsLoaded(e) {
-    $('#myImg').attr('src', e.target.result);
-    filePath = e.target.result;
-
-    if (!currentImgs.includes(fileName)) {
-      currentImgs.push(fileName);
-      $.post({
-        url: '/upload',
-        data: JSON.stringify({fileName: fileName, filePath: filePath, description: picDescrip}),
-        contentType: 'application/json',
-        success: (data) => {
-          console.log(data);
-          $("#fileUp").val('');
-          vex.dialog.alert('Image uploaded!');
-        },
-        error: (error) => {
-          console.error('error in get upload', error);
-          $('.error').show();
-        },
-      });
-    }
-  };
-}
+};
 
 const signOut = () => {
   $.get({
     url: '/signOut',
     success: (data) => {
-      console.log(data)
+      console.log(data);
     },
     error: (error) => {
       console.error('error in get bookmarks', error);
       $('.error').show();
     },
   });
-}
+};
 
 export default props => {
   uploadFile();
+
   return (
     <div>
       <Link to="/bookmarks">
@@ -101,10 +106,15 @@ export default props => {
       </div>
 
       <Link to="/signin">
-        <button onClick={() => {signOut()}}>
+        <button onClick={() => { signOut(); }}>
           <div>Sign Out</div>
         </button>
       </Link>
+
+      <div>
+        <p>Profile Pic</p>
+        <img src={props.profilePic} width="200" height="200" /> 
+      </div>
     </div>
   );
 };

@@ -46,8 +46,9 @@ class App extends React.Component {
     this.state = {
       email: '',
       password: '',
-      pics: [],
-      bigPic: ''
+      profilePic: '',
+      bigPic: '',
+      pics: []
     };
   }
 
@@ -105,8 +106,8 @@ class App extends React.Component {
     $.get({
       url: '/topPics',
       success: (data) => {
-        console.log(data);
-        this.setState({pics: data})
+        console.log('got topPics from server:', data);
+        this.setState({pics: data});
       },
       error: (error) => {
         console.error('error in get upload', error);
@@ -115,8 +116,30 @@ class App extends React.Component {
     });
   }
 
+  changeProfilePic() {
+   $.get({
+     url: '/getUserPic',
+     success: (picUrl) => {
+       console.log('got userpic from server:', picUrl);
+       if (picUrl) {
+         this.setState({
+          profilePic: picUrl
+         });
+       }
+     },
+     error: (error) => {
+       console.error('error in get userPic', error);
+       $('.error').show();
+     },
+   }); 
+  }
+
   componentDidMount () {
     this.getAllPhotos();
+    if (this.props.router.location.pathname === '/dashboard') {
+      console.log('🍊  running changeProfilePic');
+      this.changeProfilePic();
+    }
   }
 
   /** This function when invoked will submit email and password. */
@@ -185,7 +208,11 @@ class App extends React.Component {
           />
         );
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
-      return <Dashboard />
+      return (
+              <Dashboard 
+                profilePic = {this.state.profilePic}
+              />
+      );
 
     } else {
       if (this.props.router.location.pathname.indexOf('/lobby') >= 0) {
