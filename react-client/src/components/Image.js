@@ -12,15 +12,26 @@ import Text from './Text';
 import Sky from './Sky';
 import Plane from './Plane';
 
-export default props => (
-
-  <Entity>
-    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 0" onClick={() => {props.router.replace('/lobby'); props.changeBigPic('')}}></a-image>
+export default props => {
+  var commentCoords;
+  return ( <Entity>
+    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic('')}}></a-image>
 
     <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
+
+    <Entity 
+      rotation="0 180 0"
+      position="0 0 0"
+      material={{opacity: '0', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} 
+      geometry="height:5;primitive:sphere;radius:7.5;segmentsRadial:48;thetaLength:360;openEnded:true;thetaStart:0" 
+      onRaycasterIntersected={(obj) => {commentCoords = obj.detail.intersection.point}}
+      onClick={() => {
+        console.log(commentCoords)
+      }} />
 
     <Entity light={{type: 'ambient', color: '#888'}}/>
     <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
     <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
   </Entity>
-);
+  );
+};
