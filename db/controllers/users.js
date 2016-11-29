@@ -8,7 +8,7 @@ const comparePassword = (user, attemptedPassword, callback) => {
   });
 };
 
-exports.create = (props, callback) => {
+const create = (props, callback) => {
   User.build(props)
   .save()
   .then(user => {
@@ -19,7 +19,7 @@ exports.create = (props, callback) => {
   });
 };
 
-exports.findAll = callback => {
+const findAll = callback => {
   User.findAll()
   .then(users => {
     callback(users);
@@ -29,14 +29,14 @@ exports.findAll = callback => {
   });
 };
 
-exports.findOne = (query, callback) => {
+const findOne = (query, callback) => {
   User.findOne(query)
   .done(user => {
     callback(user);
   });
 };
 
-exports.isLoggedIn = req => {
+const isLoggedIn = req => {
   return req.session ? !!req.session.email : false;
 };
 
@@ -60,3 +60,8 @@ exports.createSession = (req, res, newUser, response) => {
   });
 };
 
+
+exports.comparePassword = comparePassword;
+exports.create = create;
+exports.findAll = findAll;
+exports.findOne = findOne;
