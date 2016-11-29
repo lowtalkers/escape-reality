@@ -60,17 +60,17 @@ app.post('/upload', (req, res) => {
   let file = req.body.fileName.split('.');
   let imgType = file[1]
   // console.log(req.body.fileName);
-  let fileName = file[0] + date;
+  let imgName = file[0] + date;
 
 
   const data = {
     Bucket: 'vrpics',
-    Key: fileName,
+    Key: imgName + '.' + imgType,
     Body: imageBuffer.data,
     ContentType: 'image/' + imgType
   };
 
-  let imgLink = 'https://s3.amazonaws.com/' + data.Bucket + '/' + fileName;
+  let imgLink = 'https://s3.amazonaws.com/' + data.Bucket + '/' + imgName + '.' + imgType;
 
   sharp(imageBuffer.data)
     .resize(512, 512)
@@ -87,7 +87,7 @@ app.post('/upload', (req, res) => {
     } else {
       s3Bucket.putObject({
         Bucket: 'vrpics',
-        Key: 'resized-' + fileName,
+        Key: 'resized-' + imgName + '.' + imgType,
         Body: imageBuffer.resized,
         ContentType: 'image/' + imgType
       }, (err, data) => {
@@ -102,7 +102,7 @@ app.post('/upload', (req, res) => {
   });
 
   userController.findOne({where: {email: req.session.email}}, user => {
-   photoController.create({title: fileName, imageLink: imgLink, description: req.body.description}, photo => {
+   photoController.create({title: imgName + '.' + imgType, imageLink: imgLink, description: req.body.description}, photo => {
       photo.setUser(user);
       console.log(photo);
       res.send('Added!');

@@ -13,6 +13,7 @@ var currentImgs = [];
 
 
 const getAllPhotos = () => {
+  console.log('calling')
   $.get({
     url: '/topPics',
     success: (data) => {
