@@ -47,7 +47,7 @@ export default props => {
       onClick={() => {
         console.log(commentCoords);
         // props.changeCommentMode();
-        props.addComment();
+        props.addComment(commentCoords);
       }} />
 
     <Entity light={{type: 'ambient', color: '#888'}}/>
