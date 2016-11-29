@@ -24,6 +24,7 @@ import Milan from './Milan';
 import Rome from './Rome';
 import Hack from './Hack';
 import TextPlane from './TextPlane';
+import RingTag from './RingTag';
 
 import SignUp from './signInUpComponents/signup.jsx';
 import SignIn from './signInUpComponents/signin.jsx';
@@ -32,7 +33,6 @@ import Dashboard from './Dashboard.js';
 import Bookmarks from './Bookmarks.js';
 import Home from './Home.js';
 import Image from './Image.js';
-
 
 /**
  * Creates a new App component.
@@ -49,7 +49,8 @@ class App extends React.Component {
       bigPic: '',
       pics: [],
       addCommentMode: false,
-      currentComments: [{x: 0, y: 2, z: -3}]
+      currentComments: [],
+      showComment: false
     };
   }
 
@@ -235,14 +236,13 @@ class App extends React.Component {
     let self = this;
     return (
       self.state.currentComments.map((comment, idx) => (
-        <Entity 
-          id='mappedPlane'
-          geometry='primitive: plane; height: 1; width: 1'
-          material={{color: 'black'}}
+        <RingTag
+          // clickFunction={() => console.log('Jellyfish ATTACK!!!')}
+          clickFunction={() => self.setState({showComment: true})}
+          id='mappedTag'
           position={`${comment.x} ${comment.y} ${comment.z}`}
           rotation='0 0 0'
-        >
-        </Entity>
+        />
       ))
     )
   }
@@ -354,6 +354,28 @@ class App extends React.Component {
             {vrView}
             
             {this.renderComments()} 
+
+            {self.state.showComment?
+
+                      <TextPlane 
+                        id="courtyardCard"
+                        hidePlane={() => self.setState({showComment: false})}
+
+                        position={`${self.state.currentComments[0].x} ${self.state.currentComments[0].y} ${self.state.currentComments[0].z}`}
+                        rotation="-2.86 53.86 2.86"
+                        
+                        scale='0 0 0'
+                        header='Napoleon Courtyard'
+                        headerAdjust='-1.5' // lower moves it to the left, higher to the right
+                        text= {`'Cour Napolon', or Napoleon's Courtyard, is named after Napoleon III, under whose rule the Louvre Palace underwent several structural changes to its design. The nephew and heir of Napoleon I, he was the first President of France to be elected by a direct popular vote. He was blocked by the Constitution and Parliament from running for a second term, so he organized a coup d'état in 1851 and then took the throne as Napoleon III on 2 December 1852.`}
+                        textAdjust='0' //lower moves this down, higher moves this up
+                        imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
+                      />
+
+                      :
+
+                      null
+            }
 
           </Scene>
         );
