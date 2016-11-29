@@ -47,8 +47,9 @@ class App extends React.Component {
       password: '',
       profilePic: '',
       bigPic: '',
-      pics: []
-      addCommentMode: false
+      pics: [],
+      addCommentMode: false,
+      currentComments: []
     };
   }
 
@@ -222,6 +223,30 @@ class App extends React.Component {
     })
   }
 
+  addComment () {
+    this.setState({
+      // currentComments: (this.state.currentComments).push('New comment')
+      currentComments: this.state.currentComments.concat(['New comment'])
+    });
+    // console.log('currentComments:', this.state.currentComments)
+  }
+
+  renderComments () {
+    let self = this;
+    return (
+      self.state.currentComments.map((comment, idx) => (
+        <Entity 
+          id='mappedPlane'
+          geometry='primitive: plane; height: 1; width: 1'
+          material={{color: 'black'}}
+          position={`0 ${(idx + 1) * 2} -3`}
+          rotation='0 0 0'
+        >
+        </Entity>
+      ))
+    )
+  }
+
   render () {
     let self = this;
     let vrView = '';
@@ -275,13 +300,17 @@ class App extends React.Component {
           );
       } else {
         vrView = <Image 
-                  bigPic={this.state.bigPic} 
-                  commentSubmitFn={this.commentSubmitFn.bind(this)} 
-                  likeSubmitFn={this.likeSubmitFn.bind(this)} 
-                  changeBigPic={this.changeBigPic.bind(this)} 
-                  router={this.props.router} />
-      }
+                    bigPic={this.state.bigPic} 
+                    commentSubmitFn={this.commentSubmitFn.bind(this)} 
+                    likeSubmitFn={this.likeSubmitFn.bind(this)} 
+                    changeBigPic={this.changeBigPic.bind(this)} 
+                    router={this.props.router} 
+                    changeCommentMode={this.changeCommentMode.bind(this)}
+                    currentComments={this.state.currentComments}
+                    addComment={this.addComment.bind(this)}
+                  />
 
+      } 
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
           For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
@@ -323,6 +352,9 @@ class App extends React.Component {
 
             </a-assets>
             {vrView}
+            
+            {this.renderComments()} 
+
           </Scene>
         );
     }

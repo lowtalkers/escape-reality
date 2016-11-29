@@ -37,6 +37,7 @@ export default props => {
 
     <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
 
+
     <Entity 
       rotation="0 180 0"
       position="0 0 0"
@@ -45,7 +46,8 @@ export default props => {
       onRaycasterIntersected={(obj) => {commentCoords = obj.detail.intersection.point}}
       onClick={() => {
         console.log(commentCoords);
-        props.changeCommentMode();
+        // props.changeCommentMode();
+        props.addComment();
       }} />
 
     <Entity light={{type: 'ambient', color: '#888'}}/>
