@@ -46,7 +46,8 @@ class App extends React.Component {
     this.state = {
       email: '',
       password: '',
-      pics: []
+      pics: [],
+      bigPic: ''
     };
   }
 
@@ -138,21 +139,23 @@ class App extends React.Component {
     });
   }
 
+  changeBigPic (val) {
+    this.setState({
+      bigPic: val
+    });
+  }
+
   render () {
     let self = this;
     var vrView;
+
     const images = this.state.pics.map((pic) => {
       var imageName = pic.title.split('.')[0]
-      var resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + imageName
+      var resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + pic.title
                     return (
-                      <div>
-                      <img id={imageName}
-                      crossOrigin="anonymous" 
-                      src={pic.imageLink} />
                       <img id={'resized-' + imageName}
                       crossOrigin="anonymous" 
                       src={resizedImageLink} />
-                      </div>
                     )
                   });
     if (this.props.router.location.pathname.indexOf('/signup') >= 0) {
@@ -179,10 +182,11 @@ class App extends React.Component {
         vrView = (
             <Home
             router={this.props.router}
-            pics={this.state.pics} />
+            pics={this.state.pics}
+            changeBigPic={this.changeBigPic.bind(this)} />
           );
       } else {
-        vrView = <Image router={this.props.router} /> 
+        vrView = <Image bigPic={this.state.bigPic} changeBigPic={this.changeBigPic.bind(this)} router={this.props.router} /> 
       } 
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
@@ -211,6 +215,8 @@ class App extends React.Component {
             <a-assets>
 
               {images}
+              <img id={this.state.bigPic.split('.')[0]} crossOrigin="anonymous" src={"https://s3.amazonaws.com/vrpics/"+this.state.bigPic} />
+              
               <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
