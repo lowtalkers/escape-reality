@@ -162,7 +162,7 @@ let addBookmark = (title) => {
         />
 
         {/* Main Body Text */}
-        <Entity bmfont-text={{align: 'left', width: '775', color: 'white', text: reduceMainTextSize(props.text())}} // Max character length = 500
+        <Entity bmfont-text={{align: 'left', width: '775', color: 'white', text: reduceMainTextSize(props.text)}} // Max character length = 500
           // position={adjustMainTextCoordinates(props.position, Width, Height)}
           position={`-0.35 ${props.textAdjust - 1.1} 0.1`}
           rotation='0 0 0'
