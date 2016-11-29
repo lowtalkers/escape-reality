@@ -89,7 +89,7 @@ class App extends React.Component {
   // getArticleName() {
 
 
-    
+
   // }
 
 
@@ -131,7 +131,7 @@ class App extends React.Component {
        console.error('error in get userPic', error);
        $('.error').show();
      },
-   }); 
+   });
   }
 
   componentDidMount () {
@@ -168,6 +168,36 @@ class App extends React.Component {
     });
   }
 
+  likeSubmitFn() {
+    console.log('in like submit function');
+    $.post({
+      url: '/like',
+      contentType: 'application/json',
+      data: JSON.stringify({}),
+      success: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        $('.error').show();
+      },
+    });
+  }
+
+  commentSubmitFn() {
+    console.log('in comment submit function');
+    $.post({
+      url: '/comment',
+      contentType: 'application/json',
+      data: JSON.stringify({}),
+      success: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        $('.error').show();
+      },
+    });
+  }
+
   changeBigPic (val) {
     this.setState({
       bigPic: val
@@ -183,7 +213,7 @@ class App extends React.Component {
       var resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + pic.title
                     return (
                       <img id={'resized-' + imageName}
-                      crossOrigin="anonymous" 
+                      crossOrigin="anonymous"
                       src={resizedImageLink} />
                     )
                   });
@@ -209,7 +239,7 @@ class App extends React.Component {
         );
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
       return (
-              <Dashboard 
+              <Dashboard
                 profilePic = {this.state.profilePic}
               />
       );
@@ -223,8 +253,8 @@ class App extends React.Component {
             changeBigPic={this.changeBigPic.bind(this)} />
           );
       } else {
-        vrView = <Image bigPic={this.state.bigPic} changeBigPic={this.changeBigPic.bind(this)} router={this.props.router} /> 
-      } 
+        vrView = <Image bigPic={this.state.bigPic} commentSubmitFn={this.commentSubmitFn.bind(this)} likeSubmitFn={this.likeSubmitFn.bind(this)} changeBigPic={this.changeBigPic.bind(this)} router={this.props.router} />
+      }
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
           For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
@@ -251,7 +281,9 @@ class App extends React.Component {
 
             <a-assets>
               {images}
+
               {bigPic}
+
               <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
