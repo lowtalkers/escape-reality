@@ -8,6 +8,9 @@ module.exports = (sequelize, Sequelize) => {
     },
     body: {
       type: Sequelize.STRING
+    },
+    coordinates: {
+      type: Sequelize.STRING
     }
   });
 
