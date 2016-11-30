@@ -132,6 +132,10 @@ class App extends React.Component {
       success: (data) => {
         console.log('got comment data from server:', data);
         if (data.length > 0) {
+          data = data.map(function(comment) {
+            var coords = comment.coordinates.split(' ');
+            return {x: coords[0], y: coords[1], z: coords[2], body: comment.body}
+          });
           this.setState({comments: data})          
         }
       },

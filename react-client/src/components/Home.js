@@ -17,19 +17,19 @@ export default props => {
     let pics = props.pics.map((pic, index) => {
     console.log(pic.title, index, pic.imageLink)
     const rot = '0 ' + (index * -35) + ' 0';
-    var row;
-    if (index >18 && index <= 27) {
-      row = -1.1;
-    } else if (index > 9 && index <= 18) {
-      row = 0;
-    } else if (index > -1 && index <= 9) {
-      row = 1.1;
-    }
+    // var row;
+    // if (index >18 && index <= 27) {
+    //   row = -1.1;
+    // } else if (index > 9 && index <= 18) {
+    //   row = 0;
+    // } else if (index > -1 && index <= 9) {
+    //   row = 1.1;
+    // }
     var imageName = pic.title.split('.')[0];
     return (
       <Entity
       rotation={rot}
-      position={"0 "+ row +" 0"}
+      position={"0 "+ ((index*-0.15)+0.5) +" 0"}
       material={{src: ('#resized-'+imageName), color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}}
       geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0"
       onClick={() => {
