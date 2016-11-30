@@ -43,8 +43,8 @@ export default props => {
   );
 */}
 
-if (props.ternary) {
-
+if (props.displayedComments.includes(props.commentID)) {
+  console.log('Yes', props.displayedComments)
   return ( 
 
   <Entity>
@@ -52,8 +52,8 @@ if (props.ternary) {
 
 
     <Entity ref="RingTag123">
-      <RingTag id="pyramidTag" 
-        clickFunction={(event) => props.clickFunction(event)}
+      <RingTag id="pyramidTag"
+        clickFunction={() => props.clickFunction()}
         position={props.position}
         rotation="8.02 135.22 -1.15"
       >
@@ -63,7 +63,8 @@ if (props.ternary) {
 
         
           <TextPlane 
-            planeClick={() => console.log('Current ref object id is:', self.refs)}
+            planeClick={() => console.log('displayedComments is currentlyyyy:', props.displayedComments)}
+
             id="pyramidTextPlane"
             hidePlane={props.hidePlane}
 

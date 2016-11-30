@@ -54,7 +54,8 @@ class App extends React.Component {
       addCommentMode: false,
       comments: [], //[{x: 1.24324324, y: 2, z:3, id: 0, show: false }, {xyz, 1: false}]
       currentComment: {},
-      commentCounter: 0
+      commentCounter: 0,
+      displayedComments: []
     };
   }
 
@@ -230,12 +231,32 @@ class App extends React.Component {
 
   addComment (coordinates) {
     counter++;
+    let commentObject = {
+      id: counter,
+      text: '(Placeholder text)',
+    };
+    let newObject = Object.assign(commentObject, coordinates);
+    console.log('addComment newObject:', newObject)
     this.setState({
       // comments: (this.state.comments).push('New comment')
-      comments: this.state.comments.concat([coordinates]),
+      comments: this.state.comments.concat([commentObject]),
       currentComment: coordinates
     });
     // console.log('comments:', this.state.comments)
+  }
+
+  showComment (commentID) {
+    this.setState({
+      displayedComments: this.state.displayedComments.concat([commentID])
+    })
+  }
+
+  hideComment (commentID) {
+    let indexToHide = this.state.displayedComments.indexOf(commentID);
+    console.log('Inside hideComment function, before setting state our displayedComments array is:', this.state.displayedComments, 'our commentID is:', commentID, 'and our indexToHide is:', indexToHide, '. The new array after splicing will be:', this.state.displayedComments.splice(indexToHide, 1));
+    this.setState({
+      displayedComments: this.state.displayedComments.splice(indexToHide, 1)
+    })
   }
 
   renderComments () {
@@ -243,16 +264,20 @@ class App extends React.Component {
     return (
       self.state.comments.map((comment, idx) => {
         return (
-        <UnifiedComponent 
-          clickFunction={(event) => {
+        <UnifiedComponent
+          clickFunction={() => {
             console.log('Onclick event is currently:', event)
-
-            self.setState({showComment: true});
+            console.log('ID ')
+            self.showComment(idx);
           }}
-          // id: {idx}
+          commentID= {idx}
           position={`${comment.x} ${comment.y} ${comment.z}`}
           rotation="0 0 0"
-          hidePlane={() => self.setState({showComment: false})}
+          hidePlane={() => {
+            // console.log('Hiding plane now... Data is:')
+            // self.setState({showComment: false});
+            self.hideComment(idx);
+          }}
           scale='0 0 0'
           header='Louvre Pyramid'
           wikiName='Louvre_Pyramid'
@@ -260,8 +285,7 @@ class App extends React.Component {
           text= {`'Cour Napolon', or Napoleon's Courtyard, is named after Napoleon III, under whose rule the Louvre Palace underwent several structural changes to its design. The nephew and heir of Napoleon I, he was the first President of France to be elected by a direct popular vote. He was blocked by the Constitution and Parliament from running for a second term, so he organized a coup d'état in 1851 and then took the throne as Napoleon III on 2 December 1852.`}
           textAdjust='0' //lower moves this down, higher moves this up
           imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
-          ternary={self.state.showComment}
-          commentID={counter}
+          displayedComments={self.state.displayedComments}
         />
       )})
     )
