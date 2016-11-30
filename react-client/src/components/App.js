@@ -41,7 +41,7 @@ import Image from './Image.js';
  */
 
 let counter = -1;
-
+let gCoordinates = '';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -226,7 +226,7 @@ class App extends React.Component {
   }
 
   commentSubmitFn(phrase, coordinates) {
-    console.log('in comment submit function; current phrase is:', phrase);
+    console.log('in comment submit function; current phrase is:', phrase, '🦄🦄🦄🦄🦄🦄 coords', coordinates);
     $.post({
       url: '/comment',
       contentType: 'application/json',
@@ -241,23 +241,27 @@ class App extends React.Component {
   }
 
   voiceComment(coordinates) {
-    console.log('voice activated');
     var self = this;
     if (annyang) {
+      console.log('🐞🐞🐞🐞🐞voice activated in callback', coordinates);
+      
       console.log('in annyang!!!');
       annyang.start();
+      gCoordinates = coordinates;
+
       annyang.addCallback('result', function(phrases) {
         console.log('Voice recording phrases:', phrases, 'first result:', phrases[0]);
-        self.stopVoiceComment(phrases[0], coordinates);
+        
+        self.stopVoiceComment(phrases[0], gCoordinates);
         let commentObject = {
           body: phrases[0]
         };
-        let newObject = Object.assign(commentObject, coordinates); // {x:0 }
+        let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
         console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
         self.setState({
           comments: self.state.comments.concat([newObject])
         });
-      });
+      }, this);
     }
   }
 
@@ -299,6 +303,13 @@ class App extends React.Component {
     this.setState({
       displayedComments: this.state.displayedComments.splice(indexToHide, 1)
     })
+  }
+
+  clearComments () {
+    console.log('clearing comments!!!!!')
+    this.setState({
+      comments: []
+    });
   }
 
   renderComments () {
@@ -398,6 +409,7 @@ class App extends React.Component {
                     addComment={this.addComment.bind(this)}
                     voiceComment={this.voiceComment.bind(this)}
                     stopVoiceComment={this.stopVoiceComment.bind(this)}
+                    clearComments={this.clearComments.bind(this)}
                   />
 
       }
