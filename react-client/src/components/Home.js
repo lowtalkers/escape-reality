@@ -27,11 +27,11 @@ export default props => {
     }
     var imageName = pic.title.split('.')[0];
     return (
-      <Entity 
-      rotation={rot} 
-      position={"0 "+ row +" 0"} 
-      material={{src: ('#resized-'+imageName), color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}} 
-      geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0" 
+      <Entity
+      rotation={rot}
+      position={"0 "+ row +" 0"}
+      material={{src: ('#resized-'+imageName), color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}}
+      geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0"
       onClick={() => {
         props.router.replace('/' + imageName)
         props.changeBigPic(pic.title)
