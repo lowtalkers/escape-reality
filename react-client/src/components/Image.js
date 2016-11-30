@@ -23,7 +23,7 @@ export default props => {
     props.getComments();    
   }
   return ( <Entity>
-    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic('')}}></a-image>
+    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}></a-image>
 
     <a-image id="commentStart" src="#commentStart" geometry="height: 0.3; width: 0.3" position="0 0.82 -3" onClick={()=> {props.voiceComment()}}></a-image>
 
