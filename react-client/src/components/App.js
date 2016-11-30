@@ -123,6 +123,21 @@ class App extends React.Component {
     });
   }
 
+  getComments() {
+    $.get({
+      url: '/commentData',
+      data: {photoName: this.state.bigPic},
+      success: (data) => {
+        console.log('got comment data from server:', data);
+        this.setState({comments: data})
+      },
+      error: (error) => {
+        console.error('error in get upload', error);
+        $('.error').show();
+      },
+    });
+  }
+
   changeProfilePic() {
     $.get({
       url: '/getUserPic',
@@ -351,6 +366,7 @@ class App extends React.Component {
                     router={this.props.router} 
                     changeCommentMode={this.changeCommentMode.bind(this)}
                     comments={this.state.comments}
+                    getComments={this.getComments.bind(this)}
                     addComment={this.addComment.bind(this)}
                   />
 
@@ -381,7 +397,6 @@ class App extends React.Component {
 
             <a-assets>
               {images}
-
               {bigPic}
 
               <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />

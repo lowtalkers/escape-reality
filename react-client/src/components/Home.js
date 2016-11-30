@@ -16,7 +16,7 @@ import Plane from './Plane';
 export default props => {
     let pics = props.pics.map((pic, index) => {
     console.log(pic.title, index, pic.imageLink)
-    const rot = '0 ' + (index * 35) + ' 0';
+    const rot = '0 ' + (index * -35) + ' 0';
     var row;
     if (index >18 && index <= 27) {
       row = -1.1;
@@ -43,7 +43,7 @@ export default props => {
 
         {pics}
 
-        <a-image id="exit-image" src="#exit" geometry="height: 0.3; width: 0.3" position="0 -1 -2" onClick={() => props.router.replace('/dashboard')}></a-image>
+        <a-image look-at="[camera]" id="exit-image" src="#exit" geometry="height: 0.3; width: 0.3" position="0.64 -1 2.36" onClick={() => props.router.replace('/dashboard')}></a-image>
 
         <Entity light={{type: 'ambient', color: '#fff'}}/>
         <Entity light={{type: 'directional', intensity: 0.2}} position='-1 2 1'/>
