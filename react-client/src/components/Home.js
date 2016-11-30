@@ -43,7 +43,7 @@ export default props => {
 
         {pics}
 
-        <a-image look-at="[camera]" id="exit-image" src="#exit" geometry="height: 0.3; width: 0.3" position="0.64 -1 2.36" onClick={() => props.router.replace('/dashboard')}></a-image>
+        <a-image look-at="[camera]" id="exit-image" src="#exit" geometry="height: 0.3; width: 0.3" position="0.64 -2.5 2.36" onClick={() => props.router.replace('/dashboard')}></a-image>
 
         <Entity light={{type: 'ambient', color: '#fff'}}/>
         <Entity light={{type: 'directional', intensity: 0.2}} position='-1 2 1'/>
