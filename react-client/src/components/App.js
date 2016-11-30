@@ -226,7 +226,7 @@ class App extends React.Component {
   }
 
   commentSubmitFn(phrase, coordinates) {
-    console.log('in comment submit function');
+    console.log('in comment submit function; current phrase is:', phrase);
     $.post({
       url: '/comment',
       contentType: 'application/json',
@@ -247,16 +247,15 @@ class App extends React.Component {
       console.log('in annyang!!!');
       annyang.start();
       annyang.addCallback('result', function(phrases) {
-        console.log(phrases, phrases[0]);
+        console.log('Voice recording phrases:', phrases, 'first result:', phrases[0]);
         self.stopVoiceComment(phrases[0], coordinates);
         let commentObject = {
           body: phrases[0]
         };
         let newObject = Object.assign(commentObject, coordinates); // {x:0 }
-        console.log('addComment newObject:', newObject)
-        this.setState({
-          comments: this.state.comments.concat([newObject]),
-          currentComment: coordinates
+        console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
+        self.setState({
+          comments: self.state.comments.concat([newObject])
         });
       });
     }
@@ -265,6 +264,7 @@ class App extends React.Component {
   stopVoiceComment(phrase, coordinates) {
     annyang.abort();
     //does annyang.abort wait until the voice recognition has processed before invoking commentsubmitFn?
+    console.log('Phrase right after aborting is:', phrase)
     this.commentSubmitFn(phrase, coordinates);
   }
 
