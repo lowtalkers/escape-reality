@@ -14,7 +14,7 @@ let picDescrip = '';
 let currentImgs = [];
 
 const getAllPhotos = () => {
-  console.log('calling')
+  console.log('Trying to get topPics ...');
   $.get({
     url: '/topPics',
     success: (data) => {
@@ -43,12 +43,13 @@ const uploadFile = () => {
             description: picDescrip
           }),
           contentType: 'application/json',
-          success: (data) => {
+          success: data => {
             console.log('Found user\'s uploaded photo from DB', data);
             $('#fileUp').val('');
+            $('#profilePicUp').val('');
             vex.dialog.alert('Image uploaded!');
           },
-          error: (error) => {
+          error: error => {
             console.error('error in get upload', error);
             $('.error').show();
           },
@@ -60,6 +61,17 @@ const uploadFile = () => {
       if (this.files && this.files[0]) {
         const reader = new FileReader();
         picDescrip = $('#description').val();
+        fileName = this.files[0].name;
+        console.log(fileName);
+        reader.onload = imageIsLoaded;
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    $('#profilePicUp').change(function () {
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        // picDescrip = $('#description').val();
         fileName = this.files[0].name;
         console.log(fileName);
         reader.onload = imageIsLoaded;
@@ -87,6 +99,7 @@ export default props => {
 
   return (
     <div>
+      <p></p>
       <Link to="/bookmarks">
         <button>
           <h1>Bookmarks</h1>
@@ -113,8 +126,12 @@ export default props => {
 
       <div>
         <p>Profile Pic</p>
-        <img src={props.profilePic} width="200" height="200" /> 
+        <p><img src={props.profilePic} width="200" height="200" /></p> 
       </div>
     </div>
   );
 };
+
+/*
+        <input type='file' id='profilePicUp' />
+ */
