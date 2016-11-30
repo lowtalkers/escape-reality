@@ -5,15 +5,21 @@ import 'babel-polyfill';
 import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import { Link, withRouter } from 'react-router';
+import $ from 'jquery';
 
 
 import Camera from './Camera';
 import Text from './Text';
 import Sky from './Sky';
 import Plane from './Plane';
+//commentData
+
+
 
 export default props => {
   var commentCoords;
+  props.getComments();
+  
   return ( <Entity>
     <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic('')}}></a-image>
 
