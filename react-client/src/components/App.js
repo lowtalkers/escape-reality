@@ -12,7 +12,6 @@ import ReactDOM from 'react-dom';
 import { Link, withRouter } from 'react-router';
 import $ from 'jquery';
 
-
 import Camera from './Camera';
 import Text from './Text';
 import Sky from './Sky';
@@ -162,6 +161,9 @@ class App extends React.Component {
         console.log('Sucessful authentication', data, data.auth);
         if (data.auth) {
           this.props.router.replace('/dashboard');
+          // If authenticated, then get profile picture 
+          // from server to display it
+          this.changeProfilePic();
         } else if (data === 'User exists!') {
           console.log('User exists!');
         }
@@ -211,20 +213,23 @@ class App extends React.Component {
 
   render () {
     let self = this;
-    var vrView;
+    let vrView = '';
+    let imageName = '';
+    let resizedImageLink = '';
 
-    const images = this.state.pics.map((pic) => {
-      var imageName = pic.title.split('.')[0]
-      var resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + pic.title
-                    return (
-                      <img id={'resized-' + imageName}
-                      crossOrigin="anonymous"
-                      src={resizedImageLink} />
-                    )
-                  });
-    var bigPic;
-    if(this.state.bigPic !== '') {
-      bigPic =  (<img id={this.state.bigPic.split('.')[0]} crossOrigin="anonymous" src={"https://s3.amazonaws.com/vrpics/"+this.state.bigPic} />)
+    const images = this.state.pics.map(pic => {
+      imageName = pic.title.split('.')[0];
+      resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + pic.title;
+      return (
+        <img id={'resized-' + imageName}
+        crossOrigin="anonymous"
+        src={resizedImageLink} />
+      );
+    });
+
+    let bigPic = '';
+    if (this.state.bigPic !== '') {
+      bigPic = (<img id={this.state.bigPic.split('.')[0]} crossOrigin='anonymous' src={'https://s3.amazonaws.com/vrpics/' + this.state.bigPic} />);
     }
     if (this.props.router.location.pathname.indexOf('/signup') >= 0) {
       return (
