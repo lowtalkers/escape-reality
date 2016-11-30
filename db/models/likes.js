@@ -8,12 +8,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     like: {
       type: Sequelize.BOOLEAN,
-      defaultValue: false
+      defaultValue: true
     }
   });
 
   return Like;
 
 };
-
-//find user id and find like where user id is equal to user id
