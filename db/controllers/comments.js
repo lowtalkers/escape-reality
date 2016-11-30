@@ -10,8 +10,8 @@ var create = function(props, callback) {
   });
 };
 
-var findAll = function(callback) {
-  Comment.findAll().then(function(comments) {
+var findAll = function(query, callback) {
+  Comment.findAll(query).then(function(comments) {
     callback(comments);
   }).catch(function(err) {
     console.log(err);
@@ -25,6 +25,14 @@ var findOne = function(query, callback) {
   });
 };
 
+var findOrCreate = function(query, callback) {
+  Comment.findOrCreate(query).done(function(comment) {
+    console.log('🍊  Found one comment in db:', query);
+    callback(comment);
+  });
+};
+
 exports.create = create;
 exports.findAll = findAll;
 exports.findOne = findOne;
+exports.findOrCreate = findOrCreate;
