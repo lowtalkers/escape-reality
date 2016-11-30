@@ -18,7 +18,10 @@ import Plane from './Plane';
 
 export default props => {
   var commentCoords;
-  props.getComments();
+  if(props.bigPic !== '' && props.comments.length === 0) {
+    console.log('getting comments!!!!!!')
+    props.getComments();    
+  }
   return ( <Entity>
     <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic('')}}></a-image>
 
