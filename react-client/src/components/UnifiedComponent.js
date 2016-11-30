@@ -53,7 +53,7 @@ if (props.ternary) {
 
     <Entity ref="RingTag123">
       <RingTag id="pyramidTag" 
-        clickFunction={() => props.clickFunction()}
+        clickFunction={(event) => props.clickFunction(event)}
         position={props.position}
         rotation="8.02 135.22 -1.15"
       >
@@ -77,6 +77,7 @@ if (props.ternary) {
             text={props.text}
             textAdjust={props.textAdjust} //lower moves this down, higher moves this up
             imageSrc={props.imageSrc}
+            commentID={props.commentID}
           />
 
   </Entity>

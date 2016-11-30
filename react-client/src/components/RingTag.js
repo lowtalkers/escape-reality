@@ -5,7 +5,7 @@ import 'aframe-bmfont-text-component';
 export default props => {
   return ( 
     <Entity id='RingTag' scale='.5 .5 .5'
-      onClick={() => props.clickFunction()}
+      onClick={(event) => props.clickFunction(event)}
       position={props.position}
       rotation={props.rotation}
     >
@@ -34,3 +34,5 @@ export default props => {
     </Entity>
   );
 };
+
+//e.detail.target.id
