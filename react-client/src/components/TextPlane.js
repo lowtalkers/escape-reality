@@ -175,7 +175,11 @@ let addBookmark = (title) => {
 
       {/*Collapse Icon*/}
       <Entity
-            onClick={() => props.hidePlane()}
+            commentID={props.commentID}
+            onClick={(data) => {
+              console.log('Within TextPlane.js, event data is:', data.detail.target.id)
+              props.hidePlane();
+            }}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
             position={`2.65 1.2 0.1`}
