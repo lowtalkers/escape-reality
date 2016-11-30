@@ -18,9 +18,11 @@ var findAll = function(callback) {
   });
 };
 
-var findOne = function(query, callback) {
+var update = function(query, callback) {
   Like.findOne(query).done(function(like) {
     console.log('🍊  Found one like in db:', query);
+    console.log(like, 'LIKEEEEEEE');
+    like.update({like: true});
     callback(like);
   });
 };
@@ -34,5 +36,5 @@ var findOrCreate = function(query, callback) {
 
 exports.create = create;
 exports.findAll = findAll;
-exports.findOne = findOne;
+exports.update = update;
 exports.findOrCreate = findOrCreate;
