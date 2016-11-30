@@ -250,7 +250,7 @@ app.post('/like', (req, res) => {
   });
 });
 
-app.get('/commentdata', (req, res) => {
+app.get('/commentData', (req, res) => {
   photoController.findOne({where: {title: req.query.photoName}}, photo => {
     commentController.findAll({where: {photo_id: photo.get('id')}}, (comments) => {
       res.status(200).send(comments);

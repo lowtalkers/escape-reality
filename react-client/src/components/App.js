@@ -131,12 +131,14 @@ class App extends React.Component {
       data: {photoName: this.state.bigPic},
       success: (data) => {
         console.log('got comment data from server:', data);
-        this.setState({comments: data})
+        if (data.length > 0) {
+          this.setState({comments: data})          
+        }
       },
       error: (error) => {
         console.error('error in get upload', error);
         $('.error').show();
-      },
+      }
     });
   }
 
@@ -382,6 +384,7 @@ class App extends React.Component {
             changeBigPic={this.changeBigPic.bind(this)} />
           );
       } else {
+        console.log('*********rendering image')
         vrView = <Image
                     bigPic={this.state.bigPic}
                     commentSubmitFn={this.commentSubmitFn.bind(this)}
