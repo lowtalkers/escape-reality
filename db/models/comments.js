@@ -6,6 +6,9 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       autoIncrement: true
     },
+    email: {
+      type: Sequelize.STRING
+    },
     body: {
       type: Sequelize.STRING
     },
