@@ -18,6 +18,11 @@
 -- Change into the directory 'escape-reality/db' and run this command:
 -- mysql -u root -p escape < sql-to-mock-database.txt 
 --
+-- 5)
+-- Comment out the line in step 2 again and make sure
+-- this line is uncommented:
+-- sequelize.sync();
+--
 -- ---
 
 
