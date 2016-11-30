@@ -76,8 +76,9 @@ export default props => {
    }
  }
 
-  let greenAngleCalc = (position) => {
-    console.log('Position in greenAngleCalc:', position, 'type of position:', typeof position)
+  let greenAngleCalc = (position, commentID) => {
+    console.log('Position in greenAngleCalc:', position, 'type of position:', typeof position);
+    console.log('Comment ID in TextPlane equals:', commentID)
     position = cardCoordCalc(position);
     let coordinates = position.split(" ").map((element) => Number(element));
     let x = coordinates[0];
@@ -126,7 +127,7 @@ let addBookmark = (title) => {
 
   return (
       <Entity
-        id="TextPlane" position={cardCoordCalc(props.position)} rotation={greenAngleCalc(props.position)}
+        id="TextPlane" position={cardCoordCalc(props.position)} rotation={greenAngleCalc(props.position, props.commentID)}
         animation__rot={{property: 'rotation', dir: 'normal', dur: 500, loop: false, from: '0 0 0', to: greenAngleCalc(props.position)}}
         animation__scale={{property: 'scale', dir: 'normal', dur: 500, loop: false, from: '.1 .1 .1', to: '1 1 1'}}
         easing='easeInOutQuad'

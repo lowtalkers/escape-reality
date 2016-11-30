@@ -40,6 +40,8 @@ import Image from './Image.js';
  * @class
  */
 
+let counter = -1;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -50,8 +52,9 @@ class App extends React.Component {
       bigPic: '',
       pics: [],
       addCommentMode: false,
-      currentComments: [],
-      showComment: false
+      comments: [], //[{x: 1.24324324, y: 2, z:3, id: 0, show: false }, {xyz, 1: false}]
+      currentComment: {},
+      commentCounter: 0
     };
   }
 
@@ -226,22 +229,27 @@ class App extends React.Component {
   }
 
   addComment (coordinates) {
+    counter++;
     this.setState({
-      // currentComments: (this.state.currentComments).push('New comment')
-      currentComments: this.state.currentComments.concat([coordinates])
+      // comments: (this.state.comments).push('New comment')
+      comments: this.state.comments.concat([coordinates]),
+      currentComment: coordinates
     });
-    // console.log('currentComments:', this.state.currentComments)
+    // console.log('comments:', this.state.comments)
   }
 
   renderComments () {
     let self = this;
     return (
-      self.state.currentComments.map((comment, idx) => (
-
+      self.state.comments.map((comment, idx) => {
+        return (
         <UnifiedComponent 
-          clickFunction={() => {
+          clickFunction={(event) => {
+            console.log('Onclick event is currently:', event)
+
             self.setState({showComment: true});
           }}
+          // id: {idx}
           position={`${comment.x} ${comment.y} ${comment.z}`}
           rotation="0 0 0"
           hidePlane={() => self.setState({showComment: false})}
@@ -253,8 +261,9 @@ class App extends React.Component {
           textAdjust='0' //lower moves this down, higher moves this up
           imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
           ternary={self.state.showComment}
+          commentID={counter}
         />
-      ))
+      )})
     )
   }
 
@@ -317,7 +326,7 @@ class App extends React.Component {
                     changeBigPic={this.changeBigPic.bind(this)} 
                     router={this.props.router} 
                     changeCommentMode={this.changeCommentMode.bind(this)}
-                    currentComments={this.state.currentComments}
+                    comments={this.state.comments}
                     addComment={this.addComment.bind(this)}
                   />
 
@@ -373,7 +382,7 @@ class App extends React.Component {
                         id="courtyardCard"
                         hidePlane={() => self.setState({showComment: false})}
 
-                        position={`${self.state.currentComments[0].x} ${self.state.currentComments[0].y} ${self.state.currentComments[0].z}`}
+                        position={`${self.state.comments[0].x} ${self.state.comments[0].y} ${self.state.comments[0].z}`}
                         rotation="-2.86 53.86 2.86"
                         
                         scale='0 0 0'
