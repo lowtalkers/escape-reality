@@ -38,13 +38,11 @@ Photo.belongsTo(User, {
 });
 
 // Comments
-User.belongsToMany(Photo, {
-  through: 'comments',
-  foreignKey: 'user_id'
+Photo.hasMany(Comment, {
+  foreignKey: 'photo_id'
 });
 
-Photo.belongsToMany(User, {
-  through: 'comments',
+Comment.belongsTo(Photo, {
   foreignKey: 'photo_id'
 });
 
