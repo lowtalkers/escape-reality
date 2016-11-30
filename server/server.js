@@ -241,28 +241,33 @@ app.get('/topPics', (req, res) => {
 });
 
 app.post('/like', (req, res) => {
-
-
   userController.findOne({where: {email: req.session.email}}, user => {
-    likeController.findOne({where: {user_id: user.get('id')}}, like => {
-      like.set('like', true);
-      res.status(200).send(like);
+    photoController.findOne({where: {title: req.body.photoName}}, photo => {
+      likeController.findOrCreate({where: {user_id: user.get('id'), photo_id: photo.get('id')}}, like => {
+        res.status(200).send(like);
+      })
+    })
+  });
+});
+
+app.get('/commentdata', (req, res) => {
+  photoController.findOne({where: {title: req.query.photoName}}, photo => {
+    commentController.findAll({where: {photo_id: photo.get('id')}}, (comments) => {
+      res.status(200).send(comments);
     })
   });
 });
 
 app.post('/comment', (req, res) => {
-
-
+  console.log(req.body, 'IN COMMENT ROUTE');
   userController.findOne({where: {email: req.session.email}}, user => {
-    commentController.create({title: imgName + '.' + imgType, imageLink: imgLink, description: req.body.description}, comment => {
-      photo.setUser(user);
-      console.log('photo');
-      res.status(200).send(data);
+    photoController.findOne({where: {title: req.body.photoName}}, photo => {
+      commentController.findOrCreate({where: {user_id: user.get('id'), photo_id: photo.get('id')}, defaults: {body: req.body.body, coordinates: req.body.coords}}, comment => {
+        res.status(200).send(comment);
+      })
     })
   });
 });
-
 
 
 app.use(express.static(path.join(__dirname, '../react-client')));
