@@ -225,12 +225,12 @@ class App extends React.Component {
     });
   }
 
-  commentSubmitFn() {
+  commentSubmitFn(phrase, coordinates) {
     console.log('in comment submit function');
     $.post({
       url: '/comment',
       contentType: 'application/json',
-      data: JSON.stringify({photoName: this.state.bigPic, body: this.state.lastComment, coordinates: 'test'}),
+      data: JSON.stringify({photoName: this.state.bigPic, body: phrase, coordinates: `${coordinates.x} ${coordinates.y} ${coordinates.z}`}),
       success: (data) => {
         console.log(data);
       },
@@ -240,27 +240,39 @@ class App extends React.Component {
     });
   }
 
-  voiceComment() {
+  voiceComment(coordinates) {
     console.log('voice activated');
     var self = this;
-
     if (annyang) {
       console.log('in annyang!!!');
       annyang.start();
       annyang.addCallback('result', function(phrases) {
         console.log(phrases, phrases[0]);
-        self.setState({
-          lastComment: phrases[0]
+        self.stopVoiceComment(phrases[0], coordinates);
+        let commentObject = {
+          body: phrases[0]
+        };
+        let newObject = Object.assign(commentObject, coordinates); // {x:0 }
+        console.log('addComment newObject:', newObject)
+        this.setState({
+          comments: this.state.comments.concat([newObject]),
+          currentComment: coordinates
         });
       });
     }
   }
 
-  stopVoiceComment() {
+  stopVoiceComment(phrase, coordinates) {
     annyang.abort();
-    this.commentSubmitFn();
+    //does annyang.abort wait until the voice recognition has processed before invoking commentsubmitFn?
+    this.commentSubmitFn(phrase, coordinates);
   }
 
+  addComment (coordinates) {
+    //will we need to use async here? 
+    counter++;
+    this.voiceComment(coordinates);
+  }
 
   changeBigPic (val) {
     this.setState({
@@ -274,21 +286,6 @@ class App extends React.Component {
     })
   }
 
-  addComment (coordinates) {
-    counter++;
-    let commentObject = {
-      id: counter,
-      text: '(Placeholder text)',
-    };
-    let newObject = Object.assign(commentObject, coordinates);
-    console.log('addComment newObject:', newObject)
-    this.setState({
-      // comments: (this.state.comments).push('New comment')
-      comments: this.state.comments.concat([commentObject]),
-      currentComment: coordinates
-    });
-    // console.log('comments:', this.state.comments)
-  }
 
   showComment (commentID) {
     this.setState({
