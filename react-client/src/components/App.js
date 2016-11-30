@@ -55,7 +55,9 @@ class App extends React.Component {
       comments: [], //[{x: 1.24324324, y: 2, z:3, id: 0, show: false }, {xyz, 1: false}]
       currentComment: {},
       commentCounter: 0,
-      displayedComments: []
+      displayedComments: [],
+      lastComment: ''
+
     };
   }
 
@@ -158,7 +160,7 @@ class App extends React.Component {
         console.error('Error in get userPic', error);
         $('.error').show();
       },
-    }); 
+    });
   }
 
   componentDidMount () {
@@ -188,7 +190,7 @@ class App extends React.Component {
         console.log('Sucessful authentication', data, data.auth);
         if (data.auth) {
           this.props.router.replace('/dashboard');
-          // If authenticated, then get profile picture 
+          // If authenticated, then get profile picture
           // from server to display it
           this.changeProfilePic();
         } else if (data === 'User exists!') {
@@ -207,7 +209,7 @@ class App extends React.Component {
     $.post({
       url: '/like',
       contentType: 'application/json',
-      data: JSON.stringify({}),
+      data: JSON.stringify({photoName: this.state.bigPic}),
       success: (data) => {
         console.log(data);
       },
@@ -222,7 +224,7 @@ class App extends React.Component {
     $.post({
       url: '/comment',
       contentType: 'application/json',
-      data: JSON.stringify({}),
+      data: JSON.stringify({photoName: this.state.bigPic, body: this.state.lastComment, coords: 'test'}),
       success: (data) => {
         console.log(data);
       },
@@ -231,6 +233,28 @@ class App extends React.Component {
       },
     });
   }
+
+  voiceComment() {
+    console.log('voice activated');
+    var self = this;
+
+    if (annyang) {
+      console.log('in annyang!!!');
+      annyang.start();
+      annyang.addCallback('result', function(phrases) {
+        console.log(phrases, phrases[0]);
+        self.setState({
+          lastComment: phrases[0]
+        });
+      });
+    }
+  }
+
+  stopVoiceComment() {
+    annyang.abort();
+    this.commentSubmitFn();
+  }
+
 
   changeBigPic (val) {
     this.setState({
@@ -358,19 +382,22 @@ class App extends React.Component {
             changeBigPic={this.changeBigPic.bind(this)} />
           );
       } else {
-        vrView = <Image 
-                    bigPic={this.state.bigPic} 
-                    commentSubmitFn={this.commentSubmitFn.bind(this)} 
-                    likeSubmitFn={this.likeSubmitFn.bind(this)} 
-                    changeBigPic={this.changeBigPic.bind(this)} 
-                    router={this.props.router} 
+        vrView = <Image
+                    bigPic={this.state.bigPic}
+                    commentSubmitFn={this.commentSubmitFn.bind(this)}
+                    likeSubmitFn={this.likeSubmitFn.bind(this)}
+                    changeBigPic={this.changeBigPic.bind(this)}
+                    router={this.props.router}
                     changeCommentMode={this.changeCommentMode.bind(this)}
                     comments={this.state.comments}
                     getComments={this.getComments.bind(this)}
                     addComment={this.addComment.bind(this)}
+                    voiceComment={this.voiceComment.bind(this)}
+                    stopVoiceComment={this.stopVoiceComment.bind(this)}
                   />
 
-      } 
+      }
+
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
           For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
@@ -411,19 +438,19 @@ class App extends React.Component {
 
             </a-assets>
             {vrView}
-            
-            {this.renderComments()} 
+
+            {this.renderComments()}
 
 {/*
             {self.state.showComment?
 
-                      <TextPlane 
+                      <TextPlane
                         id="courtyardCard"
                         hidePlane={() => self.setState({showComment: false})}
 
                         position={`${self.state.comments[0].x} ${self.state.comments[0].y} ${self.state.comments[0].z}`}
                         rotation="-2.86 53.86 2.86"
-                        
+
                         scale='0 0 0'
                         header='Napoleon Courtyard'
                         headerAdjust='-1.5' // lower moves it to the left, higher to the right
