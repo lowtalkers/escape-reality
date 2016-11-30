@@ -230,7 +230,7 @@ class App extends React.Component {
     $.post({
       url: '/comment',
       contentType: 'application/json',
-      data: JSON.stringify({photoName: this.state.bigPic, body: this.state.lastComment, coords: 'test'}),
+      data: JSON.stringify({photoName: this.state.bigPic, body: this.state.lastComment, coordinates: 'test'}),
       success: (data) => {
         console.log(data);
       },

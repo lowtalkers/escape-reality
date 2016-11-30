@@ -262,10 +262,15 @@ app.post('/comment', (req, res) => {
   console.log(req.body, 'IN COMMENT ROUTE');
   userController.findOne({where: {email: req.session.email}}, user => {
     photoController.findOne({where: {title: req.body.photoName}}, photo => {
-      commentController.findOrCreate({where: {user_id: user.get('id'), photo_id: photo.get('id')}, defaults: {body: req.body.body, coordinates: req.body.coords}}, comment => {
+      commentController.create({
+        body: req.body.body,
+        coordinates: req.body.coordinates,
+        user_id: user.get('id'),
+        photo_id: photo.get('id')
+      }, comment => {
         res.status(200).send(comment);
-      })
-    })
+      });
+    });
   });
 });
 
