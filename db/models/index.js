@@ -60,8 +60,8 @@ Photo.belongsToMany(User, {
 });
 
 //Create missing tables, if any
-// sequelize.sync({force: true});
-sequelize.sync();
+sequelize.sync({force: true});
+// sequelize.sync();
 
 
 exports.User = User;
