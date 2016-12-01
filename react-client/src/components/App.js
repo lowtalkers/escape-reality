@@ -376,6 +376,7 @@ class App extends React.Component {
           }}
           scale='0 0 0'
           header={comment.body}
+          name={comment.name}
           wikiName='Louvre_Pyramid'
           headerAdjust='-1.5' // lower moves it to the left, higher to the right
           text={comment.body}
@@ -506,6 +507,8 @@ class App extends React.Component {
             {vrView}
 
             {this.renderComments()}
+
+
 
 {/*
             {self.state.showComment?
