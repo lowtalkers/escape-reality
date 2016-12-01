@@ -100,6 +100,7 @@ const uploadFile = (props) => {
             console.log('Found user\'s uploaded photo from DB', data);
             $('#profilePicUp').val('');
             vex.dialog.alert('Uploaded!');
+            $('button.vex-dialog-button-primary.vex-dialog-button.vex-first').click(() => window.location.reload());
           },
           error: error => {
             console.error('error in get upload', error);
@@ -164,7 +165,6 @@ export default props => {
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} />
-
         </ToolbarGroup>
 
       </Toolbar>
