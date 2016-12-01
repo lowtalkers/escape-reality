@@ -160,7 +160,7 @@ export default props => {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Toolbar >
         <ToolbarGroup>
-          <Avatar src="https://s3.amazonaws.com/vrpics/franco-profilepic_256x256.jpg" />
+          <Avatar src={props.profilePic} />
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarTitle className="centerText" text="Welcome, Franco" />

@@ -148,14 +148,14 @@ let addBookmark = (title) => {
         {/* Main Image */}
         <Entity geometry={`primitive: plane; width: ${(Width/6)}; height: ${(Height/3)*2}`}
           onClick={() => props.planeClick()}
-          material={{side: 'double', src: '#commentStart', opacity: 1}}
+          material={{side: 'double', src: '#profilePic', opacity: 1}}
           // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
           position={`-1.07 0.02 0.18`}
           rotation='0 0 0'
         >
         </Entity>
 
-        {/* Header Text 
+        {/* Header Text
         <Entity bmfont-text={{align: 'left', width: '750', color: 'yellow', text: props.header}}
           // position={adjustHeaderTextCoordinates(props.position, Width, Height)}
           position={`${props.headerAdjust} 1 0.1`}
