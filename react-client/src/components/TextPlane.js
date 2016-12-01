@@ -142,7 +142,7 @@ let addBookmark = (title) => {
           geometry={`primitive: plane; width: ${Width}; height: ${Height}`}
           // position='0 0 0'
           rotation='0 0 0'
-          material={{color: '#92a8d1'}}
+          material={{color: '#436095', shader: 'flat'}}
         />
 
         {/* Main Image */}
