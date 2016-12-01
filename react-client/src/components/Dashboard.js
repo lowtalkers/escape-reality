@@ -163,7 +163,7 @@ export default props => {
           <Avatar src={props.profilePic} />
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarTitle className="fancyText" text="Welcome, Franco" />
+          <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} />
 
         </ToolbarGroup>
 
