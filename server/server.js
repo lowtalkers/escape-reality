@@ -200,7 +200,7 @@ app.get('/getWiki', (req, res) => {
 
 app.get('/getWikiArticleTitle', (req, res) => {
   utils.fetchArticleWikiName(req, res);
-})
+});
 
 app.get('/addBookmark', (req, res) => {
   userController.findOne({where: {email: req.session.email}}, user => {
@@ -227,9 +227,10 @@ app.get('/allBookmarks', (req, res) => {
 
 app.get('/getUserPic', (req, res) => {
   userController.findOne({where: {email: req.session.email}}, user => {
-    const pic = user.get('profilePic');
-    console.log('🍊  profile pic is', pic);
-    res.send(pic);
+    const data = {};
+    data.pic = user.get('profilePic');
+    data.currentUser = user.get('firstName')
+    res.send(data);
   });
 });
 
@@ -272,7 +273,8 @@ app.post('/comment', (req, res) => {
       commentController.create({
         body: req.body.body,
         coordinates: req.body.coordinates,
-        email: user.get('email')
+        email: user.get('email'),
+        firstName: user.get('firstName')
       }, comment => {
         comment.setPhoto(photo);
         res.status(200).send(comment);

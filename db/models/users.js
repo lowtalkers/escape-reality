@@ -14,6 +14,15 @@ module.exports = (sequelize, Sequelize) => {
     },
     profilePic: {
       type: Sequelize.STRING
+    },
+    firstName: {
+      type: Sequelize.STRING
+    },
+    lastName: {
+      type: Sequelize.STRING
+    },
+    lobbyPic: {
+      type: Sequelize.TEXT
     }
   });
 
