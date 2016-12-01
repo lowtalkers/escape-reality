@@ -458,13 +458,11 @@ class App extends React.Component {
               <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic}/>
               <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
 
-              <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />
-              <img id="commentStart" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Nov24%2C2016start.png" />
-              <img id="commentStop" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/Nov24%2C2016stop.png" />
-              <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/resized-Nov27,2016like.png" />
+              <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" />
+              <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" />
 
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
-              <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/exit.png" />
+              <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
 
             </a-assets>
             {vrView}
