@@ -56,8 +56,8 @@ class App extends React.Component {
       currentComment: {},
       commentCounter: 0,
       displayedComments: [],
-      lastComment: ''
-
+      lastComment: '',
+      isUploading: true
     };
   }
 
@@ -136,7 +136,7 @@ class App extends React.Component {
             var coords = comment.coordinates.split(' ');
             return {x: coords[0], y: coords[1], z: coords[2], body: comment.body}
           });
-          this.setState({comments: data})          
+          this.setState({comments: data})
         }
       },
       error: (error) => {
@@ -244,14 +244,14 @@ class App extends React.Component {
     var self = this;
     if (annyang) {
       console.log('🐞🐞🐞🐞🐞voice activated in callback', coordinates);
-      
+
       console.log('in annyang!!!');
       annyang.start();
       gCoordinates = coordinates;
 
       annyang.addCallback('result', function(phrases) {
         console.log('Voice recording phrases:', phrases, 'first result:', phrases[0]);
-        
+
         self.stopVoiceComment(phrases[0], gCoordinates);
         let commentObject = {
           body: phrases[0]
@@ -273,7 +273,7 @@ class App extends React.Component {
   }
 
   addComment (coordinates) {
-    //will we need to use async here? 
+    //will we need to use async here?
     counter++;
     this.voiceComment(coordinates);
   }
@@ -296,6 +296,15 @@ class App extends React.Component {
       displayedComments: this.state.displayedComments.concat([commentID])
     })
   }
+
+  uploadBar () {
+    if (this.state.isUploading) {
+      this.setState({ isUploading: false });
+    } else {
+      this.setState({ isUploading: true });
+    }
+  }
+
 
   hideComment (commentID) {
     let indexToHide = this.state.displayedComments.indexOf(commentID);
@@ -384,6 +393,8 @@ class App extends React.Component {
       return (
               <Dashboard
                 profilePic = {this.state.profilePic}
+                shouldHide={this.state.isUploading}
+                uploadBar={this.uploadBar.bind(this)}
               />
       );
 
