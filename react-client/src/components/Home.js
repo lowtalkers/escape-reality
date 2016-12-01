@@ -40,8 +40,9 @@ export default props => {
   });
   return (
     <Entity>
-
+        <Entity animation__rot={{property: 'rotation', dur: 200000, loop: 'repeat', to: '0 360 0'}} >
         {pics}
+        </Entity>
 
         <a-image look-at="[camera]" id="exit-image" src="#exit" geometry="height: 0.3; width: 0.3" position="0.64 -2.5 2.36" onClick={() => props.router.replace('/dashboard')}></a-image>
 

@@ -57,7 +57,8 @@ class App extends React.Component {
       commentCounter: 0,
       displayedComments: [],
       lastComment: '',
-      isUploading: true
+      isUploading: true,
+      commentsOn: false
     };
   }
 
@@ -322,6 +323,12 @@ class App extends React.Component {
     });
   }
 
+  turnCommentsOn () {
+    this.setState({
+      commentsOn: !this.state.commentsOn
+    });
+  }
+
   renderComments () {
     let self = this;
     console.log(self.state.comments)
@@ -424,6 +431,8 @@ class App extends React.Component {
                     voiceComment={this.voiceComment.bind(this)}
                     stopVoiceComment={this.stopVoiceComment.bind(this)}
                     clearComments={this.clearComments.bind(this)}
+                    commentsOn={this.state.commentsOn}
+                    turnCommentsOn={this.turnCommentsOn.bind(this)}
                   />
 
       }
@@ -460,6 +469,7 @@ class App extends React.Component {
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" />
               <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" />
+              <img id="mic" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" />              
 
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
