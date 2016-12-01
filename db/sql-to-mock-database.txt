@@ -61,7 +61,6 @@ INSERT INTO `users` (`id`, `email`, `password`, `profilePic`, `firstName`, `last
 VALUES
 	(8, 'franco@franco.com', '$2a$10$PSgRZS5tj4eGN2TUO9bzmO05Oc/dOiDNX5Nq1oe/MeWn6hWvbAVVC', 'https://s3.amazonaws.com/vrpics/franco-profilepic_256x256.jpg', 'Franco', 'Abaroa', 'https://s3.amazonaws.com/vrpics/lr2.jpg',  '2016-11-30 01:17:00', '2016-11-30 01:17:00');
 
-
 -- ---
 -- Create photos for franco@franco.com
 -- 

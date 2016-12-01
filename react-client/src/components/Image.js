@@ -19,7 +19,11 @@ import Plane from './Plane';
 export default props => {
   var commentCoords;
   var hiddenSphere;
-
+  var sky = <a-sky id="image-360" radius="10" src={'#resized-'+props.bigPic.split('.')[0]}></a-sky>
+  var bigPic = props.bigPic.split('.')[0]
+  $('#' + bigPic).load(function() {
+    sky = <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
+  })
   if(props.bigPic !== '' && props.comments.length === 0) {
     console.log('getting comments!!!!!!')
     props.getComments();    
@@ -45,7 +49,7 @@ export default props => {
 
     <a-image look-at="[camera]" id="mic-image" src="#mic" geometry="height: 0.3; width: 0.3" position="0 0.50 -2" onClick={() => props.turnCommentsOn()}></a-image>
 
-    <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
+    {sky}
 
     {hiddenSphere}
 
