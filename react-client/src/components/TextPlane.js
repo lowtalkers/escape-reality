@@ -3,7 +3,7 @@ import React from 'react';
 import 'aframe-bmfont-text-component';
 import $ from 'jquery';
 
-const Height = 1;
+const Height = 1.5;
 const Width = 3;
 
 export default props => {
@@ -142,15 +142,15 @@ let addBookmark = (title) => {
           geometry={`primitive: plane; width: ${Width}; height: ${Height}`}
           // position='0 0 0'
           rotation='0 0 0'
-          material={{color: 'black'}}
+          material={{color: '#92a8d1'}}
         />
 
         {/* Main Image */}
-        <Entity geometry={`primitive: plane; width: ${(Width/6)}; height: ${(Height/3)*2}`}
+        <Entity geometry={`primitive: circle; radius: 0.33`}
           onClick={() => props.planeClick()}
-          material={{side: 'double', src: '#profilePic', opacity: 1}}
+          material={{side: 'double', src: 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kobe_Bryant_warming_up.jpg/220px-Kobe_Bryant_warming_up.jpg)', opacity: 1}}
           // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
-          position={`-1.07 0.02 0.18`}
+          position={`-1.1 0.6 0.18`}
           rotation='0 0 0'
         >
         </Entity>
@@ -182,7 +182,7 @@ let addBookmark = (title) => {
             }}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
-            position={`1 0.15 0.65`}
+            position={`1.15 0.5 0.3`}
             rotation='0 0 0'
             scale='1 1 0'
       >

@@ -48,9 +48,7 @@ if (props.displayedComments.includes(props.commentID)) {
   return ( 
 
   <Entity>
-
-
-
+  
       <RingTag id="pyramidTag"
         clickFunction={props.clickFunction}
         position={props.position}
@@ -59,25 +57,25 @@ if (props.displayedComments.includes(props.commentID)) {
       </RingTag>
 
         
-          <TextPlane 
-            planeClick={() => console.log('displayedComments is currentlyyyy:', props.displayedComments)}
+      <TextPlane 
+        planeClick={() => console.log('displayedComments is currentlyyyy:', props.displayedComments)}
 
-            id="pyramidTextPlane"
-            hidePlane={props.hidePlane}
+        id="pyramidTextPlane"
+        hidePlane={props.hidePlane}
 
-            position={props.position}
-            rotation="8.02 135.22 -1.15"
+        position={props.position}
+        rotation="8.02 135.22 -1.15"
 
-            scale={props.scale}
-            header={props.header}
-            wikiName={props.wikiName}
-            headerAdjust={props.headerAdjust} // lower moves it to the left, higher to the right
-            text={props.text}
-            textAdjust={props.textAdjust} //lower moves this down, higher moves this up
-            imageSrc={props.imageSrc}
-            commentID={props.commentID}
-            profilePic={props.profilePic}
-          />
+        scale={props.scale}
+        header={props.header}
+        wikiName={props.wikiName}
+        headerAdjust={props.headerAdjust} // lower moves it to the left, higher to the right
+        text={props.text}
+        textAdjust={props.textAdjust} //lower moves this down, higher moves this up
+        imageSrc={props.imageSrc}
+        commentID={props.commentID}
+        profilePic={props.profilePic}
+      />
 
   </Entity>
 
