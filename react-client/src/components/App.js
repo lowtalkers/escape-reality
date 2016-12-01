@@ -133,8 +133,9 @@ class App extends React.Component {
         console.log('got comment data from server:', data);
         if (data.length > 0) {
           data = data.map(function(comment) {
+            console.log(comment.body)
             var coords = comment.coordinates.split(' ');
-            return {x: coords[0], y: coords[1], z: coords[2], body: comment.body}
+            return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body}
           });
           this.setState({comments: data})
         }
@@ -323,6 +324,7 @@ class App extends React.Component {
 
   renderComments () {
     let self = this;
+    console.log(self.state.comments)
     return (
       self.state.comments.map((comment, idx) => {
         return (
@@ -333,7 +335,7 @@ class App extends React.Component {
             self.showComment(idx);
           }}
           commentID= {idx}
-          position={`${comment.x} ${comment.y} ${comment.z}`}
+          position={`${Number(comment.x)} ${Number(comment.y)} ${Number(comment.z)}`}
           rotation="0 0 0"
           hidePlane={() => {
             // console.log('Hiding plane now... Data is:')
@@ -341,13 +343,14 @@ class App extends React.Component {
             self.hideComment(idx);
           }}
           scale='0 0 0'
-          header='Louvre Pyramid'
+          header={comment.body}
           wikiName='Louvre_Pyramid'
           headerAdjust='-1.5' // lower moves it to the left, higher to the right
-          text= {`'Cour Napolon', or Napoleon's Courtyard, is named after Napoleon III, under whose rule the Louvre Palace underwent several structural changes to its design. The nephew and heir of Napoleon I, he was the first President of France to be elected by a direct popular vote. He was blocked by the Constitution and Parliament from running for a second term, so he organized a coup d'état in 1851 and then took the throne as Napoleon III on 2 December 1852.`}
+          text={comment.body}
           textAdjust='0' //lower moves this down, higher moves this up
           imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
           displayedComments={self.state.displayedComments}
+          profilePic={self.state.profilePic}
         />
       )})
     )
@@ -452,7 +455,7 @@ class App extends React.Component {
             <a-assets>
               {images}
               {bigPic}
-
+              <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic}/>
               <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/icon.png" />

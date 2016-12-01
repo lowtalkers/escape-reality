@@ -3,8 +3,8 @@ import React from 'react';
 import 'aframe-bmfont-text-component';
 import $ from 'jquery';
 
-const Height = 3;
-const Width = 6;
+const Height = 1;
+const Width = 3;
 
 export default props => {
   const extraProps = AFRAME.utils.extend({}, props);
@@ -146,27 +146,27 @@ let addBookmark = (title) => {
         />
 
         {/* Main Image */}
-        <Entity geometry={`primitive: plane; width: ${(Width/9)*3}; height: ${(Height/3)*2}`}
+        <Entity geometry={`primitive: plane; width: ${(Width/6)}; height: ${(Height/3)*2}`}
           onClick={() => props.planeClick()}
-          material={{side: 'double', src: 'url(' + props.imageSrc + ')', opacity: 1}}
+          material={{side: 'double', src: '#commentStart', opacity: 1}}
           // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
-          position={`${(Width/-3.65)} ${(Height/-10)} 0.1`}
+          position={`-1.07 0.02 0.18`}
           rotation='0 0 0'
         >
         </Entity>
 
-        {/* Header Text */}
+        {/* Header Text 
         <Entity bmfont-text={{align: 'left', width: '750', color: 'yellow', text: props.header}}
           // position={adjustHeaderTextCoordinates(props.position, Width, Height)}
           position={`${props.headerAdjust} 1 0.1`}
           rotation='0 0 0'
           scale='1.85 1.85 0'
         />
-
+        */}
         {/* Main Body Text */}
         <Entity bmfont-text={{align: 'left', width: '775', color: 'white', text: reduceMainTextSize(props.text)}} // Max character length = 500
           // position={adjustMainTextCoordinates(props.position, Width, Height)}
-          position={`-0.35 ${props.textAdjust - 1.1} 0.1`}
+          position={`-0.76 ${props.textAdjust} 0.24`}
           rotation='0 0 0'
           scale='0.8 0.8 0'
         />
@@ -182,13 +182,13 @@ let addBookmark = (title) => {
             }}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
             material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
-            position={`2.65 1.2 0.1`}
+            position={`1 0.15 0.65`}
             rotation='0 0 0'
             scale='1 1 0'
       >
       </Entity>
 
-      {/*Bookmark Button*/}
+      {/*Bookmark Button
       <Entity
             onClick={() => addBookmark(props.wikiName)}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
@@ -198,7 +198,7 @@ let addBookmark = (title) => {
             scale='1 1 0'
       >
       </Entity>
-
+      */}
 
     </Entity>
   );
