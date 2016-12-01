@@ -148,7 +148,7 @@ let addBookmark = (title) => {
         {/* Main Image */}
         <Entity geometry={`primitive: circle; radius: 0.33`}
           onClick={() => props.planeClick()}
-          material={{side: 'double', src: 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kobe_Bryant_warming_up.jpg/220px-Kobe_Bryant_warming_up.jpg)', opacity: 1}}
+          material={{side: 'double', src: 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Kobe_Bryant_warming_up.jpg/220px-Kobe_Bryant_warming_up.jpg)', opacity: 1, shader: 'flat'}}
           // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
           position={`-1.1 0.6 0.18`}
           rotation='0 0 0'
@@ -181,7 +181,7 @@ let addBookmark = (title) => {
               props.hidePlane();
             }}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
-            material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99}}
+            material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99, shader: 'flat'}}
             position={`1.15 0.5 0.3`}
             rotation='0 0 0'
             scale='1 1 0'
