@@ -13,8 +13,8 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-
 import Avatar from 'material-ui/Avatar';
+
 
 import {
   blue300,
@@ -163,19 +163,10 @@ export default props => {
           <Avatar src={props.profilePic} />
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarTitle className="centerText" text="Welcome, Franco" />
+          <ToolbarTitle className="fancyText" text="Welcome, Franco" />
 
         </ToolbarGroup>
-        <ToolbarGroup>
-          <IconMenu
-            iconButtonElement={
-              <IconButton touch={true}>
-                <NavigationExpandMoreIcon />
-              </IconButton>}>
-            <MenuItem primaryText="Account Settings" />
-            <MenuItem onClick={() => { signOut(); }} primaryText="Sign Out" />
-          </IconMenu>
-          </ToolbarGroup>
+
       </Toolbar>
       </MuiThemeProvider>
 
@@ -191,8 +182,8 @@ export default props => {
       <RaisedButton buttonStyle={styles.exploreButton} label="Explore" primary={true}  />
       </MuiThemeProvider>
       </Link>
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
 
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
       <RaisedButton
       label="Upload"
       labelPosition="before"
@@ -202,6 +193,15 @@ export default props => {
       <input id="fileUp" type="file" style={styles.exampleImageInput} />
       </RaisedButton>
       </MuiThemeProvider>
+      </div>
+
+      <br/>
+      <br/>
+      <br/>
+      <div className="centerButtons">
+        <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <FlatButton label="Sign Out" labelStyle={styles.exploreButton} onClick={() => { signOut(); }} />
+        </MuiThemeProvider>
       </div>
 
     </div>
