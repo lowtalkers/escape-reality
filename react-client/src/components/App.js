@@ -375,11 +375,12 @@ class App extends React.Component {
             self.hideComment(idx);
           }}
           scale='0 0 0'
-          header={comment.name}
+          // header={comment.firstName}
+          header='Kobe'
           wikiName='Louvre_Pyramid'
-          headerAdjust='-1.5' // lower moves it to the left, higher to the right
+          headerAdjust='-0.75' // lower moves it to the left, higher to the right
           text={comment.body}
-          textAdjust='0' //lower moves this down, higher moves this up
+          textAdjust='-0.1' //lower moves this down, higher moves this up
           imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
           displayedComments={self.state.displayedComments}
           profilePic={self.state.profilePic}
