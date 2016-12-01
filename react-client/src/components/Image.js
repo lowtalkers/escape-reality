@@ -25,11 +25,7 @@ export default props => {
   return ( <Entity>
     <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}></a-image>
 
-    <a-image id="commentStart" src="#commentStart" geometry="height: 0.3; width: 0.3" position="0 0.82 -3" onClick={()=> {props.voiceComment()}}></a-image>
-
-    <a-image id="commentStop" src="#commentStop" geometry="height: 0.3; width: 0.3" position="0 0.42 -3" onClick={()=> {props.stopVoiceComment()}}></a-image>
-
-    <a-image id="like" src="#like" geometry="height: 0.3; width: 0.3" position="0 -0.50 -3" onClick={() => props.likeSubmitFn()}></a-image>
+    <a-image id="like" src="#like" geometry="height: 0.3; width: 0.3" position="0 -0.50 -2" onClick={() => props.likeSubmitFn()}></a-image>
 
     <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
 
