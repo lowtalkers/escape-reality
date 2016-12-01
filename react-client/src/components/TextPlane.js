@@ -155,14 +155,14 @@ let addBookmark = (title) => {
         >
         </Entity>
 
-        {/* Header Text
+        {/* Header Text */}
         <Entity bmfont-text={{align: 'left', width: '750', color: 'yellow', text: props.header}}
           // position={adjustHeaderTextCoordinates(props.position, Width, Height)}
           position={`${props.headerAdjust} 1 0.1`}
           rotation='0 0 0'
           scale='1.85 1.85 0'
         />
-        */}
+
         {/* Main Body Text */}
         <Entity bmfont-text={{align: 'left', width: '775', color: 'white', text: reduceMainTextSize(props.text)}} // Max character length = 500
           // position={adjustMainTextCoordinates(props.position, Width, Height)}
