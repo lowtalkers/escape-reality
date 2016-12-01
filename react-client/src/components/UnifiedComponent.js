@@ -51,15 +51,12 @@ if (props.displayedComments.includes(props.commentID)) {
 
 
 
-    <Entity ref="RingTag123">
       <RingTag id="pyramidTag"
-        clickFunction={() => props.clickFunction()}
+        clickFunction={props.clickFunction}
         position={props.position}
         rotation="8.02 135.22 -1.15"
       >
-        <Entity></Entity>
       </RingTag>
-    </Entity>
 
         
           <TextPlane 
@@ -79,6 +76,7 @@ if (props.displayedComments.includes(props.commentID)) {
             textAdjust={props.textAdjust} //lower moves this down, higher moves this up
             imageSrc={props.imageSrc}
             commentID={props.commentID}
+            profilePic={props.profilePic}
           />
 
   </Entity>
@@ -90,15 +88,12 @@ if (props.displayedComments.includes(props.commentID)) {
     return ( 
     <Entity>
 
-      <Entity ref="RingTag123">
         <RingTag id="pyramidTag" 
           clickFunction={() => props.clickFunction()}
           position={props.position}
           rotation="8.02 135.22 -1.15"
         >
-          <Entity></Entity>
         </RingTag>
-      </Entity>
   </Entity>
 
     )
