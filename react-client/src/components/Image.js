@@ -39,11 +39,11 @@ export default props => {
       }} />)
   }
   return ( <Entity>
-    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}></a-image>
+    <a-image look-at="[camera]" id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}></a-image>
 
-    <a-image id="like-image" src="#like" geometry="height: 0.3; width: 0.3" position="0 -0.50 -2" onClick={() => props.likeSubmitFn()}></a-image>
+    <a-image look-at="[camera]" id="like-image" src="#like" geometry="height: 0.3; width: 0.3" position="0 -0.50 -2" onClick={() => props.likeSubmitFn()}></a-image>
 
-    <a-image id="mic-image" src="#mic" geometry="height: 0.3; width: 0.3" position="0 0.50 -2" onClick={() => props.turnCommentsOn()}></a-image>
+    <a-image look-at="[camera]" id="mic-image" src="#mic" geometry="height: 0.3; width: 0.3" position="0 0.50 -2" onClick={() => props.turnCommentsOn()}></a-image>
 
     <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
 

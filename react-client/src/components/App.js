@@ -11,6 +11,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link, withRouter } from 'react-router';
 import $ from 'jquery';
+import isEmail from 'validator/lib/isEmail';
 
 import Camera from './Camera';
 import Text from './Text';
@@ -48,6 +49,8 @@ class App extends React.Component {
     this.state = {
       email: '',
       password: '',
+      firstName: '',
+      lastName: '',
       profilePic: '',
       bigPic: '',
       pics: [],
@@ -112,6 +115,14 @@ class App extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  onFirstChange(event) {
+    this.setState({ firstName: event.target.value });
+  }
+
+  onLastChange(event) {
+    this.setState({ lastName: event.target.value });
+  }
+
   getAllPhotos() {
     $.get({
       url: '/topPics',
@@ -136,7 +147,7 @@ class App extends React.Component {
           data = data.map(function(comment) {
             console.log(comment.body)
             var coords = comment.coordinates.split(' ');
-            return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body}
+            return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body, firstName: comment.firstName}
           });
           this.setState({comments: data})
         }
@@ -151,13 +162,16 @@ class App extends React.Component {
   changeProfilePic() {
     $.get({
       url: '/getUserPic',
-      success: (picUrl) => {
-        if (picUrl) {
+      success: (data) => {
+        this.setState({
+          currentUser: data.currentUser
+        });
+        if (data.pic) {
           this.setState({
-            profilePic: picUrl
+            profilePic: data.pic
           });
         }
-        if (!picUrl) { // picUrl is null on account creation, so give a default pic
+        if (!data.pic) { // picUrl is null on account creation, so give a default pic
           this.setState({
             profilePic: 'https://s3.amazonaws.com/vrpics/default-userpic_256x256.png'
           });
@@ -172,9 +186,9 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    this.getAllPhotos();
-    if (this.props.router.location.pathname === '/dashboard') {
+    if (this.props.router.location.pathname.indexOf('/sign') < 0) {
       console.log('🍊  running changeProfilePic');
+      this.getAllPhotos();
       this.changeProfilePic();
     }
   }
@@ -188,28 +202,35 @@ class App extends React.Component {
     /** Grab email and password values from fields */
     const email = this.state.email;
     const password = this.state.password;
-    console.log('email address is', email);
+    const firstName = this.state.firstName;
+    const lastName = this.state.lastName;
+
     /** Submit email and password for verification */
-    $.post({
-      url: this.props.router.location.pathname,
-      contentType: 'application/json',
-      data: JSON.stringify({email: email, password: password}),
-      success: (data) => {
-        console.log('Sucessful authentication', data, data.auth);
-        if (data.auth) {
-          this.props.router.replace('/dashboard');
-          // If authenticated, then get profile picture
-          // from server to display it
-          this.changeProfilePic();
-        } else if (data === 'User exists!') {
-          console.log('User exists!');
-        }
-      },
-      error: (error) => {
-        console.error(error);
-        $('.error').show();
-      },
-    });
+    if (isEmail(email)) {
+      $.post({
+        url: this.props.router.location.pathname,
+        contentType: 'application/json',
+        data: JSON.stringify({email: email, password: password, firstName: firstName, lastName: lastName}),
+        success: (data) => {
+          console.log('Sucessful authentication', data, data.auth);
+          if (data.auth) {
+            this.props.router.replace('/dashboard');
+            // If authenticated, then get profile picture
+            // from server to display it
+            this.
+            this.changeProfilePic();
+          } else if (data === 'User exists!') {
+            console.log('User exists!');
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          $('.error').show();
+        },
+      });
+    } else {
+      console.log('Not a valid email')
+    }
   }
 
   likeSubmitFn() {
@@ -256,7 +277,8 @@ class App extends React.Component {
 
         self.stopVoiceComment(phrases[0], gCoordinates);
         let commentObject = {
-          body: phrases[0]
+          body: phrases[0],
+          firstName: self.state.currentUser
         };
         let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
         console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
@@ -336,6 +358,7 @@ class App extends React.Component {
       self.state.comments.map((comment, idx) => {
         return (
         <UnifiedComponent
+         look-at="[camera]"
           clickFunction={() => {
             console.log('Onclick event is currently:', event)
             console.log('ID ')
@@ -347,6 +370,7 @@ class App extends React.Component {
           hidePlane={() => {
             // console.log('Hiding plane now... Data is:')
             // self.setState({showComment: false});
+            self.getAllPhotos();
             self.hideComment(idx);
           }}
           scale='0 0 0'
@@ -388,6 +412,8 @@ class App extends React.Component {
         <SignUp
         onEmailChange={this.onEmailChange.bind(this)}
         onPasswordChange={this.onPasswordChange.bind(this)}
+        onFirstChange={this.onFirstChange.bind(this)}
+        onLastChange={this.onLastChange.bind(this)}
         submitFn={this.submitFn.bind(this)}
         />
       );

@@ -36,6 +36,7 @@
     "request": "^2.78.0",
     "sequelize": "^3.25.0",
     "sharp": "^0.16.2",
+    "validator": "^6.2.0",
     "vex-js": "^3.0.0",
     "webpack": "^1.13.3"
   },

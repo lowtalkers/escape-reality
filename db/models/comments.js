@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
     },
     coordinates: {
       type: Sequelize.STRING
+    },
+    firstName: {
+      type: Sequelize.STRING
     }
   });
 
