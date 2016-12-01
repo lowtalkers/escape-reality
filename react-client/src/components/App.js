@@ -442,7 +442,7 @@ class App extends React.Component {
          */
 
       return (
-          <Scene>
+          <Scene antialias="true">
             <Camera>
               <a-cursor
                 animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
