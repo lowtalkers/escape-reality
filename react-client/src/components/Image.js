@@ -18,18 +18,14 @@ import Plane from './Plane';
 
 export default props => {
   var commentCoords;
+  var hiddenSphere;
+
   if(props.bigPic !== '' && props.comments.length === 0) {
     console.log('getting comments!!!!!!')
     props.getComments();    
   }
-  return ( <Entity>
-    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}></a-image>
-
-    <a-image id="like" src="#like" geometry="height: 0.3; width: 0.3" position="0 -0.50 -2" onClick={() => props.likeSubmitFn()}></a-image>
-
-    <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
-
-    <Entity
+  if(props.commentsOn) {
+    hiddenSphere = (<Entity
 
       rotation="0 180 0"
       position="0 0 0"
@@ -40,7 +36,18 @@ export default props => {
         console.log(commentCoords);
         // props.changeCommentMode();
         props.addComment(commentCoords);
-      }} />
+      }} />)
+  }
+  return ( <Entity>
+    <a-image id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}></a-image>
+
+    <a-image id="like-image" src="#like" geometry="height: 0.3; width: 0.3" position="0 -0.50 -2" onClick={() => props.likeSubmitFn()}></a-image>
+
+    <a-image id="mic-image" src="#mic" geometry="height: 0.3; width: 0.3" position="0 0.50 -2" onClick={() => props.turnCommentsOn()}></a-image>
+
+    <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
+
+    {hiddenSphere}
 
     <Entity light={{type: 'ambient', color: '#888'}}/>
     <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
