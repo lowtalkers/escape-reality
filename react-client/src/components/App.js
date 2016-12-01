@@ -375,8 +375,8 @@ class App extends React.Component {
             self.hideComment(idx);
           }}
           scale='0 0 0'
-          // header={comment.firstName}
-          header='Kobe'
+          header={comment.firstName}
+          // header='Kobe'
           wikiName='Louvre_Pyramid'
           headerAdjust='-0.75' // lower moves it to the left, higher to the right
           text={comment.body}
