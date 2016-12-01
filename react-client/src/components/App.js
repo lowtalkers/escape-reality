@@ -200,6 +200,7 @@ class App extends React.Component {
   /** This function when invoked will submit email and password. */
   submitFn() {
     /** Grab email and password values from fields */
+    let self = this;
     const email = this.state.email;
     const password = this.state.password;
     const firstName = this.state.firstName;
@@ -214,11 +215,11 @@ class App extends React.Component {
         success: (data) => {
           console.log('Sucessful authentication', data, data.auth);
           if (data.auth) {
-            this.props.router.replace('/dashboard');
+            self.props.router.replace('/dashboard');
             // If authenticated, then get profile picture
             // from server to display it
-            this.
-            this.changeProfilePic();
+            self.getAllPhotos();
+            self.changeProfilePic();
           } else if (data === 'User exists!') {
             console.log('User exists!');
           }
@@ -428,6 +429,7 @@ class App extends React.Component {
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
       return (
               <Dashboard
+              currentUser={this.state.currentUser}
                 profilePic = {this.state.profilePic}
                 shouldHide={this.state.isUploading}
                 uploadBar={this.uploadBar.bind(this)}

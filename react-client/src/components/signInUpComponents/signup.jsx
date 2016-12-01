@@ -16,16 +16,23 @@ export default props => (
 
     <div className="centerButtons">
     <MuiThemeProvider muiTheme={getMuiTheme()}>
-    <TextField
+     <TextField
       hintText="First Name Field"
       floatingLabelText="First Name"
       onChange={event => props.onFirstChange(event)}
     />
+    </MuiThemeProvider>
+    <br />
+    <MuiThemeProvider muiTheme={getMuiTheme()}>
     <TextField
       hintText="Last Name Field"
       floatingLabelText="Last Name"
       onChange={event => props.onLastChange(event)}
     />
+    </MuiThemeProvider>
+    <br />
+    <MuiThemeProvider muiTheme={getMuiTheme()}>
+   
     <TextField
       hintText="Email Field"
       floatingLabelText="Email"
