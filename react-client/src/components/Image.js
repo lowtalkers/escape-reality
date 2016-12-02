@@ -43,11 +43,38 @@ export default props => {
       }} />)
   }
   return ( <Entity>
-    <a-image look-at="[camera]" id="close-image" src="#close" geometry="height: 0.3; width: 0.3" position="0 0 -2" onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}></a-image>
+    <a-image 
+      look-at="[camera]"
+      id="close-image"
+      src="#close"
+      geometry="height: 0.3; width: 0.3"
+      position="0 0 -2"
+      animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
+      animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
+      onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}>
+    </a-image>
 
-    <a-image look-at="[camera]" id="like-image" src="#like" geometry="height: 0.3; width: 0.3" position="0 -0.50 -2" onClick={() => props.likeSubmitFn()}></a-image>
+    <a-image 
+      look-at="[camera]"
+      id="like-image"
+      src="#like"
+      geometry="height: 0.3; width: 0.3"
+      position="0 -0.50 -2"
+      animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
+      animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
+      onClick={() => props.likeSubmitFn()}>
+    </a-image>
 
-    <a-image look-at="[camera]" id="mic-image" src={props.commentsOn ? "#micActivated" : "#mic"} geometry="height: 0.3; width: 0.3" position="0 0.50 -2" onClick={() => props.turnCommentsOn()}></a-image>
+    <a-image 
+      look-at="[camera]"
+      id="mic-image"
+      src={props.commentsOn ? "#micActivated" : "#mic"}
+      geometry="height: 0.3; width: 0.3"
+      position="0 0.50 -2"
+      animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
+      animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
+      onClick={() => props.turnCommentsOn()}>
+    </a-image>
 
     {sky}
 
