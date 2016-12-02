@@ -251,10 +251,32 @@ app.post('/like', (req, res) => {
   });
 });
 
+
 app.get('/commentData', (req, res) => {
   photoController.findOne({where: {title: req.query.photoName}}, photo => {
     commentController.findAll({where: {photo_id: photo.get('id')}}, (comments) => {
-      res.status(200).send(comments);
+      var users = [];
+      var profilePics = [];
+      comments.forEach(function(comment) {
+        var email = comment.get('email')
+        if(users.indexOf(email) === -1) {
+          users.push(email);
+        }
+      });
+      var commentData = {comments: comments};
+      console.log('**********',users,'***********');
+      var getProfilePic = function(userIndex) {
+        if(userIndex === users.length) {
+          commentData.profilePics = profilePics;
+          res.status(200).send(commentData);
+          return;
+        }
+        userController.findOne({where: {email: users[userIndex]}}, function(user) {
+          profilePics.push({name: users[userIndex].split('@')[0], picLink: user.get('profilePic')})
+          getProfilePic(userIndex + 1);
+        })
+      }
+      getProfilePic(0);
     })
   });
 });

@@ -148,7 +148,7 @@ let addBookmark = (title) => {
         {/* Main Image */}
         <Entity geometry={`primitive: circle; radius: 0.33`}
           onClick={() => props.planeClick()}
-          material={{side: 'double', src: '#profilePic', opacity: 1, shader: 'flat'}}
+          material={{side: 'double', src: props.source, opacity: 1, shader: 'flat'}}
           // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
           position={`-1.1 0.6 0.18`}
           rotation='0 0 0'
