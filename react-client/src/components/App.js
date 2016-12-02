@@ -62,7 +62,9 @@ class App extends React.Component {
       lastComment: '',
       isUploading: true,
       commentsOn: false,
-      commentPics:[]
+      commentPics:[],
+      recording: false
+
     };
   }
 
@@ -272,6 +274,11 @@ class App extends React.Component {
 
       console.log('in annyang!!!');
       annyang.start();
+
+      this.setState({
+        recording: true
+      });
+
       gCoordinates = coordinates;
 
       annyang.addCallback('result', function(phrases) {
@@ -293,6 +300,11 @@ class App extends React.Component {
 
   stopVoiceComment(phrase, coordinates) {
     annyang.abort();
+
+    this.setState({
+        recording: false
+      });
+
     //does annyang.abort wait until the voice recognition has processed before invoking commentsubmitFn?
     console.log('Phrase right after aborting is:', phrase)
     this.commentSubmitFn(phrase, coordinates);
@@ -413,7 +425,7 @@ class App extends React.Component {
         crossOrigin="anonymous"
         src={pic.picLink} />
       );
-    }); 
+    });
 
     let bigPic = '';
     if (this.state.bigPic !== '') {
@@ -495,7 +507,8 @@ class App extends React.Component {
               <a-cursor
                 animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
                 geometry="radiusInner:0.02; radiusOuter:0.03; segmentsTheta:64"
-                material="color: #61ffff; shader: flat">
+                material={"color:" + (self.state.recording ? '#FF3D00' : '#61ffff') + "; shader: flat"}
+                >
               </a-cursor>
             </Camera>
 
@@ -509,7 +522,9 @@ class App extends React.Component {
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" />
               <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" />
-              <img id="mic" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" />              
+              <img id="mic" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" />
+              <img id="micActivated" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" />
+
 
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
