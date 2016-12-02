@@ -43,7 +43,7 @@ export default props => {
       }} />)
   }
   return ( <Entity>
-    <a-image 
+    <a-image
       look-at="[camera]"
       id="close-image"
       src="#close"
@@ -54,7 +54,7 @@ export default props => {
       onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}>
     </a-image>
 
-    <a-image 
+    <a-image
       look-at="[camera]"
       id="like-image"
       src="#like"
@@ -65,7 +65,7 @@ export default props => {
       onClick={() => props.likeSubmitFn()}>
     </a-image>
 
-    <a-image 
+    <a-image
       look-at="[camera]"
       id="mic-image"
       src={props.commentsOn ? "#micActivated" : "#mic"}
