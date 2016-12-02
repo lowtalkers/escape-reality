@@ -40,7 +40,7 @@ export default props => {
   });
   return (
     <Entity>
-        <Entity animation__rot={{property: 'rotation', dur: 200000, loop: 'repeat', to: '0 360 0'}} >
+        <Entity animation__rot={{property: 'rotation', dur: 200000, loop: 'repeat', to: '0 360 0', easing: 'linear'}} >
         {pics}
         </Entity>
 
