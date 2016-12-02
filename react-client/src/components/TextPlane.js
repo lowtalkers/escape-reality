@@ -180,9 +180,9 @@ let addBookmark = (title) => {
               console.log('Within TextPlane.js, event data is:', data.detail.target.id)
               props.hidePlane();
             }}
-            geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
+            geometry={`primitive: plane; width: 0.25; height: 0.25`}
             material={{side: 'double', src: 'url(http://i.imgur.com/xgNToss.png)', opacity: 0.99, shader: 'flat'}}
-            position={`1.15 0.5 0.3`}
+            position={`1.175 0.475 0.3`}
             rotation='0 0 0'
             scale='1 1 0'
       >
