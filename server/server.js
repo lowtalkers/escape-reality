@@ -21,7 +21,7 @@ const secret = process.env.SESSION_SECRET;
 const AWSaccessKey = process.env.ACCESSKEYID;
 const AWSsecretKey = process.env.SECRETACCESSKEY;
 
-const redisClient = redis.createClient();
+// const redisClient = redis.createClient();
 const app = express();
 
 app.use(bodyParser.json({limit: '40mb'}));
@@ -180,23 +180,23 @@ app.get('/signout', (req, res) => {
  * @param  {object}    {exactWikiTitle: string}
  * @return {string}    Scrubbed first paragraph of Wikipedia article
  */
-app.get('/getWiki', (req, res) => {
-  const wikiFragment = req.query.exactWikiTitle;
-  redisClient.get(wikiFragment, function(err, reply) {
-    if (err) {
-      console.log('🍊  Error in fetching from Redis', err);
-      res.status(200).send('Error in fetching from Redis', err);
-    }
-    if (reply) {
-      console.log('🍊  Found in Redis!', wikiFragment);
-      res.status(200).send(reply);
-    }
-    if (!reply) {
-      console.log('🍊  Not found in Redis:', wikiFragment);
-      utils.fetchWiki(req, res);
-    }
-  });
-});
+// app.get('/getWiki', (req, res) => {
+//   const wikiFragment = req.query.exactWikiTitle;
+//   redisClient.get(wikiFragment, function(err, reply) {
+//     if (err) {
+//       console.log('🍊  Error in fetching from Redis', err);
+//       res.status(200).send('Error in fetching from Redis', err);
+//     }
+//     if (reply) {
+//       console.log('🍊  Found in Redis!', wikiFragment);
+//       res.status(200).send(reply);
+//     }
+//     if (!reply) {
+//       console.log('🍊  Not found in Redis:', wikiFragment);
+//       utils.fetchWiki(req, res);
+//     }
+//   });
+// });
 
 app.get('/getWikiArticleTitle', (req, res) => {
   utils.fetchArticleWikiName(req, res);
