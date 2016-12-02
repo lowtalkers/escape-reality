@@ -163,7 +163,7 @@ class App extends React.Component {
     });
   }
 
-  changeProfilePic() {
+  changeProfilePic(cb) {
     $.get({
       url: '/getUserPic',
       success: (data) => {
@@ -181,6 +181,9 @@ class App extends React.Component {
           });
         }
         console.log('Got userpic from server:', this.state.profilePic);
+        if (cb) {
+          cb()
+        }
       },
       error: (error) => {
         console.error('Error in get userPic', error);
@@ -222,8 +225,7 @@ class App extends React.Component {
             self.props.router.replace('/dashboard');
             // If authenticated, then get profile picture
             // from server to display it
-            self.getAllPhotos();
-            self.changeProfilePic();
+            self.changeProfilePic(self.getAllPhotos);
           } else if (data === 'User exists!') {
             console.log('User exists!');
           }

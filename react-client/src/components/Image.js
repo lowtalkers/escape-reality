@@ -20,7 +20,7 @@ export default props => {
   var commentCoords;
   var hiddenSphere;
   var sky = <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
-  // var bigPic = props.bigPic.split('.')[0]
+  var bigPic = props.bigPic.split('.')[0]
   // $('#' + bigPic).load(function() {
   //   sky = <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
   // })
