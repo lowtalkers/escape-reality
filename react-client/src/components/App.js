@@ -127,11 +127,12 @@ class App extends React.Component {
   }
 
   getAllPhotos() {
+    let self = this;
     $.get({
       url: '/topPics',
       success: (data) => {
         console.log('got topPics from server:', data);
-        this.setState({pics: data});
+        self.setState({pics: data});
       },
       error: (error) => {
         console.error('error in get upload', error);
@@ -141,6 +142,7 @@ class App extends React.Component {
   }
 
   getComments() {
+    let self = this;
     $.get({
       url: '/commentData',
       data: {photoName: this.state.bigPic},
@@ -151,9 +153,10 @@ class App extends React.Component {
             var coords = comment.coordinates.split(' ');
             return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body, firstName: comment.firstName, src: '#'+comment.email.split('@')[0]}
           });
-          this.setState({comments: data.comments})
-          this.setState({commentPics: data.profilePics})
-
+          self.setState({
+            comments: data.comments,
+            commentPics: data.profilePics
+          });
         }
       },
       error: (error) => {
@@ -164,23 +167,23 @@ class App extends React.Component {
   }
 
   changeProfilePic(cb) {
+    let self = this;
     $.get({
       url: '/getUserPic',
       success: (data) => {
-        this.setState({
-          currentUser: data.currentUser
-        });
-        if (data.pic) {
-          this.setState({
-            profilePic: data.pic
-          });
+        
+        if (data) {
+          self.setState({
+            profilePic: data.pic,
+            currentUser: data.currentUser
+          });          
         }
-        if (!data.pic) { // picUrl is null on account creation, so give a default pic
-          this.setState({
+        if (!data) { // picUrl is null on account creation, so give a default pic
+          self.setState({
             profilePic: 'https://s3.amazonaws.com/vrpics/default-userpic_256x256.png'
           });
         }
-        console.log('Got userpic from server:', this.state.profilePic);
+        console.log('Got userpic from server:', self.state.profilePic);
         if (cb) {
           cb()
         }
@@ -225,7 +228,7 @@ class App extends React.Component {
             self.props.router.replace('/dashboard');
             // If authenticated, then get profile picture
             // from server to display it
-            self.changeProfilePic(self.getAllPhotos);
+            self.changeProfilePic(() => {self.getAllPhotos()});
           } else if (data === 'User exists!') {
             console.log('User exists!');
           }
