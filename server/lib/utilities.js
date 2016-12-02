@@ -3,7 +3,7 @@ const redis = require('redis');
 const Entities = require('html-entities').AllHtmlEntities;
 const bookmarkController = require('../../db/controllers/bookmarks.js');
 
-const redisClient = redis.createClient();
+// const redisClient = redis.createClient();
 const entities = new Entities(); // decode strings like '&amp;'
 
 module.exports.fetchWiki = function(req, res) {
@@ -42,7 +42,7 @@ module.exports.fetchWiki = function(req, res) {
 
       // Save to Redis
       const wikiFragment = req.query.exactWikiTitle;
-      redisClient.set(wikiFragment, paragraph, redis.print);
+      // redisClient.set(wikiFragment, paragraph, redis.print);
 
       // Save to database
       bookmarkController.findOne({where: {title: wikiFragment}}, bookmark => {
