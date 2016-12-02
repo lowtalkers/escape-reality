@@ -124,6 +124,15 @@ let addBookmark = (title) => {
   });
 };
 
+let adjustTextPosition = (text, textAdjust) => {
+  text = reduceMainTextSize(text);
+  if (text.split(" ").length > 7) {
+    return (textAdjust - 0.2).toString();
+  } else {
+    return textAdjust;
+  }
+}
+
 
   return (
       <Entity
@@ -166,7 +175,7 @@ let addBookmark = (title) => {
         {/* Main Body Text */}
         <Entity bmfont-text={{align: 'left', width: '450', color: 'white', text: reduceMainTextSize(props.text)}} // Max character length = 500
           // position={adjustMainTextCoordinates(props.position, Width, Height)}
-          position={`-1 ${props.textAdjust} 0.24`}
+          position={`-1 ${adjustTextPosition(props.text, props.textAdjust)} 0.24`}
           rotation='0 0 0'
           scale='1 1 0'
         />
