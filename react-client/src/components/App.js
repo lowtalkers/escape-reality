@@ -61,7 +61,8 @@ class App extends React.Component {
       displayedComments: [],
       lastComment: '',
       isUploading: true,
-      commentsOn: false
+      commentsOn: false,
+      commentPics:[]
     };
   }
 
@@ -143,13 +144,13 @@ class App extends React.Component {
       data: {photoName: this.state.bigPic},
       success: (data) => {
         console.log('got comment data from server:', data);
-        if (data.length > 0) {
-          data = data.map(function(comment) {
-            console.log(comment.body)
+        this.setState({commentPics: data.profilePics})
+        if (data.comments.length > 0) {
+          data.comments = data.comments.map(function(comment) {
             var coords = comment.coordinates.split(' ');
-            return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body, firstName: comment.firstName}
+            return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body, firstName: comment.firstName, src: '#'+comment.email.split('@')[0]}
           });
-          this.setState({comments: data})
+          this.setState({comments: data.comments})
         }
       },
       error: (error) => {
@@ -366,6 +367,7 @@ class App extends React.Component {
             self.showComment(idx);
           }}
           commentID= {idx}
+          source={comment.src}
           position={`${Number(comment.x)} ${Number(comment.y)} ${Number(comment.z)}`}
           rotation="0 0 0"
           hidePlane={() => {
@@ -404,6 +406,14 @@ class App extends React.Component {
         src={resizedImageLink} />
       );
     });
+
+    const commentPics = this.state.commentPics.map(pic => {
+      return (
+        <img id={pic.name}
+        crossOrigin="anonymous"
+        src={pic.picLink} />
+      );
+    }); 
 
     let bigPic = '';
     if (this.state.bigPic !== '') {
@@ -493,6 +503,7 @@ class App extends React.Component {
             <a-assets>
               {images}
               {bigPic}
+              {commentPics}
               <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic}/>
               <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
 

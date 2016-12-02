@@ -62,7 +62,7 @@ if (props.displayedComments.includes(props.commentID)) {
 
         id="pyramidTextPlane"
         hidePlane={props.hidePlane}
-
+        source={props.source}
         position={props.position}
         rotation="8.02 135.22 -1.15"
 
