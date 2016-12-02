@@ -181,7 +181,7 @@ let addBookmark = (title) => {
               props.hidePlane();
             }}
             geometry={`primitive: plane; width: ${Width/18}; height: ${Height/9}`}
-            material={{side: 'double', src: 'url(http://i.imgur.com/W4tbzxv.png)', opacity: 0.99, shader: 'flat'}}
+            material={{side: 'double', src: 'url(http://i.imgur.com/xgNToss.png)', opacity: 0.99, shader: 'flat'}}
             position={`1.15 0.5 0.3`}
             rotation='0 0 0'
             scale='1 1 0'
