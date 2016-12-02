@@ -344,11 +344,9 @@ class App extends React.Component {
   }
 
   uploadBar () {
-    if (this.state.isUploading) {
-      this.setState({ isUploading: false });
-    } else {
-      this.setState({ isUploading: true });
-    }
+    this.setState({
+      isUploading: !this.state.isUploading
+    });
   }
 
 
