@@ -12,7 +12,7 @@ const style = {
 export default props => (
 
   <div className="signin">
-    <h1 className="centerText"> ImmerseVR </h1>
+    <h1 className="centerText"> Immerse </h1>
 
     <div className="centerButtons">
     <MuiThemeProvider muiTheme={getMuiTheme()}>
