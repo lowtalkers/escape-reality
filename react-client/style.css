@@ -30,3 +30,12 @@
 h1 {
   text-align: center;
 }
+
+button.vex-dialog-button-primary.vex-dialog-button.vex-first {
+  background-color: #FF3D00 !important;
+  color:white !important;
+}
+
+div.vex-content {
+  border-top: 20px solid #00BCD4 !important;
+}

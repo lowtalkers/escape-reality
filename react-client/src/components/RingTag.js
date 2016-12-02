@@ -3,7 +3,7 @@ import React from 'react';
 import 'aframe-bmfont-text-component';
 
 export default props => {
-  return ( 
+  return (
     <Entity id='RingTag' scale='.5 .5 .5'
       onClick={() => {props.clickFunction(); console.log('clickingggggG!!!!')}}
       position={props.position}
@@ -17,7 +17,7 @@ export default props => {
         position='0 0 0'
         rotation='45 0 45'
         easing='easeInOutQuad'
-        material={{color: '#61ffff', opacity: 0.6}}
+        material={{color: '#00BCD4', opacity: 0.6}}
         >
       </Entity>
       <Entity
@@ -28,7 +28,7 @@ export default props => {
         position='0 0 0'
         rotation='45 45 0'
         easing='easeInOutQuad'
-        material={{color: '#86ffff', opacity: 0.6}}
+        material={{color: '#00BCD4', opacity: 0.6}}
         >
       </Entity>
     </Entity>
