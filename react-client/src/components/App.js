@@ -287,7 +287,8 @@ class App extends React.Component {
         self.stopVoiceComment(phrases[0], gCoordinates);
         let commentObject = {
           body: phrases[0],
-          firstName: self.state.currentUser
+          firstName: self.state.currentUser,
+          src:'#profilePic'
         };
         let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
         console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
@@ -302,7 +303,8 @@ class App extends React.Component {
     annyang.abort();
 
     this.setState({
-        recording: false
+        recording: false,
+        commentsOn: !this.state.commentsOn
       });
 
     //does annyang.abort wait until the voice recognition has processed before invoking commentsubmitFn?
