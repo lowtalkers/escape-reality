@@ -26,7 +26,7 @@ export default props => {
   // })
   if(props.bigPic !== '' && props.comments.length === 0) {
     console.log('getting comments!!!!!!')
-    props.getComments();    
+    props.getComments();
   }
   if(props.commentsOn) {
     hiddenSphere = (<Entity
@@ -47,7 +47,7 @@ export default props => {
 
     <a-image look-at="[camera]" id="like-image" src="#like" geometry="height: 0.3; width: 0.3" position="0 -0.50 -2" onClick={() => props.likeSubmitFn()}></a-image>
 
-    <a-image look-at="[camera]" id="mic-image" src="#mic" geometry="height: 0.3; width: 0.3" position="0 0.50 -2" onClick={() => props.turnCommentsOn()}></a-image>
+    <a-image look-at="[camera]" id="mic-image" src={props.commentsOn ? "#micActivated" : "#mic"} geometry="height: 0.3; width: 0.3" position="0 0.50 -2" onClick={() => props.turnCommentsOn()}></a-image>
 
     {sky}
 
