@@ -146,13 +146,14 @@ class App extends React.Component {
       data: {photoName: this.state.bigPic},
       success: (data) => {
         console.log('got comment data from server:', data);
-        this.setState({commentPics: data.profilePics})
         if (data.comments.length > 0) {
           data.comments = data.comments.map(function(comment) {
             var coords = comment.coordinates.split(' ');
             return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body, firstName: comment.firstName, src: '#'+comment.email.split('@')[0]}
           });
           this.setState({comments: data.comments})
+          this.setState({commentPics: data.profilePics})
+
         }
       },
       error: (error) => {
@@ -288,7 +289,7 @@ class App extends React.Component {
         let commentObject = {
           body: phrases[0],
           firstName: self.state.currentUser,
-          src:'#profilePic'
+          src: '#profilePic'
         };
         let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
         console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
@@ -519,7 +520,7 @@ class App extends React.Component {
               {images}
               {bigPic}
               {commentPics}
-              <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic}/>
+              <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic} />
               <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" />
