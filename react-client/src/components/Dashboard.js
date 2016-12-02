@@ -87,6 +87,7 @@ const uploadFile = (props) => {
 
       if (!currentImgs.includes(fileName)) {
         currentImgs.push(fileName);
+        props.uploadBar();
         $.post({
           url: '/upload',
           data: JSON.stringify({
@@ -118,7 +119,6 @@ const uploadFile = (props) => {
         fileName = this.files[0].name;
         console.log(fileName);
         reader.onload = imageIsLoaded;
-        props.uploadBar();
         reader.readAsDataURL(this.files[0]);
       }
     });
@@ -171,10 +171,10 @@ export default props => {
       </MuiThemeProvider>
 
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-          <LinearProgress className={props.shouldHide ? 'hidden' : ''} mode="indeterminate" />
+          <LinearProgress color='#FF3D00' className={props.shouldHide ? 'hidden' : ''} mode="indeterminate" />
       </MuiThemeProvider>
 
-      <h1 className="centerText"> ImmerseVr </h1>
+      <h1 className="centerText"> Immerse </h1>
 
       <div className="centerButtons">
       <Link to="/lobby">
