@@ -1,4 +1,8 @@
-<h1 align="center"> Immerse </h1>
+# Immerse
+
+> Immerse yourself virtually into your friends 360 degree photos
+> Add voice-comments on your favorite pictures
+> Upload your own pictures
 
  <p align="center"> Lobby </p>
 
