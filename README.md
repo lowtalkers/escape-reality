@@ -1,6 +1,22 @@
-# Escape
+<h1 align="center"> Immerse </h1>
 
-> Escape from the stress of everyday life and explore the world around you
+ <p align="center"> Lobby </p>
+
+![Lobby](./diagrams/lobby.png?raw=true "Homepage")
+
+ <p align="center"> Signin Page </p>
+
+![Signin](./diagrams/signin.png?raw=true "Signin")
+
+ <p align="center"> LobbyFirst </p>
+
+![LobbyFirst](./diagrams/lobbyfirst.png?raw=true "Homepage")
+
+ <p align="center"> Timeline </p>
+
+![Signin](./diagrams/view.png?raw=true "Signin")
+
+
 
 ## Team
 
