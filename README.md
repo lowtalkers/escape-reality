@@ -4,7 +4,7 @@
 > Add voice-comments on your favorite pictures
 > Upload your own pictures
 
- <p align="center"> Lobby </p>
+ <p align="center"> Explore Timeline </p>
 
 ![Lobby](./diagrams/lobby.jpg?raw=true "Lobby")
 
@@ -12,7 +12,7 @@
 
 ![View](./diagrams/view.jpg?raw=true "view")
 
- <p align="center"> Comments </p>
+ <p align="center"> Photo View with Comment </p>
 
 ![Comment](./diagrams/comment.jpg?raw=true "Comment")
 
@@ -20,7 +20,7 @@
 
 ![Signin](./diagrams/signin.png?raw=true "Signin")
 
- <p align="center"> LobbyFirst </p>
+ <p align="center"> Main Lobby </p>
 
 ![LobbyFirst](./diagrams/lobbyfirst.png?raw=true "LobbyFirst")
 
