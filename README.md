@@ -1,8 +1,6 @@
 # Immerse
 
-> Immerse yourself virtually into your friends 360 degree photos
-> Add voice-comments on your favorite pictures
-> Upload your own pictures
+> <p> Immerse yourself virtually into your friends 360 degree photos. </p> <p> Use our voice-recongition feature to add comments on your friends photos. </p> <p> Upload your own pictures so your friends can join you. </p>
 
  <p align="center"> Explore Timeline </p>
 
