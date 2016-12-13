@@ -1,25 +1,24 @@
 <h1 align="center"> Immerse </h1>
 
+ <p align="center"> Lobby </p>
+
+![Lobby](./diagrams/lobby.jpg?raw=true "Lobby")
+
+ <p align="center"> Photo View </p>
+
+![View](./diagrams/view.jpg?raw=true "view")
+
+ <p align="center"> Comments </p>
+
+![Comment](./diagrams/comment.jpg?raw=true "Comment")
+
  <p align="center"> Signin Page </p>
 
 ![Signin](./diagrams/signin.png?raw=true "Signin")
 
  <p align="center"> LobbyFirst </p>
 
-![LobbyFirst](./diagrams/lobbyfirst.png?raw=true "Homepage")
-
- <p align="center"> Lobby </p>
-
-![Lobby](./diagrams/lobby.jpg?raw=true "Homepage")
-
- <p align="center"> Photo View </p>
-
-![Signin](./diagrams/view.jpg?raw=true "Signin")
-
- <p align="center"> Comments </p>
-
-![Signin](./diagrams/comment.jpg?raw=true "Signin")
-
+![LobbyFirst](./diagrams/lobbyfirst.png?raw=true "LobbyFirst")
 
 
 ## Team
@@ -74,12 +73,6 @@ View the project roadmap [here](https://github.com/lowtalkers/escape-reality/iss
 Database in MariaDB, using Sequelize ORM
 <p align="center">
   <img src="/diagrams/schema.png?raw=true"/>
-</p>
-
-## API
-##### Public End Points
-<p align="center">
-  <img src="/diagrams/routes.png?raw=true"/>
 </p>
 
 ## Deployment
