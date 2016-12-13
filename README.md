@@ -1,9 +1,5 @@
 <h1 align="center"> Immerse </h1>
 
- <p align="center"> Lobby </p>
-
-![Lobby](./diagrams/lobby.png?raw=true "Homepage")
-
  <p align="center"> Signin Page </p>
 
 ![Signin](./diagrams/signin.png?raw=true "Signin")
@@ -12,9 +8,17 @@
 
 ![LobbyFirst](./diagrams/lobbyfirst.png?raw=true "Homepage")
 
- <p align="center"> Timeline </p>
+ <p align="center"> Lobby </p>
 
-![Signin](./diagrams/view.png?raw=true "Signin")
+![Lobby](./diagrams/lobby.jpg?raw=true "Homepage")
+
+ <p align="center"> Photo View </p>
+
+![Signin](./diagrams/view.jpg?raw=true "Signin")
+
+ <p align="center"> Comments </p>
+
+![Signin](./diagrams/comment.jpg?raw=true "Signin")
 
 
 
