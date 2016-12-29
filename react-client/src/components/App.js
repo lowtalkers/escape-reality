@@ -151,7 +151,7 @@ class App extends React.Component {
         if (data.comments.length > 0) {
           data.comments = data.comments.map(function(comment) {
             var coords = comment.coordinates.split(' ');
-            return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body, firstName: comment.firstName, src: '#'+comment.email.split('@')[0]}
+            return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body, firstName: comment.firstName, createdAt: new Date(comment.createdAt), src: '#'+comment.email.split('@')[0]}
           });
           self.setState({
             comments: data.comments,
@@ -376,6 +376,7 @@ class App extends React.Component {
     console.log(self.state.comments)
     return (
       self.state.comments.map((comment, idx) => {
+        console.log('While mapping the fetched comments, the current comment is:', comment);
         return (
         <UnifiedComponent
          look-at="[camera]"
@@ -404,6 +405,7 @@ class App extends React.Component {
           imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
           displayedComments={self.state.displayedComments}
           profilePic={self.state.profilePic}
+          createdAt={comment.createdAt}
         />
       )})
     )
