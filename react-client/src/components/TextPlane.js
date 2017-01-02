@@ -143,12 +143,8 @@ let formatDate = (string) => {
   return `${splitArray[1]} ${splitArray[2]} ${splitArray[3]} at ${formatTime(splitArray[4])}`;
 }
 
-let adjustTimestampPosition = (text, textAdjust, timestamp) => {
-  if (text.split(" ").length > 7) {
-    return (textAdjust ).toString();
-  } else {
-    return textAdjust;
-  }
+let adjustTimestampPosition = (textAdjust) => {
+  return (textAdjust - 0.5).toString();
 }
 
   return (
@@ -203,7 +199,7 @@ let adjustTimestampPosition = (text, textAdjust, timestamp) => {
       {/* Timestamp */}
         <Entity bmfont-text={{align: 'left', width: '450', color: 'white', text: formatDate(props.createdAt.toString())}} // Max character length = 500
           // position={adjustMainTextCoordinates(props.position, Width, Height)}
-          position={`-0.25 ${adjustTimestampPosition(props.text, (props.textAdjust - 0.5))} 0.24`}
+          position={`-0.25 ${adjustTimestampPosition(props.textAdjust)} 0.24`}
           rotation='0 0 0'
           scale='0.75 0.75 0'
         />
