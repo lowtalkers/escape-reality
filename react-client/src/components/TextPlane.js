@@ -133,6 +133,19 @@ let adjustTextPosition = (text, textAdjust) => {
   }
 }
 
+let formatTime = (string) => {
+  let splitArray = string.split(':');
+  return Number(splitArray[0]) > 12 ? `${Number(splitArray[0]) -12}:${splitArray[1]}pm` : `${Number(splitArray[0])}${splitArray[1]}am`
+}
+
+let formatDate = (string) => {
+  let splitArray = string.split(' ');
+  return `${splitArray[1]} ${splitArray[2]} ${splitArray[3]} at ${formatTime(splitArray[4])}`;
+}
+
+let adjustTimestampPosition = (textAdjust) => {
+  return (textAdjust - 0.5).toString();
+}
 
   return (
       <Entity
@@ -181,6 +194,14 @@ let adjustTextPosition = (text, textAdjust) => {
           position={`-1 ${adjustTextPosition(props.text, props.textAdjust)} 0.24`}
           rotation='0 0 0'
           scale='1 1 0'
+        />
+
+      {/* Timestamp */}
+        <Entity bmfont-text={{align: 'left', width: '450', color: 'white', text: formatDate(props.createdAt.toString())}} // Max character length = 500
+          // position={adjustMainTextCoordinates(props.position, Width, Height)}
+          position={`-0.25 ${adjustTimestampPosition(props.textAdjust)} 0.24`}
+          rotation='0 0 0'
+          scale='0.75 0.75 0'
         />
 
       </Entity>

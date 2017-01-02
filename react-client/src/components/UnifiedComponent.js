@@ -75,6 +75,7 @@ if (props.displayedComments.includes(props.commentID)) {
         imageSrc={props.imageSrc}
         commentID={props.commentID}
         profilePic={props.profilePic}
+        createdAt={props.createdAt}
       />
 
   </Entity>
