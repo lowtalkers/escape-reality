@@ -84,7 +84,11 @@ export default props => {
       position="0 1.5 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
-      onClick={() => console.log('Heyoo input form icon clicked')}>
+      onClick={() => {
+                let comment = prompt('Heyoo input form icon clicked, response?');
+                console.log('User submitted comment:', comment);
+              }
+      }>
     </a-image>
 
     {sky}
