@@ -1,3 +1,5 @@
+"use strict";
+
 const request = require('request');
 const redis = require('redis');
 const Entities = require('html-entities').AllHtmlEntities;
