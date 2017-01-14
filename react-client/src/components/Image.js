@@ -43,7 +43,7 @@ export default props => {
       }} />)
   }
 
-  if(props.turnTypedCommentsOn) {
+  if(props.typedCommentsOn) {
     hiddenSphere = (<Entity
 
       rotation="0 180 0"
@@ -55,6 +55,7 @@ export default props => {
         console.log('Within turnTypedCommentsOn, commentCoords:', commentCoords);
         // props.changeCommentMode();
         props.addTypedComment(commentCoords);
+        props.getComments();
       }} />)
   }
 

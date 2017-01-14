@@ -442,6 +442,8 @@ class App extends React.Component {
     let imageName = '';
     let resizedImageLink = '';
 
+    console.log('HELLO I AM RENDERING NOW');
+
     const images = this.state.pics.map(pic => {
       imageName = pic.title.split('.')[0];
       resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + pic.title;
