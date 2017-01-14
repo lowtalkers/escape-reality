@@ -65,6 +65,7 @@ class App extends React.Component {
       commentsOn: false,
       commentPics:[],
       recording: false,
+      typedCommentsOn: false,
       typedCommentBox: true
 		};
   }
@@ -326,9 +327,11 @@ class App extends React.Component {
   }
 
   addTypedComment (coordinates) {
+  	let self = this;
+  	let comment = prompt('Please enter your comment (max: 50 characters!');
   	counter++;
   	let commentObject = {
-  	  body: phrases[0],
+  	  body: comment,
   	  firstName: self.state.currentUser,
   	  src: '#profilePic'
   	};
@@ -384,6 +387,12 @@ class App extends React.Component {
     this.setState({
       commentsOn: !this.state.commentsOn
     });
+  }
+
+  turnTypedCommentsOn () {
+  	this.setState({
+  		typedCommentsOn: !this.state.typedCommentsOn
+  	})
   }
 
   renderComments () {
@@ -506,11 +515,14 @@ class App extends React.Component {
                     comments={this.state.comments}
                     getComments={this.getComments.bind(this)}
                     addComment={this.addComment.bind(this)}
+                    addTypedComment={this.addTypedComment.bind(this)}
                     voiceComment={this.voiceComment.bind(this)}
                     stopVoiceComment={this.stopVoiceComment.bind(this)}
                     clearComments={this.clearComments.bind(this)}
                     commentsOn={this.state.commentsOn}
                     turnCommentsOn={this.turnCommentsOn.bind(this)}
+                    typedCommentsOn={this.state.typedCommentsOn}
+                    turnTypedCommentsOn={this.turnTypedCommentsOn.bind(this)}
                   />
 
       }
