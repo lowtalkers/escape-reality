@@ -1,3 +1,5 @@
+"use strict";
+
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const metadata = require('../package.json');
@@ -17,6 +19,7 @@ const likeController = require('../db/controllers/likes.js');
 const commentController = require('../db/controllers/comments.js');
 
 const port = process.env.NODE_PORT;
+// const port = 3000;
 const secret = process.env.SESSION_SECRET;
 const AWSaccessKey = process.env.ACCESSKEYID;
 const AWSsecretKey = process.env.SECRETACCESSKEY;
@@ -32,7 +35,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
-const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/lobby', 'getUserPic'];
+const routes = ['/', '/signup', '/signin', '/dashboard', '/bookmarks', '/lobby', '/textComment', 'getUserPic'];
 
 for (const route of routes) {
   app.get(route, userController.checkAuth, (req, res) => {

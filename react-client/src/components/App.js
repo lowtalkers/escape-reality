@@ -27,6 +27,7 @@ import Hack from './Hack';
 import TextPlane from './TextPlane';
 import RingTag from './RingTag';
 import UnifiedComponent from './UnifiedComponent';
+import InputForm from './InputForm';
 
 import SignUp from './signInUpComponents/signup.jsx';
 import SignIn from './signInUpComponents/signin.jsx';
@@ -63,9 +64,9 @@ class App extends React.Component {
       isUploading: true,
       commentsOn: false,
       commentPics:[],
-      recording: false
-
-    };
+      recording: false,
+      typedCommentBox: true
+		};
   }
 
    /**This function is used to enforce the board rules and changes the class of currently selected letters for UI.
@@ -324,6 +325,20 @@ class App extends React.Component {
     this.voiceComment(coordinates);
   }
 
+  addTypedComment (coordinates) {
+  	counter++;
+  	let commentObject = {
+  	  body: phrases[0],
+  	  firstName: self.state.currentUser,
+  	  src: '#profilePic'
+  	};
+  	let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
+  	console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
+  	self.setState({
+  	  comments: self.state.comments.concat([newObject])
+  	});
+  }
+
   changeBigPic (val) {
     this.setState({
       bigPic: val
@@ -459,12 +474,16 @@ class App extends React.Component {
         );
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
       return (
+      				
               <Dashboard
               currentUser={this.state.currentUser}
                 profilePic = {this.state.profilePic}
                 shouldHide={this.state.isUploading}
                 uploadBar={this.uploadBar.bind(this)}
               />
+              
+
+              // <InputForm />
       );
 
     } else {
@@ -536,11 +555,148 @@ class App extends React.Component {
 
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
+              <img id="input" crossOrigin="anonymous" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Text-txt.svg/822px-Text-txt.svg.png" />
 
             </a-assets>
             {vrView}
 
             {this.renderComments()}
+
+            {self.state.typedCommentBox ? 
+            	/*
+            	<UnifiedComponent
+            	 look-at="[camera]"
+            	  clickFunction={() => {
+            	    console.log('Onclick event is currently:', event)
+            	    console.log('ID ')
+            	    self.showComment(idx);
+            	  }}
+            	  commentID= {idx}
+            	  source={comment.src}
+            	  position={`${Number(comment.x)} ${Number(comment.y)} ${Number(comment.z)}`}
+            	  rotation="0 0 0"
+            	  hidePlane={() => {
+            	    // console.log('Hiding plane now... Data is:')
+            	    // self.setState({showComment: false});
+            	    self.getAllPhotos();
+            	    self.hideComment(idx);
+            	  }}
+            	  scale='0 0 0'
+            	  header={comment.firstName}
+            	  // header='Kobe'
+            	  wikiName='Louvre_Pyramid'
+            	  headerAdjust='-0.75' // lower moves it to the left, higher to the right
+            	  text={comment.body}
+            	  textAdjust='-0.1' //lower moves this down, higher moves this up
+            	  imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
+            	  displayedComments={self.state.displayedComments}
+            	  profilePic={self.state.profilePic}
+            	  createdAt={comment.createdAt}
+            	/>
+							*/
+
+
+							//Form components
+							/*
+							<Entity
+								position="0 0 -2"
+								rotation="0 0 0"
+							>
+								<div onSubmit={(event) => {
+									event.preventDefault();
+									console.log('CommentText submitted! Body:' + document.getElementsByName('CommentText')[0].value);
+									}}>
+							  	<h1>Hello, world.</h1>
+							  	<form>Comment: <input name="CommentText" />
+							  	<button>Submit</button>
+							  	</form>
+							  </div>
+							 </Entity>
+            	*/
+
+            	//Test Component
+            	/*
+            	<Entity
+            		position="0 0 -2"
+            		rotation="0 0 0"
+            		geometry="primitive: plane; height: 2; width: 2"
+            		material="color: black"
+            	/>
+							*/
+
+							//Test UnifiedComponent
+							/*
+							<UnifiedComponent
+							  look-at="[camera]"
+							  clickFunction={() => {
+							    console.log('Onclick event is currently:', event)
+							    console.log('ID ')
+							    // self.showComment(idx);
+							  }}
+							  commentID= "0"
+							  source="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Assembled_Google_Cardboard_VR_mount.jpg/1024px-Assembled_Google_Cardboard_VR_mount.jpg"
+							  position="0 0 -2"
+							  rotation="0 0 0"
+							  hidePlane={() => {
+							    // console.log('Hiding plane now... Data is:')
+							    // self.setState({showComment: false});
+
+							    // self.getAllPhotos();
+							    // self.hideComment(idx);
+							    console.log('hidePlane function invoked')
+							  }}
+							  scale='0 0 0'
+							  header='Test User'
+							  // header='Kobe'
+							  wikiName='Louvre_Pyramid'
+							  headerAdjust='-0.75' // lower moves it to the left, higher to the right
+							  text="Test Comment"
+							  textAdjust='-0.1' //lower moves this down, higher moves this up
+							  imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
+							  displayedComments={self.state.displayedComments}
+							  profilePic={self.state.profilePic}
+							  createdAt="2016-12-01 20:39:59"
+							/>
+							*/
+
+							//Sample TextPlane
+							/*
+							<TextPlane 
+							  planeClick={() => console.log('displayedComments is currentlyyyy:')}
+
+							  id="sampleFormTextPlane"
+							  source="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Assembled_Google_Cardboard_VR_mount.jpg/1024px-Assembled_Google_Cardboard_VR_mount.jpg"
+							  position="0 0 -2"
+							  rotation="0 0 0"
+							  hidePlane={() => {
+							    // console.log('Hiding plane now... Data is:')
+							    // self.setState({showComment: false});
+
+							    // self.getAllPhotos();
+							    // self.hideComment(idx);
+							    console.log('hidePlane function invoked')
+							  }}
+
+							  scale='0 0 0'
+							  header='Test User'
+							  // header='Kobe'
+							  wikiName='Louvre_Pyramid'
+							  headerAdjust='-0.75' // lower moves it to the left, higher to the right
+							  text="Test Comment"
+							  textAdjust='-0.1' //lower moves this down, higher moves this up
+							  imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
+							  commentID="0"
+							  profilePic={self.state.profilePic}
+							  createdAt="Sat Jan 14 2017 00:46:14 GMT-0800 (PST)"
+							/>
+							*/
+
+							null
+
+            	:
+
+            	null
+            }
 
 
 

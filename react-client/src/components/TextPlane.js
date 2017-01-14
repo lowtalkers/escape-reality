@@ -134,11 +134,13 @@ let adjustTextPosition = (text, textAdjust) => {
 }
 
 let formatTime = (string) => {
+  // console.log('BLAHHDEEBLAH formatTime string:' + string);
   let splitArray = string.split(':');
   return Number(splitArray[0]) > 12 ? `${Number(splitArray[0]) -12}:${splitArray[1]}pm` : `${Number(splitArray[0])}${splitArray[1]}am`
 }
 
 let formatDate = (string) => {
+  console.log('BLAHHDEEBLEEE formatDate string:' + string);
   let splitArray = string.split(' ');
   return `${splitArray[1]} ${splitArray[2]} ${splitArray[3]} at ${formatTime(splitArray[4])}`;
 }

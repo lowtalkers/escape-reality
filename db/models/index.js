@@ -4,7 +4,7 @@ const dbHost = process.env.DB_HOST;
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASS;
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(db, dbUser, dbPassword, {
+const sequelize = new Sequelize('escape', dbUser, dbPassword, {
   dialect: 'mariadb',
   host: dbHost
 });

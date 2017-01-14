@@ -5,6 +5,7 @@ react-client/build/
 
 # environment file that stores API keys
 .env
+server/.env
 
 # Redis database
 dump.rdb
