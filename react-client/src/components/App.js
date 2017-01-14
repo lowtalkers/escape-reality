@@ -330,6 +330,7 @@ class App extends React.Component {
   	let self = this;
   	let comment = prompt('Please enter your comment (max: 50 characters!');
   	counter++;
+  	this.commentSubmitFn(comment, coordinates);
   	let commentObject = {
   	  body: comment,
   	  firstName: self.state.currentUser,
@@ -397,7 +398,7 @@ class App extends React.Component {
 
   renderComments () {
     let self = this;
-    console.log(self.state.comments)
+    console.log('self.state.comments equals:', self.state.comments)
     return (
       self.state.comments.map((comment, idx) => {
         console.log('While mapping the fetched comments, the current comment is:', comment);
