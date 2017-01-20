@@ -570,7 +570,7 @@ class App extends React.Component {
 
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
-              <img id="input" crossOrigin="anonymous" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Text-txt.svg/822px-Text-txt.svg.png" />
+              <img id="input" crossOrigin="anonymous" src="http://i.imgur.com/jRdxNpi.png" />
 
             </a-assets>
             {vrView}
@@ -629,15 +629,52 @@ class App extends React.Component {
 							 </Entity>
             	*/
 
-            	//Test Component
+
+
+
+
+            	//Test Plain Component
             	/*
             	<Entity
-            		position="0 0 -2"
+            		position="0 0 -3"
             		rotation="0 0 0"
-            		geometry="primitive: plane; height: 2; width: 2"
+            		geometry="primitive: plane; height: 0.5; width: 0.5"
             		material="color: black"
             	/>
 							*/
+
+							//Test Form
+							/*
+							<Entity position="0 0 -3" rotation="0 0 0">
+								<div onSubmit={(event) => {
+									event.preventDefault();
+									console.log('CommentText submitted! Body:' + document.getElementsByName('CommentText')[0].value);
+								}}>
+							  	<h1>Please enter your comment:</h1>
+							  	<form>Comment: <input name="CommentText" />
+							  	<button>Submit</button>
+							  	</form>
+							  </div>
+							 </Entity>
+							*/
+
+							 //Second Test Form
+							/*
+            	<Entity 
+            		// bmfont-text={{align: 'left', width: '750', color: 'yellow', text: "Testing"}}
+            	  // position={adjustHeaderTextCoordinates(props.position, Width, Height)}
+            	  input={{color: 'red', text: "Test Form"}}
+            	  position='0 1 -2'
+            	  rotation='0 0 0'
+            	  scale='1.85 1.85 0'
+            	/>
+							*/
+
+
+
+
+
+
 
 							//Test UnifiedComponent
 							/*
