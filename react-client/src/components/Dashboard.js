@@ -193,7 +193,7 @@ export default props => {
             <Avatar src={props.profilePic} style={{right: '15%'}} />
           </ToolbarGroup>
           <ToolbarGroup>
-            <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} style={{ top: '5px', right: '5%', color: 'white'}}/>
+            <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} style={{ top: '5px', color: 'white'}}/>
           </ToolbarGroup>
 
         </Toolbar>
