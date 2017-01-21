@@ -57,7 +57,12 @@ export default props => (
 
         <div>
             <p className="fancyText"> No account yet? </p>
-            <Link to="/signup" className="fancyText"> Sign up here</Link>
+            <Link to="/signup" className="fancyText" style={{color: 'white'}}> Sign up here</Link>
+        </div>
+
+        <div>
+            <p className="fancyText"> Or </p>
+            <Link to="/test" className="fancyText" style={{color: 'white'}}> Continue As Guest </Link>
         </div>
       </div>
     </div>
