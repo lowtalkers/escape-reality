@@ -220,7 +220,7 @@ class App extends React.Component {
     const lastName = this.state.lastName;
 
     /** Submit email and password for verification */
-    if (isEmail(email)) {
+    if (isEmail(email) && !self.state.guestLogin) {
       $.post({
         url: this.props.router.location.pathname,
         contentType: 'application/json',
@@ -241,6 +241,28 @@ class App extends React.Component {
           $('.error').show();
         },
       });
+    } else if (isEmail(email)) {
+      $.post({
+        url: this.props.router.location.pathname,
+        contentType: 'application/json',
+        data: JSON.stringify({email: 'guest@guest.com', password: 'guest', firstName: 'Guest', lastName: ''}),
+        success: (data) => {
+          console.log('Sucessful GUEST authentication', data, data.auth);
+          if (data.auth) {
+            self.props.router.replace('/dashboard');
+            // If authenticated, then get profile picture
+            // from server to display it
+            self.changeProfilePic(() => {self.getAllPhotos()});
+          } else if (data === 'User exists!') {
+            console.log('User exists!');
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          $('.error').show();
+        },
+      });
+
     } else {
       console.log('Not a valid email')
     }

@@ -34,6 +34,7 @@ export default props => (
         <TextField
           hintText="Email Field"
           floatingLabelText="Email"
+          style={{color: 'white'}}
           onChange={event => props.onEmailChange(event)}
         />
         </MuiThemeProvider>
