@@ -155,6 +155,18 @@ const style = {
   margin: 12,
 };
 
+const backgroundStyle = {
+  // backgroundImage: 'url("http://i.imgur.com/uTYax11.jpg")',
+  // backgroundSize: 'cover',
+  // backgroundRepeat: 'no-repeat',
+  // backgroundPosition: '50% 50%',
+  backgroundSize: 'cover',
+  position: 'fixed',
+  flex: 1,
+  height: '100%',
+  width: '100%',
+}
+
 const overlayStyle = {
   // position: 'fixed',
   top: '50%',
@@ -168,6 +180,11 @@ export default props => {
 
   return (
     <div>
+
+      <img 
+        style={backgroundStyle}
+        src={'http://i.imgur.com/1ZEHnrH.jpg'}
+      />
 
       <div>
         <MuiThemeProvider muiTheme={getMuiTheme()}>
