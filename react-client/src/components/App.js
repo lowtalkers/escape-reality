@@ -66,7 +66,8 @@ class App extends React.Component {
       commentPics:[],
       recording: false,
       typedCommentsOn: false,
-      typedCommentBox: true
+      typedCommentBox: true,
+      guestLogin: false
 		};
   }
 
@@ -482,6 +483,7 @@ class App extends React.Component {
           onEmailChange={this.onEmailChange.bind(this)}
           onPasswordChange={this.onPasswordChange.bind(this)}
           submitFn={this.submitFn.bind(this)}
+          guestLogin={this.state.guestLogin}
           />
         );
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
