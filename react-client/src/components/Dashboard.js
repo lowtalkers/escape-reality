@@ -25,32 +25,6 @@ import {
   purple500,
 } from 'material-ui/styles/colors';
 
-const styles = {
-  button: {
-    margin: 12,
-    fontFamily: 'Orbitron !important',
-    backgroundColor: '#e8e8e8',
-    color: 'black !important'
-  },
-  exampleImageInput: {
-    cursor: 'pointer',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    width: '100%',
-    opacity: 0,
-  },
-  exploreButton: {
-    fontFamily: 'Orbitron',
-  },
-};
-
-const style = {
-  margin: 12,
-};
-
 const injectTapEventPlugin = require("react-tap-event-plugin");
 injectTapEventPlugin();
 
@@ -151,21 +125,40 @@ const signOut = () => {
   });
 };
 
-const backgroundStyle = {
-  // backgroundImage: 'url("http://i.imgur.com/uTYax11.jpg")',
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: '50% 50%',
-  position: 'fixed',
-  top: '5px',
-  left: '5px',
-  flex: 1
-}
+const styles = {
+  button: {
+    margin: 12,
+    fontFamily: 'Orbitron !important',
+    backgroundColor: '#e8e8e8',
+    color: 'black !important'
+  },
+  exampleImageInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0,
+  },
+  exploreButton: {
+    fontFamily: 'Orbitron',
+    color: 'white',
+    top: '15%',
+    left: '15%',
+    // position: 'absolute'
+  },
+};
+
+const style = {
+  margin: 12,
+};
 
 const overlayStyle = {
-  position: 'fixed',
-  top: '275px',
-  left: '450px',
+  // position: 'fixed',
+  top: '50%',
+  left: '25%',
 }
 
 //     <div style={backgroundStyle}>
@@ -176,19 +169,14 @@ export default props => {
   return (
     <div>
 
-      <img 
-        style={backgroundStyle}
-        src={'http://i.imgur.com/uTYax11.jpg'}
-      />
-
-      <div style={overlayStyle}>
+      <div>
         <MuiThemeProvider muiTheme={getMuiTheme()}>
         <Toolbar >
           <ToolbarGroup>
-            <Avatar src={props.profilePic} />
+            <Avatar src={props.profilePic} style={{right: '15%'}} />
           </ToolbarGroup>
           <ToolbarGroup>
-            <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} />
+            <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} style={{ top: '5px', right: '5%', color: 'white'}}/>
           </ToolbarGroup>
 
         </Toolbar>
@@ -198,7 +186,7 @@ export default props => {
             <LinearProgress color='#FF3D00' className={props.shouldHide ? 'hidden' : ''} mode="indeterminate" />
         </MuiThemeProvider>
 
-        <h1 className="centerText" style={{color: 'white', textShadowColor: 'black', textShadowRadius: 1}}> Immerse</h1>
+        <h1 className="centerText" style={{color: 'white', top: '15px',  position: 'absolute', width:'100%', textAlign: 'center', fontSize: '100px'}}> Immerse</h1>
 
         <div className="centerButtons">
         <Link to="/lobby">
