@@ -419,6 +419,14 @@ class App extends React.Component {
   	})
   }
 
+  toggleGuestLogin (callback) {
+    console.log('Toggled toggleGuestLogin!')
+    this.setState({
+      guestLogin: !this.state.guestLogin
+    })
+    setTimeout(callback, 250);
+  }
+
   renderComments () {
     let self = this;
     console.log('self.state.comments equals:', self.state.comments)
@@ -506,6 +514,7 @@ class App extends React.Component {
           onPasswordChange={this.onPasswordChange.bind(this)}
           submitFn={this.submitFn.bind(this)}
           guestLogin={this.state.guestLogin}
+          toggleGuestLogin={this.toggleGuestLogin.bind(this)}
           />
         );
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
@@ -772,6 +781,21 @@ class App extends React.Component {
             	:
 
             	null
+            }
+
+
+              {self.state.guestLogin? 
+
+              <Entity
+                position="0 2 -3"
+                rotation="0 0 0"
+                geometry="primitive: plane; height: 0.5; width: 0.5"
+                material="color: red"
+              />
+
+              :
+
+              null
             }
 
 

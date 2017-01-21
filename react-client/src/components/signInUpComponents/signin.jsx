@@ -63,7 +63,10 @@ export default props => (
 
         <div>
             <p className="fancyText"> Or </p>
-            <Link to="/test" className="fancyText" style={{color: 'white'}} onClick={() => console.log('Continue as Guest clicked!')}> Continue As Guest </Link>
+            <div className="fancyText" style={{color: 'white', textDecoration: 'underline', cursor: "pointer"}} onClick={() => {
+              console.log('Continue as Guest clicked!');
+              props.toggleGuestLogin(props.submitFn);
+            }}> Continue As Guest </div>
         </div>
       </div>
     </div>
