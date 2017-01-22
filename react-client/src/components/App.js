@@ -169,6 +169,39 @@ class App extends React.Component {
     });
   }
 
+  getCreatedAt(newObject) {
+    let self = this;
+    let output;
+    $.get({
+      url: '/commentData',
+      data: {photoName: this.state.bigPic},
+      success: (data) => {
+        let finalElement = data.comments[data.comments.length - 1];
+        console.log('got comment data from server:', data, 'final element:', finalElement);
+        if (data.comments.length > 0) {
+          output = new Date(finalElement.createdAt);
+          console.log('Boi stop getCreatedAt actually ran and its output isss:', output);
+          // return output;
+
+          console.log('Bzzz output is:', output);
+          newObject['createdAt'] = output;
+          console.log('99999 newObject is:', newObject);
+          self.setState({
+            comments: self.state.comments.concat([newObject])
+          });
+
+        }
+      },
+      error: (error) => {
+        console.error('error in get upload', error);
+        $('.error').show();
+      }
+    });
+
+
+
+  }
+
   changeProfilePic(cb) {
     let self = this;
     $.get({
@@ -207,7 +240,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate () {
-    console.log('After rendering, current comment mode:', this.state.addCommentMode)
+    console.log('After rendering, current comment mode:', this.state.addCommentMode, 'and comments are:', this.state.comments)
   }
 
   /** This function when invoked will submit email and password. */
@@ -341,9 +374,8 @@ class App extends React.Component {
         };
         let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
         console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
-        self.setState({
-          comments: self.state.comments.concat([newObject])
-        });
+        // self.getComments();
+        self.getCreatedAt(newObject);
       }, this);
     }
   }
@@ -371,17 +403,18 @@ class App extends React.Component {
   	let self = this;
   	let comment = prompt('Please enter your comment (max: 50 characters!');
   	counter++;
-  	this.commentSubmitFn(comment, coordinates);
-  	let commentObject = {
-  	  body: comment,
-  	  firstName: self.state.currentUser,
-  	  src: '#profilePic'
-  	};
-  	let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
-  	console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
-  	self.setState({
-  	  comments: self.state.comments.concat([newObject])
-  	});
+    let commentObject = {
+      body: comment,
+      firstName: self.state.currentUser,
+      src: '#profilePic'
+    };
+    let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
+    console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
+  	self.commentSubmitFn(comment, coordinates);
+    turnTypedCommentsOn();
+    self.setState({
+      comments: self.state.comments.concat([newObject])
+    });
   }
 
   changeBigPic (val) {
@@ -626,7 +659,7 @@ class App extends React.Component {
             </a-assets>
             {vrView}
 
-            {this.renderComments()}
+            {self.renderComments()}
 
             {self.state.typedCommentBox ? 
             	/*

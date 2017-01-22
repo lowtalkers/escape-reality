@@ -55,7 +55,7 @@ export default props => {
         console.log('Within turnTypedCommentsOn, commentCoords:', commentCoords);
         // props.changeCommentMode();
         props.addTypedComment(commentCoords);
-        props.getComments();
+        // props.getComments();
       }} />)
   }
 
