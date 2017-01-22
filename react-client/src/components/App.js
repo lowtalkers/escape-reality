@@ -221,6 +221,7 @@ class App extends React.Component {
 
     /** Submit email and password for verification */
     if (isEmail(email) && !self.state.guestLogin) {
+      console.log('Guest login is false')
       $.post({
         url: this.props.router.location.pathname,
         contentType: 'application/json',
@@ -241,9 +242,10 @@ class App extends React.Component {
           $('.error').show();
         },
       });
-    } else if (isEmail(email)) {
+    } else if (self.state.guestLogin) {
+      console.log("Guest login c'est True")
       $.post({
-        url: this.props.router.location.pathname,
+        url: '/guestLogin',
         contentType: 'application/json',
         data: JSON.stringify({email: 'guest@guest.com', password: 'guest', firstName: 'Guest', lastName: ''}),
         success: (data) => {
@@ -262,7 +264,7 @@ class App extends React.Component {
           $('.error').show();
         },
       });
-
+      // self.clearGuestComments();
     } else {
       console.log('Not a valid email')
     }
@@ -296,6 +298,22 @@ class App extends React.Component {
         $('.error').show();
       },
     });
+  }
+
+  clearGuestComments() {
+    console.log('Running clearGuestComments...')
+    $.post({
+      url: '/clearGuestComments',
+      contentType: 'application/json',
+      data: JSON.stringify({test: 'test'}),
+      success: data => {
+        console.log('clearGuestComments was an official success');
+      },
+      error: error => {
+        console.log('clearGuestComments was an abject failure')
+        $('.error').show();
+      }
+    })
   }
 
   voiceComment(coordinates) {

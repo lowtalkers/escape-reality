@@ -57,17 +57,17 @@ export default props => (
         <br/>
 
         <div>
-            <p className="fancyText"> No account yet? </p>
-            <Link to="/signup" className="fancyText" style={{color: 'white'}}> Sign up here</Link>
+            <MuiThemeProvider muiTheme={getMuiTheme()}>
+              <RaisedButton buttonStyle={style} label="Login As Guest" primary={true} onClick={() => props.toggleGuestLogin(props.submitFn)} />
+            </MuiThemeProvider>
         </div>
 
+        <br/>
+
         <div>
-            <p className="fancyText"> Or </p>
-            <div className="fancyText" style={{color: 'white', textDecoration: 'underline', cursor: "pointer"}} onClick={() => {
-              console.log('Continue as Guest clicked!');
-              props.toggleGuestLogin(props.submitFn);
-            }}> Continue As Guest </div>
+            <Link to="/signup" className="fancyText" style={{color: 'white'}}> Create an Account </Link>
         </div>
+
       </div>
     </div>
 

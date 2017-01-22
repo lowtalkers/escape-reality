@@ -145,7 +145,7 @@ const styles = {
   exploreButton: {
     fontFamily: 'Orbitron',
     color: 'white',
-    top: '15%',
+    top: '25%',
     left: '15%',
     // position: 'absolute'
   },
@@ -193,7 +193,7 @@ export default props => {
             <Avatar src={props.profilePic} style={{right: '15%'}} />
           </ToolbarGroup>
           <ToolbarGroup>
-            <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} style={{ top: '5px', color: 'white'}}/>
+            <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} style={{ top: '-10px', color: 'white'}}/>
           </ToolbarGroup>
 
         </Toolbar>
