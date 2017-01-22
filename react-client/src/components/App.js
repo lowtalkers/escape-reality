@@ -412,9 +412,7 @@ class App extends React.Component {
     console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
   	self.commentSubmitFn(comment, coordinates);
     turnTypedCommentsOn();
-    self.setState({
-      comments: self.state.comments.concat([newObject])
-    });
+    getCreatedAt(newObject);
   }
 
   changeBigPic (val) {
