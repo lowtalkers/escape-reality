@@ -230,7 +230,7 @@ app.get('/allBookmarks', (req, res) => {
 
 app.get('/getUserPic', (req, res) => {
   console.log('Things getting interesting in /getUserPic...')
-  userController.findOne({where: {email: 'guest@guest.com'}}, user => {
+  userController.findOne({where: {email: req.session.email}}, user => {
     const data = {};
     data.pic = user.get('profilePic');
     data.currentUser = user.get('firstName')
@@ -326,7 +326,7 @@ app.post('/guestLogin', (req, res) => {
   const password = req.body.password;
   const response = {};
   userController.findOne({where: {email: email}}, user => {
-    console.log('Inside userController, user data is:', user)
+    // console.log('Inside userController, user data is:', user);
     if (!user) {
       response.auth = false;
       res.send(response);

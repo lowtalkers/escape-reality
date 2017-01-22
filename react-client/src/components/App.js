@@ -48,7 +48,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      email: 'carlos@carlos.com',
       password: '',
       firstName: '',
       lastName: '',
