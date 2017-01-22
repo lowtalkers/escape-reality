@@ -309,17 +309,6 @@ app.post('/comment', (req, res) => {
   });
 });
 
-// app.post('/guestLogin', (req, res) => {
-//   console.log('Heyoo we in guestLogin boy');
-//   userController.findAll({where: {email: 'guest@guest.com'}}, user => {
-//     console.log('during clearGuestComments function, user data is:', user)
-//     // commentController.findAll({where: {}}, data => {
-//       // console.log('INSIDE clearGuestComments findAll SECTION, data is:', data)
-//       res.status(200).send(user);
-//     // })
-//   })
-// })
-
 app.post('/guestLogin', (req, res) => {
   console.log('Heyoo we in guestLogin boy');
   const email = req.body.email;
@@ -335,7 +324,7 @@ app.post('/guestLogin', (req, res) => {
         if (match) {
           response.auth = true;
 
-          commentController.destroyComments({where: {}}, () => userController.createSession(req, res, user, response));
+          commentController.destroyComments({where: {email: 'guest@guest.com'}}, () => userController.createSession(req, res, user, response));
 
           
         } else {
