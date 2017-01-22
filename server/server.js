@@ -134,7 +134,10 @@ app.post('/signin', (req, res) => {
       userController.comparePassword(user, password, match => {
         if (match) {
           response.auth = true;
-          userController.createSession(req, res, user, response);
+
+          commentController.destroyComments({where: {email: 'guest@guest.com'}}, () => userController.createSession(req, res, user, response));
+
+          
         } else {
           response.auth = false;
           res.send(response);

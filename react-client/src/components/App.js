@@ -351,15 +351,12 @@ class App extends React.Component {
 
   voiceComment(coordinates) {
     var self = this;
+
     if (annyang) {
       console.log('🐞🐞🐞🐞🐞voice activated in callback', coordinates);
 
       console.log('in annyang!!!');
       annyang.start();
-
-      this.setState({
-        recording: true
-      });
 
       gCoordinates = coordinates;
 
@@ -377,15 +374,21 @@ class App extends React.Component {
         // self.getComments();
         self.getCreatedAt(newObject);
       }, this);
+    } else {
+      self.setState({
+          recording: false,
+          commentsOn: false
+        });
     }
   }
 
   stopVoiceComment(phrase, coordinates) {
+    var self = this;
     annyang.abort();
 
-    this.setState({
+    self.setState({
         recording: false,
-        commentsOn: !this.state.commentsOn
+        commentsOn: false
       });
 
     //does annyang.abort wait until the voice recognition has processed before invoking commentsubmitFn?
@@ -395,6 +398,10 @@ class App extends React.Component {
 
   addComment (coordinates) {
     //will we need to use async here?
+    var self = this;
+    self.setState({
+      recording: true
+    });
     counter++;
     this.voiceComment(coordinates);
   }
