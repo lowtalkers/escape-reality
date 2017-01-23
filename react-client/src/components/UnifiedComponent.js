@@ -44,7 +44,7 @@ export default props => {
 */}
 
 if (props.displayedComments.includes(props.commentID)) {
-  console.log('Yes', props.displayedComments)
+  console.log('props.displayedComments are:', props.displayedComments)
   return ( 
 
   <Entity>
@@ -58,7 +58,7 @@ if (props.displayedComments.includes(props.commentID)) {
 
         
       <TextPlane 
-        planeClick={() => console.log('displayedComments is currentlyyyy:', props.displayedComments)}
+        planeClick={() => console.log('in TextPlance, displayedComments is currentlyyyy:', props.displayedComments)}
 
         id="pyramidTextPlane"
         hidePlane={props.hidePlane}

@@ -67,7 +67,8 @@ class App extends React.Component {
       recording: false,
       typedCommentsOn: false,
       typedCommentBox: true,
-      guestLogin: false
+      guestLogin: false,
+      flag: false,
 		};
   }
 
@@ -191,6 +192,7 @@ class App extends React.Component {
           });
 
         }
+        setTimeout(() => self.setState({flag: !self.state.flag}), 500);
       },
       error: (error) => {
         console.error('error in get upload', error);
