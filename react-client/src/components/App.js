@@ -845,13 +845,15 @@ class App extends React.Component {
 
               {self.state.guestLogin? 
 
-              <Entity
-                position="0 2 -3"
-                rotation="0 0 0"
-                geometry="primitive: plane; height: 0.5; width: 0.5"
-                material="color: red"
-              />
+              // <Entity
+              //   position="0 2 -3"
+              //   rotation="0 0 0"
+              //   geometry="primitive: plane; height: 0.5; width: 0.5"
+              //   material="color: red"
+              // />
 
+              null
+              
               :
 
               null
