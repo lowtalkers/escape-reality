@@ -96,7 +96,8 @@ export default props => {
     <a-image
       look-at="[camera]"
       id="input-image"
-      src="#input"
+      // src="#input"
+      src={props.typedCommentsOn ? '#inputActivated' : '#input'}
       geometry="height: 0.5; width: 0.5"
       position="0 1.25 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
