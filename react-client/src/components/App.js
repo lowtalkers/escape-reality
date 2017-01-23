@@ -349,6 +349,16 @@ class App extends React.Component {
     })
   }
 
+  addComment (coordinates) {
+    //will we need to use async here?
+    var self = this;
+    self.setState({
+      recording: true
+    });
+    counter++;
+    this.voiceComment(coordinates);
+  }
+
   voiceComment(coordinates) {
     var self = this;
 
@@ -396,20 +406,13 @@ class App extends React.Component {
     this.commentSubmitFn(phrase, coordinates);
   }
 
-  addComment (coordinates) {
-    //will we need to use async here?
-    var self = this;
-    self.setState({
-      recording: true
-    });
-    counter++;
-    this.voiceComment(coordinates);
-  }
-
   addTypedComment (coordinates) {
   	let self = this;
   	let comment = prompt('Please enter your comment (max: 50 characters!');
-  	counter++;
+    counter++;
+    gCoordinates = coordinates;
+    self.turnTypedCommentsOn();
+    self.commentSubmitFn(comment, coordinates);
     let commentObject = {
       body: comment,
       firstName: self.state.currentUser,
@@ -417,8 +420,6 @@ class App extends React.Component {
     };
     let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
     console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
-  	self.commentSubmitFn(comment, coordinates);
-    self.turnTypedCommentsOn();
     self.getCreatedAt(newObject);
   }
 
