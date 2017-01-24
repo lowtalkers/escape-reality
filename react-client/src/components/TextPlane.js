@@ -152,25 +152,24 @@ let adjustTimestampPosition = (textAdjust) => {
 
   return (
       <Entity
-        id="TextPlane" onClick={(data) => {
-              console.log('Within TextPlane.js, event data is:', data.detail.target.id);
-              // props.hidePlane();
-            }} position={cardCoordCalc(props.position)} rotation={greenAngleCalc(props.position, props.commentID)}
         animation__rot={{property: 'rotation', dir: 'normal', dur: 500, loop: false, from: '0 0 0', to: greenAngleCalc(props.position, props.commentID)}}
         animation__scale={{property: 'scale', dir: 'normal', dur: 500, loop: false, from: '.1 .1 .1', to: '1 1 1'}}
-        easing='easeInOutQuad'
+        id="TextPlane" onClick={(data) => {
+              console.log('Within TextPlane.js, event data is:', data.detail.target.id);
+              props.hidePlane();
+            }} 
+        position={cardCoordCalc(props.position)} 
+        rotation={greenAngleCalc(props.position, props.commentID)}
+        // material={{opacity: 0.5, transparent: true}}
+        // easing='easeInOutQuad'
       >
-
-      <Entity>
-        {/* Assume that props.position === "0 1 -3" */}
-
 
         {/* Background Plane */}
         <Entity
           geometry={`primitive: plane; width: ${Width}; height: ${Height}`}
           // position='0 0 0'
           rotation='0 0 0'
-          material={{color: '#436095', shader: 'flat'}}
+          material={{color: '#436095', shader: 'flat', opacity: 0.6, transparent: true}}
         />
 
         {/* Main Image */}
@@ -180,8 +179,7 @@ let adjustTimestampPosition = (textAdjust) => {
           // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
           position={`-1.1 0.6 0.18`}
           rotation='0 0 0'
-        >
-        </Entity>
+        />
 
         {/* Header Text */}
         <Entity bmfont-text={{align: 'left', width: '750', color: 'yellow', text: props.header}}
@@ -207,8 +205,6 @@ let adjustTimestampPosition = (textAdjust) => {
           scale='0.75 0.75 0'
         />
 
-      </Entity>
-
       {/*Collapse Icon*/}
       <Entity
             commentID={props.commentID}
@@ -221,8 +217,7 @@ let adjustTimestampPosition = (textAdjust) => {
             position={`1.175 0.475 0.3`}
             rotation='0 0 0'
             scale='1 1 0'
-      >
-      </Entity>
+      />
 
       {/*Bookmark Button
       <Entity

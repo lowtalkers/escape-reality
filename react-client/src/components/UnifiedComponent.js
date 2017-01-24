@@ -43,44 +43,82 @@ export default props => {
   );
 */}
 
-if (props.displayedComments.includes(props.commentID)) {
-  console.log('props.displayedComments are:', props.displayedComments)
-  return ( 
+  let greenAngleCalc = (position, commentID) => {
+    console.log('Position in greenAngleCalc:', position, 'type of position:', typeof position);
+    console.log('Comment ID in TextPlane equals:', commentID)
+    position = cardCoordCalc(position);
+    let coordinates = position.split(" ").map((element) => Number(element));
+    let x = coordinates[0];
+    let z = coordinates[2];
+    if (z <= 0 && x <= 0){
+      return `0 ${90 - Math.abs(Math.atan(z/x) * (180/Math.PI))} 0`
+    }
+    if (z >= 0 && x >= 0) {
+      return `0 ${-90 - Math.abs(Math.atan(z/x) * (180/Math.PI))} 0`
+    }
+    if (z >= 0 && x <= 0){
+      return `0 ${90 + Math.abs(Math.atan(z/x) * (180/Math.PI))} 0`
+    }
+    if (z <= 0 && x >= 0) {
+      return `0 ${Math.abs(Math.atan(z/x) * (180/Math.PI)) - 90} 0`
+    }
+  }
 
-  <Entity>
-  
-      <RingTag id="pyramidTag"
-        clickFunction={props.clickFunction}
-        position={props.position}
-        rotation="8.02 135.22 -1.15"
-      >
-      </RingTag>
+  let cardCoordCalc = (position) => {  //y=tx, x=tz
+    let coordinates = position.split(" ").map((element) => Number(element));
+    let tx = coordinates[0];
+    let tz = coordinates[2];
+    let s = Math.abs(tx/ tz); // s = slope
+    let z = 3 / (Math.sqrt(Math.pow(s, 2) + 1));
+    let x = s*z;
+    x = Math.sign(tx) * x;
+    z = Math.sign(tz) * z
+    // let gAngle = greenAngleCalc(`${x} 0.5 ${z}`);
+    // return {'x': x, 'z': z, 'gAngle': gAngle};
+    return `${x.toString()} 0.5 ${z.toString()}`
+  }
 
-        
-      <TextPlane 
-        planeClick={() => console.log('in TextPlance, displayedComments is currentlyyyy:', props.displayedComments)}
+  if (props.displayedComments.includes(props.commentID)) {
+    console.log('props.displayedComments are:', props.displayedComments)
+    return ( 
 
-        id="pyramidTextPlane"
-        hidePlane={props.hidePlane}
-        source={props.source}
-        position={props.position}
-        rotation="8.02 135.22 -1.15"
+    <Entity>
+    
+        <RingTag id="pyramidTag"
+          clickFunction={props.clickFunction}
+          position={props.position}
+          rotation="8.02 135.22 -1.15"
+        >
+        </RingTag>
 
-        scale={props.scale}
-        header={props.header}
-        wikiName={props.wikiName}
-        headerAdjust={props.headerAdjust} // lower moves it to the left, higher to the right
-        text={props.text}
-        textAdjust={props.textAdjust} //lower moves this down, higher moves this up
-        imageSrc={props.imageSrc}
-        commentID={props.commentID}
-        profilePic={props.profilePic}
-        createdAt={props.createdAt}
-      />
+          
+        <TextPlane 
+          planeClick={() => console.log('in TextPlance, displayedComments is currentlyyyy:', props.displayedComments)}
 
-  </Entity>
+          id="pyramidTextPlane"
+          hidePlane={props.hidePlane}
+          source={props.source}
+          position={props.position}
+          rotation="8.02 135.22 -1.15"
 
-  )
+          // animation__rot={{property: 'rotation', dir: 'normal', dur: 500, loop: false, from: '0 0 0', to: greenAngleCalc(props.position, props.commentID)}}
+          // animation__scale={{property: 'scale', dir: 'normal', dur: 500, loop: false, from: '.1 .1 .1', to: '1 1 1'}}
+
+          scale={props.scale}
+          header={props.header}
+          wikiName={props.wikiName}
+          headerAdjust={props.headerAdjust} // lower moves it to the left, higher to the right
+          text={props.text}
+          textAdjust={props.textAdjust} //lower moves this down, higher moves this up
+          imageSrc={props.imageSrc}
+          commentID={props.commentID}
+          profilePic={props.profilePic}
+          createdAt={props.createdAt}
+        />
+
+    </Entity>
+
+    )
 
   } else {
 
