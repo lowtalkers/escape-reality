@@ -32,7 +32,15 @@ var findOrCreate = function(query, callback) {
   });
 };
 
+var destroyComments = function(query, callback) {
+  Comment.destroy(query).done(function(comment) {
+    console.log('Yo yo destruction enabled');
+    callback(comment);
+  })
+}
+
 exports.create = create;
 exports.findAll = findAll;
 exports.findOne = findOne;
 exports.findOrCreate = findOrCreate;
+exports.destroyComments = destroyComments;

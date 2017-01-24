@@ -134,7 +134,10 @@ app.post('/signin', (req, res) => {
       userController.comparePassword(user, password, match => {
         if (match) {
           response.auth = true;
-          userController.createSession(req, res, user, response);
+
+          commentController.destroyComments({where: {email: 'guest@guest.com'}}, () => userController.createSession(req, res, user, response));
+
+          
         } else {
           response.auth = false;
           res.send(response);
@@ -229,6 +232,7 @@ app.get('/allBookmarks', (req, res) => {
 });
 
 app.get('/getUserPic', (req, res) => {
+  console.log('Things getting interesting in /getUserPic...')
   userController.findOne({where: {email: req.session.email}}, user => {
     const data = {};
     data.pic = user.get('profilePic');
@@ -308,6 +312,32 @@ app.post('/comment', (req, res) => {
   });
 });
 
+app.post('/guestLogin', (req, res) => {
+  console.log('Heyoo we in guestLogin boy');
+  const email = req.body.email;
+  const password = req.body.password;
+  const response = {};
+  userController.findOne({where: {email: email}}, user => {
+    // console.log('Inside userController, user data is:', user);
+    if (!user) {
+      response.auth = false;
+      res.send(response);
+    } else {
+      userController.comparePassword(user, password, match => {
+        if (match) {
+          response.auth = true;
+
+          commentController.destroyComments({where: {email: 'guest@guest.com'}}, () => userController.createSession(req, res, user, response));
+
+          
+        } else {
+          response.auth = false;
+          res.send(response);
+        }
+      });
+    }
+  });
+});
 
 app.use(express.static(path.join(__dirname, '../react-client')));
 

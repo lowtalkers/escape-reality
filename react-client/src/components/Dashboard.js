@@ -25,32 +25,6 @@ import {
   purple500,
 } from 'material-ui/styles/colors';
 
-const styles = {
-  button: {
-    margin: 12,
-    fontFamily: 'Orbitron !important',
-    backgroundColor: '#e8e8e8',
-    color: 'black !important'
-  },
-  exampleImageInput: {
-    cursor: 'pointer',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    width: '100%',
-    opacity: 0,
-  },
-  exploreButton: {
-    fontFamily: 'Orbitron',
-  },
-};
-
-const style = {
-  margin: 12,
-};
-
 const injectTapEventPlugin = require("react-tap-event-plugin");
 injectTapEventPlugin();
 
@@ -151,6 +125,55 @@ const signOut = () => {
   });
 };
 
+const styles = {
+  button: {
+    margin: 12,
+    fontFamily: 'Orbitron !important',
+    backgroundColor: '#e8e8e8',
+    color: 'black !important'
+  },
+  exampleImageInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0,
+  },
+  exploreButton: {
+    fontFamily: 'Orbitron',
+    color: 'white',
+    top: '25%',
+    left: '15%',
+    // position: 'absolute'
+  },
+};
+
+const style = {
+  margin: 12,
+};
+
+const backgroundStyle = {
+  // backgroundImage: 'url("http://i.imgur.com/uTYax11.jpg")',
+  // backgroundSize: 'cover',
+  // backgroundRepeat: 'no-repeat',
+  // backgroundPosition: '50% 50%',
+  backgroundSize: 'cover',
+  position: 'fixed',
+  flex: 1,
+  height: '100%',
+  width: '100%',
+}
+
+const overlayStyle = {
+  // position: 'fixed',
+  top: '50%',
+  left: '25%',
+}
+
+//     <div style={backgroundStyle}>
 
 export default props => {
   uploadFile(props);
@@ -158,52 +181,58 @@ export default props => {
   return (
     <div>
 
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Toolbar >
-        <ToolbarGroup>
-          <Avatar src={props.profilePic} />
-        </ToolbarGroup>
-        <ToolbarGroup>
-          <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} />
-        </ToolbarGroup>
+      <img 
+        style={backgroundStyle}
+        src={'http://i.imgur.com/1ZEHnrH.jpg'}
+      />
 
-      </Toolbar>
-      </MuiThemeProvider>
-
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-          <LinearProgress color='#FF3D00' className={props.shouldHide ? 'hidden' : ''} mode="indeterminate" />
-      </MuiThemeProvider>
-
-      <h1 className="centerText"> Immerse </h1>
-
-      <div className="centerButtons">
-      <Link to="/lobby">
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <RaisedButton buttonStyle={styles.exploreButton} label="Explore" primary={true}  />
-      </MuiThemeProvider>
-      </Link>
-
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <RaisedButton
-      label="Upload"
-      labelPosition="before"
-      style={styles.button}
-      containerElement="label"
-      buttonStyle={styles.exploreButton}>
-      <input id="fileUp" type="file" style={styles.exampleImageInput} />
-      </RaisedButton>
-      </MuiThemeProvider>
-      </div>
-
-      <br/>
-      <br/>
-      <br/>
-      <div className="centerButtons">
+      <div>
         <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <FlatButton label="Sign Out" labelStyle={styles.exploreButton} onClick={() => { signOut(); }} />
-        </MuiThemeProvider>
-      </div>
+        <Toolbar >
+          <ToolbarGroup>
+            <Avatar src={props.profilePic} style={{right: '15%'}} />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <ToolbarTitle className="fancyText" text={"Welcome, " + props.currentUser} style={{ top: '-10px', color: 'white'}}/>
+          </ToolbarGroup>
 
+        </Toolbar>
+        </MuiThemeProvider>
+
+        <MuiThemeProvider muiTheme={getMuiTheme()}>
+            <LinearProgress color='#FF3D00' className={props.shouldHide ? 'hidden' : ''} mode="indeterminate" />
+        </MuiThemeProvider>
+
+        <h1 className="centerText" style={{color: 'white', top: '15px',  position: 'absolute', width:'100%', textAlign: 'center', fontSize: '100px'}}> Immerse</h1>
+
+        <div className="centerButtons">
+        <Link to="/lobby">
+        <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <RaisedButton buttonStyle={styles.exploreButton} label="Explore" primary={true}  />
+        </MuiThemeProvider>
+        </Link>
+
+        <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <RaisedButton
+        label="Upload"
+        labelPosition="before"
+        style={styles.button}
+        containerElement="label"
+        buttonStyle={styles.exploreButton}>
+        <input id="fileUp" type="file" style={styles.exampleImageInput} />
+        </RaisedButton>
+        </MuiThemeProvider>
+        </div>
+
+        <br/>
+        <br/>
+        <br/>
+        <div className="centerButtons">
+          <MuiThemeProvider muiTheme={getMuiTheme()}>
+          <FlatButton label="Sign Out" labelStyle={styles.exploreButton} onClick={() => { signOut(); }} />
+          </MuiThemeProvider>
+        </div>
+      </div>
     </div>
   );
 };

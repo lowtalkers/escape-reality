@@ -48,7 +48,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      email: 'carlos@carlos.com',
       password: '',
       firstName: '',
       lastName: '',
@@ -66,7 +66,9 @@ class App extends React.Component {
       commentPics:[],
       recording: false,
       typedCommentsOn: false,
-      typedCommentBox: true
+      typedCommentBox: true,
+      guestLogin: false,
+      flag: false,
 		};
   }
 
@@ -168,6 +170,40 @@ class App extends React.Component {
     });
   }
 
+  getCreatedAt(newObject) {
+    let self = this;
+    let output;
+    $.get({
+      url: '/commentData',
+      data: {photoName: this.state.bigPic},
+      success: (data) => {
+        let finalElement = data.comments[data.comments.length - 1];
+        console.log('got comment data from server:', data, 'final element:', finalElement);
+        if (data.comments.length > 0) {
+          output = new Date(finalElement.createdAt);
+          console.log('Boi stop getCreatedAt actually ran and its output isss:', output);
+          // return output;
+
+          console.log('Bzzz output is:', output);
+          newObject['createdAt'] = output;
+          console.log('99999 newObject is:', newObject);
+          self.setState({
+            comments: self.state.comments.concat([newObject])
+          });
+
+        }
+        setTimeout(() => self.setState({flag: !self.state.flag}), 500);
+      },
+      error: (error) => {
+        console.error('error in get upload', error);
+        $('.error').show();
+      }
+    });
+
+
+
+  }
+
   changeProfilePic(cb) {
     let self = this;
     $.get({
@@ -206,7 +242,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate () {
-    console.log('After rendering, current comment mode:', this.state.addCommentMode)
+    console.log('After rendering, current comment mode:', this.state.addCommentMode, 'and comments are:', this.state.comments)
   }
 
   /** This function when invoked will submit email and password. */
@@ -219,7 +255,8 @@ class App extends React.Component {
     const lastName = this.state.lastName;
 
     /** Submit email and password for verification */
-    if (isEmail(email)) {
+    if (isEmail(email) && !self.state.guestLogin) {
+      console.log('Guest login is false')
       $.post({
         url: this.props.router.location.pathname,
         contentType: 'application/json',
@@ -240,6 +277,29 @@ class App extends React.Component {
           $('.error').show();
         },
       });
+    } else if (self.state.guestLogin) {
+      console.log("Guest login c'est True")
+      $.post({
+        url: '/guestLogin',
+        contentType: 'application/json',
+        data: JSON.stringify({email: 'guest@guest.com', password: 'guest', firstName: 'Guest', lastName: ''}),
+        success: (data) => {
+          console.log('Sucessful GUEST authentication', data, data.auth);
+          if (data.auth) {
+            self.props.router.replace('/dashboard');
+            // If authenticated, then get profile picture
+            // from server to display it
+            self.changeProfilePic(() => {self.getAllPhotos()});
+          } else if (data === 'User exists!') {
+            console.log('User exists!');
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          $('.error').show();
+        },
+      });
+      // self.clearGuestComments();
     } else {
       console.log('Not a valid email')
     }
@@ -275,17 +335,40 @@ class App extends React.Component {
     });
   }
 
+  clearGuestComments() {
+    console.log('Running clearGuestComments...')
+    $.post({
+      url: '/clearGuestComments',
+      contentType: 'application/json',
+      data: JSON.stringify({test: 'test'}),
+      success: data => {
+        console.log('clearGuestComments was an official success');
+      },
+      error: error => {
+        console.log('clearGuestComments was an abject failure')
+        $('.error').show();
+      }
+    })
+  }
+
+  addComment (coordinates) {
+    //will we need to use async here?
+    var self = this;
+    self.setState({
+      recording: true
+    });
+    counter++;
+    this.voiceComment(coordinates);
+  }
+
   voiceComment(coordinates) {
     var self = this;
+
     if (annyang) {
       console.log('🐞🐞🐞🐞🐞voice activated in callback', coordinates);
 
       console.log('in annyang!!!');
       annyang.start();
-
-      this.setState({
-        recording: true
-      });
 
       gCoordinates = coordinates;
 
@@ -300,19 +383,24 @@ class App extends React.Component {
         };
         let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
         console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
-        self.setState({
-          comments: self.state.comments.concat([newObject])
-        });
+        // self.getComments();
+        self.getCreatedAt(newObject);
       }, this);
+    } else {
+      self.setState({
+          recording: false,
+          commentsOn: false
+        });
     }
   }
 
   stopVoiceComment(phrase, coordinates) {
+    var self = this;
     annyang.abort();
 
-    this.setState({
+    self.setState({
         recording: false,
-        commentsOn: !this.state.commentsOn
+        commentsOn: false
       });
 
     //does annyang.abort wait until the voice recognition has processed before invoking commentsubmitFn?
@@ -320,27 +408,21 @@ class App extends React.Component {
     this.commentSubmitFn(phrase, coordinates);
   }
 
-  addComment (coordinates) {
-    //will we need to use async here?
-    counter++;
-    this.voiceComment(coordinates);
-  }
-
   addTypedComment (coordinates) {
   	let self = this;
   	let comment = prompt('Please enter your comment (max: 50 characters!');
-  	counter++;
-  	this.commentSubmitFn(comment, coordinates);
-  	let commentObject = {
-  	  body: comment,
-  	  firstName: self.state.currentUser,
-  	  src: '#profilePic'
-  	};
-  	let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
-  	console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
-  	self.setState({
-  	  comments: self.state.comments.concat([newObject])
-  	});
+    counter++;
+    gCoordinates = coordinates;
+    self.turnTypedCommentsOn();
+    self.commentSubmitFn(comment, coordinates);
+    let commentObject = {
+      body: comment,
+      firstName: self.state.currentUser,
+      src: '#profilePic'
+    };
+    let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
+    console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
+    self.getCreatedAt(newObject);
   }
 
   changeBigPic (val) {
@@ -394,6 +476,14 @@ class App extends React.Component {
   	this.setState({
   		typedCommentsOn: !this.state.typedCommentsOn
   	})
+  }
+
+  toggleGuestLogin (callback) {
+    console.log('Toggled toggleGuestLogin!')
+    this.setState({
+      guestLogin: !this.state.guestLogin
+    })
+    setTimeout(callback, 250);
   }
 
   renderComments () {
@@ -482,6 +572,8 @@ class App extends React.Component {
           onEmailChange={this.onEmailChange.bind(this)}
           onPasswordChange={this.onPasswordChange.bind(this)}
           submitFn={this.submitFn.bind(this)}
+          guestLogin={this.state.guestLogin}
+          toggleGuestLogin={this.toggleGuestLogin.bind(this)}
           />
         );
     } else if (this.props.router.location.pathname.indexOf('/dashboard') >= 0) {
@@ -570,12 +662,13 @@ class App extends React.Component {
 
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
-              <img id="input" crossOrigin="anonymous" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Text-txt.svg/822px-Text-txt.svg.png" />
+              <img id="input" crossOrigin="anonymous" src="http://i.imgur.com/jRdxNpi.png" />
+              <img id="inputActivated" crossOrigin="anonymous" src="http://i.imgur.com/JmLIjXY.png" />
 
             </a-assets>
             {vrView}
 
-            {this.renderComments()}
+            {self.renderComments()}
 
             {self.state.typedCommentBox ? 
             	/*
@@ -629,15 +722,52 @@ class App extends React.Component {
 							 </Entity>
             	*/
 
-            	//Test Component
+
+
+
+
+            	//Test Plain Component
             	/*
             	<Entity
-            		position="0 0 -2"
+            		position="0 0 -3"
             		rotation="0 0 0"
-            		geometry="primitive: plane; height: 2; width: 2"
+            		geometry="primitive: plane; height: 0.5; width: 0.5"
             		material="color: black"
             	/>
 							*/
+
+							//Test Form
+							/*
+							<Entity position="0 0 -3" rotation="0 0 0">
+								<div onSubmit={(event) => {
+									event.preventDefault();
+									console.log('CommentText submitted! Body:' + document.getElementsByName('CommentText')[0].value);
+								}}>
+							  	<h1>Please enter your comment:</h1>
+							  	<form>Comment: <input name="CommentText" />
+							  	<button>Submit</button>
+							  	</form>
+							  </div>
+							 </Entity>
+							*/
+
+							 //Second Test Form
+							/*
+            	<Entity 
+            		// bmfont-text={{align: 'left', width: '750', color: 'yellow', text: "Testing"}}
+            	  // position={adjustHeaderTextCoordinates(props.position, Width, Height)}
+            	  input={{color: 'red', text: "Test Form"}}
+            	  position='0 1 -2'
+            	  rotation='0 0 0'
+            	  scale='1.85 1.85 0'
+            	/>
+							*/
+
+
+
+
+
+
 
 							//Test UnifiedComponent
 							/*
@@ -711,6 +841,23 @@ class App extends React.Component {
             	:
 
             	null
+            }
+
+
+              {self.state.guestLogin? 
+
+              // <Entity
+              //   position="0 2 -3"
+              //   rotation="0 0 0"
+              //   geometry="primitive: plane; height: 0.5; width: 0.5"
+              //   material="color: red"
+              // />
+
+              null
+
+              :
+
+              null
             }
 
 
