@@ -539,12 +539,22 @@ class App extends React.Component {
     console.log('Rendering...');
 
     const images = this.state.pics.map(pic => {
-      imageName = pic.title.split('.')[0];
-      resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + pic.title;
+      let imageName = pic.title.split('.')[0];
+      let resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + pic.title;
       return (
         <img id={'resized-' + imageName}
         crossOrigin="anonymous"
         src={resizedImageLink} />
+      );
+    });
+
+    const fullImages = this.state.pics.map(pic => {
+      let imageName = pic.title.split('.')[0];
+      let fullSizedImageLink = 'https://s3.amazonaws.com/vrpics/' + pic.title;
+      return (
+        <img id={'fullSized-' + imageName}
+        crossOrigin="anonymous"
+        src={fullSizedImageLink} />
       );
     });
 
@@ -653,6 +663,7 @@ class App extends React.Component {
 
             <a-assets>
               {images}
+              {fullImages}
               {bigPic}
               {commentPics}
               <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic} />
