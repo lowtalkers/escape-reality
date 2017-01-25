@@ -453,9 +453,11 @@ class App extends React.Component {
 
   hideComment (commentID) {
     let indexToHide = this.state.displayedComments.indexOf(commentID);
-    console.log('Inside hideComment function, before setting state our displayedComments array is:', this.state.displayedComments, 'our commentID is:', commentID, 'and our indexToHide is:', indexToHide, '. The new array after splicing will be:', this.state.displayedComments.splice(indexToHide, 1));
+    let array = this.state.displayedComments;
+    // console.log(this.state.displayedComments.splice(indexToHide, 1));
+    array.splice(indexToHide, 1);
     this.setState({
-      displayedComments: this.state.displayedComments.splice(indexToHide, 1)
+      displayedComments: array
     })
   }
 
