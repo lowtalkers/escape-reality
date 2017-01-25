@@ -83,7 +83,7 @@ class App extends React.Component {
       $.get({
         url: '/getWiki?exactWikiTitle=' + title,
         success: (data) => {
-          console.log('Success fetch wiki paragraph', data);
+          // console.log('Success fetch wiki paragraph', data);
           result[allTitles[idx]] = data;
           getNextParagraph();
         },
@@ -115,7 +115,7 @@ class App extends React.Component {
 
   onEmailChange(event) {
     this.setState({ email: event.target.value });
-    // console.log(this.state.email)
+    // // console.log(this.state.email)
   }
 
   onPasswordChange(event) {
@@ -135,7 +135,7 @@ class App extends React.Component {
     $.get({
       url: '/topPics',
       success: (data) => {
-        console.log('got topPics from server:', data);
+        // console.log('got topPics from server:', data);
         self.setState({pics: data});
       },
       error: (error) => {
@@ -151,7 +151,7 @@ class App extends React.Component {
       url: '/commentData',
       data: {photoName: this.state.bigPic},
       success: (data) => {
-        console.log('got comment data from server:', data);
+        // console.log('got comment data from server:', data);
         if (data.comments.length > 0) {
           data.comments = data.comments.map(function(comment) {
             var coords = comment.coordinates.split(' ');
@@ -178,15 +178,15 @@ class App extends React.Component {
       data: {photoName: this.state.bigPic},
       success: (data) => {
         let finalElement = data.comments[data.comments.length - 1];
-        console.log('got comment data from server:', data, 'final element:', finalElement);
+        // console.log('got comment data from server:', data, 'final element:', finalElement);
         if (data.comments.length > 0) {
           output = new Date(finalElement.createdAt);
-          console.log('Boi stop getCreatedAt actually ran and its output isss:', output);
+          // console.log('Boi stop getCreatedAt actually ran and its output isss:', output);
           // return output;
 
-          console.log('Bzzz output is:', output);
+          // console.log('Bzzz output is:', output);
           newObject['createdAt'] = output;
-          console.log('99999 newObject is:', newObject);
+          // console.log('99999 newObject is:', newObject);
           self.setState({
             comments: self.state.comments.concat([newObject])
           });
@@ -221,7 +221,7 @@ class App extends React.Component {
             profilePic: 'https://s3.amazonaws.com/vrpics/default-userpic_256x256.png'
           });
         }
-        console.log('Got userpic from server:', self.state.profilePic);
+        // console.log('Got userpic from server:', self.state.profilePic);
         if (cb) {
           cb()
         }
@@ -235,14 +235,14 @@ class App extends React.Component {
 
   componentDidMount () {
     if (this.props.router.location.pathname.indexOf('/sign') < 0) {
-      console.log('🍊  running changeProfilePic');
+      // console.log('🍊  running changeProfilePic');
       this.getAllPhotos();
       this.changeProfilePic();
     }
   }
 
   componentDidUpdate () {
-    console.log('After rendering, current comment mode:', this.state.addCommentMode, 'and comments are:', this.state.comments)
+    // console.log('After rendering, current comment mode:', this.state.addCommentMode, 'and comments are:', this.state.comments)
   }
 
   /** This function when invoked will submit email and password. */
@@ -256,20 +256,20 @@ class App extends React.Component {
 
     /** Submit email and password for verification */
     if (isEmail(email) && !self.state.guestLogin) {
-      console.log('Guest login is false')
+      // console.log('Guest login is false')
       $.post({
         url: this.props.router.location.pathname,
         contentType: 'application/json',
         data: JSON.stringify({email: email, password: password, firstName: firstName, lastName: lastName}),
         success: (data) => {
-          console.log('Sucessful authentication', data, data.auth);
+          // console.log('Sucessful authentication', data, data.auth);
           if (data.auth) {
             self.props.router.replace('/dashboard');
             // If authenticated, then get profile picture
             // from server to display it
             self.changeProfilePic(() => {self.getAllPhotos()});
           } else if (data === 'User exists!') {
-            console.log('User exists!');
+            // console.log('User exists!');
           }
         },
         error: (error) => {
@@ -278,20 +278,20 @@ class App extends React.Component {
         },
       });
     } else if (self.state.guestLogin) {
-      console.log("Guest login c'est True")
+      // console.log("Guest login c'est True")
       $.post({
         url: '/guestLogin',
         contentType: 'application/json',
         data: JSON.stringify({email: 'guest@guest.com', password: 'guest', firstName: 'Guest', lastName: ''}),
         success: (data) => {
-          console.log('Sucessful GUEST authentication', data, data.auth);
+          // console.log('Sucessful GUEST authentication', data, data.auth);
           if (data.auth) {
             self.props.router.replace('/dashboard');
             // If authenticated, then get profile picture
             // from server to display it
             self.changeProfilePic(() => {self.getAllPhotos()});
           } else if (data === 'User exists!') {
-            console.log('User exists!');
+            // console.log('User exists!');
           }
         },
         error: (error) => {
@@ -301,18 +301,18 @@ class App extends React.Component {
       });
       // self.clearGuestComments();
     } else {
-      console.log('Not a valid email')
+      // console.log('Not a valid email')
     }
   }
 
   likeSubmitFn() {
-    console.log('in like submit function');
+    // console.log('in like submit function');
     $.post({
       url: '/like',
       contentType: 'application/json',
       data: JSON.stringify({photoName: this.state.bigPic}),
       success: (data) => {
-        console.log(data);
+        // console.log(data);
       },
       error: (error) => {
         $('.error').show();
@@ -321,13 +321,13 @@ class App extends React.Component {
   }
 
   commentSubmitFn(phrase, coordinates) {
-    console.log('in comment submit function; current phrase is:', phrase, '🦄🦄🦄🦄🦄🦄 coords', coordinates);
+    // console.log('in comment submit function; current phrase is:', phrase, '🦄🦄🦄🦄🦄🦄 coords', coordinates);
     $.post({
       url: '/comment',
       contentType: 'application/json',
       data: JSON.stringify({photoName: this.state.bigPic, body: phrase, coordinates: `${coordinates.x} ${coordinates.y} ${coordinates.z}`}),
       success: (data) => {
-        console.log(data);
+        // console.log(data);
       },
       error: (error) => {
         $('.error').show();
@@ -336,16 +336,16 @@ class App extends React.Component {
   }
 
   clearGuestComments() {
-    console.log('Running clearGuestComments...')
+    // console.log('Running clearGuestComments...')
     $.post({
       url: '/clearGuestComments',
       contentType: 'application/json',
       data: JSON.stringify({test: 'test'}),
       success: data => {
-        console.log('clearGuestComments was an official success');
+        // console.log('clearGuestComments was an official success');
       },
       error: error => {
-        console.log('clearGuestComments was an abject failure')
+        // console.log('clearGuestComments was an abject failure')
         $('.error').show();
       }
     })
@@ -365,15 +365,15 @@ class App extends React.Component {
     var self = this;
 
     if (annyang) {
-      console.log('🐞🐞🐞🐞🐞voice activated in callback', coordinates);
+      // console.log('🐞🐞🐞🐞🐞voice activated in callback', coordinates);
 
-      console.log('in annyang!!!');
+      // console.log('in annyang!!!');
       annyang.start();
 
       gCoordinates = coordinates;
 
       annyang.addCallback('result', function(phrases) {
-        console.log('Voice recording phrases:', phrases, 'first result:', phrases[0]);
+        // console.log('Voice recording phrases:', phrases, 'first result:', phrases[0]);
 
         self.stopVoiceComment(phrases[0], gCoordinates);
         let commentObject = {
@@ -382,7 +382,7 @@ class App extends React.Component {
           src: '#profilePic'
         };
         let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
-        console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
+        // console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
         // self.getComments();
         self.getCreatedAt(newObject);
       }, this);
@@ -404,7 +404,7 @@ class App extends React.Component {
       });
 
     //does annyang.abort wait until the voice recognition has processed before invoking commentsubmitFn?
-    console.log('Phrase right after aborting is:', phrase)
+    // console.log('Phrase right after aborting is:', phrase)
     this.commentSubmitFn(phrase, coordinates);
   }
 
@@ -421,7 +421,7 @@ class App extends React.Component {
       src: '#profilePic'
     };
     let newObject = Object.assign(commentObject, gCoordinates); // {x:0 }
-    console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
+    // console.log('addComment newObject:', newObject, 'current comments state array:', self.state.comments)
     self.getCreatedAt(newObject);
   }
 
@@ -439,9 +439,11 @@ class App extends React.Component {
 
 
   showComment (commentID) {
-    this.setState({
-      displayedComments: this.state.displayedComments.concat([commentID])
-    })
+    if (this.state.displayedComments.indexOf(commentID) === -1) {
+      this.setState({
+        displayedComments: this.state.displayedComments.concat([commentID])
+      })
+    }
   }
 
   uploadBar () {
@@ -453,14 +455,16 @@ class App extends React.Component {
 
   hideComment (commentID) {
     let indexToHide = this.state.displayedComments.indexOf(commentID);
-    console.log('Inside hideComment function, before setting state our displayedComments array is:', this.state.displayedComments, 'our commentID is:', commentID, 'and our indexToHide is:', indexToHide, '. The new array after splicing will be:', this.state.displayedComments.splice(indexToHide, 1));
+    let array = this.state.displayedComments;
+    // console.log(this.state.displayedComments.splice(indexToHide, 1));
+    array.splice(indexToHide, 1);
     this.setState({
-      displayedComments: this.state.displayedComments.splice(indexToHide, 1)
+      displayedComments: array
     })
   }
 
   clearComments () {
-    console.log('clearing comments!!!!!')
+    // console.log('clearing comments!!!!!')
     this.setState({
       comments: []
     });
@@ -479,7 +483,7 @@ class App extends React.Component {
   }
 
   toggleGuestLogin (callback) {
-    console.log('Toggled toggleGuestLogin!')
+    // console.log('Toggled toggleGuestLogin!')
     this.setState({
       guestLogin: !this.state.guestLogin
     })
@@ -488,16 +492,16 @@ class App extends React.Component {
 
   renderComments () {
     let self = this;
-    console.log('self.state.comments equals:', self.state.comments)
+    // console.log('self.state.comments equals:', self.state.comments)
     return (
       self.state.comments.map((comment, idx) => {
-        console.log('While mapping the fetched comments, the current comment is:', comment);
+        // console.log('While mapping the fetched comments, the current comment is:', comment);
         return (
         <UnifiedComponent
          look-at="[camera]"
           clickFunction={() => {
-            console.log('Onclick event is currently:', event)
-            console.log('ID ')
+            // console.log('Onclick event is currently:', event)
+            // console.log('ID ')
             self.showComment(idx);
           }}
           commentID= {idx}
@@ -505,9 +509,9 @@ class App extends React.Component {
           position={`${Number(comment.x)} ${Number(comment.y)} ${Number(comment.z)}`}
           rotation="0 0 0"
           hidePlane={() => {
-            // console.log('Hiding plane now... Data is:')
+            // // console.log('Hiding plane now... Data is:')
             // self.setState({showComment: false});
-            self.getAllPhotos();
+            // self.getAllPhotos();
             self.hideComment(idx);
           }}
           scale='0 0 0'
@@ -532,15 +536,25 @@ class App extends React.Component {
     let imageName = '';
     let resizedImageLink = '';
 
-    console.log('HELLO I AM RENDERING NOW');
+    console.log('Rendering...');
 
     const images = this.state.pics.map(pic => {
-      imageName = pic.title.split('.')[0];
-      resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + pic.title;
+      let imageName = pic.title.split('.')[0];
+      let resizedImageLink = 'https://s3.amazonaws.com/vrpics/resized-' + pic.title;
       return (
         <img id={'resized-' + imageName}
         crossOrigin="anonymous"
         src={resizedImageLink} />
+      );
+    });
+
+    const fullImages = this.state.pics.map(pic => {
+      let imageName = pic.title.split('.')[0];
+      let fullSizedImageLink = 'https://s3.amazonaws.com/vrpics/' + pic.title;
+      return (
+        <img id={'fullSized-' + imageName}
+        crossOrigin="anonymous"
+        src={fullSizedImageLink} />
       );
     });
 
@@ -599,7 +613,7 @@ class App extends React.Component {
             changeBigPic={this.changeBigPic.bind(this)} />
           );
       } else {
-        console.log('*********rendering image')
+        // console.log('*********rendering image')
         vrView = <Image
                     bigPic={this.state.bigPic}
                     commentSubmitFn={this.commentSubmitFn.bind(this)}
@@ -649,6 +663,7 @@ class App extends React.Component {
 
             <a-assets>
               {images}
+              {fullImages}
               {bigPic}
               {commentPics}
               <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic} />
@@ -675,8 +690,8 @@ class App extends React.Component {
             	<UnifiedComponent
             	 look-at="[camera]"
             	  clickFunction={() => {
-            	    console.log('Onclick event is currently:', event)
-            	    console.log('ID ')
+            	    // console.log('Onclick event is currently:', event)
+            	    // console.log('ID ')
             	    self.showComment(idx);
             	  }}
             	  commentID= {idx}
@@ -684,7 +699,7 @@ class App extends React.Component {
             	  position={`${Number(comment.x)} ${Number(comment.y)} ${Number(comment.z)}`}
             	  rotation="0 0 0"
             	  hidePlane={() => {
-            	    // console.log('Hiding plane now... Data is:')
+            	    // // console.log('Hiding plane now... Data is:')
             	    // self.setState({showComment: false});
             	    self.getAllPhotos();
             	    self.hideComment(idx);
@@ -712,7 +727,7 @@ class App extends React.Component {
 							>
 								<div onSubmit={(event) => {
 									event.preventDefault();
-									console.log('CommentText submitted! Body:' + document.getElementsByName('CommentText')[0].value);
+									// console.log('CommentText submitted! Body:' + document.getElementsByName('CommentText')[0].value);
 									}}>
 							  	<h1>Hello, world.</h1>
 							  	<form>Comment: <input name="CommentText" />
@@ -741,7 +756,7 @@ class App extends React.Component {
 							<Entity position="0 0 -3" rotation="0 0 0">
 								<div onSubmit={(event) => {
 									event.preventDefault();
-									console.log('CommentText submitted! Body:' + document.getElementsByName('CommentText')[0].value);
+									// console.log('CommentText submitted! Body:' + document.getElementsByName('CommentText')[0].value);
 								}}>
 							  	<h1>Please enter your comment:</h1>
 							  	<form>Comment: <input name="CommentText" />
@@ -774,8 +789,8 @@ class App extends React.Component {
 							<UnifiedComponent
 							  look-at="[camera]"
 							  clickFunction={() => {
-							    console.log('Onclick event is currently:', event)
-							    console.log('ID ')
+							    // console.log('Onclick event is currently:', event)
+							    // console.log('ID ')
 							    // self.showComment(idx);
 							  }}
 							  commentID= "0"
@@ -783,12 +798,12 @@ class App extends React.Component {
 							  position="0 0 -2"
 							  rotation="0 0 0"
 							  hidePlane={() => {
-							    // console.log('Hiding plane now... Data is:')
+							    // // console.log('Hiding plane now... Data is:')
 							    // self.setState({showComment: false});
 
 							    // self.getAllPhotos();
 							    // self.hideComment(idx);
-							    console.log('hidePlane function invoked')
+							    // console.log('hidePlane function invoked')
 							  }}
 							  scale='0 0 0'
 							  header='Test User'
@@ -807,19 +822,19 @@ class App extends React.Component {
 							//Sample TextPlane
 							/*
 							<TextPlane 
-							  planeClick={() => console.log('displayedComments is currentlyyyy:')}
+							  planeClick={() => // console.log('displayedComments is currentlyyyy:')}
 
 							  id="sampleFormTextPlane"
 							  source="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Assembled_Google_Cardboard_VR_mount.jpg/1024px-Assembled_Google_Cardboard_VR_mount.jpg"
 							  position="0 0 -2"
 							  rotation="0 0 0"
 							  hidePlane={() => {
-							    // console.log('Hiding plane now... Data is:')
+							    // // console.log('Hiding plane now... Data is:')
 							    // self.setState({showComment: false});
 
 							    // self.getAllPhotos();
 							    // self.hideComment(idx);
-							    console.log('hidePlane function invoked')
+							    // console.log('hidePlane function invoked')
 							  }}
 
 							  scale='0 0 0'

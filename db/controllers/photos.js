@@ -6,12 +6,12 @@ const create = (props, callback) => {
   .then(photo => {
     callback(photo);
   }).catch(err => {
-    console.log('🍊  Error in create photo', err);
+    // console.log('🍊  Error in create photo', err);
   });
 };
 
 const findAll = callback => {
-  console.log('🍊  Running findAll query in photos controller');
+  // console.log('🍊  Running findAll query in photos controller');
   Photo.findAll({ 
     limit: 30, 
     order: [['createdAt', 'DESC']]
@@ -19,14 +19,14 @@ const findAll = callback => {
   .then(photos => {
     callback(photos);
   }).catch(err => {
-    console.log('🍊  Error in find all photos', err);
+    // console.log('🍊  Error in find all photos', err);
   });
 };
 
 const findOne = (query, callback) => {
   Photo.findOne(query)
   .done(photo => {
-    console.log('🍊  Found one photo in db:', query);
+    // console.log('🍊  Found one photo in db:', query);
     callback(photo);
   });
 };

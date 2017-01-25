@@ -50,7 +50,7 @@ class Louvre extends React.Component {
   componentWillMount () {
     this.props.getParagraph(this.state.allTitles, allParagraphs => {
       this.setState( {allParagraphs: allParagraphs} );
-      console.log('🍊 this.state allParagraphs', this.state.allParagraphs);
+      // console.log('🍊 this.state allParagraphs', this.state.allParagraphs);
     })
   }
 
@@ -139,7 +139,7 @@ class Louvre extends React.Component {
       {self.state.showPyramidCard? 
         
           <TextPlane 
-            planeClick={() => console.log('Current ref object id is:', self.refs)}
+            planeClick={() => // console.log('Current ref object id is:', self.refs)}
             id="pyramidTextPlane"
             hidePlane={() => self.setState({showPyramidCard: false})}
 

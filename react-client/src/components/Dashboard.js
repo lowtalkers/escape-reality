@@ -40,11 +40,11 @@ let picDescrip = '';
 let currentImgs = [];
 
 const getAllPhotos = () => {
-  console.log('Trying to get topPics ...');
+  // console.log('Trying to get topPics ...');
   $.get({
     url: '/topPics',
     success: (data) => {
-      console.log(data, data.length);
+      // console.log(data, data.length);
     },
     error: (error) => {
       console.error('error in get upload', error);
@@ -72,7 +72,7 @@ const uploadFile = (props) => {
           contentType: 'application/json',
           success: data => {
             props.uploadBar();
-            console.log('Found user\'s uploaded photo from DB', data);
+            // console.log('Found user\'s uploaded photo from DB', data);
             $('#profilePicUp').val('');
             vex.dialog.alert('Uploaded!');
             $('button.vex-dialog-button-primary.vex-dialog-button.vex-first').click(() => window.location.reload());
@@ -86,12 +86,12 @@ const uploadFile = (props) => {
     };
 
     $('#fileUp').change(function () {
-      console.log('file ATTEMPT');
+      // console.log('file ATTEMPT');
       if (this.files && this.files[0]) {
         const reader = new FileReader();
         picDescrip = $('#description').val();
         fileName = this.files[0].name;
-        console.log(fileName);
+        // console.log(fileName);
         reader.onload = imageIsLoaded;
         reader.readAsDataURL(this.files[0]);
       }
@@ -102,7 +102,7 @@ const uploadFile = (props) => {
         const reader = new FileReader();
         // picDescrip = $('#description').val();
         fileName = this.files[0].name;
-        console.log(fileName);
+        // console.log(fileName);
         reader.onload = imageIsLoaded;
         reader.readAsDataURL(this.files[0]);
       }
@@ -111,11 +111,11 @@ const uploadFile = (props) => {
 };
 
 const signOut = () => {
-  console.log('in sign out function');
+  // console.log('in sign out function');
   $.get({
     url: '/signOut',
     success: (data) => {
-      console.log(data);
+      // console.log(data);
       window.location.reload();
     },
     error: (error) => {

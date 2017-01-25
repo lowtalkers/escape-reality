@@ -35,7 +35,7 @@ class Milan extends React.Component {
   componentWillMount () {
     this.props.getParagraph(this.state.allTitles, allParagraphs => {
       this.setState( {allParagraphs: allParagraphs} );
-      console.log('🍊  this.state allParagraphs', this.state.allParagraphs);
+      // console.log('🍊  this.state allParagraphs', this.state.allParagraphs);
     });
   }
 

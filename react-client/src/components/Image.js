@@ -25,7 +25,7 @@ export default props => {
   //   sky = <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
   // })
   if(props.bigPic !== '' && props.comments.length === 0) {
-    console.log('getting comments!!!!!!')
+    // console.log('getting comments!!!!!!')
     props.getComments();
   }
   if(props.commentsOn) {
@@ -37,7 +37,7 @@ export default props => {
       geometry="height:5;primitive:sphere;radius:7.5;segmentsRadial:48;thetaLength:360;openEnded:true;thetaStart:0"
       onRaycasterIntersected={(obj) => {commentCoords = obj.detail.intersection.point}}
       onClick={() => {
-        console.log(commentCoords);
+        // console.log(commentCoords);
         // props.changeCommentMode();
         props.addComment(commentCoords);
       }} />)
@@ -52,7 +52,7 @@ export default props => {
       geometry="height:5;primitive:sphere;radius:7.5;segmentsRadial:48;thetaLength:360;openEnded:true;thetaStart:0"
       onRaycasterIntersected={(obj) => {commentCoords = obj.detail.intersection.point}}
       onClick={() => {
-        console.log('Within turnTypedCommentsOn, commentCoords:', commentCoords);
+        // console.log('Within turnTypedCommentsOn, commentCoords:', commentCoords);
         // props.changeCommentMode();
         props.addTypedComment(commentCoords);
         // props.getComments();
@@ -104,7 +104,7 @@ export default props => {
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
       onClick={() => {
                 // let comment = prompt('Heyoo input form icon clicked, response?');
-                // console.log('User submitted comment:', comment);
+                // // console.log('User submitted comment:', comment);
                 props.turnTypedCommentsOn();
               }
       }>

@@ -6,7 +6,7 @@ var create = function(props, callback) {
   .then(function(bookmark) {
     callback(bookmark);
   }).catch(function(err) {
-    console.log(err);
+    // console.log(err);
   });
 };
 
@@ -14,13 +14,13 @@ var findAll = function(callback) {
   Bookmark.findAll().then(function(bookmarks) {
     callback(bookmarks);
   }).catch(function(err) {
-    console.log(err);
+    // console.log(err);
   });
 };
 
 var findOne = function(query, callback) {
   Bookmark.findOne(query).done(function(bookmark) {
-    console.log('🍊  Found one bookmark in db:', query);
+    // console.log('🍊  Found one bookmark in db:', query);
     callback(bookmark);
   });
 };

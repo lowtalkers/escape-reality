@@ -15,7 +15,7 @@ import Plane from './Plane';
 
 export default props => {
     let pics = props.pics.map((pic, index) => {
-    console.log(pic.title, index, pic.imageLink)
+    // console.log(pic.title, index, pic.imageLink)
     const rot = '0 ' + (index * -35) + ' 0';
     // var row;
     // if (index >18 && index <= 27) {

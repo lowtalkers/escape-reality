@@ -15,7 +15,7 @@ exports.create = (props, callback) => {
     callback(user);
   })
   .catch(err => {
-    console.log(err);
+    // console.log(err);
   });
 };
 
@@ -25,7 +25,7 @@ exports.findAll = callback => {
     callback(users);
   })
   .catch(err => {
-    console.log(err);
+    // console.log(err);
   });
 };
 
@@ -44,10 +44,10 @@ exports.checkAuth = (req, res, next) => {
   if (!exports.isLoggedIn(req) && 
       !(req.url.indexOf('/signin') >= 0) && 
       !(req.url.indexOf('/signup') >= 0)) {
-    console.log('Redirecting to /signin');
+    // console.log('Redirecting to /signin');
     res.redirect('/signin');
   } else {
-    console.log('Executing next() after checkAuth() passed');
+    // console.log('Executing next() after checkAuth() passed');
     next();
   }
 };
