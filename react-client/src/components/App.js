@@ -439,9 +439,11 @@ class App extends React.Component {
 
 
   showComment (commentID) {
-    this.setState({
-      displayedComments: this.state.displayedComments.concat([commentID])
-    })
+    if (this.state.displayedComments.indexOf(commentID) === -1) {
+      this.setState({
+        displayedComments: this.state.displayedComments.concat([commentID])
+      })
+    }
   }
 
   uploadBar () {
@@ -509,7 +511,7 @@ class App extends React.Component {
           hidePlane={() => {
             // // console.log('Hiding plane now... Data is:')
             // self.setState({showComment: false});
-            self.getAllPhotos();
+            // self.getAllPhotos();
             self.hideComment(idx);
           }}
           scale='0 0 0'
