@@ -9,21 +9,21 @@ const bookmarkController = require('../../db/controllers/bookmarks.js');
 const entities = new Entities(); // decode strings like '&amp;'
 
 module.exports.fetchWiki = function(req, res) {
-  console.log('🍊  Starting Wikipedia API request for:', req.query.exactWikiTitle);
+  // console.log('🍊  Starting Wikipedia API request for:', req.query.exactWikiTitle);
   const url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&titles='
               + req.query.exactWikiTitle
               + '&format=json&exintro=1';
 
   request(url, (err, requestResponse, body) => {
     if (err) {
-      console.log('Error in Wikipedia fetch', err);
+      // console.log('Error in Wikipedia fetch', err);
     }
 
     if (!err) {
       const query = (JSON.parse(body)).query.pages;
 
       if (query['-1']) {
-        console.log('🍊  bad title for Wikipedia API request:', query['-1'].title);
+        // console.log('🍊  bad title for Wikipedia API request:', query['-1'].title);
         res.status(404).send('Not Found');
         return;
       }
@@ -36,7 +36,7 @@ module.exports.fetchWiki = function(req, res) {
       const regexApostrophes = /(\')/ig;
       let paragraph = result.replace(regexApostrophes, '\'');
       paragraph = entities.decode(paragraph);
-      console.log('🍊  Sending scrubbed text to client:', paragraph.slice(0, 55) + '...');
+      // console.log('🍊  Sending scrubbed text to client:', paragraph.slice(0, 55) + '...');
 
       // Send response to client first (faster),
       // save to databases later (slower)
@@ -49,12 +49,12 @@ module.exports.fetchWiki = function(req, res) {
       // Save to database
       bookmarkController.findOne({where: {title: wikiFragment}}, bookmark => {
         if (bookmark) {
-          console.log('🍊  bookmark already exists, avoiding save to DB:', wikiFragment); 
+          // console.log('🍊  bookmark already exists, avoiding save to DB:', wikiFragment); 
         }
         if (!bookmark) {
           bookmarkController.create({title: wikiFragment, paragraph: paragraph},
             bookmark => {
-              console.log('🍊  Saved to database:', wikiFragment);
+              // console.log('🍊  Saved to database:', wikiFragment);
             });
         }
       });
@@ -63,14 +63,14 @@ module.exports.fetchWiki = function(req, res) {
 };
 
 // module.exports.fetchArticleWikiName = function(req, res) {
-//   console.log('Beginning article wiki name fetch...');
+//   // console.log('Beginning article wiki name fetch...');
 //   const url = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${req.query.exactWikiTitle}%20Pyramid&limit=1&namespace=0&format=jsonfm`;
-//       console.log('Error in Wikipedia fetch', err);
+//       // console.log('Error in Wikipedia fetch', err);
 //       return;
   
 
 //     let articleWikiName = JSON.parse(body)[0][0];
-//     console.log('Fetched articleWikiName:', articleWikiName);
+//     // console.log('Fetched articleWikiName:', articleWikiName);
 //     res.status(200).send(articleWikiName);
 //   })
 

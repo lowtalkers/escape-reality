@@ -60,11 +60,11 @@ const s3Bucket = new AWS.S3( { params: {Bucket: 'vrpics'} } );
 app.post('/upload', (req, res) => {
   const imageBuffer = utils.decodeBase64Image(req.body.filePath);
 
-  console.log(req.body.fileName);
+  // console.log(req.body.fileName);
   var date = new Date().getTime(); // fecha.format(new Date(), 'mediumDate').replace(/\s+/g, '');
   let file = req.body.fileName.split('.');
   let imgType = file[1];
-  // console.log(req.body.fileName);
+  // // console.log(req.body.fileName);
   let imgName = file[0] + date;
 
 
@@ -82,7 +82,7 @@ app.post('/upload', (req, res) => {
     .toBuffer()
     .then( data => {
       imageBuffer.resized = data;
-      console.log(data);
+      // console.log(data);
     })
     .catch( err => console.log(err));
 
@@ -97,12 +97,12 @@ app.post('/upload', (req, res) => {
         ContentType: 'image/' + imgType
       }, (err, data) => {
         if (err) {
-          console.log('Error uploading data: ', data, err);
+          // console.log('Error uploading data: ', data, err);
         } else {
-          console.log('succesfully uploaded the resized image!');
+          // console.log('succesfully uploaded the resized image!');
         }
       });
-      console.log('succesfully uploaded the image!');
+      // console.log('succesfully uploaded the image!');
     }
   });
 
@@ -114,7 +114,7 @@ app.post('/upload', (req, res) => {
     }, 
     photo => {
       photo.setUser(user);
-      console.log('Found user\'s uploaded photo in DB', photo);
+      // console.log('Found user\'s uploaded photo in DB', photo);
       res.status(200).send(data);
     });
   });
@@ -151,7 +151,7 @@ app.post('/signup', function(req, res) {
 
   const email = req.body.email;
   const password = req.body.password;
-  console.log(req.body);
+  // console.log(req.body);
   userController.findOne({where: {email: email}}, user => {
     if (!user) {
       bcrypt.hash(password, null, null, (err, hash) => {
@@ -190,15 +190,15 @@ app.get('/signout', (req, res) => {
 //   const wikiFragment = req.query.exactWikiTitle;
 //   redisClient.get(wikiFragment, function(err, reply) {
 //     if (err) {
-//       console.log('🍊  Error in fetching from Redis', err);
+//       // console.log('🍊  Error in fetching from Redis', err);
 //       res.status(200).send('Error in fetching from Redis', err);
 //     }
 //     if (reply) {
-//       console.log('🍊  Found in Redis!', wikiFragment);
+//       // console.log('🍊  Found in Redis!', wikiFragment);
 //       res.status(200).send(reply);
 //     }
 //     if (!reply) {
-//       console.log('🍊  Not found in Redis:', wikiFragment);
+//       // console.log('🍊  Not found in Redis:', wikiFragment);
 //       utils.fetchWiki(req, res);
 //     }
 //   });
@@ -213,7 +213,7 @@ app.get('/addBookmark', (req, res) => {
     bookmarkController.findOne({where: {title: req.query.exactWikiTitle}},
       bookmark => {
         user.addBookmark(bookmark);
-        console.log('bookmark added');
+        // console.log('bookmark added');
         res.send('Added!');
       });
   });
@@ -221,7 +221,7 @@ app.get('/addBookmark', (req, res) => {
 
 app.get('/allBookmarks', (req, res) => {
   userController.findOne({where: {email: req.session.email}}, user => {
-    console.log(user);
+    // console.log(user);
     // Sequelize join tables get automatic functions
     // between models, that's how getBookmarks() is available
     // even though it's not a function on the User model
@@ -232,7 +232,7 @@ app.get('/allBookmarks', (req, res) => {
 });
 
 app.get('/getUserPic', (req, res) => {
-  console.log('Things getting interesting in /getUserPic...')
+  // console.log('Things getting interesting in /getUserPic...')
   userController.findOne({where: {email: req.session.email}}, user => {
     const data = {};
     data.pic = user.get('profilePic');
@@ -242,7 +242,7 @@ app.get('/getUserPic', (req, res) => {
 });
 
 app.get('/topPics', (req, res) => {
-  console.log('in top pics!!');
+  // console.log('in top pics!!');
   photoController.findAll((photos) => {
     res.send(photos);
   });
@@ -271,7 +271,7 @@ app.get('/commentData', (req, res) => {
         }
       });
       var commentData = {comments: comments};
-      console.log('**********',users,'***********');
+      // console.log('**********',users,'***********');
       var getProfilePic = function(userIndex) {
         if(userIndex === users.length) {
           commentData.profilePics = profilePics;
@@ -289,10 +289,10 @@ app.get('/commentData', (req, res) => {
 });
 
 app.post('/comment', (req, res) => {
-  console.log(req.body, 'IN COMMENT ROUTE');
+  // console.log(req.body, 'IN COMMENT ROUTE');
   userController.findOne({where: {email: req.session.email}}, user => {
     photoController.findOne({where: {title: req.body.photoName}}, photo => {
-      console.log(user.get('id'))
+      // console.log(user.get('id'))
       // user.addPhoto(photo, {
       //   body: req.body.body,
       //   coordinates: req.body.coordinates
@@ -313,12 +313,12 @@ app.post('/comment', (req, res) => {
 });
 
 app.post('/guestLogin', (req, res) => {
-  console.log('Heyoo we in guestLogin boy');
+  // console.log('Heyoo we in guestLogin boy');
   const email = req.body.email;
   const password = req.body.password;
   const response = {};
   userController.findOne({where: {email: email}}, user => {
-    // console.log('Inside userController, user data is:', user);
+    // // console.log('Inside userController, user data is:', user);
     if (!user) {
       response.auth = false;
       res.send(response);

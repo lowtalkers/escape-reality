@@ -15,7 +15,7 @@ class App extends Component {
 
     	<div onSubmit={(event) => {
     		event.preventDefault();
-    		console.log('CommentText submitted! Body:' + document.getElementsByName('CommentText')[0].value);
+    		// console.log('CommentText submitted! Body:' + document.getElementsByName('CommentText')[0].value);
     	}}>
       	<h1>Please enter your comment:</h1>
       	<form>Comment: <input name="CommentText" />

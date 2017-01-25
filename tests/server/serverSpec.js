@@ -97,7 +97,7 @@ describe('', function() {
             'title': 'Batman',
             'paragraph': 'Batman is a fictional superhero'
           }, function (bookmark) {
-            console.log(bookmark, bookmark.dataValues);
+            // console.log(bookmark, bookmark.dataValues);
             done();
           });
         });
@@ -108,7 +108,7 @@ describe('', function() {
           Bookmarks.findOne({
             'title': 'Batman'
           }, function (bookmark) {
-            console.log('bookmark', bookmark[0].title);
+            // console.log('bookmark', bookmark[0].title);
             expect(bookmark[0].paragraph).to.contain('Batman is a fictional superhero');
             done();
           });
@@ -163,7 +163,7 @@ describe('', function() {
 
       request(options, function(error, res, body) {
         User.findOne({where: {email: 't'}}, function (user) {
-          console.log('user found', user, user.dataValues);
+          // console.log('user found', user, user.dataValues);
           expect(res.auth).to.equal(true);
           done();
         });
@@ -201,7 +201,7 @@ describe('', function() {
         'email': 'phil@gmail.com',
         'password': 'phil'
       }, function (user) {
-        console.log('user here', user);
+        // console.log('user here', user);
         done();
       });
     });

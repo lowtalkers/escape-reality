@@ -52,7 +52,7 @@ export default props => {
     }
     xCoordinate = (xCoordinate + (width/2.5)).toString(); //bigger modifier moves left
     //temporary
-    console.log('adjustIconCoordinates height:', height)
+    // console.log('adjustIconCoordinates height:', height)
     yCoordinate = (yCoordinate + (height/2.75)).toString(); //bigger modifier moves down
     return (`${xCoordinate} ${yCoordinate} ${zCoordinate}`);
   }
@@ -60,7 +60,7 @@ export default props => {
   //make sure main text doesn't overflow beyond component parameters
  let reduceMainTextSize = (text) => {
    let output = null;
-   console.log('reduceMainTextSize text:', text)
+   // console.log('reduceMainTextSize text:', text)
    if (text.length >= 500) {
      text = text.slice(0, text.length -1);
      let finalPeriod = text.lastIndexOf('. ')
@@ -77,8 +77,8 @@ export default props => {
  }
 
   let greenAngleCalc = (position, commentID) => {
-    console.log('Position in greenAngleCalc:', position, 'type of position:', typeof position);
-    console.log('Comment ID in TextPlane equals:', commentID)
+    // console.log('Position in greenAngleCalc:', position, 'type of position:', typeof position);
+    // console.log('Comment ID in TextPlane equals:', commentID)
     position = cardCoordCalc(position);
     let coordinates = position.split(" ").map((element) => Number(element));
     let x = coordinates[0];
@@ -115,7 +115,7 @@ let addBookmark = (title) => {
   $.get({
     url: '/addBookmark?exactWikiTitle=' + title,
     success: (data) => {
-      console.log(data);
+      // console.log(data);
     },
     error: (error) => {
       console.error('error in fetch paragraph', error);
@@ -134,15 +134,15 @@ let adjustTextPosition = (text, textAdjust) => {
 }
 
 let formatTime = (string) => {
-  // console.log('BLAHHDEEBLAH formatTime string:' + string);
+  // // console.log('BLAHHDEEBLAH formatTime string:' + string);
   let splitArray = string.split(':');
   return Number(splitArray[0]) > 12 ? `${Number(splitArray[0]) -12}:${splitArray[1]}pm` : `${Number(splitArray[0])}:${splitArray[1]}am`
 }
 
 let formatDate = (string) => {
-  console.log('BLAHHDEEBLEEE formatDate string:' + string);
+  // console.log('BLAHHDEEBLEEE formatDate string:' + string);
   let splitArray = string.split(' ');
-  console.log('HA LA LA splitArray equals:', splitArray)
+  // console.log('HA LA LA splitArray equals:', splitArray)
   return `${splitArray[1]} ${splitArray[2]} ${splitArray[3]} at ${formatTime(splitArray[4])}`;
 }
 
@@ -155,7 +155,7 @@ let adjustTimestampPosition = (textAdjust) => {
         animation__rot={{property: 'rotation', dir: 'normal', dur: 500, loop: false, from: '0 0 0', to: greenAngleCalc(props.position, props.commentID)}}
         animation__scale={{property: 'scale', dir: 'normal', dur: 500, loop: false, from: '.1 .1 .1', to: '1 1 1'}}
         id="TextPlane" onClick={(data) => {
-              console.log('Within TextPlane.js, event data is:', data.detail.target.id);
+              // console.log('Within TextPlane.js, event data is:', data.detail.target.id);
               props.hidePlane();
             }} 
         position={cardCoordCalc(props.position)} 
@@ -209,7 +209,7 @@ let adjustTimestampPosition = (textAdjust) => {
       <Entity
             commentID={props.commentID}
             onClick={(data) => {
-              console.log('Within TextPlane.js, event data is:', data.detail.target.id)
+              // console.log('Within TextPlane.js, event data is:', data.detail.target.id)
               props.hidePlane();
             }}
             geometry={`primitive: plane; width: 0.25; height: 0.25`}

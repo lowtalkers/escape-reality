@@ -16,7 +16,7 @@ class Bookmarks extends React.Component {
     $.get({
       url: '/allBookmarks',
       success: (data) => {
-        console.log(data, data[0].title)
+        // console.log(data, data[0].title)
         self.setState({bookmarks: data})
       },
       error: (error) => {

@@ -20,7 +20,7 @@ export default props => {
     {self.state.showPyramidCard? 
       
       <TextPlane 
-        planeClick={() => console.log('Current ref object id is:', self.refs)}
+        planeClick={() => // console.log('Current ref object id is:', self.refs)}
         id="pyramidTextPlane"
         hidePlane={() => self.setState({showPyramidCard: false})}
 
@@ -44,8 +44,8 @@ export default props => {
 */}
 
   let greenAngleCalc = (position, commentID) => {
-    console.log('Position in greenAngleCalc:', position, 'type of position:', typeof position);
-    console.log('Comment ID in TextPlane equals:', commentID)
+    // console.log('Position in greenAngleCalc:', position, 'type of position:', typeof position);
+    // console.log('Comment ID in TextPlane equals:', commentID)
     position = cardCoordCalc(position);
     let coordinates = position.split(" ").map((element) => Number(element));
     let x = coordinates[0];
@@ -79,7 +79,7 @@ export default props => {
   }
 
   if (props.displayedComments.includes(props.commentID)) {
-    console.log('props.displayedComments are:', props.displayedComments)
+    // console.log('props.displayedComments are:', props.displayedComments)
     return ( 
 
     <Entity>
@@ -93,7 +93,7 @@ export default props => {
 
           
         <TextPlane 
-          planeClick={() => console.log('in TextPlance, displayedComments is currentlyyyy:', props.displayedComments)}
+          // planeClick={() => console.log('in TextPlane, displayedComments is currentlyyyy:', props.displayedComments)}
 
           id="pyramidTextPlane"
           hidePlane={props.hidePlane}
