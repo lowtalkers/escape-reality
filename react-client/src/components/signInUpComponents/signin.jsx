@@ -30,6 +30,17 @@ export default props => (
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
 
 
+    <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+
+    <img src="https://s3.amazonaws.com/vrpics/plus-hi.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img src="http://i.imgur.com/jRdxNpi.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img src="http://i.imgur.com/JmLIjXY.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+
+
+
     <div>
       <h1 className="centerText" style={{color: 'white', top: '15px', position: 'absolute', width:'100%', textAlign: 'center', fontSize: '100px'}}> Immerse </h1>
 
