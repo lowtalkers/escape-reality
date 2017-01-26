@@ -274,7 +274,7 @@ class App extends React.Component {
             self.changeProfilePic(() => {
               console.log('Running within the changeProfilePic')
               self.getAllPhotos();
-              self.getLikes();
+              // self.getLikes();
             });
           } else if (data === 'User exists!') {
             // console.log('User exists!');
@@ -299,7 +299,7 @@ class App extends React.Component {
             // from server to display it
             self.changeProfilePic(() => {
               self.getAllPhotos();
-              self.getLikes();
+              // self.getLikes();
             });
           } else if (data === 'User exists!') {
             // console.log('User exists!');
@@ -667,6 +667,7 @@ class App extends React.Component {
             <Home
             router={this.props.router}
             pics={this.state.pics}
+            getLikes={this.getLikes.bind(this)}
             changeBigPic={this.changeBigPic.bind(this)} />
           );
       } else {
@@ -731,6 +732,8 @@ class App extends React.Component {
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" />
               <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" />
+              <img id="liked" crossOrigin="anonymous" src="http://i.imgur.com/XTLYqU3.png" />
+
               <img id="mic" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" />
               <img id="micActivated" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" />
 

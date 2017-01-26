@@ -6,7 +6,6 @@ import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 
-
 import Camera from './Camera';
 import Text from './Text';
 import Sky from './Sky';
@@ -14,6 +13,7 @@ import Plane from './Plane';
 
 
 export default props => {
+    props.getLikes();
     console.log('Within Home, props is currently:', props)
     let pics = props.pics.map((pic, index) => {
     // console.log(pic.title, index, pic.imageLink)
