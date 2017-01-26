@@ -54,7 +54,9 @@ class App extends React.Component {
       lastName: '',
       profilePic: '',
       bigPic: '',
+      currentPic: false,
       pics: [],
+      likedPhotos: [],
       addCommentMode: false,
       comments: [], //[{x: 1.24324324, y: 2, z:3, id: 0, show: false }, {xyz, 1: false}]
       currentComment: {},
@@ -132,6 +134,7 @@ class App extends React.Component {
 
   getAllPhotos() {
     let self = this;
+    console.log('RUNNING getAllPhotos !!!')
     $.get({
       url: '/topPics',
       success: (data) => {
@@ -234,6 +237,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
+    console.log('componentDidMount')
     if (this.props.router.location.pathname.indexOf('/sign') < 0) {
       // console.log('🍊  running changeProfilePic');
       this.getAllPhotos();
@@ -267,7 +271,11 @@ class App extends React.Component {
             self.props.router.replace('/dashboard');
             // If authenticated, then get profile picture
             // from server to display it
-            self.changeProfilePic(() => {self.getAllPhotos()});
+            self.changeProfilePic(() => {
+              console.log('Running within the changeProfilePic')
+              self.getAllPhotos();
+              self.getLikes();
+            });
           } else if (data === 'User exists!') {
             // console.log('User exists!');
           }
@@ -289,7 +297,10 @@ class App extends React.Component {
             self.props.router.replace('/dashboard');
             // If authenticated, then get profile picture
             // from server to display it
-            self.changeProfilePic(() => {self.getAllPhotos()});
+            self.changeProfilePic(() => {
+              self.getAllPhotos();
+              self.getLikes();
+            });
           } else if (data === 'User exists!') {
             // console.log('User exists!');
           }
@@ -306,18 +317,63 @@ class App extends React.Component {
   }
 
   likeSubmitFn() {
+    let self = this;
     // console.log('in like submit function');
     $.post({
       url: '/like',
       contentType: 'application/json',
       data: JSON.stringify({photoName: this.state.bigPic}),
       success: (data) => {
-        // console.log(data);
+        let array = [data[0].photo_id];
+        console.log('like result is:', array[0]);
+        self.setState({likedPhotos: self.state.likedPhotos.concat(array)})
       },
       error: (error) => {
         $('.error').show();
       },
     });
+  }
+
+  // getComments() {
+  //   let self = this;
+  //   $.get({
+  //     url: '/commentData',
+  //     data: {photoName: this.state.bigPic},
+  //     success: (data) => {
+  //       // console.log('got comment data from server:', data);
+  //       if (data.comments.length > 0) {
+  //         data.comments = data.comments.map(function(comment) {
+  //           var coords = comment.coordinates.split(' ');
+  //           return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body, firstName: comment.firstName, createdAt: new Date(comment.createdAt), src: '#'+comment.email.split('@')[0]}
+  //         });
+  //         self.setState({
+  //           comments: data.comments,
+  //           commentPics: data.profilePics
+  //         });
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error('error in get upload', error);
+  //       $('.error').show();
+  //     }
+  //   });
+  // }
+
+  getLikes() {
+    let self = this;
+    $.get({
+      url: '/retrieveLikes',
+      success: (data) => {
+        console.log('after running getLikes, retrieved data is:', data);
+        let photoIDs = data.map(likeData => likeData.photo_id);
+        console.log('photoIDs:', photoIDs)
+        self.setState({likedPhotos: photoIDs})
+      },
+      error: (error) => {
+        console.log('error retrieving likes', error);
+        $('.error').show();
+      }
+    })
   }
 
   commentSubmitFn(phrase, coordinates) {
@@ -425,9 +481,10 @@ class App extends React.Component {
     self.getCreatedAt(newObject);
   }
 
-  changeBigPic (val) {
+  changeBigPic (val, id) {
     this.setState({
-      bigPic: val
+      bigPic: val,
+      currentPic: id
     });
   }
 
@@ -616,6 +673,8 @@ class App extends React.Component {
         // console.log('*********rendering image')
         vrView = <Image
                     bigPic={this.state.bigPic}
+                    currentPic={this.state.currentPic}
+                    likedPhotos={this.state.likedPhotos}
                     commentSubmitFn={this.commentSubmitFn.bind(this)}
                     likeSubmitFn={this.likeSubmitFn.bind(this)}
                     changeBigPic={this.changeBigPic.bind(this)}
@@ -623,6 +682,7 @@ class App extends React.Component {
                     changeCommentMode={this.changeCommentMode.bind(this)}
                     comments={this.state.comments}
                     getComments={this.getComments.bind(this)}
+                    getLikes={this.getLikes.bind(this)}
                     addComment={this.addComment.bind(this)}
                     addTypedComment={this.addTypedComment.bind(this)}
                     voiceComment={this.voiceComment.bind(this)}

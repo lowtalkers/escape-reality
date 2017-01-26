@@ -24,6 +24,7 @@ export default props => {
   // $('#' + bigPic).load(function() {
   //   sky = <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
   // })
+  console.log('likedPhotos is:', props.likedPhotos, 'and props.currentPic is:', props.currentPic)
   if(props.bigPic !== '' && props.comments.length === 0) {
     // console.log('getting comments!!!!!!')
     props.getComments();
@@ -74,7 +75,8 @@ export default props => {
     <a-image
       look-at="[camera]"
       id="like-image"
-      src="#like"
+      // src="#like"
+      src={props.likedPhotos.indexOf(props.currentPic) > -1 ? "#exit" : "#like"}
       geometry="height: 0.5; width: 0.5"
       position="0 -0.25 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"

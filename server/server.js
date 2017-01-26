@@ -208,6 +208,12 @@ app.get('/getWikiArticleTitle', (req, res) => {
   utils.fetchArticleWikiName(req, res);
 });
 
+app.get('/retrieveLikes', (req, res) => {
+  likeController.findAll(likes => {
+    res.send(likes);
+  })
+})
+
 app.get('/addBookmark', (req, res) => {
   userController.findOne({where: {email: req.session.email}}, user => {
     bookmarkController.findOne({where: {title: req.query.exactWikiTitle}},

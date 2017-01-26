@@ -14,6 +14,7 @@ import Plane from './Plane';
 
 
 export default props => {
+    console.log('Within Home, props is currently:', props)
     let pics = props.pics.map((pic, index) => {
     // console.log(pic.title, index, pic.imageLink)
     const rot = '0 ' + (index * -35) + ' 0';
@@ -32,9 +33,10 @@ export default props => {
       position={"0 "+ ((index*-0.15)+0.5) +" 0"}
       material={{src: ('#resized-'+imageName), color: '#FFF', shader: 'flat', side: 'double', transparent: 'true', repeat: '-1 1'}}
       geometry="height:1;primitive:cylinder;radius:2;segmentsRadial:48;thetaLength:30;openEnded:true;thetaStart:0"
+      photoID={pic.id}
       onClick={() => {
         props.router.replace('/' + imageName)
-        props.changeBigPic(pic.title)
+        props.changeBigPic(pic.title, pic.id)
       }} />
     );
   });
