@@ -1,29 +1,5 @@
 -- ---
--- how to use this file:
---
--- 1)
--- Log into mysql console and drop the 'escape' database and create it again.
--- mysql -u root -p
--- drop database escape;
--- create database escape;
--- ctrl-d
---
--- 2)
--- For the file 'escape-reality/db/models/index.js',
--- Uncomment 'sequelize.sync({force: true});' on line 63, 
--- then make line 64 a comment: 
--- sequelize.sync();
---
--- 3)
--- Restart your node server
---
--- 4)
--- Change into the directory 'escape-reality/db' and run this command:
--- mysql -u root -p escape < sql-to-mock-database.txt 
---
--- 5)
--- Comment out the line in step 2 again and make sure this line is uncommented:
--- sequelize.sync();
+-- See instructions in the file 'db/models/how-to-mock-database.txt'
 --
 -- ---
 
@@ -31,10 +7,12 @@
 -- ---
 -- Create user tony@tony.com
 -- 
+-- Must use imgr.com profile picture links instead of AWS bucket links because there were
+-- inconsistent CORS errors in loading profile pics during the display of comments in our app.
 -- ---
 INSERT INTO `users` (`id`, `email`, `password`, `profilePic`, `firstName`, `lastName`, `lobbyPic`, `createdAt`, `updatedAt`)
 VALUES
-	(7, 'tony@tony.com', '$2a$10$5TqeWOK2GsKUyajuXZPoGu73Z8D2wAhAhD0dxVR4YeGDjFhSg457G', 'https://s3.amazonaws.com/vrpics/tony-le-profilepic.png', 'Tony', 'Le', 'https://s3.amazonaws.com/vrpics/lr2.jpg', '2016-11-30 00:35:49', '2016-11-30 00:35:49');
+	(7, 'tony@tony.com', '$2a$10$5TqeWOK2GsKUyajuXZPoGu73Z8D2wAhAhD0dxVR4YeGDjFhSg457G', 'http://i.imgur.com/b47RMuI.jpg', 'Tony', 'Le', 'https://s3.amazonaws.com/vrpics/lr2.jpg', '2016-11-30 00:35:49', '2016-11-30 00:35:49');
 
 -- ---
 -- Create photos for tony@tony.com
@@ -59,7 +37,7 @@ VALUES
 -- ---
 INSERT INTO `users` (`id`, `email`, `password`, `profilePic`, `firstName`, `lastName`, `lobbyPic`, `createdAt`, `updatedAt`)
 VALUES
-	(8, 'franco@franco.com', '$2a$10$PSgRZS5tj4eGN2TUO9bzmO05Oc/dOiDNX5Nq1oe/MeWn6hWvbAVVC', 'https://s3.amazonaws.com/vrpics/franco-profilepic_256x256.jpg', 'Franco', 'Abaroa', 'https://s3.amazonaws.com/vrpics/lr2.jpg',  '2016-11-30 01:17:00', '2016-11-30 01:17:00');
+	(8, 'franco@franco.com', '$2a$10$PSgRZS5tj4eGN2TUO9bzmO05Oc/dOiDNX5Nq1oe/MeWn6hWvbAVVC', 'http://i.imgur.com/ApUbhYu.jpg', 'Franco', 'Abaroa', 'https://s3.amazonaws.com/vrpics/lr2.jpg',  '2016-11-30 01:17:00', '2016-11-30 01:17:00');
 
 -- ---
 -- Create photos for franco@franco.com
@@ -79,7 +57,7 @@ VALUES
 -- ---
 INSERT INTO `users` (`id`, `email`, `password`, `profilePic`, `firstName`, `lastName`, `lobbyPic`, `createdAt`, `updatedAt`)
 VALUES
-	(9, 'carlos@carlos.com', '$2a$10$Y6qUvZ9zFwAWnAVzn4vpXeGSnyv.ZD2FKvKRbZYSKzrB7aETn15pe', 'https://s3.amazonaws.com/vrpics/carlos-profilepic_512x300.jpg', 'Carlos', 'Portillo ', 'https://s3.amazonaws.com/vrpics/lr2.jpg',  '2016-12-01 19:56:18', '2016-12-01 19:56:18');
+	(9, 'carlos@carlos.com', '$2a$10$Y6qUvZ9zFwAWnAVzn4vpXeGSnyv.ZD2FKvKRbZYSKzrB7aETn15pe', 'http://i.imgur.com/mlAx8Xb.jpg', 'Carlos', 'Portillo ', 'https://s3.amazonaws.com/vrpics/lr2.jpg',  '2016-12-01 19:56:18', '2016-12-01 19:56:18');
 
 
 -- ---
