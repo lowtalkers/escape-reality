@@ -1,0 +1,19 @@
+# Log into MariaDB (MySQL) console,
+# drop the 'escape' database,
+# and create it again.
+
+mysql -u root -p
+
+
+## While inside the MariaDB console:
+
+drop database escape;
+create database escape;
+ctrl-d
+
+
+# Import SQL commands into MariaDB
+# to create starting data.
+
+cd escape-reality/db
+mysql -u root -p escape < sql-to-mock-database.sql
