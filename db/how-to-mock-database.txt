@@ -1,8 +1,10 @@
+# Step 1: ---------------------------------------------
 # Log into MariaDB (MySQL) console
 
 mysql -u root -p
 
 
+# Step 2: ---------------------------------------------
 # While inside the MariaDB console,
 # drop the 'escape' database,
 # and create it again.
@@ -12,6 +14,14 @@ create database escape;
 ctrl-d
 
 
+# Step 3: ---------------------------------------------
+# Restart Node to make Sequelize
+# create the initial tables
+
+node server/server.js
+
+
+# Step 4: ---------------------------------------------
 # Import SQL commands into MariaDB
 # to create starting data.
 
