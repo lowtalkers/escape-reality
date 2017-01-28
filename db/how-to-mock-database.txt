@@ -1,11 +1,11 @@
-# Log into MariaDB (MySQL) console,
-# drop the 'escape' database,
-# and create it again.
+# Log into MariaDB (MySQL) console
 
 mysql -u root -p
 
 
-## While inside the MariaDB console:
+# While inside the MariaDB console,
+# drop the 'escape' database,
+# and create it again.
 
 drop database escape;
 create database escape;
