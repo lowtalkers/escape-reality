@@ -18,14 +18,6 @@ export default props => {
     let pics = props.pics.map((pic, index) => {
     // console.log(pic.title, index, pic.imageLink)
     const rot = '0 ' + (index * -35) + ' 0';
-    // var row;
-    // if (index >18 && index <= 27) {
-    //   row = -1.1;
-    // } else if (index > 9 && index <= 18) {
-    //   row = 0;
-    // } else if (index > -1 && index <= 9) {
-    //   row = 1.1;
-    // }
     var imageName = pic.title.split('.')[0];
     return (
       <Entity
@@ -40,6 +32,7 @@ export default props => {
       }} />
     );
   });
+    
   return (
     <Entity>
         <Entity animation__rot={{property: 'rotation', dur: 200000, loop: 'repeat', to: '0 360 0', easing: 'linear'}} >
