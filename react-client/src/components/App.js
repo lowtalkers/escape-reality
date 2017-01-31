@@ -71,6 +71,10 @@ class App extends React.Component {
       typedCommentBox: true,
       guestLogin: false,
       flag: false,
+      micHover: false,
+      textHover: false,
+      homeHover: false,
+      likeHover: false,
 		};
   }
 

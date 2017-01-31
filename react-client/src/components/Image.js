@@ -61,6 +61,13 @@ export default props => {
   }
 
   return ( <Entity>
+    <Text
+      text="Hello olleH"
+      material={{color: 'red'}}
+      position="0 1.5 -3.5"
+      look-at="camera"
+    />
+
     <a-image
       look-at="[camera]"
       id="close-image"
