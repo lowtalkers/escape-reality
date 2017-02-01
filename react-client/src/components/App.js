@@ -75,6 +75,7 @@ class App extends React.Component {
       textHover: false,
       homeHover: false,
       likeHover: false,
+      hoverIcon: false
 		};
   }
 
@@ -82,6 +83,18 @@ class App extends React.Component {
     * @param {object} event click event object
     * @returns {boolean} true or false if rules are followed
     */
+
+  closeHoverText() {
+    let self = this;
+    let currentState = self.state.hoverIcon;
+    if (self.state.hoverIcon) {
+      setTimeout(()=> {
+        if (self.state.hoverIcon === currentState) {
+          self.setState({hoverIcon: false})
+        }
+      }, 500)
+    }
+  }
 
   getParagraph(allTitles, setStateParagraph) {
     const result = {};
@@ -365,13 +378,16 @@ class App extends React.Component {
 
   getLikes() {
     let self = this;
+    console.log('props.router is currently:',  self.props.router)
     $.get({
       url: '/retrieveLikes',
       success: (data) => {
         console.log('after running getLikes, retrieved data is:', data);
         let photoIDs = data.map(likeData => likeData.photo_id);
-        console.log('photoIDs:', photoIDs)
-        self.setState({likedPhotos: photoIDs})
+        if (self.state.likedPhotos.length !== photoIDs.length) {
+          console.log('photoIDs:', photoIDs, 'while state\'s likedPhotos is:', self.state.likedPhotos);
+          self.setState({likedPhotos: photoIDs})
+        }
       },
       error: (error) => {
         console.log('error retrieving likes', error);
@@ -677,6 +693,7 @@ class App extends React.Component {
       } else {
         // console.log('*********rendering image')
         vrView = <Image
+                    self={self}
                     bigPic={this.state.bigPic}
                     currentPic={this.state.currentPic}
                     likedPhotos={this.state.likedPhotos}
@@ -701,6 +718,7 @@ class App extends React.Component {
 
       }
 
+      // self.closeHoverText();
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
           For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
