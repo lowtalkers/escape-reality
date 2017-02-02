@@ -170,7 +170,7 @@ let adjustTimestampPosition = (textAdjust) => {
           geometry={`primitive: plane; width: ${Width}; height: ${Height}`}
           // position='0 0 0'
           rotation='0 0 0'
-          material={{color: '#436095', shader: 'flat', opacity: 0.75, transparent: true}}
+          material={{color: '#436095', shader: 'flat', opacity: 0.75, transparent: true, side: 'double'}}
         />
 
         {/* Main Image */}
