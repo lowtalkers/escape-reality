@@ -82,112 +82,82 @@ export default props => {
 
     {hoverText}
 
-    {/* Background Hidden Planes to Remove Hovering Text */}
+    {/* Background Info Plane */}
     <Entity
-      geometry={`primitive: plane; width: 1; height: 4`}
-      position='-0.75 1 -4'
+      geometry={`primitive: plane; width: 4; height: 2`}
+      position='0 3.75 -4'
       rotation='0 0 0'
       // look-at="[camera]"
-      material={{color: 'white', shader: 'flat', opacity: 0.75, transparent: true}}
-      onRaycasterIntersected={() => props.self.state.hoverIcon ? props.self.setState({hoverIcon: false}) : null}
+      // material={{color: 'white', shader: 'flat', opacity: 0.75, transparent: true}}
+      material={{side: 'double', src: 'url(http://i.imgur.com/FTQCBnz.jpg)', opacity: 0.75, transparent: true, shader: 'flat'}}
+      // onRaycasterIntersected={() => props.self.state.hoverIcon ? props.self.setState({hoverIcon: false}) : null}
       // onRaycasterIntersected={() => console.log('Intersectingg!')}
     />
 
-    <Entity
-      geometry={`primitive: plane; width: 1; height: 4`}
-      position='0.75 1 -4'
-      rotation='0 0 0'
-      // look-at="[camera]"
-      material={{color: 'white', shader: 'flat', opacity: 0.75, transparent: true}}
-      onRaycasterIntersected={() => props.self.state.hoverIcon ? props.self.setState({hoverIcon: false}) : null}
-      // onRaycasterIntersected={() => console.log('Intersectingg!')}
-    />
-
-
-    <Entity
+    <a-image
       look-at="[camera]"
+      id="input-image"
+      // src="#input"
+      src={props.typedCommentsOn ? '#inputActivated' : '#input'}
+      geometry="height: 0.5; width: 0.5"
       position="0 2 -3.5"
-      onRaycasterIntersected={(obj) => props.self.state.hoverIcon === 'micImage' ? null :  props.self.setState({hoverIcon: 'micImage'})}
-    >
-      <a-image
-        look-at="[camera]"
-        id="mic-image"
-        src={props.commentsOn ? "#micActivated" : "#mic"}
-        geometry="height: 0.5; width: 0.5"
-        // position="0 2 -3.5"
-        animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
-        animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
-        onClick={() => props.turnCommentsOn()}>
-      </a-image>
-    </Entity>
+      animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
+      animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
+      onClick={() => {
+        console.log('hoverIcon is:', props.self.state.hoverIcon)
+        // let comment = prompt('Heyoo input form icon clicked, response?');
+        // // console.log('User submitted comment:', comment);
+        props.turnTypedCommentsOn();
+      }
+      }>
+    </a-image>
 
-
-    <Entity
+    <a-image
       look-at="[camera]"
+      id="mic-image"
+      src={props.commentsOn ? "#micActivated" : "#mic"}
+      geometry="height: 0.5; width: 0.5"
       position="0 1.25 -3.5"
-      onRaycasterIntersected={(obj) => {
-        // console.log('props.self.state is:', props.self.state)
-        props.self.state.hoverIcon === 'inputImage' ? null : props.self.setState({hoverIcon: 'inputImage'})
-      }}
-    >
-      <a-image
-        look-at="[camera]"
-        id="input-image"
-        // src="#input"
-        src={props.typedCommentsOn ? '#inputActivated' : '#input'}
-        geometry="height: 0.5; width: 0.5"
-        // position="0 1.25 -3.5"
-        animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
-        animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
-        onClick={() => {
-          console.log('hoverIcon is:', props.self.state.hoverIcon)
-          // let comment = prompt('Heyoo input form icon clicked, response?');
-          // // console.log('User submitted comment:', comment);
-          props.turnTypedCommentsOn();
-        }
-        }>
-      </a-image>
-    </Entity>
+      animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
+      animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
+      onClick={() => props.turnCommentsOn()}>
+    </a-image>
 
-    <Entity
+    <a-image
       look-at="[camera]"
+      id="like-image"
+      // src="#like"
+      src={props.likedPhotos.indexOf(props.currentPic) > -1 ? "#liked" : "#like"}
+      geometry="height: 0.5; width: 0.5"
       position="0 0.5 -3.5"
-      onRaycasterIntersected={(obj) => props.self.state.hoverIcon === 'likeImage' ? null : props.self.setState({hoverIcon: 'likeImage'})}
-    >
-      <a-image
-        look-at="[camera]"
-        id="like-image"
-        // src="#like"
-        src={props.likedPhotos.indexOf(props.currentPic) > -1 ? "#liked" : "#like"}
-        geometry="height: 0.5; width: 0.5"
-        // position="0 -0.25 -3.5"
-        animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
-        animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
-        onClick={() => props.likeSubmitFn()}>
-      </a-image>
-    </Entity>
+      animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
+      animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
+      onClick={() => props.likeSubmitFn()}>
+    </a-image>
 
-    <Entity
+    <a-image
       look-at="[camera]"
+      id="close-image"
+      src="#close"
+      geometry="height: 0.5; width: 0.5"
       position="0 -0.25 -3.5"
-      onRaycasterIntersected={(obj) => props.self.state.hoverIcon === 'closeImage' ? null : props.self.setState({hoverIcon: 'closeImage'})}
+      animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
+      animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
+      onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}
     >
-      <a-image
-        look-at="[camera]"
-        id="close-image"
-        src="#close"
-        geometry="height: 0.5; width: 0.5"
-        // position="0 0.5 -3.5"
-        animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
-        animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
-        onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}
-      >
-      </a-image>
-    </Entity>
+    </a-image>
 
-
-
-
+    <a-image
+      look-at="[camera]"
+      id="info"
+      src="#info"
+      geometry="height: 0.25; width: 0.25"
+      position="0 -0.85 -3.5"
+      animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
+      animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
+      onClick={() => console.log('Info button clicked!')}
+    >
+    </a-image>
 
     {sky}
 
