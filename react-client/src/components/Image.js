@@ -85,7 +85,7 @@ export default props => {
     {/* Background Info Plane */}
     <Entity
       geometry={`primitive: plane; width: 4; height: 2`}
-      position='0 3.75 -4'
+      position='0 3.25 -4'
       rotation='0 0 0'
       // look-at="[camera]"
       // material={{color: 'white', shader: 'flat', opacity: 0.75, transparent: true}}
@@ -100,7 +100,7 @@ export default props => {
       // src="#input"
       src={props.typedCommentsOn ? '#inputActivated' : '#input'}
       geometry="height: 0.5; width: 0.5"
-      position="0 2 -3.5"
+      position="0 1.5 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
       onClick={() => {
@@ -117,7 +117,7 @@ export default props => {
       id="mic-image"
       src={props.commentsOn ? "#micActivated" : "#mic"}
       geometry="height: 0.5; width: 0.5"
-      position="0 1.25 -3.5"
+      position="0 0.75 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
       onClick={() => props.turnCommentsOn()}>
@@ -129,7 +129,7 @@ export default props => {
       // src="#like"
       src={props.likedPhotos.indexOf(props.currentPic) > -1 ? "#liked" : "#like"}
       geometry="height: 0.5; width: 0.5"
-      position="0 0.5 -3.5"
+      position="0 0 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
       onClick={() => props.likeSubmitFn()}>
@@ -140,7 +140,7 @@ export default props => {
       id="close-image"
       src="#close"
       geometry="height: 0.5; width: 0.5"
-      position="0 -0.25 -3.5"
+      position="0 -0.75 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
       onClick={() => {props.router.replace('/lobby'); props.changeBigPic(''); props.clearComments();}}
