@@ -89,7 +89,7 @@ export default props => {
       rotation='0 0 0'
       // look-at="[camera]"
       // material={{color: 'white', shader: 'flat', opacity: 0.75, transparent: true}}
-      material={{side: 'double', src: 'url(http://i.imgur.com/FTQCBnz.jpg)', opacity: 0.75, transparent: true, shader: 'flat'}}
+      material={{side: 'double', src: 'url(http://i.imgur.com/vJM4tTV.jpg)', opacity: 0.75, transparent: true, shader: 'flat'}}
       // onRaycasterIntersected={() => props.self.state.hoverIcon ? props.self.setState({hoverIcon: false}) : null}
       // onRaycasterIntersected={() => console.log('Intersectingg!')}
     />
@@ -152,7 +152,7 @@ export default props => {
       id="info"
       src="#info"
       geometry="height: 0.25; width: 0.25"
-      position="0 -0.85 -3.5"
+      position="0 -1.35 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
       onClick={() => console.log('Info button clicked!')}
