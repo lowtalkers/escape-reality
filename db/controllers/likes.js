@@ -21,8 +21,12 @@ var findAll = function(callback) {
 var update = function(query, callback) {
   Like.findOne(query).done(function(like) {
     // console.log('🍊  Found one like in db:', query);
-    // console.log(like, 'LIKEEEEEEE');
-    like.update({like: true});
+    console.log('LIKEEEEEEE:', like.like);
+    if (like.like) {
+      like.update({like: false});
+    } else {
+      like.update({like: true})
+    }
     callback(like);
   });
 };

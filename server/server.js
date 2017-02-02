@@ -257,7 +257,7 @@ app.get('/topPics', (req, res) => {
 app.post('/like', (req, res) => {
   userController.findOne({where: {email: req.session.email}}, user => {
     photoController.findOne({where: {title: req.body.photoName}}, photo => {
-      likeController.findOrCreate({where: {user_id: user.get('id'), photo_id: photo.get('id')}}, like => {
+      likeController.update({where: {user_id: user.get('id'), photo_id: photo.get('id')}}, like => {
         res.status(200).send(like);
       })
     })

@@ -329,9 +329,18 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({photoName: this.state.bigPic}),
       success: (data) => {
-        let array = [data[0].photo_id];
-        console.log('like result is:', array[0]);
-        self.setState({likedPhotos: self.state.likedPhotos.concat(array)})
+        console.log('after running likeSubmitFn data is:', data, 'and its photo_id is:', data.photo_id, 'and also self.state.likedPhotos is:', self.state.likedPhotos)
+        let index = self.state.likedPhotos.indexOf(data.photo_id);
+        if (index > -1) {
+          let array = self.state.likedPhotos;
+          let updatedArray = array.slice(0, index).concat(array.slice(index + 1))
+          console.log('updatedArray is:', updatedArray);
+          self.setState({likedPhotos: updatedArray})
+        } else {
+          let array = [data.photo_id];
+          console.log('like result is:', array[0]);
+          self.setState({likedPhotos: self.state.likedPhotos.concat(array)})
+        }
       },
       error: (error) => {
         $('.error').show();

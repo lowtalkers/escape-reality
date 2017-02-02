@@ -88,8 +88,9 @@ export default props => {
 
       <Entity
         geometry={`primitive: plane; width: 4; height: 2`}
-        position='2.5 0.35 -4'
-        rotation='0 0 0'
+        position='-2.5 0.35 -4'
+        // rotation='0 25 0'
+        look-at="[camera]"
         material={{side: 'double', src: 'url(http://i.imgur.com/vJM4tTV.jpg)', opacity: 0.75, transparent: true, shader: 'flat'}}
         onClick={() => props.self.setState({infoPlane: false})}
         // onRaycasterIntersected={() => props.self.state.hoverIcon ? props.self.setState({hoverIcon: false}) : null}
