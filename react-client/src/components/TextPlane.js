@@ -127,7 +127,7 @@ let addBookmark = (title) => {
 let adjustTextPosition = (text, textAdjust) => {
   text = reduceMainTextSize(text);
   if (text.split(" ").length > 7) {
-    return (textAdjust - 0.2).toString();
+    return (textAdjust - 0.225).toString();
   } else {
     return textAdjust;
   }
@@ -170,7 +170,7 @@ let adjustTimestampPosition = (textAdjust) => {
           geometry={`primitive: plane; width: ${Width}; height: ${Height}`}
           // position='0 0 0'
           rotation='0 0 0'
-          material={{color: '#436095', shader: 'flat', opacity: 0.75, transparent: true}}
+          material={{color: '#436095', shader: 'flat', opacity: 0.75, transparent: true, side: 'double'}}
         />
 
         {/* Main Image */}
@@ -178,14 +178,14 @@ let adjustTimestampPosition = (textAdjust) => {
           onClick={() => props.planeClick()}
           material={{side: 'double', src: props.source, opacity: 1, shader: 'flat'}}
           // position={adjustImageCoordinates(props.position, Width, (Height/3)*2)}
-          position={`-1.1 0.6 0.18`}
+          position={`-1.25 0.75 0.05`}
           rotation='0 0 0'
         />
 
         {/* Header Text */}
         <Entity bmfont-text={{align: 'left', width: '750', color: 'yellow', text: props.header}}
           // position={adjustHeaderTextCoordinates(props.position, Width, Height)}
-          position={`${props.headerAdjust} 0.40 0.1`}
+          position={`${props.headerAdjust} 0.40 0.05`}
           rotation='0 0 0'
           scale='1.85 1.85 0'
         />
@@ -193,7 +193,7 @@ let adjustTimestampPosition = (textAdjust) => {
         {/* Main Body Text */}
         <Entity bmfont-text={{align: 'left', width: '450', color: 'white', text: reduceMainTextSize(props.text)}} // Max character length = 500
           // position={adjustMainTextCoordinates(props.position, Width, Height)}
-          position={`-1 ${adjustTextPosition(props.text, props.textAdjust)} 0.24`}
+          position={`-1 ${adjustTextPosition(props.text, props.textAdjust)} 0.05`}
           rotation='0 0 0'
           scale='1 1 0'
         />
@@ -201,7 +201,7 @@ let adjustTimestampPosition = (textAdjust) => {
       {/* Timestamp */}
         <Entity bmfont-text={{align: 'left', width: '450', color: 'white', text: formatDate(props.createdAt.toString())}} // Max character length = 500
           // position={adjustMainTextCoordinates(props.position, Width, Height)}
-          position={`-0.25 ${adjustTimestampPosition(props.textAdjust)} 0.24`}
+          position={`-0.25 ${adjustTimestampPosition(props.textAdjust)} 0.05`}
           rotation='0 0 0'
           scale='0.75 0.75 0'
         />
@@ -215,7 +215,7 @@ let adjustTimestampPosition = (textAdjust) => {
             }}
             geometry={`primitive: plane; width: 0.25; height: 0.25`}
             material={{side: 'double', src: 'url(http://i.imgur.com/xgNToss.png)', opacity: 0.99, shader: 'flat'}}
-            position={`1.175 0.475 0.3`}
+            position={`1.25 0.5 0.05`}
             rotation='0 0 0'
             scale='1 1 0'
       />

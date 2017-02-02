@@ -54,7 +54,9 @@ class App extends React.Component {
       lastName: '',
       profilePic: '',
       bigPic: '',
+      currentPic: false,
       pics: [],
+      likedPhotos: [],
       addCommentMode: false,
       comments: [], //[{x: 1.24324324, y: 2, z:3, id: 0, show: false }, {xyz, 1: false}]
       currentComment: {},
@@ -69,6 +71,7 @@ class App extends React.Component {
       typedCommentBox: true,
       guestLogin: false,
       flag: false,
+      infoPlane: true,
 		};
   }
 
@@ -76,6 +79,10 @@ class App extends React.Component {
     * @param {object} event click event object
     * @returns {boolean} true or false if rules are followed
     */
+
+  closeLegend() {
+    this.setState({infoPlane: false})
+  }
 
   getParagraph(allTitles, setStateParagraph) {
     const result = {};
@@ -132,6 +139,7 @@ class App extends React.Component {
 
   getAllPhotos() {
     let self = this;
+    // console.log('RUNNING getAllPhotos !!!')
     $.get({
       url: '/topPics',
       success: (data) => {
@@ -234,6 +242,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
+    // console.log('componentDidMount')
     if (this.props.router.location.pathname.indexOf('/sign') < 0) {
       // console.log('🍊  running changeProfilePic');
       this.getAllPhotos();
@@ -267,7 +276,11 @@ class App extends React.Component {
             self.props.router.replace('/dashboard');
             // If authenticated, then get profile picture
             // from server to display it
-            self.changeProfilePic(() => {self.getAllPhotos()});
+            self.changeProfilePic(() => {
+              console.log('Running within the changeProfilePic')
+              self.getAllPhotos();
+              // self.getLikes();
+            });
           } else if (data === 'User exists!') {
             // console.log('User exists!');
           }
@@ -289,7 +302,10 @@ class App extends React.Component {
             self.props.router.replace('/dashboard');
             // If authenticated, then get profile picture
             // from server to display it
-            self.changeProfilePic(() => {self.getAllPhotos()});
+            self.changeProfilePic(() => {
+              self.getAllPhotos();
+              // self.getLikes();
+            });
           } else if (data === 'User exists!') {
             // console.log('User exists!');
           }
@@ -306,18 +322,75 @@ class App extends React.Component {
   }
 
   likeSubmitFn() {
+    let self = this;
     // console.log('in like submit function');
     $.post({
       url: '/like',
       contentType: 'application/json',
       data: JSON.stringify({photoName: this.state.bigPic}),
       success: (data) => {
-        // console.log(data);
+        // console.log('after running likeSubmitFn data is:', data, 'and its photo_id is:', data.photo_id, 'and also self.state.likedPhotos is:', self.state.likedPhotos)
+        let index = self.state.likedPhotos.indexOf(data.photo_id);
+        if (index > -1) {
+          let array = self.state.likedPhotos;
+          let updatedArray = array.slice(0, index).concat(array.slice(index + 1))
+          // console.log('updatedArray is:', updatedArray);
+          self.setState({likedPhotos: updatedArray})
+        } else {
+          let array = [data.photo_id];
+          // console.log('like result is:', array[0]);
+          self.setState({likedPhotos: self.state.likedPhotos.concat(array)})
+        }
       },
       error: (error) => {
         $('.error').show();
       },
     });
+  }
+
+  // getComments() {
+  //   let self = this;
+  //   $.get({
+  //     url: '/commentData',
+  //     data: {photoName: this.state.bigPic},
+  //     success: (data) => {
+  //       // console.log('got comment data from server:', data);
+  //       if (data.comments.length > 0) {
+  //         data.comments = data.comments.map(function(comment) {
+  //           var coords = comment.coordinates.split(' ');
+  //           return {x: Number(coords[0]), y: Number(coords[1]), z: Number(coords[2]), body: comment.body, firstName: comment.firstName, createdAt: new Date(comment.createdAt), src: '#'+comment.email.split('@')[0]}
+  //         });
+  //         self.setState({
+  //           comments: data.comments,
+  //           commentPics: data.profilePics
+  //         });
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error('error in get upload', error);
+  //       $('.error').show();
+  //     }
+  //   });
+  // }
+
+  getLikes() {
+    let self = this;
+    // console.log('props.router is currently:',  self.props.router)
+    $.get({
+      url: '/retrieveLikes',
+      success: (data) => {
+        // console.log('after running getLikes, retrieved data is:', data);
+        let photoIDs = data.map(likeData => likeData.photo_id);
+        if (self.state.likedPhotos.length !== photoIDs.length) {
+          // console.log('photoIDs:', photoIDs, 'while state\'s likedPhotos is:', self.state.likedPhotos);
+          self.setState({likedPhotos: photoIDs})
+        }
+      },
+      error: (error) => {
+        // console.log('error retrieving likes', error);
+        $('.error').show();
+      }
+    })
   }
 
   commentSubmitFn(phrase, coordinates) {
@@ -425,9 +498,10 @@ class App extends React.Component {
     self.getCreatedAt(newObject);
   }
 
-  changeBigPic (val) {
+  changeBigPic (val, id) {
     this.setState({
-      bigPic: val
+      bigPic: val,
+      currentPic: id
     });
   }
 
@@ -518,7 +592,7 @@ class App extends React.Component {
           header={comment.firstName}
           // header='Kobe'
           wikiName='Louvre_Pyramid'
-          headerAdjust='-0.75' // lower moves it to the left, higher to the right
+          headerAdjust='-0.8' // lower moves it to the left, higher to the right
           text={comment.body}
           textAdjust='-0.1' //lower moves this down, higher moves this up
           imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
@@ -536,7 +610,7 @@ class App extends React.Component {
     let imageName = '';
     let resizedImageLink = '';
 
-    console.log('Rendering...');
+    // console.log('Rendering...');
 
     const images = this.state.pics.map(pic => {
       let imageName = pic.title.split('.')[0];
@@ -610,12 +684,16 @@ class App extends React.Component {
             <Home
             router={this.props.router}
             pics={this.state.pics}
+            getLikes={this.getLikes.bind(this)}
             changeBigPic={this.changeBigPic.bind(this)} />
           );
       } else {
         // console.log('*********rendering image')
         vrView = <Image
+                    self={self}
                     bigPic={this.state.bigPic}
+                    currentPic={this.state.currentPic}
+                    likedPhotos={this.state.likedPhotos}
                     commentSubmitFn={this.commentSubmitFn.bind(this)}
                     likeSubmitFn={this.likeSubmitFn.bind(this)}
                     changeBigPic={this.changeBigPic.bind(this)}
@@ -623,6 +701,7 @@ class App extends React.Component {
                     changeCommentMode={this.changeCommentMode.bind(this)}
                     comments={this.state.comments}
                     getComments={this.getComments.bind(this)}
+                    getLikes={this.getLikes.bind(this)}
                     addComment={this.addComment.bind(this)}
                     addTypedComment={this.addTypedComment.bind(this)}
                     voiceComment={this.voiceComment.bind(this)}
@@ -636,6 +715,7 @@ class App extends React.Component {
 
       }
 
+      // self.closeHoverText();
         /*
           For development, we turn off fusing cursor (too slow) to allow clicking
           For deployment, we turn on fusing cursor (so mobile phones can gaze to "click")
@@ -671,8 +751,11 @@ class App extends React.Component {
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" />
               <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" />
+              <img id="liked" crossOrigin="anonymous" src="http://i.imgur.com/XTLYqU3.png" />
+
               <img id="mic" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" />
               <img id="micActivated" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" />
+              <img id="info" crossOrigin="anonymous" src="http://i.imgur.com/Gu5WR5K.png" />
 
 
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />
