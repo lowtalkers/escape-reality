@@ -71,11 +71,7 @@ class App extends React.Component {
       typedCommentBox: true,
       guestLogin: false,
       flag: false,
-      micHover: false,
-      textHover: false,
-      homeHover: false,
-      likeHover: false,
-      hoverIcon: false
+      infoPlane: true,
 		};
   }
 
@@ -84,16 +80,8 @@ class App extends React.Component {
     * @returns {boolean} true or false if rules are followed
     */
 
-  closeHoverText() {
-    let self = this;
-    let currentState = self.state.hoverIcon;
-    if (self.state.hoverIcon) {
-      setTimeout(()=> {
-        if (self.state.hoverIcon === currentState) {
-          self.setState({hoverIcon: false})
-        }
-      }, 500)
-    }
+  closeLegend() {
+    this.setState({infoPlane: false})
   }
 
   getParagraph(allTitles, setStateParagraph) {
@@ -758,7 +746,7 @@ class App extends React.Component {
 
               <img id="mic" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" />
               <img id="micActivated" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" />
-              <img id="info" crossOrigin="anonymous" src="http://i.imgur.com/Wwr383H.jpg" />
+              <img id="info" crossOrigin="anonymous" src="http://i.imgur.com/Gu5WR5K.png" />
 
 
               <img id="bookmark" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/plus-hi.png" />

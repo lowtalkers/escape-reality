@@ -83,16 +83,24 @@ export default props => {
     {hoverText}
 
     {/* Background Info Plane */}
-    <Entity
-      geometry={`primitive: plane; width: 4; height: 2`}
-      position='0 3.25 -4'
-      rotation='0 0 0'
-      // look-at="[camera]"
-      // material={{color: 'white', shader: 'flat', opacity: 0.75, transparent: true}}
-      material={{side: 'double', src: 'url(http://i.imgur.com/vJM4tTV.jpg)', opacity: 0.75, transparent: true, shader: 'flat'}}
-      // onRaycasterIntersected={() => props.self.state.hoverIcon ? props.self.setState({hoverIcon: false}) : null}
-      // onRaycasterIntersected={() => console.log('Intersectingg!')}
-    />
+
+    { props.self.state.infoPlane ? 
+
+      <Entity
+        geometry={`primitive: plane; width: 4; height: 2`}
+        position='2.5 0.35 -4'
+        rotation='0 0 0'
+        material={{side: 'double', src: 'url(http://i.imgur.com/vJM4tTV.jpg)', opacity: 0.75, transparent: true, shader: 'flat'}}
+        onClick={() => props.self.setState({infoPlane: false})}
+        // onRaycasterIntersected={() => props.self.state.hoverIcon ? props.self.setState({hoverIcon: false}) : null}
+        // onRaycasterIntersected={() => console.log('Intersectingg!')}
+      />
+
+      :
+
+      null
+
+    }
 
     <a-image
       look-at="[camera]"
@@ -155,7 +163,7 @@ export default props => {
       position="0 -1.35 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
-      onClick={() => console.log('Info button clicked!')}
+      onClick={() => props.self.setState({infoPlane: true})}
     >
     </a-image>
 
