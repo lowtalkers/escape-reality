@@ -139,7 +139,7 @@ class App extends React.Component {
 
   getAllPhotos() {
     let self = this;
-    console.log('RUNNING getAllPhotos !!!')
+    // console.log('RUNNING getAllPhotos !!!')
     $.get({
       url: '/topPics',
       success: (data) => {
@@ -242,7 +242,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    console.log('componentDidMount')
+    // console.log('componentDidMount')
     if (this.props.router.location.pathname.indexOf('/sign') < 0) {
       // console.log('🍊  running changeProfilePic');
       this.getAllPhotos();
@@ -329,7 +329,7 @@ class App extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify({photoName: this.state.bigPic}),
       success: (data) => {
-        console.log('after running likeSubmitFn data is:', data, 'and its photo_id is:', data.photo_id, 'and also self.state.likedPhotos is:', self.state.likedPhotos)
+        // console.log('after running likeSubmitFn data is:', data, 'and its photo_id is:', data.photo_id, 'and also self.state.likedPhotos is:', self.state.likedPhotos)
         let index = self.state.likedPhotos.indexOf(data.photo_id);
         if (index > -1) {
           let array = self.state.likedPhotos;
@@ -338,7 +338,7 @@ class App extends React.Component {
           self.setState({likedPhotos: updatedArray})
         } else {
           let array = [data.photo_id];
-          console.log('like result is:', array[0]);
+          // console.log('like result is:', array[0]);
           self.setState({likedPhotos: self.state.likedPhotos.concat(array)})
         }
       },
@@ -375,19 +375,19 @@ class App extends React.Component {
 
   getLikes() {
     let self = this;
-    console.log('props.router is currently:',  self.props.router)
+    // console.log('props.router is currently:',  self.props.router)
     $.get({
       url: '/retrieveLikes',
       success: (data) => {
-        console.log('after running getLikes, retrieved data is:', data);
+        // console.log('after running getLikes, retrieved data is:', data);
         let photoIDs = data.map(likeData => likeData.photo_id);
         if (self.state.likedPhotos.length !== photoIDs.length) {
-          console.log('photoIDs:', photoIDs, 'while state\'s likedPhotos is:', self.state.likedPhotos);
+          // console.log('photoIDs:', photoIDs, 'while state\'s likedPhotos is:', self.state.likedPhotos);
           self.setState({likedPhotos: photoIDs})
         }
       },
       error: (error) => {
-        console.log('error retrieving likes', error);
+        // console.log('error retrieving likes', error);
         $('.error').show();
       }
     })
@@ -610,7 +610,7 @@ class App extends React.Component {
     let imageName = '';
     let resizedImageLink = '';
 
-    console.log('Rendering...');
+    // console.log('Rendering...');
 
     const images = this.state.pics.map(pic => {
       let imageName = pic.title.split('.')[0];

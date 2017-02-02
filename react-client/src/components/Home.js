@@ -14,7 +14,7 @@ import Plane from './Plane';
 
 export default props => {
     props.getLikes();
-    console.log('Within Home, props is currently:', props)
+    // console.log('Within Home, props is currently:', props)
     let pics = props.pics.map((pic, index) => {
     // console.log(pic.title, index, pic.imageLink)
     const rot = '0 ' + (index * -35) + ' 0';

@@ -25,7 +25,7 @@ export default props => {
   // $('#' + bigPic).load(function() {
   //   sky = <a-sky id="image-360" radius="10" src={'#'+props.bigPic.split('.')[0]}></a-sky>
   // })
-  console.log('likedPhotos is:', props.likedPhotos, 'and props.currentPic is:', props.currentPic)
+  // console.log('likedPhotos is:', props.likedPhotos, 'and props.currentPic is:', props.currentPic)
   if(props.bigPic !== '' && props.comments.length === 0) {
     // console.log('getting comments!!!!!!')
     props.getComments();
@@ -113,7 +113,7 @@ export default props => {
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
       onClick={() => {
-        console.log('hoverIcon is:', props.self.state.hoverIcon)
+        // console.log('hoverIcon is:', props.self.state.hoverIcon)
         // let comment = prompt('Heyoo input form icon clicked, response?');
         // // console.log('User submitted comment:', comment);
         props.turnTypedCommentsOn();
