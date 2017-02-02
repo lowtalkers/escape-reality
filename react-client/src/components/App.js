@@ -334,7 +334,7 @@ class App extends React.Component {
         if (index > -1) {
           let array = self.state.likedPhotos;
           let updatedArray = array.slice(0, index).concat(array.slice(index + 1))
-          console.log('updatedArray is:', updatedArray);
+          // console.log('updatedArray is:', updatedArray);
           self.setState({likedPhotos: updatedArray})
         } else {
           let array = [data.photo_id];
@@ -592,7 +592,7 @@ class App extends React.Component {
           header={comment.firstName}
           // header='Kobe'
           wikiName='Louvre_Pyramid'
-          headerAdjust='-0.75' // lower moves it to the left, higher to the right
+          headerAdjust='-0.8' // lower moves it to the left, higher to the right
           text={comment.body}
           textAdjust='-0.1' //lower moves this down, higher moves this up
           imageSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Le_Louvre_-_Aile_Richelieu.jpg/800px-Le_Louvre_-_Aile_Richelieu.jpg '
