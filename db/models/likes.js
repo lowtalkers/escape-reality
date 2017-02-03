@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     like: {
       type: Sequelize.BOOLEAN,
-      defaultValue: true
+      defaultValue: false
     }
   });
 
