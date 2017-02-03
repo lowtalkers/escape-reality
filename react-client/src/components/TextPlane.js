@@ -154,12 +154,8 @@ let adjustTimestampPosition = (textAdjust) => {
       <Entity
         animation__rot={{property: 'rotation', dir: 'normal', dur: 500, loop: false, from: '0 0 0', to: greenAngleCalc(props.position, props.commentID)}}
         animation__scale={{property: 'scale', dir: 'normal', dur: 500, loop: false, from: '.1 .1 .1', to: '1 1 1'}}
-        id="TextPlane" 
-        onClick={(data) => {
-          // console.log('Within TextPlane.js, event data is:', data.detail.target.id);
-          props.hidePlane();
-        }} 
-        position={cardCoordCalc(props.position)} 
+        id="TextPlane"
+        position={cardCoordCalc(props.position)}
         rotation={greenAngleCalc(props.position, props.commentID)}
         // material={{opacity: 0.5, transparent: true}}
         // easing='easeInOutQuad'

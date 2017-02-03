@@ -9,6 +9,11 @@ const style = {
   fontFamily: 'Orbitron'
 };
 
+const style2 = {
+  fontFamily: 'Orbitron',
+  color: 'white'
+};
+
 const backgroundStyle = {
   backgroundSize: 'cover',
   position: 'fixed',
@@ -21,7 +26,7 @@ export default props => (
 
   <div className="signin">
 
-    <img 
+    <img
       style={backgroundStyle}
       src={'http://i.imgur.com/1ZEHnrH.jpg'}
     />
@@ -49,7 +54,7 @@ export default props => (
         <TextField
           hintText="Email Field"
           floatingLabelText="Email"
-          style={{color: 'white'}}
+          style={{color:'white !important'}}
           onChange={event => props.onEmailChange(event)}
         />
         </MuiThemeProvider>
@@ -59,6 +64,7 @@ export default props => (
           hintText="Password Field"
           floatingLabelText="Password"
           type="password"
+          style={{color:'white !important'}}
           onChange={event => props.onPasswordChange(event)}
         />
         </MuiThemeProvider>
