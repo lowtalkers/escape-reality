@@ -6,15 +6,15 @@ var create = function(props, callback) {
   .then(function(like) {
     callback(like);
   }).catch(function(err) {
-    // console.log(err);
+    console.log(err);
   });
 };
 
-var findAll = function(callback) {
-  Like.findAll().then(function(likes) {
+var findAll = function(query, callback) {
+  Like.findAll(query).then(function(likes) {
     callback(likes);
   }).catch(function(err) {
-    // console.log(err);
+    console.log(err);
   });
 };
 
@@ -32,8 +32,16 @@ var update = function(query, callback) {
 };
 
 var findOrCreate = function(query, callback) {
-  Like.findOrCreate(query).done(function(like) {
-    // console.log('🍊  Found one like in db:', query);
+  Like.findOrCreate(query).done(function(likeInfo) {
+    like = likeInfo[0];
+    changed = likeInfo[0]['_changed']
+    console.log('🍊  Found one like in db via findOrCreate:', like);
+    if (like.like && changed.user_id === false) {
+    } else if (like.like) {
+      like.update({like: false});
+    } else {
+      like.update({like: true})
+    }
     callback(like);
   });
 };
