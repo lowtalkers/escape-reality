@@ -743,7 +743,6 @@ class App extends React.Component {
 
             <a-assets>
               {images}
-              {fullImages}
               {bigPic}
               {commentPics}
               <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic} />
