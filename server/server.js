@@ -209,9 +209,13 @@ app.get('/getWikiArticleTitle', (req, res) => {
 });
 
 app.get('/retrieveLikes', (req, res) => {
-  likeController.findAll(likes => {
-    res.send(likes);
+  userController.findOne({where: {email: req.session.email}}, user => {
+    likeController.findAll({where: {user_id: user.get('id')}}, likes => {
+      console.log('After running /retrieveLikes, returned data is:', likes)
+      res.send(likes);
+    })    
   })
+
 })
 
 app.get('/addBookmark', (req, res) => {

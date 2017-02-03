@@ -379,7 +379,7 @@ class App extends React.Component {
     $.get({
       url: '/retrieveLikes',
       success: (data) => {
-        // console.log('after running getLikes, retrieved data is:', data);
+        console.log('after running getLikes, retrieved data is:', data);
         let photoIDs = data.map(likeData => likeData.photo_id);
         if (self.state.likedPhotos.length !== photoIDs.length) {
           // console.log('photoIDs:', photoIDs, 'while state\'s likedPhotos is:', self.state.likedPhotos);
