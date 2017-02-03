@@ -181,7 +181,7 @@ export default props => {
   return (
     <div>
 
-      <img 
+      <img
         style={backgroundStyle}
         src={'http://i.imgur.com/1ZEHnrH.jpg'}
       />
