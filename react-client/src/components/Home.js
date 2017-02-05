@@ -17,7 +17,7 @@ export default props => {
     // console.log('Within Home, props is currently:', props)
     let pics = props.pics.map((pic, index) => {
     // console.log(pic.title, index, pic.imageLink)
-    const rot = '0 ' + ((index - 4) * -35) + ' 0';
+    const rot = '0 ' + ((index - 3) * -35) + ' 0';
     var imageName = pic.title.split('.')[0];
     return (
       <Entity
