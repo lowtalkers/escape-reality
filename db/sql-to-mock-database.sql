@@ -20,15 +20,8 @@ VALUES
 -- ---
 INSERT INTO `photos` (`id`, `title`, `imageLink`, `description`, `createdAt`, `updatedAt`, `poster_id`)
 VALUES
-	(9, 'thanksgiving-before_3584x17921480465178818.jpg', 'https://s3.amazonaws.com/vrpics/thanksgiving-before_3584x17921480465178818.jpg', '', '2016-11-30 00:19:38', '2016-11-30 00:19:38', 7);
-INSERT INTO `photos` (`id`, `title`, `imageLink`, `description`, `createdAt`, `updatedAt`, `poster_id`)
-VALUES
-	(10, 'thanksgiving-after_3584x17921480465211709.jpg', 'https://s3.amazonaws.com/vrpics/thanksgiving-after_3584x17921480465211709.jpg', '', '2016-11-30 00:20:11', '2016-11-30 00:20:11', 7),
-	(11, 'noe-valley-sanchez-street_3584x17921480465274422.jpg', 'https://s3.amazonaws.com/vrpics/noe-valley-sanchez-street_3584x17921480465274422.jpg', '', '2016-11-30 00:21:14', '2016-11-30 00:21:14', 7),
 	(12, 'dolores-park_3584x17921480465350583.jpg', 'https://s3.amazonaws.com/vrpics/dolores-park_3584x17921480465350583.jpg', '', '2016-11-30 00:22:30', '2016-11-30 00:22:30', 7),
-	(13, 'twin-peakers-upper_3584x17921480465401065.jpg', 'https://s3.amazonaws.com/vrpics/twin-peakers-upper_3584x17921480465401065.jpg', '', '2016-11-30 00:23:21', '2016-11-30 00:23:21', 7),
-	(14, 'daybreaker-2nd-floor_4096x20481480465439315.jpg', 'https://s3.amazonaws.com/vrpics/daybreaker-2nd-floor_4096x20481480465439315.jpg', '', '2016-11-30 00:23:59', '2016-11-30 00:23:59', 7),
-	(15, 'daybreaker-4096x20481480465471303.jpg', 'https://s3.amazonaws.com/vrpics/daybreaker-4096x20481480465471303.jpg', '', '2016-11-30 00:24:31', '2016-11-30 00:24:31', 7);
+	(13, 'twin-peakers-upper_3584x17921480465401065.jpg', 'https://s3.amazonaws.com/vrpics/twin-peakers-upper_3584x17921480465401065.jpg', '', '2016-11-30 00:23:21', '2016-11-30 00:23:21', 7);
 
 
 -- ---
