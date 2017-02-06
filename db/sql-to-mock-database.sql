@@ -59,12 +59,7 @@ VALUES
 -- ---
 INSERT INTO `photos` (`id`, `title`, `imageLink`, `description`, `createdAt`, `updatedAt`, `poster_id`)
 VALUES
-	(21, 'GoldenGateRoom_alt_4096x20481480624756099.jpg', 'https://s3.amazonaws.com/vrpics/GoldenGateRoom_alt_4096x20481480624756099.jpg', NULL, '2016-12-01 20:39:16', '2016-12-01 20:39:16', 9),
-	(22, 'Mikkelers1_4096x20481480624773205.jpg', 'https://s3.amazonaws.com/vrpics/Mikkelers1_4096x20481480624773205.jpg', NULL, '2016-12-01 20:39:33', '2016-12-01 20:39:33', 9),
-	(23, 'Mikkelers2_4096x20481480624786606.jpg', 'https://s3.amazonaws.com/vrpics/Mikkelers2_4096x20481480624786606.jpg', NULL, '2016-12-01 20:39:46', '2016-12-01 20:39:46', 9),
-	(24, 'UnionSquareNight_4096x20481480624799552.jpg', 'https://s3.amazonaws.com/vrpics/UnionSquareNight_4096x20481480624799552.jpg', NULL, '2016-12-01 20:39:59', '2016-12-01 20:39:59', 9),
-	(25,'R0010028_201612021410261480716681953.JPG','https://s3.amazonaws.com/vrpics/R0010028_201612021410261480716681953.JPG',NULL,'2016-12-02 22:11:22','2016-12-02 22:11:22',9),
-	(26,'R0010029_201612021549041480722608350.JPG','https://s3.amazonaws.com/vrpics/R0010029_201612021549041480722608350.JPG',NULL,'2016-12-02 23:50:08','2016-12-02 23:50:08',9);
+	(22, 'Mikkelers1_4096x20481480624773205.jpg', 'https://s3.amazonaws.com/vrpics/Mikkelers1_4096x20481480624773205.jpg', NULL, '2016-12-01 20:39:33', '2016-12-01 20:39:33', 9);
 
 
 -- ---
