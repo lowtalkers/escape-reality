@@ -68,7 +68,7 @@ VALUES
 -- ---
 INSERT INTO `users` (`id`, `email`, `password`, `profilePic`, `firstName`, `lastName`, `lobbyPic`, `createdAt`, `updatedAt`)
 VALUES
-	(10, 'amad@amad.com', '$2a$10$rQ4JP/aLLeWYPBu4TD6zR.7MZU040sM8QbdzjSssqpt2QSMJ2SgtK', 'http://i.imgur.com/mlAx8Xb.jpg', 'Amad', 'Khan ', 'https://s3.amazonaws.com/vrpics/lr2.jpg',  '2016-12-01 19:56:19', '2016-12-01 19:56:19');
+	(10, 'amad@amad.com', '$2a$10$rQ4JP/aLLeWYPBu4TD6zR.7MZU040sM8QbdzjSssqpt2QSMJ2SgtK', 'http://i.imgur.com/HGWwU6r.jpg', 'Amad', 'Khan ', 'https://s3.amazonaws.com/vrpics/lr2.jpg',  '2016-12-01 19:56:19', '2016-12-01 19:56:19');
 
 
 -- ---
