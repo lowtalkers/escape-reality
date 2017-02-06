@@ -60,8 +60,8 @@ VALUES
 INSERT INTO `photos` (`id`, `title`, `imageLink`, `description`, `createdAt`, `updatedAt`, `poster_id`)
 VALUES
 	(22, 'Mikkelers1_4096x20481480624773205.jpg', 'https://s3.amazonaws.com/vrpics/Mikkelers1_4096x20481480624773205.jpg', NULL, '2016-12-01 20:39:35', '2016-12-01 20:39:35', 9),
-	(30, 'tropical-island-FATwuo5.jpg', 'http://i.imgur.com/FATwuo5.jpg', NULL, '2016-12-01 20:49:33', '2016-12-01 20:49:33', 9),
-	(35, 'interior-church-0ADcJAv.jpg', 'http://i.imgur.com/0ADcJAv.jpg', NULL, '2016-12-01 20:59:34', '2016-12-01 20:59:34', 9);
+	(30, 'tropical-island_4096x20481486347045397.jpg', 'http://i.imgur.com/Gb4f5Dn.jpg', NULL, '2016-12-01 20:49:33', '2016-12-01 20:49:33', 9),
+	(35, 'church-interior_4096x20481486347086284.jpg', 'http://i.imgur.com/PKTJji3.jpg', NULL, '2016-12-01 20:59:34', '2016-12-01 20:59:34', 9);
 
 
 -- ---
