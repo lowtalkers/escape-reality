@@ -38,10 +38,10 @@ VALUES
 -- ---
 INSERT INTO `photos` (`id`, `title`, `imageLink`, `description`, `createdAt`, `updatedAt`, `poster_id`)
 VALUES
-	(17, 'IMG_7877-niceSFstreet_4096x20481480469899430.jpg', 'https://s3.amazonaws.com/vrpics/IMG_7877-niceSFstreet_4096x20481480469899430.jpg', '', '2016-11-30 01:38:19', '2016-11-30 01:38:19', 8),
-	(18, 'IMG_7878-hayesValPark_4096x20481480470054798.jpg', 'https://s3.amazonaws.com/vrpics/IMG_7878-hayesValPark_4096x20481480470054798.jpg', '', '2016-11-30 01:40:54', '2016-11-30 01:40:54', 8),
-	(19, 'IMG_7894-sfCityCenter_4096x20481480470133413.jpg', 'https://s3.amazonaws.com/vrpics/IMG_7894-sfCityCenter_4096x20481480470133413.jpg', '', '2016-11-30 01:42:13', '2016-11-30 01:42:13', 8),
-	(20, 'IMG_7900-sfTrainStation_4096x20481480470178646.jpg', 'https://s3.amazonaws.com/vrpics/IMG_7900-sfTrainStation_4096x20481480470178646.jpg', '', '2016-11-30 01:42:58', '2016-11-30 01:42:58', 8);
+	(17, 'IMG_7877-niceSFstreet_4096x20481480469899430.jpg', 'https://s3.amazonaws.com/vrpics/IMG_7877-niceSFstreet_4096x20481480469899430.jpg', '', '2016-07-15 01:38:19', '2016-11-30 01:38:19', 8),
+	(18, 'IMG_7878-hayesValPark_4096x20481480470054798.jpg', 'https://s3.amazonaws.com/vrpics/IMG_7878-hayesValPark_4096x20481480470054798.jpg', '', '2016-05-15 01:40:54', '2016-11-30 01:40:54', 8),
+	(19, 'IMG_7894-sfCityCenter_4096x20481480470133413.jpg', 'https://s3.amazonaws.com/vrpics/IMG_7894-sfCityCenter_4096x20481480470133413.jpg', '', '2016-06-15 01:42:13', '2016-11-30 01:42:13', 8),
+	(20, 'IMG_7900-sfTrainStation_4096x20481480470178646.jpg', 'https://s3.amazonaws.com/vrpics/IMG_7900-sfTrainStation_4096x20481480470178646.jpg', '', '2016-09-15 01:42:58', '2016-11-30 01:42:58', 8);
 
 
 -- ---
@@ -60,9 +60,9 @@ VALUES
 INSERT INTO `photos` (`id`, `title`, `imageLink`, `description`, `createdAt`, `updatedAt`, `poster_id`)
 VALUES
 	(22, 'Mikkelers1_4096x20481480624773205.jpg', 'https://s3.amazonaws.com/vrpics/Mikkelers1_4096x20481480624773205.jpg', NULL, '2016-12-15 20:39:35', '2016-12-01 20:39:35', 9),
-	(30, 'tropical-island_4096x20481486347045397.jpg', 'http://i.imgur.com/Gb4f5Dn.jpg', NULL, '2016-12-01 20:49:33', '2016-12-01 20:49:33', 9),
-	(35, 'church-interior_4096x20481486347086284.jpg', 'http://i.imgur.com/PKTJji3.jpg', NULL, '2016-12-01 20:59:34', '2016-12-01 20:59:34', 9),
-	(38, 'ny-times-square_2377x7991486507444953.jpg', 'http://i.imgur.com/PmQy13p.jpg', NULL, '2016-12-01 20:59:35', '2016-11-15 20:59:35', 9);
+	(30, 'tropical-island_4096x20481486347045397.jpg', 'http://i.imgur.com/Gb4f5Dn.jpg', NULL, '2016-08-15 20:49:33', '2016-12-01 20:49:33', 9),
+	(35, 'church-interior_4096x20481486347086284.jpg', 'http://i.imgur.com/PKTJji3.jpg', NULL, '2016-10-15 20:59:34', '2016-10-15 20:59:34', 9),
+	(38, 'ny-times-square_2377x7991486507444953.jpg', 'http://i.imgur.com/PmQy13p.jpg', NULL, '2016-11-15 20:59:35', '2016-11-15 20:59:35', 9);
 
 
 -- ---
