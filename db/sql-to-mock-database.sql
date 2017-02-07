@@ -18,10 +18,10 @@ VALUES
 -- Create photos for tony@tony.com
 -- 
 -- ---
-INSERT INTO `photos` (`id`, `title`, `imageLink`, `description`, `createdAt`, `updatedAt`, `poster_id`)
-VALUES
-	(12, 'dolores-park_3584x17921480465350583.jpg', 'https://s3.amazonaws.com/vrpics/dolores-park_3584x17921480465350583.jpg', '', '2016-11-30 00:22:30', '2016-11-30 00:22:30', 7),
-	(13, 'twin-peakers-upper_3584x17921480465401065.jpg', 'https://s3.amazonaws.com/vrpics/twin-peakers-upper_3584x17921480465401065.jpg', '', '2016-11-30 00:23:21', '2016-11-30 00:23:21', 7);
+-- INSERT INTO `photos` (`id`, `title`, `imageLink`, `description`, `createdAt`, `updatedAt`, `poster_id`)
+-- VALUES
+-- 	(12, 'dolores-park_3584x17921480465350583.jpg', 'https://s3.amazonaws.com/vrpics/dolores-park_3584x17921480465350583.jpg', '', '2016-11-30 00:22:30', '2016-11-30 00:22:30', 7),
+-- 	(13, 'twin-peakers-upper_3584x17921480465401065.jpg', 'https://s3.amazonaws.com/vrpics/twin-peakers-upper_3584x17921480465401065.jpg', '', '2016-11-30 00:23:21', '2016-11-30 00:23:21', 7);
 
 
 -- ---
@@ -59,9 +59,10 @@ VALUES
 -- ---
 INSERT INTO `photos` (`id`, `title`, `imageLink`, `description`, `createdAt`, `updatedAt`, `poster_id`)
 VALUES
-	(22, 'Mikkelers1_4096x20481480624773205.jpg', 'https://s3.amazonaws.com/vrpics/Mikkelers1_4096x20481480624773205.jpg', NULL, '2016-12-01 20:39:35', '2016-12-01 20:39:35', 9),
+	(22, 'Mikkelers1_4096x20481480624773205.jpg', 'https://s3.amazonaws.com/vrpics/Mikkelers1_4096x20481480624773205.jpg', NULL, '2016-12-15 20:39:35', '2016-12-01 20:39:35', 9),
 	(30, 'tropical-island_4096x20481486347045397.jpg', 'http://i.imgur.com/Gb4f5Dn.jpg', NULL, '2016-12-01 20:49:33', '2016-12-01 20:49:33', 9),
-	(35, 'church-interior_4096x20481486347086284.jpg', 'http://i.imgur.com/PKTJji3.jpg', NULL, '2016-12-01 20:59:34', '2016-12-01 20:59:34', 9);
+	(35, 'church-interior_4096x20481486347086284.jpg', 'http://i.imgur.com/PKTJji3.jpg', NULL, '2016-12-01 20:59:34', '2016-12-01 20:59:34', 9),
+	(38, 'ny-times-square_2377x7991486507444953.jpg', 'http://i.imgur.com/PmQy13p.jpg', NULL, '2016-12-01 20:59:35', '2016-11-15 20:59:35', 9);
 
 
 -- ---
