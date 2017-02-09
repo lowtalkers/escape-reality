@@ -20,7 +20,7 @@ const backgroundStyle = {
   flex: 1,
   height: '100%',
   width: '100%',
-}
+};
 
 export default props => (
 
@@ -31,9 +31,9 @@ export default props => (
       src={'http://i.imgur.com/1ZEHnrH.jpg'}
     />
 
+    {/* Preload (but don't display) the browser cache with UI images so that the follow-up VR scene loads faster */}
     <img src="https://s3.amazonaws.com/vrpics/lr2.jpg" style={{display: 'none'}} crossOrigin="anonymous"/>
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
-
 
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
@@ -47,14 +47,14 @@ export default props => (
 
 
     <div>
-      <h1 className="centerText" style={{color: 'white', top: '15px', position: 'absolute', width:'100%', textAlign: 'center', fontSize: '100px'}}> Immerse </h1>
+      <h1 className="centerText" style={{color: 'white', top: '15px', position: 'absolute', width: '100%', textAlign: 'center', fontSize: '100px'}}> ImmerseVR</h1>
 
       <div className="centerButtons" style={{top: '100px', position: 'absolute', left: '25.5%'}}>
         <MuiThemeProvider muiTheme={getMuiTheme()}>
         <TextField
           hintText="Email Field"
           floatingLabelText="Email"
-          style={{color:'white !important'}}
+          style={{color: 'white !important'}}
           onChange={event => props.onEmailChange(event)}
         />
         </MuiThemeProvider>
@@ -64,7 +64,7 @@ export default props => (
           hintText="Password Field"
           floatingLabelText="Password"
           type="password"
-          style={{color:'white !important'}}
+          style={{color: 'white !important'}}
           onChange={event => props.onPasswordChange(event)}
         />
         </MuiThemeProvider>
