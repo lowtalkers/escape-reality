@@ -658,7 +658,7 @@ class App extends React.Component {
               <img id="info" crossOrigin="anonymous" src="http://i.imgur.com/Gu5WR5K.png" />
 
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
-              <img id="input" crossOrigin="anonymous" src="http://i.imgur.com/jRdxNpi.png" />
+              <img id="input" crossOrigin="anonymous" src="http://i.imgur.com/sELlxqj.png" />
               <img id="inputActivated" crossOrigin="anonymous" src="http://i.imgur.com/JmLIjXY.png" />
 
             </a-assets>
