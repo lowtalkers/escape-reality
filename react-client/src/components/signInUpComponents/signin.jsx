@@ -41,7 +41,7 @@ export default props => (
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
 
-    <img src="http://i.imgur.com/jRdxNpi.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img src="http://i.imgur.com/sELlxqj.png" style={{display: 'none'}} crossOrigin="anonymous"/>
     <img src="http://i.imgur.com/JmLIjXY.png" style={{display: 'none'}} crossOrigin="anonymous"/>
 
 
