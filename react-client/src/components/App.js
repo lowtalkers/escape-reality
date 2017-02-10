@@ -655,7 +655,7 @@ class App extends React.Component {
 
               <img id="mic" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" />
               <img id="micActivated" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" />
-              <img id="info" crossOrigin="anonymous" src="http://i.imgur.com/Gu5WR5K.png" />
+              <img id="info" crossOrigin="anonymous" src="http://i.imgur.com/BGRK0Vf.png" />
 
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
               <img id="input" crossOrigin="anonymous" src="http://i.imgur.com/sELlxqj.png" />
