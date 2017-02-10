@@ -160,8 +160,8 @@ export default props => {
       look-at="[camera]"
       id="info"
       src="#info"
-      geometry="height: 0.25; width: 0.25"
-      position="0 -1.35 -3.5"
+      geometry="height: 0.5; width: 0.5"
+      position="0 -1.50 -3.5"
       animation__click="property: scale; easing: easeOutQuad; startEvents: click; from: 2 2 2; to: 1 1 1; dur: 200"
       animation__clickOpacity="property: material.opacity; easing: easeOutQuad; startEvents: click; dir: alternate; from: 1; to: 0; dur: 200"
       onClick={() => props.self.setState({infoPlane: true})}
