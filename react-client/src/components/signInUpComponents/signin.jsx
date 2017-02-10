@@ -42,7 +42,8 @@ export default props => (
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
 
     <img alt="input" src="http://i.imgur.com/sELlxqj.png" style={{display: 'none'}} crossOrigin="anonymous"/>
-    <img alt="input activated" src="http://i.imgur.com/JmLIjXY.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img alt="input activated" src="http://i.imgur.com/Sls7xlQ.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img alt="info" src="http://i.imgur.com/BGRK0Vf.png" style={{display: 'none'}} crossOrigin="anonymous"/>
 
 
     <div>
