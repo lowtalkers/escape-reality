@@ -203,7 +203,7 @@ export default props => {
             <LinearProgress color='#FF3D00' className={props.shouldHide ? 'hidden' : ''} mode="indeterminate" />
         </MuiThemeProvider>
 
-        <h1 className="centerText" style={{color: 'white', top: '15px',  position: 'absolute', width:'100%', textAlign: 'center', fontSize: '100px'}}> Immerse</h1>
+        <h1 className="centerText" style={{color: 'white', top: '15px',  position: 'absolute', width:'100%', textAlign: 'center', fontSize: '100px'}}> ImmerseVR</h1>
 
         <div className="centerButtons">
         <Link to="/lobby">
