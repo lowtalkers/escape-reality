@@ -643,11 +643,13 @@ class App extends React.Component {
 
 
             <a-assets>
-              {images}
-              {bigPic}
-              {commentPics}
-              <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic} />
               <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
+              
+              {/* lobby thumbnails of scenes */}
+              {images}
+
+              {/* most of these UI icons are pre-cached in the signin route */}
+              <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic} />
 
               <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" />
               <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" />
@@ -661,6 +663,8 @@ class App extends React.Component {
               <img id="input" crossOrigin="anonymous" src="http://i.imgur.com/sELlxqj.png" />
               <img id="inputActivated" crossOrigin="anonymous" src="http://i.imgur.com/Sls7xlQ.png" />
 
+              {bigPic}
+              {commentPics}
             </a-assets>
             {vrView}
 
