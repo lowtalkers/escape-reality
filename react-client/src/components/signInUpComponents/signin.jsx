@@ -33,16 +33,16 @@ export default props => (
 
     {/* Preload (but don't display) the browser cache with UI images so that the follow-up VR scene loads faster */}
     <img src="https://s3.amazonaws.com/vrpics/lr2.jpg" style={{display: 'none'}} crossOrigin="anonymous"/>
-    <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img alt="exit" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
 
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
-    <img src="http://i.imgur.com/XTLYqU3.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img alt="liked" src="http://i.imgur.com/XTLYqU3.png" style={{display: 'none'}} crossOrigin="anonymous"/>
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
     <img src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" style={{display: 'none'}} crossOrigin="anonymous"/>
 
-    <img src="http://i.imgur.com/sELlxqj.png" style={{display: 'none'}} crossOrigin="anonymous"/>
-    <img src="http://i.imgur.com/JmLIjXY.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img alt="input" src="http://i.imgur.com/sELlxqj.png" style={{display: 'none'}} crossOrigin="anonymous"/>
+    <img alt="input activated" src="http://i.imgur.com/JmLIjXY.png" style={{display: 'none'}} crossOrigin="anonymous"/>
 
 
     <div>
