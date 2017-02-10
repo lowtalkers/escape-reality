@@ -111,7 +111,7 @@ class App extends React.Component {
   }
 
   closeLegend() {
-    this.setState({infoPlane: false})
+    this.setState({infoPlane: false});
   }
 
   onEmailChange(event) {
@@ -643,8 +643,8 @@ class App extends React.Component {
 
 
             <a-assets>
-              <img id="lobby-_1" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/lr2.jpg" />
-              
+              <img id="lobby-_1" crossOrigin="anonymous" src="http://i.imgur.com/A6fO7Bf.jpg" />
+
               {/* lobby thumbnails of scenes */}
               {images}
 
