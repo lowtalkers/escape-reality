@@ -659,7 +659,7 @@ class App extends React.Component {
 
               <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
               <img id="input" crossOrigin="anonymous" src="http://i.imgur.com/sELlxqj.png" />
-              <img id="inputActivated" crossOrigin="anonymous" src="http://i.imgur.com/JmLIjXY.png" />
+              <img id="inputActivated" crossOrigin="anonymous" src="http://i.imgur.com/Sls7xlQ.png" />
 
             </a-assets>
             {vrView}
