@@ -1,4 +1,4 @@
-###Making the Spherical Images Smaller
+### Making the Spherical Images Smaller
 
 We have very large image sizes because each 360° image is composed of [about 18 individual images](http://spherical.photography/360-panorama-creation.html) stitched together. Reducing file sizes by over 1 megabyte feel like a significant improvement on congested mobile networks and underpowered mobile devices.
 
