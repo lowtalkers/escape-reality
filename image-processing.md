@@ -10,6 +10,7 @@ Google just released [Guetzli](https://github.com/google/guetzli), a perceptual 
 | IMG_7900-sfTrainStation_4096x20481480470178646.jpg | 4.9 MB | 3.6 MB | 1.3 MB | 27% | 
 | IMG_7878-hayesValPark_4096x20481480470054798.jpg | 5.8 MB | 3.9 MB | 1.9 MB | 33% |
 | IMG_7894-sfCityCenter_4096x20481480470133413.jpg | 4.9 MB | 3.7 MB | 1.2 MB | 24% |
+| IMG_7877-niceSFstreet_4096x20481480469899430.jpg | 5.5 MB | 4.0 MB | 1.5 MB | 28% |
 
 Processing the images takes a significant amount of time, sometimes more than 10 minutes per image. (The "Hayes Valley Park" image took about 24 minutes to process on my dual core 2.8 GHz i7 laptop!). I evaluated both the originals and the Guetzli-processed images at 100% view and really couldn't see any major differences or degradation in quality.
 
