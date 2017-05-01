@@ -651,15 +651,15 @@ class App extends React.Component {
               {/* most of these UI icons are pre-cached in the signin route */}
               <img id="profilePic" crossOrigin="anonymous" src={self.state.profilePic} />
 
-              <img id="close" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-home_512x512.png" />
-              <img id="like" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-favorite_512x512.png" />
+              <img id="close" alt="home" crossOrigin="anonymous" src="http://i.imgur.com/PMgJxSU.png" />
+              <img id="like" crossOrigin="anonymous" src="http://i.imgur.com/Iz5kgoH.png" />
               <img id="liked" crossOrigin="anonymous" src="http://i.imgur.com/XTLYqU3.png" />
 
-              <img id="mic" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic_512x512.png" />
-              <img id="micActivated" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-mic-activated_512x512.png" />
+              <img id="mic" crossOrigin="anonymous" src="http://i.imgur.com/wNqlh3b.png" />
+              <img id="micActivated" crossOrigin="anonymous" src="http://i.imgur.com/p433Gsv.png" />
               <img id="info" crossOrigin="anonymous" src="http://i.imgur.com/BGRK0Vf.png" />
 
-              <img id="exit" crossOrigin="anonymous" src="https://s3.amazonaws.com/vrpics/ui-icons/icon-dashboard_512x512.png" />
+              <img id="exit" crossOrigin="anonymous" src="http://i.imgur.com/5x56Jce.png" />
               <img id="input" crossOrigin="anonymous" src="http://i.imgur.com/sELlxqj.png" />
               <img id="inputActivated" crossOrigin="anonymous" src="http://i.imgur.com/Sls7xlQ.png" />
 
