@@ -88,7 +88,7 @@ app.post('/upload', (req, res) => {
 
   s3Bucket.putObject(data, (err, data) => {
     if (err) {
-      console.log('Error uploading data: ', data, err);
+      console.log('Error running putObject with data: ', data, err);
     } else {
       s3Bucket.putObject({
         Bucket: 'vrpics',
@@ -97,9 +97,9 @@ app.post('/upload', (req, res) => {
         ContentType: 'image/' + imgType
       }, (err, data) => {
         if (err) {
-          // console.log('Error uploading data: ', data, err);
+          console.log('During s3Bucket.putObject, data:' data, 'and error:', err);
         } else {
-          // console.log('succesfully uploaded the resized image!');
+          console.log('succesfully uploaded the resized image!');
         }
       });
       // console.log('succesfully uploaded the image!');
